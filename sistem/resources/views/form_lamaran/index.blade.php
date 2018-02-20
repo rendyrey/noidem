@@ -1,0 +1,8 @@
+@include('form_lamaran.style')
+@include('form_lamaran.general_data')
+@include('form_lamaran.personal_data')
+@include('form_lamaran.educational_background')
+@include('form_lamaran.work_experience')
+@include('form_lamaran.psychotest_readiness')
+@include('form_lamaran.confirmation')
+@include('form_lamaran.script')
