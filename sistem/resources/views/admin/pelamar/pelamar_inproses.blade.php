@@ -50,7 +50,7 @@
                       <div class="col-md-12">
                         <div class="x_panel">
                           <div class="x_title">
-                            <h2>Calendar Events <small>Sessions</small></h2>
+                            <h2>Calendar Events <small>Psychotest</small></h2>
                             <ul class="nav navbar-right panel_toolbox">
                               <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                               </li>
@@ -69,6 +69,7 @@
                             <div class="clearfix"></div>
                           </div>
                           <div class="x_content">
+                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CalenderModalNew">Add Schedule</button>
 
                             <div id='calendar'></div>
 
@@ -157,21 +158,33 @@
 
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-              <h4 class="modal-title" id="myModalLabel">New Calendar Entry</h4>
+              <h4 class="modal-title" id="myModalLabel">New Psychotest Schedule Entry</h4>
             </div>
             <div class="modal-body">
               <div id="testmodal" style="padding: 5px 20px;">
-                <form id="antoform" class="form-horizontal calender" role="form">
+                <form id="" class="form-horizontal calender" role="form" action="{{url('pelamar_inproses/test_scheduling')}}" method="POST">
+                {!! csrf_field() !!}
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Title</label>
+                    <label class="col-sm-3 control-label">Psychotest Date</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="title" name="title">
+                      <input type="text" class="form-control myDatepicker2" id="title" name="tanggal">
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Description</label>
+                    <label class="col-sm-3 control-label">City</label>
                     <div class="col-sm-9">
-                      <textarea class="form-control" style="height:55px;" id="descr" name="descr"></textarea>
+                      <select name="id_kota" class="form-control select_search" style="width:100%" data-placeholder="Pilih Kota" required>
+                      <option value=""></option>
+                      @foreach ($kota as $key=>$value )
+                          <option value="{{$key}}">{{$value}}</option>
+                      @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Quota</label>
+                    <div class="col-sm-9">
+                    <input type="text" class="form-control auto_currency" name="kuota">
                     </div>
                   </div>
                 </form>
@@ -234,9 +247,9 @@
         console.log('init_calendar');
 
         var date = new Date(),
-        d = date.getDate(),
-        m = date.getMonth(),
-        y = '2200',
+        d = '7',
+        m = '04',
+        y = '2018',
         started,
         categoryClass;
 

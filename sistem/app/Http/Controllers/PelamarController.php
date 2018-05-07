@@ -783,6 +783,7 @@ class PelamarController extends Controller
 
 	public function pelamar_inproses(){
 		$data['pelamar'] = Pelamar::all();
+		$data['kota'] = Kota::all()->lists('kota','id');
 		return view('admin.pelamar.pelamar_inproses',$data);
 	}
 
