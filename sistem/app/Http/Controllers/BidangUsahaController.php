@@ -25,7 +25,7 @@ class BidangUsahaController extends Controller
     {
     	$bidang_usaha = $request->bidang_usaha;
         DB::table('bidang_usaha')->insert(['bidang_usaha' => $bidang_usaha]);
-        return redirect('bidang_usaha')->with('message', 'Data Berhasil Disimpan !');
+        return redirect('bidang_usaha')->with('message', 'Data Berhasil Disimpan !')->with('panel','success');
     }
 
     public function edit($id)
@@ -38,6 +38,17 @@ class BidangUsahaController extends Controller
     {
     	$bidang_usaha = $request->bidang_usaha;
     	DB::table('bidang_usaha')->where('id', $id)->update(['bidang_usaha' => $bidang_usaha]);
-    	return redirect('bidang_usaha')->with('message', 'Data berhasil diubah!');
+    	return redirect('bidang_usaha')->with('message', 'Data berhasil diubah!')->with('panel','success');
+    }
+
+    public function delete($id){
+        $hapus = Bidang_usaha::findOrfail($id);
+        $hapus->delete();
+        return redirect('user')->with('messages', 'Data berhasil dihapus!')->with('panel','success');
+    }
+
+    public function modal_hapus(Request $request){
+        $hapus = Bidang_usaha::find($request->data);
+        echo "<p>Yakin akan menghapus data <label>$hapus->bidang_usaha</label>?</p>";
     }
 }

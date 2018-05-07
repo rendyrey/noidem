@@ -23,7 +23,7 @@ var $select1 = $( '#adv_cat' );
 
 			if(length >= 4){
 				$('#com_adv_cat').hide('slow');
-				$('#lbl_job_1').show('slow');				
+				$('#lbl_job_1').show('slow');
 				$('#lbl_job_2').show('slow');
 				$('#lbl_job_3').show('slow');
 				$('#lbl_job_4').show('slow');

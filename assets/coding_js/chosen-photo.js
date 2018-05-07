@@ -41,7 +41,7 @@ jQuery(function($) {
 					no_icon: 'ace-icon fa fa-cloud-upload',
 					droppable: true,
 					thumbnail: 'fit',
-					allowMime: ["image/jpg", "image/jpeg", "image/png"],
+					// allowMime: ["image/jpg", "image/jpeg", "image/png"],
 					preview_error : function(filename, error_code) {
 					}
 			

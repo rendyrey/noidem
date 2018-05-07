@@ -23,8 +23,8 @@ class InstitusiController extends Controller
 	public function index()
 	{
 		$institusi = Institusi::all();
-        $provinsi = Provinsi::all();
-        $kota = Kota::all();
+        $provinsi = Provinsi::orderBy('province','asc')->get();
+        $kota = Kota::orderBy('kota','asc')->get();
     	return view('admin.institusi.index', compact('institusi','provinsi','kota'));
 	}
 
@@ -35,14 +35,14 @@ class InstitusiController extends Controller
         $id_provinsi = $request->id_provinsi;
         $id_kota = $request->id_kota;
         DB::table('institusi')->insert(['nama_institusi' => $nama_institusi, 'singkatan' => $singkatan, 'id_provinsi' => $id_provinsi, 'id_kota' => $id_kota]);
-        return redirect('institusi')->with('message', 'Data Berhasil Disimpan !');
+        return redirect('institusi')->with('message', 'Data Berhasil Disimpan !')->with('panel','success');
     }
 
     public function edit($id)
     {
     	$institusi = Institusi::findOrfail($id);
-        $provinsi = Provinsi::all()->lists('province','id');
-        $kota = Kota::all()->lists('kota','id');
+        $provinsi = Provinsi::orderBy('province','asc')->lists('province','id');
+        $kota = Kota::orderBy('kota','asc')->lists('kota','id');
     	return view('admin.institusi.edit', compact('institusi','provinsi','kota'));
     }
 
@@ -53,7 +53,7 @@ class InstitusiController extends Controller
         $id_provinsi = $request->id_provinsi;
         $id_kota= $request->id_kota;
     	DB::table('institusi')->where('id', $id)->update(['nama_institusi' => $nama_institusi, 'singkatan' => $singkatan, 'id_provinsi' => $id_provinsi, 'id_kota' => $id_kota ]);
-    	return redirect('institusi')->with('message', 'Data berhasil diubah!');
+    	return redirect('institusi')->with('message', 'Data berhasil diubah!')->with('panel','success');
     }
 
     public function import()

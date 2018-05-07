@@ -26,7 +26,7 @@ class TingkatPendidikanController extends Controller
     	$tingkat = $request->tingkat;
     	$no_urut = $request->no_urut;
     	DB::table('tingkat_pendidikan')->insert(['tingkat' => $tingkat, 'no_urut' => $no_urut]);
-    	return redirect('tingkat_pendidikan')->with('message','Data berhasil disimpan!');
+    	return redirect('tingkat_pendidikan')->with('message','Data berhasil disimpan!')->with('panel','success');
     }
 
     public function edit($id)
@@ -40,6 +40,6 @@ class TingkatPendidikanController extends Controller
     	$tingkat = $request->tingkat;
     	$no_urut = $request->no_urut;
     	DB::table('tingkat_pendidikan')->where('id', $id)->update(['tingkat' => $tingkat, 'no_urut' => $no_urut]);
-    	return redirect('tingkat_pendidikan')->with('message', 'Data berhasil diubah!');
+    	return redirect('tingkat_pendidikan')->with('message', 'Data berhasil diubah!')->with('panel','success');
     }
 }

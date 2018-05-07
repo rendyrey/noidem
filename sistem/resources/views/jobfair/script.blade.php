@@ -1,152 +1,167 @@
-</div><!-- /.row -->
-	</form>
-		</div><!-- /.page-content -->				
-			</div><!-- /.main-content -->
-			</div>
-			<br>
-				<div class="footer-inner" align="center">PT. MEDION
-					&copy; 2016
-				</div>
-			<br>
+</div>
+</form>
+</div><!-- /.page-content -->
+</div><!-- /.main-content -->
+</div>
+<br>
+<div class="footer-inner" align="center">
+	PT. MEDION
+	&copy; {{date('Y')}}
+</div>
+<br>
 
-			<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-				<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-			</a>
-		<script src="assets/js/jquery-2.1.4.min.js"></script>
-		
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/jquery-ui.custom.min.js"></script>
-		<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
-		<script src="assets/js/chosen.jquery.min.js"></script>
-		<script src="assets/js/bootstrap-datepicker.min.js"></script>
-		<!-- ace scripts -->
-		<script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
+<a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+	<i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+</a>
+<script type="text/javascript">
+if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+<script type="text/javascript">
+$(window).load(function() {
+	$("#more_edu").attr("hidden","hidden", !$(this).is(':checked'));
+	$("#D3_more").attr("hidden","hidden", !$(this).is(':checked'));
+	// $("#remove_field").hide();
+});
+</script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery-ui.custom.min.js"></script>
+<script src="assets/js/jquery.ui.touch-punch.min.js"></script>
+<script src="assets/js/chosen.jquery.min.js"></script>
+<script src="assets/js/bootstrap-datepicker.min.js"></script>
+<!-- ace scripts -->
+<script src="assets/js/ace-elements.min.js"></script>
+<script src="assets/js/ace.min.js"></script>
+<script src="assets/coding_js/chosen-photo.js"></script>
+<script src="assets/js/jquery.validate.min.js"></script>
+<script src="assets/coding_js/validasi_2.js"></script>
+<script src="assets/coding_js/general_data.js"></script>
+<script src="assets/coding_js/other_data.js"></script>
+<script src="assets/coding_js/confirmation.js"></script>
+<script src="assets/coding_js/work_experience.js"></script>
+<script src="assets/coding_js/just_number.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+	String.format = function() {
+		var s = arguments[0];
+		for (var i = 0; i < arguments.length - 1; i++) {
+			var reg = new RegExp("\\{" + i + "\\}", "gm");
+			s = s.replace(reg, arguments[i + 1]);
+		}
 
-		<script type="text/javascript">
-			jQuery(function($) {			
-			
-				if(!ace.vars['touch']) {
-					$('.chosen-select').chosen({allow_single_deselect:true}); 
-					//resize the chosen on window resize
-			
-					$(window)
-					.off('resize.chosen')
-					.on('resize.chosen', function() {
-						$('.chosen-select').each(function() {
-							 var $this = $(this);
-							 $this.next().css({'width': $this.parent().width()});
-						})
-					}).trigger('resize.chosen');
-					//resize chosen on sidebar collapse/expand
-					$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-						if(event_name != 'sidebar_collapsed') return;
-						$('.chosen-select').each(function() {
-							 var $this = $(this);
-							 $this.next().css({'width': $this.parent().width()});
-						})
-					});
-			
-			
-					$('#chosen-multiple-style .btn').on('click', function(e){
-						var target = $(this).find('input[type=radio]');
-						var which = parseInt(target.val());
-						if(which == 2) $('#form-field-select-4').addClass('tag-input-style');
-						 else $('#form-field-select-4').removeClass('tag-input-style');
-					});
-				}				
-			
-				$('#id-input-file-3').ace_file_input({
-					style: 'well',
-					btn_choose: 'Drop images here or click to choose Photo',
-					btn_change: null,
-					no_icon: 'ace-icon fa fa-cloud-upload',
-					droppable: true,
-					thumbnail: 'fit',
-					allowMime: ["image/jpg", "image/jpeg", "image/png", "image/gif", "image/bmp"],
-					preview_error : function(filename, error_code) {
+		return s;
+	}
+	var max_fields      = 4; //maximum input boxes allowed
+	var wrapper         = $("#more_work_experience"); //Fields wrapper
+	var add_button      = $("#add"); //Add button ID
+	var form1			= '<div id="tampil_form"><br><div class="form-group"><label class="col-xs-12 col-sm-3 control-label no-padding-right">Line of Business</label><div class="col-xs-12 col-sm-5"><select name="more_id_bidang_usaha{0}" class="chosen-select form-control more" id="more_id_bidang_usaha{1}" data-placeholder="Choose ..."><option></option>@foreach($bidang_usaha as $value)<option value="{{$value->id}}">{{$value->bidang_usaha}}</option>@endforeach</select></div></div>', index1 = 0;
+	var form2			= '<div class="form-group more" id="more_other_bidang_usaha{0}" hidden><label class="col-xs-12 col-sm-3 control-label no-padding-right">Other Line of Business</label><div class="col-xs-12 col-sm-5"><span class="block input-icon input-icon-right"><input type="text" name="more_other_bidang_usaha{1}" class="width-100 more_other_bidang_usaha"><i class="ace-icon fa fa-pencil-square-o"></i></span></div></div>', index2 = 0;
+	var form3			= '<div class="form-group"><label class="col-xs-12 col-sm-3 control-label no-padding-right">Start Year</label><div class="col-xs-12 col-sm-2"><select name="more_we_start_month{0}" class="form-control">@foreach($months as $num => $name)<option value="{{$name}}">{{$name}}</option>@endforeach</select></div><div class="col-xs-12 col-sm-2"><select name="more_we_start_year{1}" class="form-control">@foreach ($yearArray as $year){{$selected = ($year == $cur_year) ? "selected" : ''}}<option {{$selected}} value="{{$year}}">{{$year}}</option>@endforeach</select></div></div>', index3 = 0;
+	var form4 			= '<div class="form-group"><label class="col-xs-12 col-sm-3 control-label no-padding-right">End Year</label><div class="col-xs-12 col-sm-2"><select name="more_we_end_month{0}" class="form-control"><option value="Present">Present</option>@foreach ($months as $num => $name)<option value="{{$name}}">{{$name}}</option>@endforeach</select></div><div class="col-xs-12 col-sm-2"><select name="more_we_end_year{1}" class="form-control"><option value="Present">Present</option>@foreach ($yearArray as $year){{$selected = ($year == $cur_year) ? '' : ''}}<option {{$selected}} value="{{$year}}">{{$year}}</option>@endforeach</select></div></div></div>', index4 = 0;
+
+	var x = 1; //initlal text box count
+	// $("#remove_field").hide();
+	$(add_button).click(function(e){ //on add input button click
+		e.preventDefault();
+		if(x < max_fields){ //max input box allowed
+			x++; //text box increment
+			$(wrapper).append(String.format(form1+form2+form3+form4,index1,index1,index2,index2,index3,index3,index4,index4)); //add input box
+			index1 = index1 + 1;
+			index2 = index2 + 1;
+			index3 = index3 + 1;
+			index4 = index4 + 1;
+			$('.chosen-select').chosen({allow_single_deselect:true});
+			// $("#remove_field").show('slow');
+
+			jQuery(function($) {
+				$('#more_other_bidang_usaha0').hide();
+				$('#more_id_bidang_usaha0').change(function(){
+					if($('#more_id_bidang_usaha0').val() == '19') {
+						$('#more_other_bidang_usaha0').show('slow');
+					} else {
+						$('#more_other_bidang_usaha0').hide('slow');
 					}
-			
-				}).on('change', function(){
 				});
-				$('[data-rel=tooltip]').tooltip({container:'body'});
-				$('[data-rel=popover]').popover({container:'body'});
-				//dynamically change allowed formats by changing allowExt && allowMime function			
-				$('.date-picker').datepicker({
-					autoclose: true,
-					todayHighlight: true
-				})
-				//show datepicker when clicking on the icon
-				.next().on(ace.click_event, function(){
-					$(this).prev().focus();
-				});
-			
 			});
-		</script>
-		<script type="text/javascript">
-		$('#medion_employee').change(function(){
-			$("#medion_employee_name").prop("hidden", !$(this).is(':checked'));
+
+			jQuery(function($) {
+				$('#more_other_bidang_usaha1').hide();
+				$('#more_id_bidang_usaha1').change(function(){
+					if($('#more_id_bidang_usaha1').val() == '19') {
+						$('#more_other_bidang_usaha1').show('slow');
+					} else {
+						$('#more_other_bidang_usaha1').hide('slow');
+					}
+				});
+			});
+
+			jQuery(function($) {
+				$('#more_other_bidang_usaha2').hide();
+				$('#more_id_bidang_usaha2').change(function(){
+					if($('#more_id_bidang_usaha2').val() == '19') {
+						$('#more_other_bidang_usaha2').show('slow');
+					} else {
+						$('#more_other_bidang_usaha2').hide('slow');
+					}
+				});
+			});
+		}
+	});
+
+	$(wrapper).on("click","#remove_field", function(e){ //user click on remove text
+		e.preventDefault();
+		$("#tampil_form").fadeOut(500, function() {
+			$(this).remove();
 		});
-		$('#confirm_yes').change(function(){
-			$("#simpan_lamaran").prop("disabled", !$(this).is(':checked'));
-		});
-		$('#confirm_no').change(function(){
-			$("#simpan_lamaran").attr("disabled","disabled", !$(this).is(':checked'));
-		});
-		$('#confirm_followed_yes').change(function(){
-			$("#confirm_followed_date").prop("hidden", !$(this).is(':checked'));
-		});
-		$('#confirm_followed_no').change(function(){
-			$("#confirm_followed_date").attr("hidden","hidden", !$(this).is(':checked'));
-		});
-		$('#confirm_correctly').buttonset();
-		function validAngka(a)
-		{
-  			if(!/^[0-9.]+$/.test(a.value))
-  			{
-  				a.value = a.value.substring(0,a.value.length-1);
-  			}
-		}
-		</script>
-		<script type="text/javascript">
-		function other_institusi(val){
- 			var element=document.getElementById('institusi');
- 			if(val=='Other')
-   				element.style.display='block';
- 			else  
-   				element.style.display='none';
-		}
-		function other_major(val){
- 			var element=document.getElementById('major');
- 			if(val=='Other')
-   				element.style.display='block';
- 			else  
-   				element.style.display='none';
-		}
-		function line_business(val){
- 			var element=document.getElementById('line_business');
- 			if(val=='Other')
-   				element.style.display='block';
- 			else  
-   				element.style.display='none';
-		}
-		function other_city(val){
- 			var element=document.getElementById('city');
- 			if(val=='Other')
-   				element.style.display='block';
- 			else  
-   				element.style.display='none';
-		}
-		function other_venue(val){
- 			var element=document.getElementById('other_venue');
- 			if(val=='Other')
-   				element.style.display='block';
- 			else  
-   				element.style.display='none';
-		}
-		</script>		
-	</body>
+		x--;
+	});
+	$("#interest_1").change(function(){
+		var id = $(this).val();
+		$("#interest_2").find('option').prop('disabled',false);
+		$("#interest_3").find('option').prop('disabled',false);
+		$("#interest_4").find('option').prop('disabled',false);
+		$("#interest_2").find('option[value="'+id+'"]').prop('disabled',true);
+		$("#interest_3").find('option[value="'+id+'"]').prop('disabled',true);
+		$("#interest_4").find('option[value="'+id+'"]').prop('disabled',true);
+	});
+	$("#interest_2").change(function(){
+		var id = $(this).val();
+		$("#interest_1").find('option').prop('disabled',false);
+		$("#interest_3").find('option').prop('disabled',false);
+		$("#interest_4").find('option').prop('disabled',false);
+		$("#interest_1").find('option[value="'+id+'"]').prop('disabled',true);
+		$("#interest_3").find('option[value="'+id+'"]').prop('disabled',true);
+		$("#interest_4").find('option[value="'+id+'"]').prop('disabled',true);
+	});
+	$("#interest_3").change(function(){
+		var id = $(this).val();
+		$("#interest_2").find('option').prop('disabled',false);
+		$("#interest_1").find('option').prop('disabled',false);
+		$("#interest_4").find('option').prop('disabled',false);
+		$("#interest_2").find('option[value="'+id+'"]').prop('disabled',true);
+		$("#interest_1").find('option[value="'+id+'"]').prop('disabled',true);
+		$("#interest_4").find('option[value="'+id+'"]').prop('disabled',true);
+	});
+	$("#interest_4").change(function(){
+		var id = $(this).val();
+		$("#interest_2").find('option').prop('disabled',false);
+		$("#interest_3").find('option').prop('disabled',false);
+		$("#interest_1").find('option').prop('disabled',false);
+		$("#interest_2").find('option[value="'+id+'"]').prop('disabled',true);
+		$("#interest_3").find('option[value="'+id+'"]').prop('disabled',true);
+		$("#interest_1").find('option[value="'+id+'"]').prop('disabled',true);
+	});
+	$("#refresh_interest").click(function(){
+		$("#interest_1").val("");
+		$("#interest_2").val("");
+		$("#interest_3").val("");
+		$("#interest_4").val("");
+		$("#interest_1").find('option').prop('disabled',false);
+		$("#interest_2").find('option').prop('disabled',false);
+		$("#interest_3").find('option').prop('disabled',false);
+		$("#interest_4").find('option').prop('disabled',false);
+
+	});
+});
+</script>
+</body>
 </html>

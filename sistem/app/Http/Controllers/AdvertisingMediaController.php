@@ -28,7 +28,7 @@ class AdvertisingMediaController extends Controller
     	$media = $request->media;
     	$id_kategori = $request->id_kategori;
     	DB::table('advertising_media')->insert(['id_kategori' => $id_kategori, 'media' => $media]);
-    	return redirect('advertising_media')->with('message','Data berhasil disimpan!');
+    	return redirect('advertising_media')->with('message','Data berhasil disimpan!')->with('panel','success');
     }
 
     public function edit($id)
@@ -43,6 +43,6 @@ class AdvertisingMediaController extends Controller
     	$media = $request->media;
     	$id_kategori = $request->id_kategori;
     	DB::table('advertising_media')->where('id', $id)->update(['id_kategori' => $id_kategori, 'media' => $media]);
-    	return redirect('advertising_media')->with('message','Data berhasil diubah!');
+    	return redirect('advertising_media')->with('message','Data berhasil diubah!')->with('panel','success');
     }
 }

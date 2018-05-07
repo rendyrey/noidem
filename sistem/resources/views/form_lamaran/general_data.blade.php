@@ -37,7 +37,6 @@
 							<label class="col-xs-12 col-sm-3 control-label no-padding-right">Job Interest {{$a}}</label>
 							<div class="col-xs-12 col-sm-5">
 								<select class="form-control" name="job_interest_{{$a}}" id="interest_{{$a}}" placeholder="Choose ...">
-
 								@foreach($job_interest as $value)
 									<option value="{{$value->no_rcr}}" name="{{$value->id}}">{{$value->position_publish}}</option>
 								@endforeach
@@ -45,6 +44,7 @@
 							</div>
 						</div>
 						@endfor
+						<button id="refresh_interest" type="button">Reset</button> click this button if you want to reorder job interests
 
 						<div class="form-group" id="medion_employee_name" hidden>
 							<label class="col-xs-12 col-sm-3 control-label no-padding-right">Medion Employee Name</label>

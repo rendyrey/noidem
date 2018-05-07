@@ -48,4 +48,15 @@ class Iklan extends Model
 
         return $job_interest;
     }
+
+    public static function job_interest_jobfair(){
+      $job_interest = DB::table('iklan')
+          ->join('loker', 'iklan.id', '=', 'loker.id_iklan')
+          ->select('loker.*', 'iklan.id')
+          ->where('iklan.actual_end_date', '>=', Carbon::now())
+          ->where('iklan.domain','jobfair.medion.co.id')
+          ->get();
+
+      return $job_interest;
+    }
 }

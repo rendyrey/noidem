@@ -25,9 +25,10 @@ class TanggalPsychotestRequest extends Request
     {
         return [
             
-            'tanggal_psychotest' => 'required',
-            'id_iklan' => 'required',
-            'id_kota' => 'required'
+            'tanggal_psychotest' => 'required|after:yesterday',
+            
+            'id_kota' => 'required',
+            'kuota' => 'required|numeric',
         ];
     }
 
@@ -36,8 +37,11 @@ class TanggalPsychotestRequest extends Request
         return [
 
             'tanggal_psychotest.required' => 'Tanggal tidak boleh kosong!',
-            'id_iklan.required' => 'Iklan tidak boleh kosong!',
-            'id_kota.required' => 'Kota tidak boleh kosong!'
+            'tanggal_psychotest.after' => 'Tanggal Psychotest harus hari ini atau di atasnya',
+            'id_kota.required' => 'Kota tidak boleh kosong!',
+            'kuota.required' => 'Kuota tidak boleh kosong!',
+            'keterangan' => 'Keterangan tidka boleh kosong!',
+            'kuota.numeric' => 'Kuota harus menggunakan angka!'
 
         ];
     }

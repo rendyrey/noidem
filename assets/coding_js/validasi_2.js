@@ -1,6 +1,7 @@
 $.validator.addMethod('filesize', function (value, element, param) {
     	return this.optional(element) || (element.files[0].size <= param)
-		}, 'File size must be less than 1 MB');
+		}, 'File size must be less than 2 MB');
+
 
 		jQuery(function ($){
 
@@ -8,6 +9,7 @@ $.validator.addMethod('filesize', function (value, element, param) {
 
 			$('#form_lamaran').validate({
 		        rules: {
+              //id
 		        	'id_iklan': {
 		                required: true
 		            },
@@ -25,8 +27,9 @@ $.validator.addMethod('filesize', function (value, element, param) {
 		            	required: true
 		            },
 		            'photo': {
-		            	required: true,
-		                filesize: 2000000
+        						required: true,
+                    extension: "jpg|png|bmp|jpeg",
+        						filesize: 2000000,
 		            },
 		            'id_institusi': {
 		            	required: true
@@ -35,7 +38,8 @@ $.validator.addMethod('filesize', function (value, element, param) {
 		            	required: true
 		            },
 		            'gpa': {
-		            	required: true
+		            	required: true,
+                  max:4
 		            },
 		            'id_tanggal_psychotest': {
 		            	required: true
@@ -65,7 +69,7 @@ $.validator.addMethod('filesize', function (value, element, param) {
 		            }
 
 		        },
-		        
+
 
 		        highlight: function(element, errorClass, validClass) {
 
@@ -73,7 +77,7 @@ $.validator.addMethod('filesize', function (value, element, param) {
 		                this.findByName(element.name).addClass(errorClass).removeClass(validClass);
 		            } else {
 		                $(element).closest('.form-group').addClass('has-error');
-		            }    
+		            }
 		        },
 
 		        unhighlight: function(element) {
@@ -84,7 +88,7 @@ $.validator.addMethod('filesize', function (value, element, param) {
 		                $(element).closest('.form-group').removeClass('has-error');
 		        		$(element).closest('.form-group').find('chosen-select').remove();
 		            }
-		            
+
 		        },
 
 		        errorElement: 'span',

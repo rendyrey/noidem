@@ -38,4 +38,8 @@ class Major extends Model
     {
         return $this->hasMany('App\Akreditasi', 'id_major');
     }
+
+    public function syarat_prescreening(){
+        return $this->hasMany('App\SyaratPrescreening','id');
+    }
 }

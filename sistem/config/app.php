@@ -159,6 +159,9 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        //form
+        // Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
@@ -208,7 +211,9 @@ return [
         'Input' => Illuminate\Support\Facades\Input::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
-
+        //form
+        // 'Form' => Collective\Html\FormFacade::class,
+        // 'Html' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

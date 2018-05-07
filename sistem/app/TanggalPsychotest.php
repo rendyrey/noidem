@@ -8,7 +8,7 @@ class TanggalPsychotest extends Model
 {
     protected $table = 'tanggal_psychotest';
     protected $primaryKey = 'id';
-    protected $fillable = ['id_iklan','id_kota','tanggal','keterangan'];
+    protected $fillable = ['id_iklan','id_kota','tanggal','keterangan','kuota'];
 
     public function pelamar()
     {

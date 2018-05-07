@@ -26,7 +26,7 @@ class MajorGrupController extends Controller
     	$kode = $request->kode;
     	$nama_grup = $request->nama_grup;
     	DB::table('major_grup')->insert(['kode' => $kode, 'nama_grup' => $nama_grup]);
-    	return redirect('major_grup')->with('message', 'Data Berhasil Disimpan !');
+    	return redirect('major_grup')->with('message', 'Data Berhasil Disimpan !')->with('panel','success');
     }
 
     public function edit($id)
@@ -40,6 +40,6 @@ class MajorGrupController extends Controller
     	$kode = $request->kode;
     	$nama_grup = $request->nama_grup;
     	DB::table('major_grup')->where('id', $id)->update(['kode' => $kode, 'nama_grup' => $nama_grup]);
-    	return redirect('major_grup')->with('message', 'Data berhasil diubah!');
+    	return redirect('major_grup')->with('message', 'Data berhasil diubah!')->with('panel','success');
     }
 }

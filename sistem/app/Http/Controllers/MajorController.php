@@ -33,7 +33,7 @@ class MajorController extends Controller
         $major->created_at = Carbon::now();
         $major->save();
         
-    	return redirect('major')->with('message', 'Data Berhasil Disimpan !');
+    	return redirect('major')->with('message', 'Data Berhasil Disimpan !')->with('panel','success');
     }
 
     public function edit($id)
@@ -49,6 +49,6 @@ class MajorController extends Controller
     	$major = $request->major;
     	$id_grup = $request->id_grup;
     	DB::table('major')->where('id', $id)->update(['kode_major' => $kode_major, 'major' => $major, 'id_grup' => $id_grup]);
-    	return redirect('major')->with('message', 'Data berhasil diubah');
+    	return redirect('major')->with('message', 'Data berhasil diubah')->with('panel','success');
     }
 }

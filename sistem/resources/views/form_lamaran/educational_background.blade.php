@@ -86,7 +86,8 @@
 								<div class="form-group">
 									<label class="col-xs-12 col-sm-3 control-label no-padding-right">Start Year</label>
 									<div class="col-xs-12 col-sm-2">
-										<select name="start_month_education" class="form-control">
+										<select name="start_month_education" class="form-control" required>
+										<option value="">Select Month</option>
 										@foreach($months as $name)
 											<option value="{{$name}}">{{$name}}</option>
 										@endforeach
@@ -94,13 +95,12 @@
 									</div>
 									
 									<div class="col-xs-12 col-sm-2">
-										<select name="start_year_education" class="form-control">
+										<select name="start_year_education" class="form-control" required>
+										<option value="">Select Year</option>
 										@foreach ($yearArray as $year)
-										@if($year == $cur_year)
-										<option value="{{$year}}" selected>{{$year}}</option>
-										@else
+										
 										<option value="{{$year}}">{{$year}}</option>
-										@endif
+										
 										@endforeach
 										</select>
 									</div>
@@ -110,6 +110,7 @@
 									<label class="col-xs-12 col-sm-3 control-label no-padding-right">End Year</label>
 									<div class="col-xs-12 col-sm-2">
 										<select name="end_month_education" class="form-control">
+										<option value="">Select Month</option>
 										@foreach($months as $name)
 											<option value="{{$name}}">{{$name}}</option>
 										@endforeach
@@ -118,12 +119,11 @@
 
 									<div class="col-xs-12 col-sm-2">
 										<select name="end_year_education" class="form-control">
+										<option value="">Select Year</option>
 										@foreach ($yearArray as $year)
-										@if($year == $cur_year)
-										<option value="{{$year}}" selected>{{$year}}</option>
-										@else
+									
 										<option value="{{$year}}">{{$year}}</option>
-										@endif
+									
 										@endforeach
 										</select>
 									</div>

@@ -12,11 +12,11 @@
 							<label class="col-xs-12 col-sm-3 control-label no-padding-right">Date and City</label>
 
 							<div class="col-xs-12 col-sm-5">
-								<select name="id_tanggal_psychotest" class="form-control" id="tgl_psychotest" data-placeholder="Choose ...">
+								<select name="id_tanggal_psychotest" class="form-control" id="tgl_psychotest_not" data-placeholder="Choose ...">
 									<option></option>
 									@foreach($tanggal_psychotest as $value)
-									<?php $tanggal = date('d M Y', strtotime($value->tanggal)); ?>
-									<option value="{{$value->id}}" name="{{$value->id_iklan}}">{{$tanggal}} ( {{$value->kota->kota}} )</option>
+										<?php $tanggal = date('d M Y', strtotime($value->tanggal)); ?>
+										<option value="{{$value->id}}" name="{{$value->id_iklan}}">{{$tanggal}} ( {{$value->kota->kota}} )</option>
 									@endforeach
 								</select>
 							</div>
@@ -26,12 +26,15 @@
 
 							<div class="col-xs-12 col-sm-5">
 								<input type="text" name="other_psychotest_city" class="width-100">
-							</div>														
+							</div>
 						</div>
 					</div>
 				</div>
-			</div><!-- /.widget-main -->
-		</div><!-- /.widget-body -->
+			</div>
+			<!-- /.widget-main -->
+		</div>
+		<!-- /.widget-body -->
 	</div>
-</div><!-- /.col -->
+</div>
+<!-- /.col -->
 <!--========================== Psychotest Readiness =============== -->

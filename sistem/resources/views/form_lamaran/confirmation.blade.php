@@ -100,7 +100,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-xs-12 col-sm-5 control-label no-padding-right">Have you filled in this application from correctly?</label>
+							<label class="col-xs-12 col-sm-5 control-label no-padding-right">Have you filled in this application form correctly?</label>
 							<div class="col-xs-12 col-sm-7">
 								<div class="btn-group" data-toggle="buttons">
 										<label class="btn btn-white" name="confirm_yes">

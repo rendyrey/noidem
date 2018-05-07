@@ -25,7 +25,7 @@ class AdvertisingCategoryController extends Controller
 	{
 		$kategori = $request->kategori;
 		DB::table('advertising_category')->insert(['kategori' => $kategori]);
-		return redirect('advertising_category')->with('message','Data berhasil disimpan!');
+		return redirect('advertising_category')->with('message','Data berhasil disimpan!')->with('panel','success');
 	}
 
 	public function edit($id)
@@ -38,6 +38,6 @@ class AdvertisingCategoryController extends Controller
     {
     	$kategori = $request->kategori;
     	DB::table('advertising_category')->where('id', $id)->update(['kategori' => $kategori]);
-    	return redirect('advertising_category')->with('message','Data berhasil diubah!');
+    	return redirect('advertising_category')->with('message','Data berhasil diubah!')->with('panel','success');
     }
 }

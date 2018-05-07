@@ -29,4 +29,8 @@ class Loker extends Model
     {
     	return $this->belongsTo('App\Major', 'id_major');
     }
+
+    public function pelamar(){
+      return $this->hasMany('App\Pelamar','no_rcr');
+    }
 }

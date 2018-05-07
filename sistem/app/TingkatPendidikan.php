@@ -33,4 +33,8 @@ class TingkatPendidikan extends Model
     {
         return $this->hasMany('App\Akreditasi', 'id_tingkat_pendidikan');
     }
+
+    public function syarat_prescreening(){
+        return $this->hasMany('App\SyaratPrescreening','id');
+    }
 }

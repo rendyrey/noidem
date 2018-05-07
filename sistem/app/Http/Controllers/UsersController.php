@@ -30,7 +30,7 @@ class UsersController extends Controller
         $simpan->password = bcrypt($request->password);
         $simpan->save();
 
-    	return redirect('user')->with('message', 'Data User berhasil ditambahkan!');
+    	return redirect('user')->with('message', 'Data User berhasil ditambahkan!')->with('panel','success');
 
     }
 
@@ -48,13 +48,13 @@ class UsersController extends Controller
 
     	DB::table('users')->where('id', $id)->update(['name' => $name, 'email' => $email, 'password' => $password]);
 
-    	return redirect('user')->with('message', 'Data berhasil diubah!');
+    	return redirect('user')->with('message', 'Data berhasil diubah!')->with('panel','success');
     }
 
     public function hapus($id)
     {
     	$hapus = User::findOrfail($id);
         $hapus->delete();
-        return redirect('user')->with('messages', 'Data berhasil dihapus!');
+        return redirect('user')->with('messages', 'Data berhasil dihapus!')->with('panel','success');
     }
 }

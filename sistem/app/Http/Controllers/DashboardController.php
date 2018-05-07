@@ -22,12 +22,21 @@ class DashboardController extends Controller
     {
         $this->middleware('auth');
     }
-    
-	publiC function index()
+
+	publiC function vacancy_dashboard()
 	{
+		// echo Carbon::today();
 		$loker = Loker::OrderBy('id_iklan','ASC')->get();
-		$iklan = Iklan::OrderBy('id','ASC')->where('actual_end_date', '>=', Carbon::now())->get();
-		return view('admin.dashboard.index', compact('loker','iklan'));
+		$iklan = Iklan::OrderBy('id','ASC')->where('actual_end_date', '>=', Carbon::today())->get();
+		return view('admin.dashboard.vacancy_dashboard', compact('loker','iklan'));
 	}
-    
+
+	public function main_dashboard(){
+		return view('admin.dashboard.main_dashboard');
+	}
+
+	public function applicant_dashboard(){
+		return view('admin.dashboard.applicant_dashboard');
+	}
+
 }

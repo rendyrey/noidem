@@ -25,7 +25,7 @@ class ProvinsiController extends Controller
     {
     	$provinsi = $request->provinsi;
     	DB::table('provinsi')->insert(['province' => $provinsi]);
-        return redirect('provinsi')->with('message', 'Data Berhasil Disimpan !');
+        return redirect('provinsi')->with('message', 'Data Berhasil Disimpan !')->with('panel','success');
     }
 
     public function edit($id)
@@ -38,7 +38,7 @@ class ProvinsiController extends Controller
     {
     	$provinsi = $request->provinsi;
     	DB::table('provinsi')->where('id', $id)->update(['province' => $provinsi]);
-    	return redirect('provinsi')->with('message', 'Data berhasil diubah!');
+    	return redirect('provinsi')->with('message', 'Data berhasil diubah!')->with('panel','success');
     }
 
     // public function hapus($id)

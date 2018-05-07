@@ -1,1683 +1,1649 @@
--- phpMyAdmin SQL Dump
--- version 4.3.11
--- http://www.phpmyadmin.net
---
--- Host: 127.0.0.1
--- Generation Time: Dec 29, 2016 at 10:37 AM
--- Server version: 5.6.24
--- PHP Version: 5.6.8
+/*
+Navicat MySQL Data Transfer
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+Source Server         : localhost
+Source Server Version : 100131
+Source Host           : localhost:3306
+Source Database       : dbformlamaran
 
+Target Server Type    : MYSQL
+Target Server Version : 100131
+File Encoding         : 65001
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+Date: 2018-04-10 09:48:14
+*/
 
---
--- Database: `dbformlamaran`
---
+SET FOREIGN_KEY_CHECKS=0;
 
--- --------------------------------------------------------
-
---
--- Table structure for table `advertising_category`
---
-
-CREATE TABLE IF NOT EXISTS `advertising_category` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for advertising_category
+-- ----------------------------
+DROP TABLE IF EXISTS `advertising_category`;
+CREATE TABLE `advertising_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `kategori` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `advertising_category`:
---
+-- ----------------------------
+-- Records of advertising_category
+-- ----------------------------
+INSERT INTO `advertising_category` VALUES ('4', 'Company Website', '2016-10-04 22:48:40', '2016-10-04 22:48:40', null);
+INSERT INTO `advertising_category` VALUES ('5', 'Campus/Career Center', '2016-10-04 22:49:11', '2016-10-04 22:49:11', null);
+INSERT INTO `advertising_category` VALUES ('6', 'Jobsearch Website', '2016-10-04 22:49:37', '2016-10-04 22:49:37', null);
+INSERT INTO `advertising_category` VALUES ('7', 'Medion Employees', '2016-10-04 22:49:53', '2016-10-04 22:49:53', null);
+INSERT INTO `advertising_category` VALUES ('8', 'Magazines', '2016-10-04 22:50:04', '2017-03-06 04:04:14', null);
+INSERT INTO `advertising_category` VALUES ('9', 'Newspaper', '2016-10-04 22:50:13', '2016-10-04 22:50:13', null);
+INSERT INTO `advertising_category` VALUES ('10', 'Social Media', '2016-10-04 22:50:30', '2016-10-04 22:50:30', null);
+INSERT INTO `advertising_category` VALUES ('11', 'Events', '2016-10-04 22:50:39', '2016-10-04 22:50:39', null);
+INSERT INTO `advertising_category` VALUES ('12', 'Job Fair', '2016-10-04 22:50:51', '2016-10-04 22:50:51', null);
+INSERT INTO `advertising_category` VALUES ('13', 'Campus Recruitment', '2016-10-04 22:51:13', '2016-10-04 22:51:13', null);
+INSERT INTO `advertising_category` VALUES ('14', 'Head Hunter', '2017-03-06 04:04:27', '2017-03-06 04:04:27', null);
+INSERT INTO `advertising_category` VALUES ('15', 'Asosiasi Profesi', '2017-03-06 06:54:16', '2018-04-02 15:05:54', null);
 
---
--- Dumping data for table `advertising_category`
---
-
-INSERT INTO `advertising_category` (`id`, `kategori`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 'Company Website', '2016-10-04 22:48:40', '2016-10-04 22:48:40', NULL),
-(5, 'Campus/Career Center', '2016-10-04 22:49:11', '2016-10-04 22:49:11', NULL),
-(6, 'Jobsearch Website', '2016-10-04 22:49:37', '2016-10-04 22:49:37', NULL),
-(7, 'Medion Employees', '2016-10-04 22:49:53', '2016-10-04 22:49:53', NULL),
-(8, 'Magazine', '2016-10-04 22:50:04', '2016-10-04 22:50:04', NULL),
-(9, 'Newspaper', '2016-10-04 22:50:13', '2016-10-04 22:50:13', NULL),
-(10, 'Social Media', '2016-10-04 22:50:30', '2016-10-04 22:50:30', NULL),
-(11, 'Events', '2016-10-04 22:50:39', '2016-10-04 22:50:39', NULL),
-(12, 'Job Fair', '2016-10-04 22:50:51', '2016-10-04 22:50:51', NULL),
-(13, 'Campus Recruitment', '2016-10-04 22:51:13', '2016-10-04 22:51:13', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `advertising_media`
---
-
-CREATE TABLE IF NOT EXISTS `advertising_media` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for advertising_media
+-- ----------------------------
+DROP TABLE IF EXISTS `advertising_media`;
+CREATE TABLE `advertising_media` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_kategori` int(10) unsigned NOT NULL,
   `media` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `advertising_media_id_kategori_foreign` (`id_kategori`),
+  CONSTRAINT `advertising_media_id_kategori_foreign` FOREIGN KEY (`id_kategori`) REFERENCES `advertising_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `advertising_media`:
---   `id_kategori`
---       `advertising_category` -> `id`
---
+-- ----------------------------
+-- Records of advertising_media
+-- ----------------------------
+INSERT INTO `advertising_media` VALUES ('4', '4', 'Company Website', '2016-10-04 22:51:39', '2018-04-02 15:14:02', null);
+INSERT INTO `advertising_media` VALUES ('5', '5', 'Fakultas Farmasi UGM', '2016-10-04 22:52:19', '2016-10-04 22:52:19', null);
+INSERT INTO `advertising_media` VALUES ('6', '6', 'Job Street', '2016-10-04 22:52:36', '2017-03-06 04:52:27', null);
+INSERT INTO `advertising_media` VALUES ('7', '7', 'Medion Employees', '2016-10-04 22:53:39', '2017-03-06 05:39:33', null);
+INSERT INTO `advertising_media` VALUES ('8', '8', 'Infovet', '2016-10-04 22:53:52', '2016-10-04 22:53:52', null);
+INSERT INTO `advertising_media` VALUES ('9', '9', 'Pikiran Rakyat', '2016-10-04 22:54:07', '2016-10-04 22:54:07', null);
+INSERT INTO `advertising_media` VALUES ('10', '10', 'Twitter', '2016-10-04 22:54:21', '2016-10-04 22:54:21', null);
+INSERT INTO `advertising_media` VALUES ('11', '11', 'Daftar Lulusan FT UNDIP', '2016-10-04 22:55:01', '2016-10-04 22:55:01', null);
+INSERT INTO `advertising_media` VALUES ('12', '12', 'Job Fair UB', '2016-10-04 22:55:15', '2016-10-04 22:55:15', null);
+INSERT INTO `advertising_media` VALUES ('13', '13', 'POLINEMA', '2016-10-04 22:55:28', '2016-10-04 22:55:28', null);
+INSERT INTO `advertising_media` VALUES ('14', '13', 'USD', '2017-09-29 09:51:46', '2017-09-29 09:51:46', null);
 
---
--- Dumping data for table `advertising_media`
---
-
-INSERT INTO `advertising_media` (`id`, `id_kategori`, `media`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(4, 4, 'medion.co.id', '2016-10-04 22:51:39', '2016-10-04 22:51:39', NULL),
-(5, 5, 'Fakultas Farmasi UGM', '2016-10-04 22:52:19', '2016-10-04 22:52:19', NULL),
-(6, 6, 'urbancv.com', '2016-10-04 22:52:36', '2016-10-04 22:52:36', NULL),
-(7, 7, 'Web Internal Medion', '2016-10-04 22:53:39', '2016-10-04 22:53:39', NULL),
-(8, 8, 'Infovet', '2016-10-04 22:53:52', '2016-10-04 22:53:52', NULL),
-(9, 9, 'Pikiran Rakyat', '2016-10-04 22:54:07', '2016-10-04 22:54:07', NULL),
-(10, 10, 'Twitter', '2016-10-04 22:54:21', '2016-10-04 22:54:21', NULL),
-(11, 11, 'Daftar Lulusan FT UNDIP', '2016-10-04 22:55:01', '2016-10-04 22:55:01', NULL),
-(12, 12, 'Job Fair UB', '2016-10-04 22:55:15', '2016-10-04 22:55:15', NULL),
-(13, 13, 'POLINEMA', '2016-10-04 22:55:28', '2016-10-04 22:55:28', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `akreditasi`
---
-
-CREATE TABLE IF NOT EXISTS `akreditasi` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for akreditasi
+-- ----------------------------
+DROP TABLE IF EXISTS `akreditasi`;
+CREATE TABLE `akreditasi` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_institusi` int(11) NOT NULL,
   `id_major` int(11) NOT NULL,
   `akreditasi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `id_tingkat_pendidikan` int(11) NOT NULL,
   `tgl_kadaluarsa` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1573 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `akreditasi`:
---
+-- ----------------------------
+-- Records of akreditasi
+-- ----------------------------
+INSERT INTO `akreditasi` VALUES ('1', '43', '12', 'A', '3', '2016-08-24', '2016-12-21 20:06:40', '2016-12-21 20:06:40');
+INSERT INTO `akreditasi` VALUES ('2', '43', '80', 'A', '1', '2020-06-04', '2016-12-21 20:15:07', '2016-12-21 20:15:07');
+INSERT INTO `akreditasi` VALUES ('3', '43', '16', 'B', '1', '2019-05-22', '2016-12-21 21:27:15', '2017-01-11 20:01:13');
+INSERT INTO `akreditasi` VALUES ('4', '43', '24', 'B', '1', '2019-05-27', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('5', '43', '94', 'A', '1', '2019-05-22', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('6', '43', '94', 'A', '5', '2017-05-16', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('7', '43', '81', 'B', '5', '2017-05-31', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('8', '43', '3', 'A', '1', '2018-10-19', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('9', '43', '3', 'B', '5', '2019-11-14', '2016-12-21 21:27:15', '2017-01-11 19:39:48');
+INSERT INTO `akreditasi` VALUES ('10', '43', '2', 'A', '1', '2018-10-26', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('11', '43', '82', 'A', '5', '2020-06-04', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('12', '43', '5', 'A', '5', '2018-08-24', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('13', '43', '18', 'A', '1', '2016-08-18', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('14', '43', '51', 'A', '1', '2017-10-18', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('15', '43', '51', 'A', '5', '2020-03-09', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('16', '43', '17', 'B', '5', '2020-01-31', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('17', '43', '83', 'A', '1', '2020-03-14', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('18', '43', '23', 'A', '1', '2018-10-19', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('19', '43', '23', 'A', '5', '2020-04-18', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('20', '43', '26', 'B', '1', '2020-02-21', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('21', '43', '84', 'A', '1', '2018-11-22', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('22', '43', '17', 'A', '1', '2020-06-04', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('23', '43', '85', 'B', '1', '2020-01-24', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('24', '43', '86', 'A', '6', '2017-07-19', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('25', '43', '87', 'B', '1', '2020-08-21', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('26', '43', '88', 'B', '1', '2020-09-05', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('27', '43', '52', 'B', '1', '2019-11-14', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('28', '43', '27', 'A', '1', '2018-08-24', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('29', '43', '4', 'A', '5', '2020-10-07', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('30', '43', '4', 'A', '6', '2020-05-30', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('31', '43', '89', 'A', '5', '2017-05-16', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('32', '43', '89', 'A', '6', '2017-05-16', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('33', '43', '90', 'A', '5', '2018-10-01', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('34', '43', '31', 'A', '5', '2016-10-28', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('35', '43', '91', 'B', '1', '2020-03-28', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('36', '43', '55', 'B', '1', '2020-03-28', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('37', '43', '92', 'A', '1', '2016-09-29', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('38', '43', '93', 'A', '5', '2016-07-10', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('41', '43', '32', 'A', '1', '2016-09-29', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('42', '43', '80', 'A', '1', '2020-06-04', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('43', '43', '33', 'A', '1', '2018-07-20', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('44', '43', '33', 'A', '5', '2020-02-05', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('45', '43', '33', 'A', '6', '2016-10-28', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('46', '43', '31', 'A', '1', '2016-07-10', '2016-12-21 21:27:15', '2016-12-21 21:27:15');
+INSERT INTO `akreditasi` VALUES ('48', '12', '50', 'B', '3', '2018-09-11', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('49', '12', '25', 'B', '3', '2017-11-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('50', '12', '52', 'B', '1', '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('51', '12', '57', 'B', '3', '2019-11-14', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('52', '24', '1', 'A', '4', '2017-10-18', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('53', '24', '95', 'A', '3', '2016-09-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('54', '24', '50', 'A', '3', '2020-02-05', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('55', '24', '75', 'A', '3', '2016-10-14', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('56', '24', '75', 'A', '5', '2017-01-13', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('57', '24', '75', 'B', '6', '2019-07-12', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('58', '24', '94', 'A', '5', '2019-08-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('59', '24', '2', 'A', '3', '2019-10-10', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('60', '24', '2', 'A', '5', '2016-07-21', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('61', '24', '2', 'A', '6', '2019-08-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('62', '24', '100', 'A', '5', '2016-07-21', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('63', '24', '5', 'A', '5', '2016-12-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('64', '24', '7', 'A', '3', '2020-01-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('65', '24', '8', 'A', '3', '2017-12-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('68', '24', '9', 'A', '3', '2016-09-09', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('69', '24', '95', 'A', '5', '2016-09-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('70', '24', '95', 'A', '6', '2020-09-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('71', '24', '19', 'A', '3', '2019-10-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('72', '24', '19', 'A', '5', '2020-08-15', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('73', '24', '19', 'A', '6', '2014-10-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('74', '24', '23', 'A', '3', '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('75', '24', '23', 'A', '5', '2016-02-25', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('76', '24', '23', 'A', '6', '2019-05-06', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('77', '24', '17', 'A', '3', '2020-02-05', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('78', '24', '27', 'A', '3', '2019-08-22', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('79', '24', '27', 'A', '5', '2020-01-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('80', '24', '27', 'A', '6', '2014-01-16', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('81', '24', '4', 'A', '3', '2020-08-29', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('82', '24', '90', 'A', '3', '2020-02-05', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('83', '24', '90', 'A', '5', '2016-06-17', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('84', '24', '90', 'A', '6', '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('85', '24', '10', 'A', '3', '2020-05-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('86', '24', '10', 'A', '5', '2018-10-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('87', '24', '96', 'A', '5', '2016-07-21', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('88', '24', '96', 'A', '6', '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('89', '24', '47', 'A', '3', '2020-02-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('91', '24', '47', 'A', '5', '2017-07-27', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('93', '24', '97', 'A', '3', '2020-05-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('94', '24', '97', 'A', '5', '2016-12-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('95', '24', '97', 'A', '6', '2019-08-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('96', '24', '98', 'A', '3', '2020-05-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('97', '24', '98', 'A', '5', '2017-06-15', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('98', '24', '98', 'A', '6', '2020-09-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('99', '24', '99', 'A', '3', '2020-08-29', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('100', '24', '56', 'A', '3', '2020-08-29', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('101', '24', '56', 'A', '5', '2016-01-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('102', '24', '56', 'A', '6', '2019-12-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('103', '24', '57', 'A', '3', '2020-03-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('104', '24', '57', 'A', '5', '2016-03-06', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('105', '24', '57', 'A', '6', '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('106', '24', '63', 'A', '3', '2016-09-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('107', '24', '63', 'A', '5', '2016-07-21', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('108', '24', '63', 'A', '6', '2018-04-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('109', '24', '46', 'A', '3', '2018-01-31', '2016-12-21 21:58:27', '2016-12-21 21:58:27');
+INSERT INTO `akreditasi` VALUES ('111', '26', '8', 'B', '3', '2017-01-13', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('114', '26', '53', 'B', '3', '2016-09-23', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('115', '26', '50', 'B', '3', '2016-09-09', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('117', '26', '99', 'B', '3', '2016-09-23', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('118', '25', '50', 'B', '3', '2016-11-11', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('119', '25', '56', 'B', '3', '2018-09-21', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('120', '25', '75', 'B', '3', '2018-07-20', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('121', '25', '7', 'A', '3', '2018-07-20', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('122', '25', '77', 'B', '3', '2016-07-28', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('123', '25', '8', 'B', '3', '2018-09-21', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('126', '25', '9', 'B', '3', '2020-06-27', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('127', '25', '90', 'B', '3', '2020-08-15', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('128', '25', '47', 'B', '3', '2018-09-26', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('129', '25', '99', 'B', '3', '1900-01-23', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('130', '25', '57', 'A', '3', '2018-10-26', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('131', '25', '63', 'B', '3', '2018-09-11', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('132', '64', '50', 'B', '3', '2017-10-18', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('133', '64', '75', 'B', '3', '2018-09-21', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('134', '64', '90', 'B', '3', '2019-08-22', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('135', '64', '47', 'B', '1', '2013-05-31', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('136', '64', '50', 'B', '3', '2017-10-18', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('137', '64', '50', 'B', '5', '2019-01-11', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('138', '64', '99', 'B', '3', '2020-10-04', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('139', '64', '56', 'B', '3', '2016-06-05', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('140', '64', '57', 'B', '3', '2019-01-10', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('141', '64', '63', 'B', '1', '2020-03-14', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('142', '64', '63', 'B', '3', '2018-09-21', '2016-12-21 22:49:39', '2016-12-21 22:49:39');
+INSERT INTO `akreditasi` VALUES ('143', '72', '50', 'A', '3', '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('144', '72', '75', 'A', '3', '2016-06-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('145', '72', '75', 'A', '5', '2018-01-25', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('146', '72', '2', 'A', '3', '2018-07-20', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('147', '72', '7', 'B', '3', '2020-03-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('148', '72', '9', 'A', '3', '2016-05-13', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('149', '72', '19', 'A', '3', '2017-03-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('150', '72', '19', 'A', '5', '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('151', '72', '51', 'B', '6', '2019-11-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('152', '72', '23', 'A', '3', '2018-07-20', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('153', '72', '23', 'B', '5', '2019-10-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('154', '72', '23', 'B', '6', '2019-07-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('155', '72', '86', 'B', '3', '2019-07-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('156', '72', '27', 'B', '3', '2016-07-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('157', '72', '27', 'B', '5', '2019-01-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('158', '72', '90', 'A', '3', '2020-10-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('159', '72', '53', 'A', '3', '2016-08-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('160', '72', '47', 'A', '3', '2017-04-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('162', '72', '47', 'A', '5', '2019-08-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('164', '72', '47', 'A', '6', '2016-08-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('166', '72', '97', 'A', '3', '2017-06-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('167', '72', '97', 'A', '5', '2018-10-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('168', '72', '50', 'B', '5', '2018-10-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('169', '72', '50', 'B', '6', '2019-02-05', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('170', '72', '99', 'A', '3', '2016-12-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('171', '72', '99', 'B', '5', '2018-04-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('172', '72', '56', 'B', '1', '1900-01-24', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('173', '72', '56', 'A', '3', '2016-11-03', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('174', '72', '56', 'A', '5', '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('175', '72', '56', 'A', '6', '2020-10-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('176', '72', '57', 'A', '3', '2020-11-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('177', '72', '57', 'A', '5', '2020-09-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('178', '72', '57', 'B', '6', '2019-02-05', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('179', '72', '63', 'B', '1', '2019-07-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('180', '72', '63', 'A', '3', '2017-11-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('181', '72', '63', 'A', '5', '2020-06-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('182', '72', '63', 'A', '6', '2019-08-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('183', '72', '77', 'B', '1', '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('184', '72', '77', 'B', '2', '2019-12-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('185', '59', '101', 'B', '1', '2016-11-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('186', '59', '62', 'B', '1', '2016-11-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('187', '70', '47', 'A', '1', '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('188', '70', '47', 'A', '2', '2020-06-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('189', '70', '48', 'A', '1', '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('190', '70', '48', 'A', '2', '2015-10-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('193', '70', '47', 'A', '1', '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('195', '70', '99', 'A', '1', '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('196', '70', '55', 'B', '2', '2018-04-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('197', '70', '46', 'A', '1', '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('199', '70', '46', 'A', '2', '2015-10-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('201', '29', '62', 'A', '1', '2017-12-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('202', '29', '102', 'B', '1', '2017-12-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('203', '13', '62', 'B', '1', '2019-08-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('204', '3', '103', 'B', '1', '2016-08-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('205', '3', '14', 'B', '2', '2020-03-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('206', '3', '104', 'B', '1', '2019-11-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('207', '27', '77', 'A', '1', '2019-01-10', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('208', '27', '13', 'A', '1', '2018-04-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('209', '27', '13', 'B', '2', '2016-12-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('210', '27', '16', 'A', '1', '2018-09-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('211', '27', '24', 'B', '1', '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('212', '27', '42', 'A', '1', '2017-07-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('214', '27', '105', 'A', '2', '2017-01-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('215', '27', '106', 'A', '1', '2019-12-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('216', '27', '47', 'B', '1', '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('217', '27', '47', 'B', '2', '2017-10-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('218', '27', '99', 'A', '1', '2018-10-19', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('219', '27', '99', 'B', '2', '2017-06-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('220', '27', '56', 'A', '1', '2018-09-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('221', '27', '107', 'B', '1', '2018-07-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('222', '27', '103', 'B', '1', '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('223', '27', '103', 'B', '2', '2020-10-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('224', '27', '46', 'A', '1', '2020-01-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('226', '27', '46', 'B', '2', '2017-10-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('228', '27', '63', 'B', '1', '2016-08-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('229', '27', '47', 'B', '1', '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('230', '27', '47', 'B', '2', '2017-10-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('231', '98', '13', 'B', '1', '2017-06-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('232', '98', '104', 'B', '1', '2020-03-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('233', '45', '13', 'A', '1', '2015-08-20', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('234', '45', '16', 'A', '1', '2017-11-05', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('235', '45', '48', 'B', '1', '2017-06-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('236', '45', '107', 'B', '1', '2016-08-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('237', '45', '63', 'B', '1', '2016-04-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('238', '45', '46', 'B', '1', '2017-06-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('240', '61', '40', 'A', '1', '2015-12-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('241', '61', '32', 'B', '1', '2016-01-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('242', '61', '85', 'B', '1', '2015-12-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('243', '61', '104', 'B', '1', '2020-10-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('244', '61', '55', 'B', '1', '2016-08-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('245', '61', '108', 'B', '1', '2016-01-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('246', '78', '16', 'B', '1', '2019-09-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('247', '78', '109', 'B', '1', '2016-03-06', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('248', '78', '104', 'B', '1', '2019-10-10', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('249', '78', '110', 'B', '1', '2020-03-09', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('250', '78', '31', 'B', '1', '2020-05-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('251', '65', '13', 'A', '1', '2019-10-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('252', '65', '16', 'A', '1', '2018-01-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('253', '65', '111', 'A', '2', '2018-04-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('254', '65', '112', 'B', '2', '2020-07-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('256', '65', '104', 'B', '1', '2019-09-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('257', '65', '106', 'B', '2', '2015-05-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('258', '65', '47', 'B', '1', '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('259', '65', '47', 'B', '2', '2018-01-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('260', '65', '99', 'B', '2', '2018-01-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('261', '65', '56', 'A', '1', '2018-12-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('262', '65', '113', 'B', '2', '2015-09-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('263', '65', '77', 'B', '1', '2020-06-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('264', '65', '46', 'B', '1', '2020-07-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('266', '65', '16', 'A', '1', '2018-01-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('267', '65', '56', 'A', '1', '2018-12-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('268', '65', '63', 'B', '1', '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('269', '65', '47', 'B', '1', '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('270', '91', '13', 'B', '1', '2017-06-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('271', '91', '16', 'B', '1', '2016-04-02', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('272', '91', '77', 'B', '1', '2016-04-02', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('273', '95', '13', 'A', '1', '2016-01-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('274', '95', '104', 'B', '1', '2015-12-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('275', '95', '47', 'B', '1', '2016-09-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('276', '95', '55', 'B', '1', '2017-03-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('277', '95', '77', 'B', '1', '2016-08-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('278', '83', '13', 'B', '1', '2016-12-06', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('279', '83', '16', 'B', '1', '2016-10-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('280', '83', '16', 'B', '2', '2018-12-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('281', '83', '104', 'B', '1', '2016-07-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('282', '83', '47', 'B', '1', '2016-07-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('283', '83', '47', 'B', '2', '2018-01-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('284', '83', '55', 'B', '1', '2016-07-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('285', '83', '63', 'B', '1', '2020-06-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('286', '83', '77', 'A', '1', '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('287', '83', '46', 'B', '1', '2016-07-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('289', '99', '13', 'B', '1', '2016-09-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('290', '99', '16', 'B', '1', '2016-01-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('291', '99', '16', 'B', '2', '2018-04-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('292', '99', '75', 'B', '1', '2020-06-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('293', '99', '109', 'B', '1', '2018-09-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('294', '99', '77', 'B', '1', '2018-02-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('295', '100', '13', 'B', '1', '2016-11-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('296', '100', '16', 'B', '1', '2018-08-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('297', '100', '9', 'B', '1', '2020-06-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('298', '100', '106', 'B', '2', '2018-09-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('299', '100', '77', 'B', '1', '2016-12-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('300', '52', '77', 'A', '1', '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('301', '52', '13', 'A', '1', '2019-01-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('302', '52', '16', 'A', '1', '2018-09-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('303', '52', '14', 'B', '2', '2018-06-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('304', '52', '47', 'B', '1', '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('305', '52', '99', 'B', '1', '2019-10-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('306', '52', '107', 'B', '1', '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('307', '52', '63', 'B', '1', '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('308', '52', '46', 'B', '1', '2020-08-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('310', '52', '46', 'B', '2', '2019-06-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('312', '52', '16', 'A', '1', '2018-09-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('313', '52', '63', 'B', '1', '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('314', '52', '47', 'B', '1', '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('315', '93', '77', 'B', '1', '2019-11-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('316', '93', '63', 'B', '1', '2019-12-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('317', '93', '13', 'A', '1', '2020-03-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('318', '93', '16', 'B', '1', '2020-07-02', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('319', '93', '42', 'A', '1', '2020-08-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('321', '93', '104', 'B', '1', '2018-12-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('322', '93', '47', 'B', '1', '2018-12-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('323', '93', '56', 'B', '1', '2020-02-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('324', '93', '55', 'B', '1', '2016-08-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('325', '93', '46', 'B', '1', '2020-03-09', '2016-12-22 01:02:14', '2016-12-22 01:02:14');
+INSERT INTO `akreditasi` VALUES ('327', '88', '16', 'B', '1', '2018-10-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('328', '88', '56', 'B', '1', '2016-01-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('329', '88', '114', 'B', '2', '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('330', '88', '107', 'B', '1', '2018-10-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('331', '88', '46', 'B', '1', '2016-07-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('333', '82', '115', 'B', '1', '2016-01-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('334', '82', '116', 'B', '1', '2015-12-30', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('335', '82', '31', 'B', '1', '2015-12-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('337', '42', '104', 'B', '1', '2019-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('338', '42', '106', 'B', '1', '2018-12-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('339', '74', '16', 'A', '1', '2020-07-02', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('340', '31', '99', 'B', '3', '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('341', '30', '16', 'B', '3', '2017-12-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('342', '30', '8', 'B', '3', '2017-08-06', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('344', '30', '26', 'B', '3', '2017-05-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('345', '30', '17', 'A', '5', '2017-06-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('346', '30', '53', 'B', '3', '2018-07-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('347', '30', '47', 'B', '3', '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('348', '30', '47', 'B', '5', '2017-05-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('349', '30', '99', 'B', '3', '2015-12-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('350', '30', '99', 'B', '5', '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('351', '30', '46', 'A', '1', '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('353', '30', '46', 'A', '3', '2014-06-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('355', '30', '57', 'B', '3', '2016-12-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('356', '30', '17', 'A', '3', '2018-09-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('357', '30', '104', 'A', '1', '2020-10-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('358', '30', '106', 'B', '1', '2020-10-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('359', '30', '97', 'B', '3', '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('360', '30', '50', 'A', '3', '2019-12-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('361', '30', '99', 'A', '1', '2015-05-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('362', '30', '55', 'A', '1', '2020-11-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('363', '30', '46', 'A', '3', '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('365', '6', '1', 'A', '4', '2020-06-27', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('366', '6', '95', 'A', '3', '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('367', '6', '16', 'B', '3', '2016-05-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('368', '6', '2', 'A', '3', '2019-12-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('369', '6', '95', 'B', '5', '2020-09-19', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('370', '6', '19', 'B', '3', '2017-12-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('371', '6', '26', 'B', '3', '2018-05-22', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('372', '6', '17', 'B', '3', '2020-01-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('373', '6', '27', 'B', '3', '2016-04-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('374', '6', '41', 'B', '3', '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('375', '6', '41', 'B', '5', '2018-05-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('376', '6', '42', 'B', '3', '2018-12-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('378', '6', '53', 'B', '3', '2017-08-15', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('379', '6', '47', 'B', '3', '2016-07-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('380', '6', '50', 'B', '3', '2018-09-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('381', '6', '99', 'B', '3', '2019-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('382', '6', '56', 'B', '3', '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('383', '71', '1', 'A', '4', '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('384', '71', '95', 'A', '3', '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('385', '71', '11', 'A', '4', '2020-01-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('386', '71', '11', 'A', '3', '2020-01-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('387', '71', '16', 'A', '1', '2017-06-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('388', '71', '16', 'A', '3', '2016-11-02', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('389', '71', '16', 'A', '5', '2020-01-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('390', '71', '42', 'B', '1', '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('392', '71', '2', 'A', '3', '2016-06-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('393', '71', '2', 'A', '5', '2020-10-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('394', '71', '117', 'B', '5', '2018-03-10', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('396', '71', '19', 'B', '3', '2016-05-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('397', '71', '118', 'A', '1', '2020-06-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('398', '71', '20', 'B', '5', '2017-05-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('399', '71', '26', 'A', '3', '2016-01-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('400', '71', '17', 'B', '6', '2019-10-10', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('401', '71', '59', 'B', '5', '2017-03-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('402', '71', '23', 'A', '3', '2016-07-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('403', '71', '23', 'B', '5', '2016-05-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('404', '71', '17', 'A', '3', '2020-11-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('405', '71', '17', 'A', '5', '2016-09-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('406', '71', '106', 'B', '1', '2017-06-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('407', '71', '119', 'B', '1', '2016-07-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('408', '71', '27', 'A', '3', '2016-05-27', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('409', '71', '120', 'A', '5', '2016-12-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('410', '71', '121', 'B', '4', '2014-12-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('411', '71', '41', 'A', '3', '2016-07-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('412', '71', '41', 'B', '6', '2017-08-15', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('413', '71', '41', 'A', '4', '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('414', '71', '42', 'A', '3', '2016-05-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('416', '71', '53', 'B', '1', '2016-09-06', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('417', '71', '53', 'B', '3', '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('418', '81', '1', 'A', '4', '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('419', '81', '95', 'A', '3', '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('420', '81', '116', 'A', '3', '2017-11-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('421', '81', '16', 'B', '1', '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('422', '81', '16', 'A', '3', '2016-01-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('423', '81', '16', 'B', '5', '2018-02-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('424', '81', '2', 'A', '3', '2017-11-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('425', '81', '2', 'B', '5', '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('426', '81', '95', 'B', '5', '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('427', '81', '19', 'B', '3', '2016-04-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('428', '81', '26', 'B', '3', '2017-06-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('429', '81', '26', 'B', '5', '2019-05-19', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('430', '81', '23', 'B', '3', '2015-02-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('431', '81', '23', 'B', '5', '2019-08-15', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('432', '81', '17', 'A', '5', '2018-10-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('433', '81', '106', 'B', '1', '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('434', '81', '27', 'B', '3', '2016-09-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('435', '81', '42', 'B', '3', '2016-07-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('437', '81', '47', 'B', '3', '2016-09-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('438', '81', '47', 'B', '5', '2019-08-15', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('439', '81', '50', 'A', '3', '2020-10-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('440', '81', '50', 'B', '5', '2020-05-30', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('441', '81', '57', 'B', '3', '2016-06-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('442', '81', '63', 'A', '3', '2017-01-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('443', '81', '63', 'B', '5', '2019-06-27', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('444', '81', '32', 'B', '3', '2018-09-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('445', '81', '77', 'A', '3', '2018-08-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('446', '81', '77', 'B', '5', '2018-10-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('447', '81', '122', 'B', '3', '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('448', '81', '33', 'B', '5', '2019-02-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('449', '7', '50', 'B', '3', '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('450', '7', '16', 'A', '3', '2015-03-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('451', '7', '99', 'A', '3', '2016-01-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('452', '7', '2', 'B', '3', '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('453', '7', '75', 'A', '3', '2019-12-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('454', '7', '75', 'B', '5', '2016-02-25', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('455', '7', '26', 'A', '3', '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('456', '7', '17', 'A', '3', '2015-12-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('457', '7', '17', 'B', '5', '2016-07-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('458', '7', '99', 'A', '3', '2016-01-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('459', '7', '99', 'B', '5', '2017-01-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('460', '7', '77', 'A', '3', '2020-08-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('461', '7', '16', 'A', '3', '2015-03-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('462', '79', '13', 'B', '3', '2020-01-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('463', '79', '26', 'B', '3', '2020-06-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('464', '79', '53', 'B', '3', '2020-02-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('465', '79', '75', 'B', '3', '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('466', '79', '17', 'B', '3', '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('467', '79', '17', 'B', '5', '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('468', '79', '77', 'B', '3', '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('469', '79', '77', 'B', '5', '2018-01-25', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('470', '85', '116', 'B', '3', '2018-02-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('471', '85', '16', 'A', '1', '2016-09-06', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('472', '85', '16', 'A', '3', '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('473', '85', '16', 'B', '5', '2020-09-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('474', '85', '42', 'B', '1', '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('476', '85', '2', 'A', '3', '2016-07-10', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('477', '85', '19', 'B', '3', '2016-08-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('478', '85', '26', 'B', '3', '2020-01-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('479', '85', '23', 'B', '3', '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('480', '85', '17', 'A', '3', '2018-03-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('481', '85', '17', 'A', '5', '2019-05-19', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('482', '85', '27', 'B', '3', '2016-09-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('483', '85', '47', 'B', '3', '2020-05-30', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('484', '85', '99', 'B', '3', '2020-10-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('485', '85', '63', 'B', '3', '2016-05-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('486', '85', '77', 'B', '3', '2016-05-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('487', '85', '33', 'B', '3', '2020-03-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('488', '16', '75', 'B', '3', '2016-01-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('489', '16', '7', 'B', '3', '2018-02-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('490', '16', '8', 'B', '3', '2016-07-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('493', '16', '9', 'B', '3', '2019-06-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('494', '16', '26', 'B', '3', '2018-02-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('495', '16', '17', 'A', '3', '2019-10-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('496', '16', '17', 'A', '5', '2016-10-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('497', '16', '27', 'A', '3', '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('498', '16', '41', 'B', '3', '2019-11-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('499', '16', '42', 'B', '3', '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('501', '16', '53', 'A', '3', '2018-12-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('502', '16', '50', 'A', '3', '2020-10-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('503', '16', '99', 'A', '3', '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('504', '16', '99', 'B', '5', '2017-03-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('505', '16', '77', 'A', '3', '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('506', '16', '16', 'A', '3', '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('507', '63', '11', 'B', '3', '2016-04-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('508', '63', '116', 'A', '3', '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('509', '63', '50', 'B', '3', '2016-12-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('510', '63', '13', 'A', '5', '2016-07-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('511', '63', '123', 'B', '3', '2018-07-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('512', '63', '16', 'A', '3', '2019-11-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('513', '63', '16', 'A', '5', '2017-05-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('514', '63', '1', 'B', '4', '2019-06-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('515', '63', '2', 'A', '3', '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('516', '63', '2', 'A', '5', '2016-07-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('517', '63', '2', 'B', '6', '2019-08-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('518', '63', '5', 'A', '3', '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('519', '63', '38', 'A', '5', '2018-07-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('520', '63', '95', 'B', '3', '2019-06-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('521', '63', '19', 'A', '3', '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('522', '63', '19', 'A', '5', '2018-04-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('523', '63', '26', 'B', '3', '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('524', '63', '26', 'B', '5', '2019-06-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('525', '63', '17', 'A', '6', '2020-06-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('526', '63', '32', 'B', '5', '2020-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('527', '63', '23', 'A', '3', '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('528', '63', '23', 'B', '5', '2017-05-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('529', '63', '17', 'A', '3', '2020-06-27', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('530', '63', '17', 'A', '5', '2016-07-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('531', '63', '27', 'A', '3', '2020-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('532', '63', '27', 'B', '5', '2019-02-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('533', '63', '121', 'B', '4', '2014-12-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('534', '63', '90', 'A', '3', '2020-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('535', '63', '42', 'B', '3', '2018-11-22', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('537', '63', '53', 'B', '3', '2019-09-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('538', '63', '124', 'A', '3', '2020-03-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('539', '63', '47', 'B', '3', '2015-02-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('540', '63', '47', 'B', '5', '2017-05-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('541', '63', '99', 'B', '3', '2018-06-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('542', '63', '56', 'B', '3', '2020-10-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('543', '63', '63', 'A', '3', '2016-08-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('544', '63', '63', 'B', '5', '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('545', '63', '32', 'A', '3', '2018-07-02', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('546', '63', '77', 'A', '3', '2018-10-19', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('547', '63', '77', 'A', '5', '2018-11-22', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('548', '63', '77', 'B', '6', '2016-10-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('549', '63', '125', 'A', '3', '2018-02-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('550', '63', '122', 'A', '5', '2017-05-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('551', '63', '33', 'A', '3', '2018-02-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('552', '63', '33', 'B', '5', '2016-10-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('553', '63', '33', 'B', '6', '2020-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29');
+INSERT INTO `akreditasi` VALUES ('554', '55', '16', 'B', '3', '2018-01-31', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('557', '55', '8', 'A', '3', '2020-11-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('558', '55', '26', 'B', '3', '2020-05-15', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('559', '55', '17', 'B', '3', '2020-03-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('560', '55', '17', 'B', '5', '2020-05-30', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('561', '55', '104', 'B', '1', '2020-03-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('562', '55', '42', 'B', '3', '2017-01-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('564', '55', '53', 'B', '3', '2016-04-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('565', '55', '47', 'B', '3', '2017-01-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('566', '55', '50', 'B', '3', '2016-08-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('567', '55', '99', 'B', '1', '2020-03-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('568', '55', '99', 'A', '3', '2020-03-09', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('569', '55', '99', 'B', '5', '2019-10-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('570', '50', '16', 'A', '1', '2020-08-15', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('571', '50', '16', 'A', '3', '2019-08-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('572', '50', '50', 'A', '3', '2017-10-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('573', '50', '56', 'A', '3', '2019-06-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('574', '50', '77', 'B', '1', '2018-01-31', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('575', '50', '35', 'A', '3', '2013-11-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('576', '50', '116', 'B', '3', '2019-05-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('577', '50', '40', 'A', '3', '2013-11-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('578', '50', '63', 'B', '1', '2019-09-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('579', '50', '63', 'A', '3', '2019-01-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('580', '50', '47', 'C', '1', '2018-04-04', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('581', '50', '47', 'A', '3', '2019-05-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('582', '50', '77', 'A', '3', '2020-01-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('583', '50', '40', 'B', '3', '2018-01-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('584', '50', '13', 'A', '3', '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('585', '50', '16', 'A', '5', '2016-02-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('586', '50', '75', 'B', '1', '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('587', '50', '75', 'A', '3', '2018-08-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('588', '50', '75', 'B', '5', '2017-07-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('589', '50', '2', 'A', '3', '2019-12-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('590', '50', '2', 'B', '5', '2019-08-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('591', '50', '19', 'B', '3', '2016-11-03', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('592', '50', '22', 'A', '3', '2020-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('593', '50', '51', 'B', '3', '2013-12-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('594', '50', '26', 'A', '3', '2018-09-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('595', '50', '26', 'B', '5', '2017-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('596', '50', '59', 'B', '5', '2018-09-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('597', '50', '23', 'A', '3', '2018-11-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('598', '50', '17', 'A', '3', '2019-09-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('599', '50', '17', 'A', '5', '2016-01-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('600', '50', '106', 'B', '1', '2016-05-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('601', '50', '126', 'A', '1', '2020-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('602', '50', '27', 'B', '3', '2019-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('603', '50', '90', 'B', '1', '2016-07-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('604', '50', '90', 'A', '3', '2018-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('605', '50', '41', 'B', '3', '2018-08-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('606', '50', '42', 'B', '3', '2019-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('608', '50', '53', 'B', '5', '2018-10-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('609', '50', '47', 'A', '3', '2019-05-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('611', '50', '99', 'B', '3', '2018-12-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('612', '50', '56', 'B', '1', '2016-09-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('613', '50', '56', 'A', '5', '2020-05-30', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('614', '50', '57', 'A', '3', '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('615', '50', '63', 'B', '5', '2016-08-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('616', '50', '77', 'B', '5', '2015-07-16', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('617', '50', '77', 'B', '6', '2019-12-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('618', '50', '125', 'A', '3', '2018-07-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('619', '4', '1', 'A', '4', '2017-03-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('620', '4', '95', 'A', '3', '2019-07-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('621', '4', '127', 'A', '3', '2019-10-09', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('622', '4', '11', 'A', '3', '2016-01-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('623', '4', '63', 'B', '1', '2018-12-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('624', '4', '63', 'A', '3', '2018-10-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('625', '4', '16', 'A', '1', '2020-06-04', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('626', '4', '16', 'A', '3', '2019-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('627', '4', '16', 'A', '5', '2020-02-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('628', '4', '75', 'A', '3', '2019-05-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('629', '4', '43', 'B', '1', '2016-02-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('630', '4', '2', 'A', '3', '2020-01-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('631', '4', '2', 'A', '5', '2016-08-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('632', '4', '5', 'A', '5', '2016-08-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('633', '4', '5', 'A', '6', '2016-11-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('634', '4', '109', 'A', '3', '2020-03-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('635', '4', '128', 'A', '5', '2017-05-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('636', '4', '95', 'B', '6', '2015-09-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('637', '4', '19', 'A', '3', '2019-07-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('638', '4', '98', 'A', '3', '2019-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('639', '4', '22', 'B', '1', '2020-10-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('640', '4', '51', 'A', '3', '2019-10-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('641', '4', '51', 'A', '5', '2016-09-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('642', '4', '51', 'A', '6', '2016-04-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('643', '4', '26', 'A', '3', '2020-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('644', '4', '26', 'A', '5', '2020-06-04', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('645', '4', '17', 'A', '6', '2020-02-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('646', '4', '23', 'A', '3', '2020-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('647', '4', '23', 'A', '6', '2020-03-09', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('648', '4', '129', 'B', '1', '2015-02-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('649', '4', '17', 'A', '1', '2020-07-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('650', '4', '17', 'A', '3', '2019-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('651', '4', '85', 'A', '5', '2020-06-04', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('652', '4', '27', 'A', '3', '2019-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('653', '4', '27', 'A', '5', '2016-03-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('654', '4', '27', 'A', '6', '2015-12-30', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('655', '4', '130', 'B', '3', '2019-12-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('656', '4', '90', 'A', '3', '2020-02-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('657', '4', '16', 'A', '4', '2019-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('658', '4', '41', 'A', '3', '2015-08-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('659', '4', '41', 'A', '5', '2016-07-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('660', '4', '42', 'A', '3', '2020-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('662', '4', '124', 'A', '5', '2017-07-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('663', '4', '47', 'A', '3', '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('665', '4', '97', 'A', '3', '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('666', '4', '50', 'A', '3', '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('667', '4', '50', 'B', '5', '2016-09-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('668', '4', '56', 'A', '3', '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('669', '4', '56', 'A', '5', '2020-08-15', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('670', '4', '63', 'A', '5', '2016-09-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('671', '4', '74', 'A', '3', '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('672', '4', '32', 'A', '3', '2019-04-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('673', '4', '32', 'A', '5', '2019-07-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('674', '4', '77', 'B', '1', '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('675', '4', '77', 'A', '3', '2018-10-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('676', '4', '77', 'A', '5', '2016-01-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('677', '4', '125', 'A', '3', '2020-01-16', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('678', '4', '35', 'A', '3', '2019-02-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('679', '4', '35', 'B', '5', '2016-01-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('680', '4', '131', 'A', '3', '2019-04-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('683', '47', '50', 'A', '3', '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('684', '47', '99', 'A', '3', '2020-01-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('685', '47', '63', 'A', '3', '2016-10-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('686', '47', '63', 'B', '5', '2018-07-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('687', '47', '16', 'A', '1', '2018-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('688', '47', '16', 'A', '3', '2019-01-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('689', '47', '47', 'A', '3', '2016-06-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('691', '47', '47', 'B', '5', '2017-01-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('692', '47', '77', 'A', '3', '2018-09-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('693', '47', '77', 'B', '5', '2017-05-31', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('694', '87', '11', 'B', '3', '2016-05-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('695', '87', '116', 'A', '3', '2019-08-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('696', '87', '16', 'A', '3', '2018-07-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('697', '87', '16', 'B', '5', '2018-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('698', '87', '75', 'A', '3', '2016-11-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('699', '87', '75', 'B', '5', '2015-06-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('700', '87', '42', 'A', '5', '2020-01-16', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('702', '87', '2', 'A', '3', '2017-11-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('703', '87', '95', 'A', '3', '2016-07-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('704', '87', '95', 'A', '5', '2016-09-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('705', '87', '19', 'B', '3', '2018-02-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('706', '87', '98', 'B', '3', '2018-02-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('707', '87', '132', 'B', '3', '2020-03-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('708', '87', '26', 'B', '3', '2018-02-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('709', '87', '26', 'A', '5', '2018-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('710', '87', '23', 'A', '3', '2017-08-15', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('711', '87', '23', 'B', '5', '2019-10-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('712', '87', '17', 'A', '3', '2017-10-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('713', '87', '17', 'A', '5', '2015-05-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('714', '87', '133', 'B', '5', '2020-03-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('715', '87', '134', 'B', '5', '2019-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('716', '87', '27', 'A', '3', '2020-03-09', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('717', '87', '27', 'B', '5', '2017-05-16', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('718', '87', '16', 'B', '4', '2020-06-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('719', '87', '42', 'B', '3', '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('721', '87', '47', 'A', '3', '2016-12-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('722', '87', '47', 'B', '5', '2016-01-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('723', '87', '50', 'B', '3', '2017-12-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('724', '87', '99', 'B', '3', '2018-02-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('725', '87', '57', 'B', '3', '2018-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('726', '87', '63', 'B', '3', '2016-08-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('727', '87', '63', 'B', '5', '2016-09-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('728', '87', '32', 'B', '3', '2017-07-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('729', '87', '77', 'A', '3', '2016-07-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('730', '87', '77', 'A', '5', '2018-12-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('731', '87', '77', 'B', '6', '2018-04-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('732', '44', '1', 'A', '4', '2017-03-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('733', '44', '95', 'A', '3', '2016-12-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('734', '44', '16', 'A', '1', '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('735', '44', '16', 'A', '5', '2018-10-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('736', '44', '75', 'A', '3', '2016-05-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('737', '44', '75', 'A', '5', '2019-02-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('738', '44', '75', 'B', '6', '2019-08-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('739', '44', '137', 'A', '3', '2018-09-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('740', '44', '2', 'A', '3', '2018-11-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('741', '44', '2', 'A', '5', '2020-09-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('742', '44', '95', 'A', '3', '2016-12-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('743', '44', '19', 'A', '3', '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('744', '44', '51', 'A', '3', '2016-10-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('745', '44', '51', 'A', '5', '2016-01-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('746', '44', '51', 'A', '6', '2016-01-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('747', '44', '26', 'A', '1', '2018-12-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('748', '44', '26', 'A', '3', '2019-01-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('749', '44', '26', 'B', '5', '2015-10-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('750', '44', '26', 'A', '6', '2019-12-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('751', '44', '17', 'A', '6', '2019-05-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('752', '44', '23', 'A', '3', '2016-08-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('753', '44', '17', 'A', '3', '2016-04-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('754', '44', '17', 'A', '5', '2019-02-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('755', '44', '135', 'B', '1', '2018-11-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('756', '44', '27', 'A', '3', '2017-06-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('757', '44', '27', 'B', '5', '2018-08-30', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('758', '44', '41', 'A', '3', '2019-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('759', '44', '41', 'A', '6', '2020-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('760', '44', '41', 'A', '4', '2020-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('761', '44', '42', 'B', '3', '2018-11-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('762', '44', '53', 'A', '3', '2020-08-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('763', '44', '47', 'A', '3', '2015-10-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('764', '44', '47', 'A', '5', '2019-05-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('765', '44', '47', 'A', '6', '2019-10-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('766', '44', '50', 'A', '3', '2015-12-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('767', '44', '50', 'B', '5', '2018-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('768', '44', '56', 'A', '3', '2016-01-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('769', '44', '56', 'A', '5', '2017-06-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('770', '44', '56', 'A', '6', '2016-11-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('771', '44', '55', 'B', '3', '2016-01-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('772', '44', '57', 'B', '3', '2016-11-03', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('773', '44', '63', 'A', '3', '2020-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('774', '44', '63', 'A', '5', '2018-11-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('775', '44', '63', 'A', '6', '2017-07-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('776', '44', '77', 'A', '3', '2020-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('777', '44', '77', 'A', '5', '2017-01-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('778', '44', '77', 'A', '6', '2018-10-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('779', '44', '16', 'A', '3', '2020-01-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('780', '44', '41', 'A', '5', '2020-01-31', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
+INSERT INTO `akreditasi` VALUES ('781', '101', '16', 'A', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('782', '101', '17', 'B', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('783', '101', '17', 'B', '5', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('784', '101', '53', 'B', '3', '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('785', '33', '16', 'A', '3', '2020-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('786', '33', '26', 'A', '3', '2019-01-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('787', '33', '26', 'B', '5', '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('788', '33', '17', 'A', '3', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('789', '33', '27', 'B', '3', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('790', '33', '16', 'B', '4', '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('791', '33', '90', 'B', '3', '2019-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('792', '33', '41', 'B', '3', '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('793', '33', '50', 'B', '3', '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('794', '5', '50', 'A', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('795', '5', '99', 'A', '3', '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('796', '5', '16', 'B', '1', '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('797', '5', '16', 'A', '3', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('798', '5', '16', 'B', '5', '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('799', '5', '1', 'B', '4', '2017-02-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('800', '5', '75', 'A', '3', '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('801', '5', '138', 'B', '1', '2015-05-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('802', '5', '95', 'B', '3', '2015-10-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('803', '5', '26', 'A', '3', '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('804', '5', '23', 'A', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('805', '5', '17', 'A', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('806', '5', '17', 'A', '5', '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('807', '5', '126', 'B', '1', '2016-08-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('808', '5', '41', 'A', '3', '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('809', '5', '50', 'A', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('810', '5', '56', 'B', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('811', '5', '57', 'A', '3', '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('812', '5', '63', 'B', '3', '2017-01-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('813', '5', '77', 'A', '3', '2019-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('814', '5', '77', 'B', '5', '2020-01-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('815', '68', '116', 'B', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('816', '54', '16', 'B', '1', '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('817', '54', '16', 'A', '3', '2016-04-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('818', '54', '17', 'A', '3', '2017-04-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('819', '54', '17', 'A', '5', '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('820', '54', '90', 'B', '3', '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('821', '54', '41', 'B', '3', '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('822', '54', '42', 'B', '3', '2017-12-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('823', '54', '47', 'B', '3', '2016-09-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('824', '54', '50', 'B', '3', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('825', '54', '55', 'B', '1', '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('826', '54', '77', 'A', '3', '2015-08-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('827', '54', '77', 'B', '5', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('828', '86', '116', 'B', '3', '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('829', '86', '16', 'B', '1', '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('830', '86', '16', 'B', '3', '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('831', '86', '23', 'B', '3', '2019-07-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('832', '86', '17', 'B', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('833', '86', '17', 'B', '5', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('834', '86', '106', 'B', '1', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('835', '86', '122', 'B', '3', '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('836', '60', '16', 'B', '1', '2017-01-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('837', '60', '16', 'B', '3', '2016-11-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('838', '60', '95', 'B', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('839', '60', '19', 'B', '3', '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('840', '60', '17', 'A', '3', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('841', '60', '17', 'A', '5', '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('842', '60', '126', 'B', '1', '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('843', '60', '42', 'B', '3', '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('845', '60', '47', 'B', '3', '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('846', '60', '47', 'B', '1', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('847', '60', '63', 'B', '1', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('848', '60', '63', 'B', '3', '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('849', '60', '32', 'B', '3', '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('850', '60', '77', 'B', '1', '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('851', '60', '77', 'B', '3', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('852', '60', '122', 'B', '3', '2015-09-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('853', '40', '95', 'B', '3', '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('854', '40', '47', 'B', '3', '2016-06-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('855', '40', '56', 'B', '3', '2018-11-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('856', '40', '77', 'B', '3', '2016-01-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('857', '40', '1', 'B', '4', '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('858', '40', '16', 'B', '3', '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('859', '40', '23', 'B', '3', '2020-06-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('860', '40', '17', 'A', '3', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('861', '40', '41', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('862', '40', '47', 'B', '1', '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('863', '40', '50', 'B', '3', '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('864', '40', '63', 'B', '3', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('865', '48', '116', 'A', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('866', '48', '40', 'A', '3', '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('867', '48', '26', 'A', '3', '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('868', '48', '17', 'A', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('869', '48', '16', 'A', '1', '2016-07-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('870', '48', '16', 'A', '3', '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('871', '48', '16', 'B', '5', '2016-09-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('872', '48', '138', 'B', '1', '2018-08-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('873', '48', '43', 'B', '1', '2019-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('874', '48', '2', 'A', '3', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('875', '48', '95', 'B', '3', '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('876', '48', '19', 'B', '3', '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('877', '48', '20', 'B', '3', '2019-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('878', '48', '23', 'B', '3', '2019-10-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('879', '48', '17', 'B', '5', '2016-11-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('880', '48', '27', 'B', '3', '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('881', '48', '16', 'B', '4', '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('882', '48', '20', 'B', '1', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('883', '48', '42', 'B', '3', '2018-03-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('884', '48', '47', 'B', '3', '2017-06-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('885', '48', '32', 'B', '3', '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('886', '48', '77', 'B', '3', '2017-01-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('887', '19', '2', 'A', '3', '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('888', '19', '5', 'B', '5', '2019-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('889', '19', '26', 'B', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('890', '19', '17', 'A', '3', '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('891', '19', '17', 'B', '5', '2018-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('892', '19', '16', 'B', '4', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('893', '19', '41', 'A', '3', '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('894', '19', '41', 'B', '5', '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('895', '19', '41', 'A', '4', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('896', '19', '47', 'B', '3', '2015-12-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('897', '19', '50', 'B', '3', '2016-11-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('898', '19', '63', 'A', '3', '2016-04-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('899', '19', '16', 'A', '3', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('900', '36', '50', 'A', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('901', '36', '99', 'B', '3', '2020-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('902', '36', '56', 'A', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('903', '36', '16', 'A', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('904', '36', '75', 'A', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('905', '36', '75', 'A', '5', '2016-07-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('906', '36', '75', 'B', '6', '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('907', '36', '19', 'A', '3', '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('908', '36', '17', 'A', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('909', '36', '17', 'B', '5', '2016-01-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('910', '36', '126', 'B', '1', '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('911', '36', '27', 'A', '3', '2020-03-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('912', '36', '50', 'A', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('913', '36', '56', 'B', '5', '2018-04-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('914', '36', '77', 'B', '1', '2013-06-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('915', '36', '77', 'A', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('916', '36', '77', 'B', '5', '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('917', '36', '77', 'B', '6', '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('918', '53', '16', 'A', '3', '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('919', '53', '75', 'A', '3', '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('920', '53', '17', 'A', '3', '2018-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('921', '53', '17', 'B', '5', '2020-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('922', '53', '41', 'B', '3', '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('923', '53', '41', 'B', '5', '2018-01-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('924', '53', '41', 'B', '4', '2020-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('925', '53', '42', 'B', '3', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('926', '53', '47', 'B', '3', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('927', '53', '99', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('928', '53', '77', 'B', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('929', '53', '31', 'A', '3', '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('930', '75', '31', 'A', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('931', '34', '16', 'A', '1', '2017-01-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('932', '34', '16', 'A', '3', '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('933', '34', '75', 'B', '3', '2017-10-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('934', '34', '7', 'B', '3', '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('935', '34', '8', 'B', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('936', '34', '26', 'B', '3', '2017-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('937', '34', '17', 'A', '3', '2016-09-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('938', '34', '17', 'B', '5', '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('939', '34', '104', 'B', '1', '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('940', '34', '106', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('941', '34', '90', 'B', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('942', '34', '42', 'B', '3', '2018-12-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('943', '34', '53', 'B', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('944', '34', '53', 'B', '5', '2020-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('945', '34', '47', 'B', '3', '2018-08-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('946', '34', '50', 'B', '3', '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('947', '34', '99', 'B', '3', '2018-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('948', '34', '55', 'B', '1', '2017-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('949', '11', '99', 'B', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('950', '11', '16', 'B', '3', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('951', '11', '75', 'A', '3', '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('952', '11', '2', 'A', '3', '2016-08-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('953', '11', '9', 'B', '3', '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('954', '11', '17', 'B', '3', '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('955', '11', '53', 'B', '3', '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('956', '32', '50', 'B', '3', '2016-03-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('957', '32', '16', 'B', '3', '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('958', '32', '99', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('959', '32', '16', 'B', '5', '2018-12-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('960', '32', '138', 'B', '1', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('961', '32', '43', 'B', '1', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('962', '32', '7', 'B', '3', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('963', '32', '8', 'B', '3', '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('964', '32', '17', 'A', '3', '2016-01-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('965', '32', '17', 'B', '5', '2019-05-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('966', '32', '16', 'B', '4', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('967', '32', '41', 'B', '3', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('968', '32', '42', 'B', '3', '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('969', '32', '140', 'B', '1', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('970', '32', '53', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('971', '32', '47', 'A', '3', '2020-10-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('972', '32', '99', 'B', '1', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('973', '32', '77', 'B', '3', '2020-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('974', '76', '75', 'A', '3', '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('975', '76', '7', 'A', '3', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('976', '76', '8', 'A', '3', '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('977', '76', '26', 'A', '3', '2017-12-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('978', '76', '17', 'A', '3', '2020-06-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('979', '76', '17', 'B', '5', '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('980', '76', '42', 'A', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('981', '76', '50', 'A', '3', '2019-10-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('982', '49', '16', 'A', '3', '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('983', '49', '2', 'B', '3', '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('984', '49', '2', 'B', '5', '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('985', '49', '8', 'B', '3', '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('986', '49', '19', 'B', '3', '2016-01-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('987', '49', '26', 'B', '3', '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('988', '49', '23', 'B', '3', '2016-01-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('989', '49', '141', 'B', '1', '2015-06-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('990', '49', '17', 'A', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('991', '49', '17', 'A', '5', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('992', '49', '17', 'A', '6', '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('993', '49', '27', 'B', '3', '2016-11-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('994', '49', '41', 'B', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('995', '49', '41', 'B', '5', '2018-01-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('996', '49', '53', 'A', '3', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('997', '49', '47', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('998', '49', '99', 'B', '1', '2017-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('999', '49', '99', 'A', '3', '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1000', '77', '116', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1001', '77', '13', 'B', '3', '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1002', '77', '16', 'A', '1', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1003', '77', '16', 'A', '3', '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1004', '77', '2', 'B', '3', '2016-02-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1005', '77', '19', 'B', '3', '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1006', '77', '16', 'B', '5', '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1007', '77', '51', 'B', '3', '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1008', '77', '26', 'A', '3', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1009', '77', '23', 'B', '3', '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1010', '77', '17', 'A', '3', '2017-11-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1011', '77', '17', 'A', '5', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1012', '77', '104', 'B', '1', '2017-04-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1013', '77', '106', 'A', '1', '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1014', '77', '27', 'B', '3', '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1015', '77', '47', 'B', '3', '2020-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1016', '77', '98', 'B', '3', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1017', '77', '63', 'B', '1', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1018', '77', '63', 'B', '3', '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1019', '77', '32', 'B', '3', '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1020', '77', '77', 'B', '5', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1021', '77', '122', 'A', '3', '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1022', '77', '33', 'B', '5', '2016-08-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1023', '77', '16', 'B', '4', '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1024', '41', '16', 'B', '3', '2016-01-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1025', '41', '75', 'B', '3', '2020-10-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1026', '41', '26', 'B', '3', '2020-10-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1027', '41', '17', 'B', '3', '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1028', '41', '17', 'B', '5', '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1029', '41', '50', 'B', '3', '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1030', '41', '77', 'B', '3', '2020-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1031', '80', '116', 'B', '3', '2016-05-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1032', '80', '16', 'B', '1', '2014-07-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1033', '80', '16', 'B', '3', '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1034', '80', '16', 'B', '5', '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1035', '80', '19', 'B', '3', '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1036', '80', '17', 'B', '3', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1037', '80', '17', 'B', '5', '2015-12-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1038', '80', '27', 'B', '3', '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1039', '80', '47', 'B', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1040', '80', '32', 'B', '3', '2016-09-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1041', '80', '77', 'B', '3', '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1042', '80', '122', 'B', '3', '2015-12-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1043', '62', '77', 'B', '3', '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1044', '67', '116', 'A', '3', '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1045', '67', '16', 'A', '3', '2018-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1046', '67', '95', 'B', '3', '2018-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1047', '67', '47', 'B', '3', '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1048', '67', '47', 'B', '1', '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1049', '67', '50', 'B', '3', '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1050', '67', '63', 'B', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1051', '67', '77', 'B', '3', '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1052', '96', '47', 'B', '3', '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1053', '58', '1', 'A', '4', '2017-03-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1054', '58', '95', 'A', '3', '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1055', '58', '77', 'B', '5', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1056', '58', '16', 'A', '3', '2018-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1057', '58', '75', 'B', '3', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1058', '58', '26', 'B', '3', '2020-06-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1059', '58', '17', 'A', '3', '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1060', '58', '17', 'A', '5', '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1061', '58', '41', 'B', '3', '2019-06-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1062', '58', '47', 'B', '3', '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1063', '58', '50', 'B', '3', '2017-02-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1064', '58', '99', 'B', '3', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1065', '58', '56', 'B', '3', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1066', '58', '63', 'B', '3', '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1067', '58', '77', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1068', '14', '16', 'A', '3', '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1069', '14', '26', 'A', '3', '2018-03-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1070', '14', '17', 'A', '3', '2018-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1071', '14', '17', 'B', '5', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1072', '14', '47', 'B', '3', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1073', '20', '16', 'B', '1', '2016-08-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1074', '20', '16', 'B', '3', '2020-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1075', '20', '2', 'A', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1076', '20', '19', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1077', '20', '23', 'A', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1078', '20', '17', 'B', '3', '2019-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1079', '20', '17', 'B', '5', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1080', '20', '106', 'A', '1', '2017-06-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1081', '20', '27', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1082', '20', '41', 'B', '3', '2018-04-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1083', '20', '42', 'B', '3', '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1084', '20', '63', 'B', '1', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1085', '20', '77', 'B', '1', '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1086', '89', '138', 'B', '1', '2017-06-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1087', '89', '2', 'A', '3', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1088', '89', '8', 'B', '3', '2020-06-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1089', '89', '19', 'B', '3', '2016-04-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1090', '89', '23', 'B', '3', '2015-11-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1091', '89', '17', 'B', '3', '2017-06-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1092', '89', '27', 'A', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1093', '89', '142', 'B', '1', '2017-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1094', '89', '42', 'B', '3', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1095', '89', '47', 'B', '1', '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1097', '69', '16', 'A', '1', '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1098', '69', '16', 'B', '3', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1099', '69', '2', 'A', '3', '2015-10-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1100', '69', '8', 'B', '3', '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1101', '69', '19', 'B', '3', '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1102', '69', '23', 'B', '3', '2015-08-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1103', '69', '17', 'B', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1104', '69', '17', 'B', '5', '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1105', '69', '106', 'B', '1', '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1106', '69', '27', 'B', '3', '2015-08-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1107', '69', '41', 'B', '3', '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1108', '69', '42', 'B', '3', '2018-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1109', '69', '47', 'B', '1', '2019-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1110', '69', '47', 'B', '1', '2016-12-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1111', '69', '99', 'B', '3', '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1112', '69', '63', 'B', '1', '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1113', '69', '77', 'B', '3', '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1114', '97', '19', 'B', '3', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1115', '97', '17', 'B', '3', '2017-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1116', '97', '27', 'B', '3', '2020-10-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1117', '97', '42', 'B', '3', '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1118', '97', '63', 'B', '1', '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1119', '97', '77', 'B', '1', '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1120', '84', '16', 'B', '1', '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1121', '84', '16', 'B', '3', '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1122', '84', '19', 'B', '3', '2016-06-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1123', '84', '23', 'B', '3', '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1124', '84', '17', 'B', '3', '2016-01-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1125', '84', '17', 'B', '5', '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1126', '84', '143', 'B', '1', '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1127', '84', '119', 'B', '2', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1128', '84', '27', 'B', '3', '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1129', '84', '41', 'B', '3', '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1130', '84', '42', 'B', '3', '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1131', '84', '47', 'B', '1', '2014-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1132', '84', '48', 'B', '2', '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1133', '84', '47', 'B', '1', '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1134', '84', '63', 'B', '1', '2018-08-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1135', '51', '16', 'B', '1', '2020-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1136', '51', '16', 'B', '3', '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1137', '51', '2', 'A', '3', '2015-10-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1138', '51', '8', 'B', '1', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1139', '51', '19', 'B', '3', '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1140', '51', '23', 'B', '3', '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1141', '51', '17', 'B', '3', '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1142', '51', '144', 'B', '1', '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1143', '51', '27', 'B', '3', '2016-04-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1144', '51', '41', 'B', '3', '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1145', '51', '42', 'B', '3', '2015-09-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1146', '51', '145', 'B', '3', '2015-09-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1147', '51', '47', 'B', '1', '2019-11-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1148', '51', '56', 'B', '3', '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1149', '51', '63', 'B', '1', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1150', '51', '77', 'B', '1', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1151', '73', '16', 'B', '1', '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1152', '73', '16', 'B', '3', '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1153', '73', '2', 'A', '3', '2020-06-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1154', '73', '6', 'B', '1', '2016-03-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1155', '73', '19', 'B', '3', '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1156', '73', '23', 'A', '3', '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1157', '73', '17', 'B', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1158', '73', '27', 'B', '3', '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1159', '73', '42', 'B', '3', '2017-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1160', '73', '63', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1161', '73', '77', 'B', '1', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1162', '15', '16', 'B', '1', '2019-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1163', '15', '16', 'B', '3', '2017-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1164', '15', '2', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1165', '15', '19', 'B', '3', '2018-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1166', '15', '23', 'A', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1167', '15', '17', 'B', '3', '2017-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1168', '15', '106', 'A', '1', '2018-11-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1169', '15', '27', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1170', '15', '142', 'B', '1', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1171', '15', '42', 'B', '3', '2020-01-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1172', '15', '47', 'B', '1', '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1173', '15', '99', 'B', '3', '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1174', '15', '142', 'B', '1', '2015-07-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1175', '15', '77', 'B', '1', '2017-10-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1176', '35', '1', 'A', '4', '2017-02-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1177', '35', '95', 'A', '3', '2017-05-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1178', '35', '13', 'B', '5', '2019-11-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1179', '35', '16', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1180', '35', '16', 'A', '3', '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1181', '35', '16', 'B', '5', '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1182', '35', '24', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1183', '35', '2', 'A', '3', '2017-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1184', '35', '128', 'B', '5', '2018-04-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1185', '35', '95', 'B', '5', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1186', '35', '19', 'A', '3', '2018-01-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1187', '35', '20', 'B', '6', '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1188', '35', '26', 'A', '3', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1189', '35', '26', 'A', '5', '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1190', '35', '26', 'A', '6', '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1191', '35', '17', 'B', '5', '2018-04-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1192', '35', '23', 'A', '3', '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1193', '35', '25', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1194', '35', '146', 'B', '5', '2012-01-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1195', '35', '17', 'A', '3', '2016-01-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1196', '35', '17', 'A', '5', '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1197', '35', '104', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1198', '35', '106', 'A', '1', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1199', '35', '27', 'A', '3', '2018-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1200', '35', '147', 'A', '3', '2019-03-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1201', '35', '41', 'A', '3', '2019-12-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1202', '35', '41', 'B', '5', '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1203', '35', '41', 'B', '6', '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1204', '35', '41', 'A', '4', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1205', '35', '42', 'B', '3', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1206', '35', '99', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1207', '35', '99', 'B', '3', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1208', '35', '55', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1209', '35', '32', 'A', '3', '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1210', '35', '31', 'B', '3', '2015-08-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1211', '46', '1', 'A', '4', '2020-01-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1212', '46', '47', 'B', '3', '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1213', '46', '16', 'B', '1', '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1214', '46', '16', 'A', '3', '2017-10-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1215', '46', '16', 'B', '5', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1216', '46', '75', 'B', '3', '2015-10-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1217', '46', '95', 'A', '3', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1218', '46', '95', 'B', '5', '2016-08-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1219', '46', '26', 'B', '3', '2016-06-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1220', '46', '17', 'A', '3', '2018-04-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1221', '46', '17', 'B', '5', '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1222', '46', '41', 'B', '3', '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1223', '46', '47', 'B', '1', '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1224', '46', '50', 'B', '3', '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1225', '46', '99', 'B', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1226', '46', '63', 'B', '1', '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1227', '46', '63', 'A', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1228', '46', '63', 'B', '5', '2018-04-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1229', '46', '77', 'B', '3', '2015-10-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1230', '37', '16', 'A', '3', '2016-09-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1231', '37', '8', 'B', '3', '2019-05-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1232', '37', '26', 'A', '3', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1233', '37', '17', 'B', '6', '2017-03-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1234', '37', '17', 'A', '3', '2015-12-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1235', '37', '17', 'B', '5', '2020-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1236', '37', '90', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1237', '37', '42', 'B', '3', '2017-06-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1238', '37', '50', 'B', '3', '2019-05-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1239', '37', '99', 'B', '3', '2020-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1240', '37', '57', 'B', '3', '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1241', '37', '63', 'B', '3', '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1242', '37', '31', 'A', '3', '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1243', '21', '16', 'B', '3', '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1244', '21', '75', 'B', '3', '2020-01-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1245', '21', '2', 'B', '3', '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1246', '21', '7', 'B', '3', '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1247', '21', '8', 'A', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1248', '21', '9', 'B', '3', '2020-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1249', '21', '26', 'B', '3', '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1250', '21', '26', 'B', '5', '2018-01-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1251', '21', '17', 'B', '3', '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1252', '21', '27', 'B', '3', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1253', '21', '53', 'B', '3', '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1254', '21', '47', 'A', '3', '2020-06-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1255', '21', '50', 'B', '3', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1256', '21', '99', 'B', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1257', '21', '55', 'B', '3', '2015-08-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1258', '21', '77', 'A', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1259', '21', '31', 'B', '3', '2020-05-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1260', '21', '31', 'B', '5', '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1261', '21', '16', 'B', '3', '2017-05-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1262', '21', '17', 'B', '3', '2017-04-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1263', '21', '17', 'B', '5', '2016-01-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1264', '21', '41', 'B', '3', '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1265', '10', '50', 'B', '3', '2016-04-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1266', '38', '148', 'B', '3', '2020-10-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1267', '38', '2', 'A', '3', '2017-04-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1268', '38', '19', 'B', '3', '2016-04-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1269', '38', '51', 'B', '3', '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1270', '38', '26', 'B', '3', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1271', '38', '17', 'B', '6', '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1272', '38', '17', 'B', '3', '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1273', '38', '86', 'B', '5', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1274', '38', '27', 'B', '3', '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1275', '38', '63', 'B', '1', '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1276', '102', '13', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1277', '102', '123', 'B', '3', '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1278', '102', '19', 'B', '3', '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1279', '102', '26', 'B', '3', '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1280', '102', '17', 'B', '3', '2016-07-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1281', '102', '27', 'B', '3', '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1282', '102', '27', 'B', '5', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1283', '102', '47', 'B', '1', '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1284', '102', '77', 'B', '1', '2019-05-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1285', '102', '77', 'B', '3', '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1286', '102', '125', 'A', '3', '2017-10-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1287', '102', '122', 'B', '3', '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1288', '90', '116', 'B', '3', '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1289', '90', '123', 'B', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1290', '90', '16', 'A', '3', '2016-12-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1291', '90', '16', 'B', '5', '2018-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1292', '90', '75', 'B', '3', '2016-12-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1293', '90', '75', 'B', '5', '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1294', '90', '2', 'B', '3', '2020-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1295', '90', '19', 'B', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1296', '90', '26', 'B', '3', '2015-11-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1297', '90', '17', 'B', '6', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1298', '90', '17', 'A', '3', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1299', '90', '17', 'B', '5', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1300', '90', '27', 'A', '3', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1301', '90', '90', 'B', '3', '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1302', '90', '42', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1303', '90', '47', 'B', '3', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1304', '90', '99', 'B', '3', '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1305', '90', '63', 'B', '3', '2019-05-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1306', '90', '32', 'B', '3', '2017-11-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1307', '90', '77', 'B', '3', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1308', '90', '125', 'B', '3', '2016-11-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1309', '9', '1', 'A', '4', '2017-03-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1310', '9', '95', 'A', '3', '2015-05-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1311', '9', '63', 'B', '3', '2020-01-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1312', '9', '47', 'B', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1313', '9', '27', 'B', '3', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1314', '9', '42', 'A', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1315', '9', '47', 'B', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1316', '9', '16', 'A', '3', '2016-01-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1317', '9', '17', 'B', '3', '2020-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1318', '9', '62', 'B', '1', '2015-02-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1319', '9', '41', 'A', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1320', '9', '99', 'B', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1321', '57', '16', 'B', '1', '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1322', '57', '16', 'A', '3', '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1323', '57', '16', 'A', '5', '2020-09-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1324', '57', '75', 'A', '3', '2019-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1325', '57', '138', 'B', '1', '2017-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1326', '57', '2', 'A', '3', '2015-10-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1327', '57', '7', 'B', '3', '2017-11-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1328', '57', '8', 'B', '1', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1329', '57', '8', 'A', '3', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1330', '57', '19', 'A', '3', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1331', '57', '118', 'B', '1', '2016-06-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1332', '57', '20', 'B', '3', '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1333', '57', '26', 'A', '3', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1334', '57', '26', 'B', '5', '2018-03-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1335', '57', '23', 'B', '3', '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1336', '57', '17', 'A', '3', '2018-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1337', '57', '17', 'A', '5', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1338', '57', '149', 'B', '1', '2016-05-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1339', '57', '86', 'B', '1', '2017-05-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1340', '57', '106', 'A', '1', '2017-04-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1341', '57', '143', 'B', '1', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1342', '57', '27', 'B', '3', '2019-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1343', '57', '16', 'B', '4', '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1344', '57', '90', 'B', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1345', '57', '41', 'B', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1346', '57', '42', 'B', '3', '2020-12-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1348', '57', '99', 'B', '1', '2019-05-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1349', '57', '99', 'B', '3', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1350', '57', '56', 'A', '1', '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1351', '57', '56', 'B', '3', '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1352', '57', '63', 'B', '1', '2016-03-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1353', '57', '63', 'B', '5', '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1354', '57', '77', 'B', '1', '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1355', '57', '77', 'B', '5', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1356', '57', '122', 'B', '1', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1357', '57', '122', 'B', '3', '2014-06-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1358', '57', '31', 'B', '3', '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1359', '57', '116', 'B', '3', '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1360', '57', '50', 'A', '3', '2020-02-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1361', '57', '63', 'B', '1', '2016-03-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1362', '57', '63', 'A', '3', '2019-11-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1363', '57', '77', 'B', '1', '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1364', '57', '77', 'A', '3', '2019-06-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1365', '56', '26', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1366', '56', '17', 'B', '3', '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1367', '56', '17', 'B', '5', '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1368', '56', '126', 'A', '1', '2017-06-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1369', '56', '53', 'B', '3', '2016-11-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1370', '56', '77', 'B', '1', '2012-11-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1371', '56', '77', 'B', '3', '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1372', '56', '122', 'B', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1373', '92', '116', 'B', '3', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1374', '92', '16', 'A', '1', '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1375', '92', '16', 'B', '3', '2019-04-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1376', '92', '2', 'A', '3', '2018-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1377', '92', '19', 'A', '3', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1378', '92', '17', 'B', '5', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1379', '92', '23', 'A', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1380', '92', '141', 'B', '1', '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1381', '92', '17', 'A', '3', '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1383', '92', '104', 'B', '1', '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1384', '92', '27', 'B', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1385', '92', '53', 'B', '3', '2019-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1386', '92', '124', 'A', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1387', '92', '47', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1388', '92', '99', 'B', '3', '2019-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1389', '92', '56', 'A', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1390', '92', '56', 'B', '5', '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1391', '92', '55', 'B', '1', '2020-10-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1392', '92', '63', 'B', '3', '2019-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1393', '92', '32', 'B', '3', '2019-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1394', '92', '77', 'A', '3', '2018-11-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1395', '92', '77', 'B', '5', '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1396', '92', '125', 'B', '3', '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1397', '92', '122', 'B', '3', '2018-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1398', '23', '63', 'B', '3', '2016-07-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1399', '94', '116', 'B', '3', '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1400', '94', '16', 'B', '1', '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1401', '94', '16', 'B', '3', '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1402', '94', '16', 'B', '5', '2014-05-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1403', '94', '75', 'B', '3', '2017-11-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1404', '94', '138', 'B', '1', '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1405', '94', '2', 'B', '3', '2016-01-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1406', '94', '2', 'B', '5', '2018-03-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1407', '94', '95', 'A', '3', '2016-09-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1408', '94', '95', 'B', '5', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1409', '94', '19', 'B', '1', '2017-10-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1410', '94', '19', 'B', '3', '2018-08-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1411', '94', '19', 'B', '5', '2018-03-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1412', '94', '51', 'B', '1', '2016-07-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1413', '94', '51', 'A', '3', '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1414', '94', '26', 'B', '3', '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1415', '94', '26', 'B', '5', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1416', '94', '23', 'B', '3', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1417', '94', '17', 'A', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1418', '94', '17', 'B', '5', '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1419', '94', '27', 'B', '3', '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1420', '94', '27', 'B', '5', '2013-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1421', '94', '16', 'B', '4', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1422', '94', '90', 'B', '6', '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1423', '94', '41', 'B', '3', '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1424', '94', '41', 'B', '4', '2020-01-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1425', '94', '42', 'B', '3', '2016-03-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1426', '94', '124', 'B', '5', '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1427', '94', '47', 'B', '3', '2015-10-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1428', '94', '50', 'B', '3', '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1429', '94', '99', 'B', '5', '2017-03-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1430', '94', '56', 'B', '3', '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1431', '94', '56', 'B', '5', '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1432', '94', '63', 'B', '3', '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1433', '94', '63', 'B', '5', '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1434', '94', '63', 'B', '6', '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1435', '94', '77', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1436', '112', '1', 'A', '4', '2017-10-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1437', '112', '50', 'A', '3', '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1438', '112', '16', 'A', '3', '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1439', '112', '16', 'B', '5', '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1440', '112', '2', 'B', '3', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1441', '112', '95', 'A', '3', '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1442', '112', '95', 'B', '5', '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1443', '112', '17', 'A', '3', '2020-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1444', '112', '17', 'A', '5', '2020-01-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1445', '112', '16', 'B', '4', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1446', '112', '41', 'A', '3', '2016-11-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1447', '112', '41', 'B', '4', '2020-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1448', '112', '47', 'A', '3', '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1449', '112', '99', 'A', '3', '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1450', '112', '56', 'A', '3', '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1451', '1', '11', 'B', '3', '2016-01-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1452', '1', '16', 'B', '1', '2012-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1453', '1', '16', 'B', '3', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1454', '1', '16', 'B', '5', '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1455', '1', '75', 'B', '3', '2019-04-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1456', '1', '2', 'B', '3', '2016-08-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1457', '1', '19', 'B', '3', '2016-11-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1458', '1', '26', 'B', '3', '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1459', '1', '23', 'B', '3', '2015-12-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1460', '1', '17', 'A', '3', '2017-03-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1461', '1', '17', 'B', '5', '2019-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1462', '1', '85', 'B', '1', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1463', '1', '104', 'B', '1', '2019-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1464', '1', '126', 'B', '1', '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1465', '1', '27', 'A', '3', '2016-08-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1466', '1', '116', 'B', '3', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1467', '1', '47', 'B', '1', '2012-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1468', '1', '47', 'B', '3', '2016-12-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1469', '1', '47', 'B', '5', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1470', '1', '99', 'B', '3', '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1471', '1', '56', 'B', '1', '2019-07-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1472', '1', '56', 'A', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1473', '1', '56', 'B', '5', '2016-07-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1474', '1', '63', 'A', '3', '2017-01-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1475', '1', '63', 'B', '5', '2019-05-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1476', '1', '32', 'B', '3', '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1477', '1', '77', 'B', '1', '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1478', '1', '77', 'A', '3', '2016-09-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1479', '1', '77', 'B', '5', '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1480', '1', '122', 'B', '3', '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1481', '17', '16', 'A', '3', '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1482', '17', '16', 'A', '1', '2012-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1483', '17', '16', 'B', '5', '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1484', '17', '75', 'A', '3', '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1485', '17', '7', 'A', '3', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1486', '17', '8', 'A', '3', '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1487', '17', '26', 'B', '3', '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1488', '17', '17', 'A', '3', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1489', '17', '17', 'B', '5', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1490', '17', '106', 'A', '1', '2012-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1491', '17', '150', 'B', '1', '2012-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1492', '17', '16', 'B', '4', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1493', '17', '90', 'B', '5', '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1494', '17', '76', 'B', '3', '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1495', '17', '41', 'A', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1496', '17', '53', 'B', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1497', '17', '47', 'B', '3', '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1498', '17', '50', 'B', '3', '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1499', '17', '99', 'B', '3', '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1500', '17', '63', 'B', '3', '2019-09-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1501', '17', '77', 'A', '3', '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1502', '17', '77', 'A', '5', '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1503', '30', '17', 'A', '3', '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1504', '30', '104', 'A', '1', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1505', '30', '106', 'B', '1', '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1506', '30', '97', 'B', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1507', '30', '50', 'A', '3', '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1508', '30', '99', 'A', '1', '2015-05-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1509', '30', '55', 'A', '1', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1510', '30', '46', 'A', '3', '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1511', '18', '16', 'A', '3', '2015-09-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1512', '18', '17', 'B', '5', '2020-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1513', '18', '16', 'B', '4', '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1514', '18', '47', 'A', '3', '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1515', '18', '99', 'B', '3', '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1516', '18', '57', 'A', '3', '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1517', '18', '16', 'B', '5', '2020-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1518', '18', '75', 'A', '3', '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1519', '18', '75', 'B', '5', '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1520', '18', '94', 'B', '3', '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1521', '18', '7', 'A', '3', '2017-01-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1522', '18', '8', 'A', '3', '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1523', '18', '9', 'A', '3', '2017-06-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1524', '18', '9', 'B', '5', '2018-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1525', '18', '17', 'A', '3', '2020-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1526', '18', '90', 'B', '3', '2018-11-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1527', '18', '53', 'B', '3', '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1528', '18', '50', 'A', '3', '2019-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1529', '18', '63', 'A', '3', '2019-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1530', '18', '77', 'A', '3', '2019-10-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1531', '2', '11', 'A', '3', '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1532', '2', '11', 'A', '4', '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1533', '2', '16', 'A', '3', '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1534', '2', '17', 'A', '3', '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1535', '2', '16', 'B', '1', '2019-09-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1536', '2', '16', 'B', '5', '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1537', '2', '75', 'A', '3', '2019-11-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1538', '2', '75', 'B', '5', '2017-05-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1539', '2', '2', 'B', '3', '2016-08-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1540', '2', '151', 'A', '5', '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1541', '2', '95', 'B', '3', '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1542', '2', '19', 'B', '3', '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1543', '2', '26', 'B', '3', '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1544', '2', '17', 'B', '6', '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1545', '2', '23', 'B', '3', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1546', '2', '17', 'A', '5', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1547', '2', '27', 'B', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1548', '2', '16', 'B', '4', '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1549', '2', '116', 'B', '3', '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1550', '2', '41', 'B', '3', '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1551', '2', '42', 'A', '3', '2017-01-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1552', '2', '47', 'B', '3', '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1553', '2', '47', 'B', '5', '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1554', '2', '99', 'B', '3', '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1555', '2', '63', 'A', '3', '2016-09-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1556', '2', '63', 'B', '5', '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1557', '2', '32', 'B', '3', '2019-03-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1558', '2', '77', 'B', '3', '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1559', '2', '77', 'B', '5', '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1560', '2', '33', 'B', '3', '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1561', '39', '50', 'B', '3', '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1562', '39', '16', 'B', '1', '2018-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1563', '39', '16', 'A', '3', '2020-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1564', '39', '6', 'B', '2', '2019-11-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1565', '39', '17', 'B', '1', '2014-11-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1566', '39', '17', 'A', '3', '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1567', '39', '17', 'B', '5', '2016-10-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1568', '39', '126', 'B', '1', '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1569', '39', '16', 'B', '4', '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1570', '39', '42', 'B', '3', '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1571', '39', '53', 'B', '3', '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
+INSERT INTO `akreditasi` VALUES ('1572', '39', '99', 'B', '3', '2016-08-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
 
---
--- Dumping data for table `akreditasi`
---
-
-INSERT INTO `akreditasi` (`id`, `id_institusi`, `id_major`, `akreditasi`, `id_tingkat_pendidikan`, `tgl_kadaluarsa`, `created_at`, `updated_at`) VALUES
-(1, 43, 12, 'A', 3, '2016-08-24', '2016-12-21 20:06:40', '2016-12-21 20:06:40'),
-(2, 43, 80, 'A', 1, '2020-06-04', '2016-12-21 20:15:07', '2016-12-21 20:15:07'),
-(3, 43, 16, 'B', 1, '2019-05-22', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(4, 43, 24, 'B', 1, '2019-05-27', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(5, 43, 94, 'A', 1, '2019-05-22', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(6, 43, 94, 'A', 5, '2017-05-16', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(7, 43, 81, 'B', 5, '2017-05-31', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(8, 43, 3, 'A', 1, '2018-10-19', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(9, 43, 3, 'B', 5, '2019-11-14', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(10, 43, 2, 'A', 1, '2018-10-26', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(11, 43, 82, 'A', 5, '2020-06-04', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(12, 43, 5, 'A', 5, '2018-08-24', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(13, 43, 18, 'A', 1, '2016-08-18', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(14, 43, 51, 'A', 1, '2017-10-18', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(15, 43, 51, 'A', 5, '2020-03-09', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(16, 43, 17, 'B', 5, '2020-01-31', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(17, 43, 83, 'A', 1, '2020-03-14', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(18, 43, 23, 'A', 1, '2018-10-19', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(19, 43, 23, 'A', 5, '2020-04-18', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(20, 43, 26, 'B', 1, '2020-02-21', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(21, 43, 84, 'A', 1, '2018-11-22', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(22, 43, 17, 'A', 1, '2020-06-04', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(23, 43, 85, 'B', 1, '2020-01-24', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(24, 43, 86, 'A', 6, '2017-07-19', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(25, 43, 87, 'B', 1, '2020-08-21', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(26, 43, 88, 'B', 1, '2020-09-05', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(27, 43, 52, 'B', 1, '2019-11-14', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(28, 43, 27, 'A', 1, '2018-08-24', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(29, 43, 4, 'A', 5, '2020-10-07', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(30, 43, 4, 'A', 6, '2020-05-30', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(31, 43, 89, 'A', 5, '2017-05-16', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(32, 43, 89, 'A', 6, '2017-05-16', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(33, 43, 90, 'A', 5, '2018-10-01', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(34, 43, 31, 'A', 5, '2016-10-28', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(35, 43, 91, 'B', 1, '2020-03-28', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(36, 43, 55, 'B', 1, '2020-03-28', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(37, 43, 92, 'A', 1, '2016-09-29', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(38, 43, 93, 'A', 5, '2016-07-10', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(41, 43, 32, 'A', 1, '2016-09-29', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(42, 43, 80, 'A', 1, '2020-06-04', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(43, 43, 33, 'A', 1, '2018-07-20', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(44, 43, 33, 'A', 5, '2020-02-05', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(45, 43, 33, 'A', 6, '2016-10-28', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(46, 43, 31, 'A', 1, '2016-07-10', '2016-12-21 21:27:15', '2016-12-21 21:27:15'),
-(48, 12, 50, 'B', 3, '2018-09-11', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(49, 12, 25, 'B', 3, '2017-11-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(50, 12, 52, 'B', 1, '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(51, 12, 57, 'B', 3, '2019-11-14', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(52, 24, 1, 'A', 4, '2017-10-18', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(53, 24, 95, 'A', 3, '2016-09-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(54, 24, 50, 'A', 3, '2020-02-05', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(55, 24, 75, 'A', 3, '2016-10-14', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(56, 24, 75, 'A', 5, '2017-01-13', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(57, 24, 75, 'B', 6, '2019-07-12', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(58, 24, 94, 'A', 5, '2019-08-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(59, 24, 2, 'A', 3, '2019-10-10', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(60, 24, 2, 'A', 5, '2016-07-21', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(61, 24, 2, 'A', 6, '2019-08-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(62, 24, 100, 'A', 5, '2016-07-21', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(63, 24, 5, 'A', 5, '2016-12-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(64, 24, 7, 'A', 3, '2020-01-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(65, 24, 8, 'A', 3, '2017-12-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(68, 24, 9, 'A', 3, '2016-09-09', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(69, 24, 95, 'A', 5, '2016-09-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(70, 24, 95, 'A', 6, '2020-09-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(71, 24, 19, 'A', 3, '2019-10-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(72, 24, 19, 'A', 5, '2020-08-15', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(73, 24, 19, 'A', 6, '2014-10-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(74, 24, 23, 'A', 3, '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(75, 24, 23, 'A', 5, '2016-02-25', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(76, 24, 23, 'A', 6, '2019-05-06', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(77, 24, 17, 'A', 3, '2020-02-05', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(78, 24, 27, 'A', 3, '2019-08-22', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(79, 24, 27, 'A', 5, '2020-01-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(80, 24, 27, 'A', 6, '2014-01-16', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(81, 24, 4, 'A', 3, '2020-08-29', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(82, 24, 90, 'A', 3, '2020-02-05', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(83, 24, 90, 'A', 5, '2016-06-17', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(84, 24, 90, 'A', 6, '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(85, 24, 10, 'A', 3, '2020-05-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(86, 24, 10, 'A', 5, '2018-10-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(87, 24, 96, 'A', 5, '2016-07-21', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(88, 24, 96, 'A', 6, '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(89, 24, 47, 'A', 3, '2020-02-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(91, 24, 47, 'A', 5, '2017-07-27', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(93, 24, 97, 'A', 3, '2020-05-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(94, 24, 97, 'A', 5, '2016-12-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(95, 24, 97, 'A', 6, '2019-08-08', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(96, 24, 98, 'A', 3, '2020-05-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(97, 24, 98, 'A', 5, '2017-06-15', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(98, 24, 98, 'A', 6, '2020-09-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(99, 24, 99, 'A', 3, '2020-08-29', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(100, 24, 56, 'A', 3, '2020-08-29', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(101, 24, 56, 'A', 5, '2016-01-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(102, 24, 56, 'A', 6, '2019-12-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(103, 24, 57, 'A', 3, '2020-03-28', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(104, 24, 57, 'A', 5, '2016-03-06', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(105, 24, 57, 'A', 6, '2019-09-26', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(106, 24, 63, 'A', 3, '2016-09-23', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(107, 24, 63, 'A', 5, '2016-07-21', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(108, 24, 63, 'A', 6, '2018-04-01', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(109, 24, 46, 'A', 3, '2018-01-31', '2016-12-21 21:58:27', '2016-12-21 21:58:27'),
-(111, 26, 8, 'B', 3, '2017-01-13', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(114, 26, 53, 'B', 3, '2016-09-23', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(115, 26, 50, 'B', 3, '2016-09-09', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(117, 26, 99, 'B', 3, '2016-09-23', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(118, 25, 50, 'B', 3, '2016-11-11', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(119, 25, 56, 'B', 3, '2018-09-21', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(120, 25, 75, 'B', 3, '2018-07-20', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(121, 25, 7, 'A', 3, '2018-07-20', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(122, 25, 77, 'B', 3, '2016-07-28', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(123, 25, 8, 'B', 3, '2018-09-21', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(126, 25, 9, 'B', 3, '2020-06-27', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(127, 25, 90, 'B', 3, '2020-08-15', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(128, 25, 47, 'B', 3, '2018-09-26', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(129, 25, 99, 'B', 3, '1900-01-23', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(130, 25, 57, 'A', 3, '2018-10-26', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(131, 25, 63, 'B', 3, '2018-09-11', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(132, 64, 50, 'B', 3, '2017-10-18', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(133, 64, 75, 'B', 3, '2018-09-21', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(134, 64, 90, 'B', 3, '2019-08-22', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(135, 64, 47, 'B', 1, '2013-05-31', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(136, 64, 50, 'B', 3, '2017-10-18', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(137, 64, 50, 'B', 5, '2019-01-11', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(138, 64, 99, 'B', 3, '2020-10-04', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(139, 64, 56, 'B', 3, '2016-06-05', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(140, 64, 57, 'B', 3, '2019-01-10', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(141, 64, 63, 'B', 1, '2020-03-14', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(142, 64, 63, 'B', 3, '2018-09-21', '2016-12-21 22:49:39', '2016-12-21 22:49:39'),
-(143, 72, 50, 'A', 3, '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(144, 72, 75, 'A', 3, '2016-06-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(145, 72, 75, 'A', 5, '2018-01-25', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(146, 72, 2, 'A', 3, '2018-07-20', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(147, 72, 7, 'B', 3, '2020-03-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(148, 72, 9, 'A', 3, '2016-05-13', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(149, 72, 19, 'A', 3, '2017-03-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(150, 72, 19, 'A', 5, '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(151, 72, 51, 'B', 6, '2019-11-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(152, 72, 23, 'A', 3, '2018-07-20', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(153, 72, 23, 'B', 5, '2019-10-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(154, 72, 23, 'B', 6, '2019-07-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(155, 72, 86, 'B', 3, '2019-07-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(156, 72, 27, 'B', 3, '2016-07-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(157, 72, 27, 'B', 5, '2019-01-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(158, 72, 90, 'A', 3, '2020-10-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(159, 72, 53, 'A', 3, '2016-08-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(160, 72, 47, 'A', 3, '2017-04-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(162, 72, 47, 'A', 5, '2019-08-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(164, 72, 47, 'A', 6, '2016-08-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(166, 72, 97, 'A', 3, '2017-06-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(167, 72, 97, 'A', 5, '2018-10-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(168, 72, 50, 'B', 5, '2018-10-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(169, 72, 50, 'B', 6, '2019-02-05', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(170, 72, 99, 'A', 3, '2016-12-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(171, 72, 99, 'B', 5, '2018-04-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(172, 72, 56, 'B', 1, '1900-01-24', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(173, 72, 56, 'A', 3, '2016-11-03', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(174, 72, 56, 'A', 5, '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(175, 72, 56, 'A', 6, '2020-10-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(176, 72, 57, 'A', 3, '2020-11-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(177, 72, 57, 'A', 5, '2020-09-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(178, 72, 57, 'B', 6, '2019-02-05', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(179, 72, 63, 'B', 1, '2019-07-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(180, 72, 63, 'A', 3, '2017-11-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(181, 72, 63, 'A', 5, '2020-06-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(182, 72, 63, 'A', 6, '2019-08-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(183, 72, 77, 'B', 1, '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(184, 72, 77, 'B', 2, '2019-12-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(185, 59, 101, 'B', 1, '2016-11-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(186, 59, 62, 'B', 1, '2016-11-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(187, 70, 47, 'A', 1, '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(188, 70, 47, 'A', 2, '2020-06-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(189, 70, 48, 'A', 1, '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(190, 70, 48, 'A', 2, '2015-10-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(193, 70, 47, 'A', 1, '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(195, 70, 99, 'A', 1, '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(196, 70, 55, 'B', 2, '2018-04-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(197, 70, 46, 'A', 1, '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(199, 70, 46, 'A', 2, '2015-10-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(201, 29, 62, 'A', 1, '2017-12-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(202, 29, 102, 'B', 1, '2017-12-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(203, 13, 62, 'B', 1, '2019-08-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(204, 3, 103, 'B', 1, '2016-08-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(205, 3, 14, 'B', 2, '2020-03-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(206, 3, 104, 'B', 1, '2019-11-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(207, 27, 77, 'A', 1, '2019-01-10', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(208, 27, 13, 'A', 1, '2018-04-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(209, 27, 13, 'B', 2, '2016-12-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(210, 27, 16, 'A', 1, '2018-09-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(211, 27, 24, 'B', 1, '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(212, 27, 42, 'A', 1, '2017-07-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(214, 27, 105, 'A', 2, '2017-01-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(215, 27, 106, 'A', 1, '2019-12-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(216, 27, 47, 'B', 1, '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(217, 27, 47, 'B', 2, '2017-10-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(218, 27, 99, 'A', 1, '2018-10-19', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(219, 27, 99, 'B', 2, '2017-06-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(220, 27, 56, 'A', 1, '2018-09-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(221, 27, 107, 'B', 1, '2018-07-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(222, 27, 103, 'B', 1, '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(223, 27, 103, 'B', 2, '2020-10-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(224, 27, 46, 'A', 1, '2020-01-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(226, 27, 46, 'B', 2, '2017-10-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(228, 27, 63, 'B', 1, '2016-08-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(229, 27, 47, 'B', 1, '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(230, 27, 47, 'B', 2, '2017-10-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(231, 98, 13, 'B', 1, '2017-06-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(232, 98, 104, 'B', 1, '2020-03-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(233, 45, 13, 'A', 1, '2015-08-20', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(234, 45, 16, 'A', 1, '2017-11-05', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(235, 45, 48, 'B', 1, '2017-06-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(236, 45, 107, 'B', 1, '2016-08-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(237, 45, 63, 'B', 1, '2016-04-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(238, 45, 46, 'B', 1, '2017-06-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(240, 61, 40, 'A', 1, '2015-12-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(241, 61, 32, 'B', 1, '2016-01-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(242, 61, 85, 'B', 1, '2015-12-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(243, 61, 104, 'B', 1, '2020-10-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(244, 61, 55, 'B', 1, '2016-08-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(245, 61, 108, 'B', 1, '2016-01-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(246, 78, 16, 'B', 1, '2019-09-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(247, 78, 109, 'B', 1, '2016-03-06', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(248, 78, 104, 'B', 1, '2019-10-10', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(249, 78, 110, 'B', 1, '2020-03-09', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(250, 78, 31, 'B', 1, '2020-05-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(251, 65, 13, 'A', 1, '2019-10-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(252, 65, 16, 'A', 1, '2018-01-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(253, 65, 111, 'A', 2, '2018-04-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(254, 65, 112, 'B', 2, '2020-07-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(256, 65, 104, 'B', 1, '2019-09-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(257, 65, 106, 'B', 2, '2015-05-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(258, 65, 47, 'B', 1, '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(259, 65, 47, 'B', 2, '2018-01-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(260, 65, 99, 'B', 2, '2018-01-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(261, 65, 56, 'A', 1, '2018-12-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(262, 65, 113, 'B', 2, '2015-09-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(263, 65, 77, 'B', 1, '2020-06-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(264, 65, 46, 'B', 1, '2020-07-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(266, 65, 16, 'A', 1, '2018-01-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(267, 65, 56, 'A', 1, '2018-12-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(268, 65, 63, 'B', 1, '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(269, 65, 47, 'B', 1, '2017-05-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(270, 91, 13, 'B', 1, '2017-06-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(271, 91, 16, 'B', 1, '2016-04-02', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(272, 91, 77, 'B', 1, '2016-04-02', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(273, 95, 13, 'A', 1, '2016-01-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(274, 95, 104, 'B', 1, '2015-12-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(275, 95, 47, 'B', 1, '2016-09-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(276, 95, 55, 'B', 1, '2017-03-08', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(277, 95, 77, 'B', 1, '2016-08-07', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(278, 83, 13, 'B', 1, '2016-12-06', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(279, 83, 16, 'B', 1, '2016-10-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(280, 83, 16, 'B', 2, '2018-12-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(281, 83, 104, 'B', 1, '2016-07-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(282, 83, 47, 'B', 1, '2016-07-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(283, 83, 47, 'B', 2, '2018-01-31', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(284, 83, 55, 'B', 1, '2016-07-01', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(285, 83, 63, 'B', 1, '2020-06-27', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(286, 83, 77, 'A', 1, '2016-07-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(287, 83, 46, 'B', 1, '2016-07-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(289, 99, 13, 'B', 1, '2016-09-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(290, 99, 16, 'B', 1, '2016-01-12', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(291, 99, 16, 'B', 2, '2018-04-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(292, 99, 75, 'B', 1, '2020-06-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(293, 99, 109, 'B', 1, '2018-09-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(294, 99, 77, 'B', 1, '2018-02-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(295, 100, 13, 'B', 1, '2016-11-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(296, 100, 16, 'B', 1, '2018-08-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(297, 100, 9, 'B', 1, '2020-06-04', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(298, 100, 106, 'B', 2, '2018-09-21', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(299, 100, 77, 'B', 1, '2016-12-15', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(300, 52, 77, 'A', 1, '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(301, 52, 13, 'A', 1, '2019-01-16', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(302, 52, 16, 'A', 1, '2018-09-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(303, 52, 14, 'B', 2, '2018-06-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(304, 52, 47, 'B', 1, '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(305, 52, 99, 'B', 1, '2019-10-23', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(306, 52, 107, 'B', 1, '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(307, 52, 63, 'B', 1, '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(308, 52, 46, 'B', 1, '2020-08-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(310, 52, 46, 'B', 2, '2019-06-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(312, 52, 16, 'A', 1, '2018-09-11', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(313, 52, 63, 'B', 1, '2018-11-22', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(314, 52, 47, 'B', 1, '2018-10-26', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(315, 93, 77, 'B', 1, '2019-11-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(316, 93, 63, 'B', 1, '2019-12-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(317, 93, 13, 'A', 1, '2020-03-14', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(318, 93, 16, 'B', 1, '2020-07-02', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(319, 93, 42, 'A', 1, '2020-08-29', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(321, 93, 104, 'B', 1, '2018-12-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(322, 93, 47, 'B', 1, '2018-12-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(323, 93, 56, 'B', 1, '2020-02-28', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(324, 93, 55, 'B', 1, '2016-08-18', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(325, 93, 46, 'B', 1, '2020-03-09', '2016-12-22 01:02:14', '2016-12-22 01:02:14'),
-(327, 88, 16, 'B', 1, '2018-10-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(328, 88, 56, 'B', 1, '2016-01-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(329, 88, 114, 'B', 2, '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(330, 88, 107, 'B', 1, '2018-10-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(331, 88, 46, 'B', 1, '2016-07-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(333, 82, 115, 'B', 1, '2016-01-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(334, 82, 116, 'B', 1, '2015-12-30', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(335, 82, 31, 'B', 1, '2015-12-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(337, 42, 104, 'B', 1, '2019-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(338, 42, 106, 'B', 1, '2018-12-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(339, 74, 16, 'A', 1, '2020-07-02', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(340, 31, 99, 'B', 3, '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(341, 30, 16, 'B', 3, '2017-12-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(342, 30, 8, 'B', 3, '2017-08-06', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(344, 30, 26, 'B', 3, '2017-05-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(345, 30, 17, 'A', 5, '2017-06-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(346, 30, 53, 'B', 3, '2018-07-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(347, 30, 47, 'B', 3, '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(348, 30, 47, 'B', 5, '2017-05-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(349, 30, 99, 'B', 3, '2015-12-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(350, 30, 99, 'B', 5, '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(351, 30, 46, 'A', 1, '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(353, 30, 46, 'A', 3, '2014-06-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(355, 30, 57, 'B', 3, '2016-12-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(356, 30, 17, 'A', 3, '2018-09-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(357, 30, 104, 'A', 1, '2020-10-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(358, 30, 106, 'B', 1, '2020-10-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(359, 30, 97, 'B', 3, '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(360, 30, 50, 'A', 3, '2019-12-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(361, 30, 99, 'A', 1, '2015-05-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(362, 30, 55, 'A', 1, '2020-11-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(363, 30, 46, 'A', 3, '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(365, 6, 1, 'A', 4, '2020-06-27', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(366, 6, 95, 'A', 3, '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(367, 6, 16, 'B', 3, '2016-05-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(368, 6, 2, 'A', 3, '2019-12-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(369, 6, 95, 'B', 5, '2020-09-19', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(370, 6, 19, 'B', 3, '2017-12-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(371, 6, 26, 'B', 3, '2018-05-22', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(372, 6, 17, 'B', 3, '2020-01-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(373, 6, 27, 'B', 3, '2016-04-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(374, 6, 41, 'B', 3, '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(375, 6, 41, 'B', 5, '2018-05-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(376, 6, 42, 'B', 3, '2018-12-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(378, 6, 53, 'B', 3, '2017-08-15', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(379, 6, 47, 'B', 3, '2016-07-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(380, 6, 50, 'B', 3, '2018-09-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(381, 6, 99, 'B', 3, '2019-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(382, 6, 56, 'B', 3, '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(383, 71, 1, 'A', 4, '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(384, 71, 95, 'A', 3, '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(385, 71, 11, 'A', 4, '2020-01-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(386, 71, 11, 'A', 3, '2020-01-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(387, 71, 16, 'A', 1, '2017-06-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(388, 71, 16, 'A', 3, '2016-11-02', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(389, 71, 16, 'A', 5, '2020-01-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(390, 71, 42, 'B', 1, '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(392, 71, 2, 'A', 3, '2016-06-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(393, 71, 2, 'A', 5, '2020-10-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(394, 71, 117, 'B', 5, '2018-03-10', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(396, 71, 19, 'B', 3, '2016-05-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(397, 71, 118, 'A', 1, '2020-06-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(398, 71, 20, 'B', 5, '2017-05-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(399, 71, 26, 'A', 3, '2016-01-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(400, 71, 17, 'B', 6, '2019-10-10', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(401, 71, 59, 'B', 5, '2017-03-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(402, 71, 23, 'A', 3, '2016-07-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(403, 71, 23, 'B', 5, '2016-05-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(404, 71, 17, 'A', 3, '2020-11-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(405, 71, 17, 'A', 5, '2016-09-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(406, 71, 106, 'B', 1, '2017-06-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(407, 71, 119, 'B', 1, '2016-07-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(408, 71, 27, 'A', 3, '2016-05-27', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(409, 71, 120, 'A', 5, '2016-12-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(410, 71, 121, 'B', 4, '2014-12-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(411, 71, 41, 'A', 3, '2016-07-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(412, 71, 41, 'B', 6, '2017-08-15', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(413, 71, 41, 'A', 4, '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(414, 71, 42, 'A', 3, '2016-05-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(416, 71, 53, 'B', 1, '2016-09-06', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(417, 71, 53, 'B', 3, '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(418, 81, 1, 'A', 4, '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(419, 81, 95, 'A', 3, '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(420, 81, 116, 'A', 3, '2017-11-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(421, 81, 16, 'B', 1, '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(422, 81, 16, 'A', 3, '2016-01-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(423, 81, 16, 'B', 5, '2018-02-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(424, 81, 2, 'A', 3, '2017-11-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(425, 81, 2, 'B', 5, '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(426, 81, 95, 'B', 5, '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(427, 81, 19, 'B', 3, '2016-04-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(428, 81, 26, 'B', 3, '2017-06-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(429, 81, 26, 'B', 5, '2019-05-19', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(430, 81, 23, 'B', 3, '2015-02-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(431, 81, 23, 'B', 5, '2019-08-15', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(432, 81, 17, 'A', 5, '2018-10-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(433, 81, 106, 'B', 1, '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(434, 81, 27, 'B', 3, '2016-09-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(435, 81, 42, 'B', 3, '2016-07-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(437, 81, 47, 'B', 3, '2016-09-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(438, 81, 47, 'B', 5, '2019-08-15', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(439, 81, 50, 'A', 3, '2020-10-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(440, 81, 50, 'B', 5, '2020-05-30', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(441, 81, 57, 'B', 3, '2016-06-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(442, 81, 63, 'A', 3, '2017-01-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(443, 81, 63, 'B', 5, '2019-06-27', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(444, 81, 32, 'B', 3, '2018-09-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(445, 81, 77, 'A', 3, '2018-08-24', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(446, 81, 77, 'B', 5, '2018-10-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(447, 81, 122, 'B', 3, '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(448, 81, 33, 'B', 5, '2019-02-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(449, 7, 50, 'B', 3, '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(450, 7, 16, 'A', 3, '2015-03-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(451, 7, 99, 'A', 3, '2016-01-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(452, 7, 2, 'B', 3, '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(453, 7, 75, 'A', 3, '2019-12-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(454, 7, 75, 'B', 5, '2016-02-25', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(455, 7, 26, 'A', 3, '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(456, 7, 17, 'A', 3, '2015-12-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(457, 7, 17, 'B', 5, '2016-07-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(458, 7, 99, 'A', 3, '2016-01-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(459, 7, 99, 'B', 5, '2017-01-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(460, 7, 77, 'A', 3, '2020-08-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(461, 7, 16, 'A', 3, '2015-03-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(462, 79, 13, 'B', 3, '2020-01-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(463, 79, 26, 'B', 3, '2020-06-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(464, 79, 53, 'B', 3, '2020-02-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(465, 79, 75, 'B', 3, '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(466, 79, 17, 'B', 3, '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(467, 79, 17, 'B', 5, '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(468, 79, 77, 'B', 3, '2017-10-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(469, 79, 77, 'B', 5, '2018-01-25', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(470, 85, 116, 'B', 3, '2018-02-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(471, 85, 16, 'A', 1, '2016-09-06', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(472, 85, 16, 'A', 3, '2019-10-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(473, 85, 16, 'B', 5, '2020-09-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(474, 85, 42, 'B', 1, '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(476, 85, 2, 'A', 3, '2016-07-10', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(477, 85, 19, 'B', 3, '2016-08-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(478, 85, 26, 'B', 3, '2020-01-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(479, 85, 23, 'B', 3, '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(480, 85, 17, 'A', 3, '2018-03-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(481, 85, 17, 'A', 5, '2019-05-19', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(482, 85, 27, 'B', 3, '2016-09-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(483, 85, 47, 'B', 3, '2020-05-30', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(484, 85, 99, 'B', 3, '2020-10-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(485, 85, 63, 'B', 3, '2016-05-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(486, 85, 77, 'B', 3, '2016-05-13', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(487, 85, 33, 'B', 3, '2020-03-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(488, 16, 75, 'B', 3, '2016-01-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(489, 16, 7, 'B', 3, '2018-02-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(490, 16, 8, 'B', 3, '2016-07-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(493, 16, 9, 'B', 3, '2019-06-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(494, 16, 26, 'B', 3, '2018-02-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(495, 16, 17, 'A', 3, '2019-10-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(496, 16, 17, 'A', 5, '2016-10-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(497, 16, 27, 'A', 3, '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(498, 16, 41, 'B', 3, '2019-11-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(499, 16, 42, 'B', 3, '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(501, 16, 53, 'A', 3, '2018-12-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(502, 16, 50, 'A', 3, '2020-10-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(503, 16, 99, 'A', 3, '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(504, 16, 99, 'B', 5, '2017-03-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(505, 16, 77, 'A', 3, '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(506, 16, 16, 'A', 3, '2018-01-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(507, 63, 11, 'B', 3, '2016-04-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(508, 63, 116, 'A', 3, '2016-09-23', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(509, 63, 50, 'B', 3, '2016-12-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(510, 63, 13, 'A', 5, '2016-07-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(511, 63, 123, 'B', 3, '2018-07-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(512, 63, 16, 'A', 3, '2019-11-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(513, 63, 16, 'A', 5, '2017-05-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(514, 63, 1, 'B', 4, '2019-06-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(515, 63, 2, 'A', 3, '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(516, 63, 2, 'A', 5, '2016-07-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(517, 63, 2, 'B', 6, '2019-08-08', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(518, 63, 5, 'A', 3, '2020-03-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(519, 63, 38, 'A', 5, '2018-07-20', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(520, 63, 95, 'B', 3, '2019-06-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(521, 63, 19, 'A', 3, '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(522, 63, 19, 'A', 5, '2018-04-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(523, 63, 26, 'B', 3, '2019-01-11', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(524, 63, 26, 'B', 5, '2019-06-18', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(525, 63, 17, 'A', 6, '2020-06-04', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(526, 63, 32, 'B', 5, '2020-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(527, 63, 23, 'A', 3, '2019-07-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(528, 63, 23, 'B', 5, '2017-05-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(529, 63, 17, 'A', 3, '2020-06-27', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(530, 63, 17, 'A', 5, '2016-07-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(531, 63, 27, 'A', 3, '2020-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(532, 63, 27, 'B', 5, '2019-02-05', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(533, 63, 121, 'B', 4, '2014-12-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(534, 63, 90, 'A', 3, '2020-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(535, 63, 42, 'B', 3, '2018-11-22', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(537, 63, 53, 'B', 3, '2019-09-26', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(538, 63, 124, 'A', 3, '2020-03-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(539, 63, 47, 'B', 3, '2015-02-09', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(540, 63, 47, 'B', 5, '2017-05-16', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(541, 63, 99, 'B', 3, '2018-06-29', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(542, 63, 56, 'B', 3, '2020-10-07', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(543, 63, 63, 'A', 3, '2016-08-12', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(544, 63, 63, 'B', 5, '2018-10-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(545, 63, 32, 'A', 3, '2018-07-02', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(546, 63, 77, 'A', 3, '2018-10-19', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(547, 63, 77, 'A', 5, '2018-11-22', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(548, 63, 77, 'B', 6, '2016-10-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(549, 63, 125, 'A', 3, '2018-02-21', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(550, 63, 122, 'A', 5, '2017-05-31', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(551, 63, 33, 'A', 3, '2018-02-14', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(552, 63, 33, 'B', 5, '2016-10-28', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(553, 63, 33, 'B', 6, '2020-09-01', '2016-12-22 02:13:29', '2016-12-22 02:13:29'),
-(554, 55, 16, 'B', 3, '2018-01-31', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(557, 55, 8, 'A', 3, '2020-11-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(558, 55, 26, 'B', 3, '2020-05-15', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(559, 55, 17, 'B', 3, '2020-03-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(560, 55, 17, 'B', 5, '2020-05-30', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(561, 55, 104, 'B', 1, '2020-03-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(562, 55, 42, 'B', 3, '2017-01-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(564, 55, 53, 'B', 3, '2016-04-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(565, 55, 47, 'B', 3, '2017-01-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(566, 55, 50, 'B', 3, '2016-08-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(567, 55, 99, 'B', 1, '2020-03-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(568, 55, 99, 'A', 3, '2020-03-09', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(569, 55, 99, 'B', 5, '2019-10-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(570, 50, 16, 'A', 1, '2020-08-15', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(571, 50, 16, 'A', 3, '2019-08-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(572, 50, 50, 'A', 3, '2017-10-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(573, 50, 56, 'A', 3, '2019-06-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(574, 50, 77, 'B', 1, '2018-01-31', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(575, 50, 35, 'A', 3, '2013-11-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(576, 50, 116, 'B', 3, '2019-05-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(577, 50, 40, 'A', 3, '2013-11-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(578, 50, 63, 'B', 1, '2019-09-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(579, 50, 63, 'A', 3, '2019-01-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(580, 50, 47, 'C', 1, '2018-04-04', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(581, 50, 47, 'A', 3, '2019-05-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(582, 50, 77, 'A', 3, '2020-01-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(583, 50, 40, 'B', 3, '2018-01-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(584, 50, 13, 'A', 3, '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(585, 50, 16, 'A', 5, '2016-02-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(586, 50, 75, 'B', 1, '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(587, 50, 75, 'A', 3, '2018-08-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(588, 50, 75, 'B', 5, '2017-07-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(589, 50, 2, 'A', 3, '2019-12-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(590, 50, 2, 'B', 5, '2019-08-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(591, 50, 19, 'B', 3, '2016-11-03', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(592, 50, 22, 'A', 3, '2020-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(593, 50, 51, 'B', 3, '2013-12-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(594, 50, 26, 'A', 3, '2018-09-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(595, 50, 26, 'B', 5, '2017-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(596, 50, 59, 'B', 5, '2018-09-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(597, 50, 23, 'A', 3, '2018-11-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(598, 50, 17, 'A', 3, '2019-09-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(599, 50, 17, 'A', 5, '2016-01-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(600, 50, 106, 'B', 1, '2016-05-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(601, 50, 126, 'A', 1, '2020-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(602, 50, 27, 'B', 3, '2019-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(603, 50, 90, 'B', 1, '2016-07-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(604, 50, 90, 'A', 3, '2018-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(605, 50, 41, 'B', 3, '2018-08-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(606, 50, 42, 'B', 3, '2019-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(608, 50, 53, 'B', 5, '2018-10-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(609, 50, 47, 'A', 3, '2019-05-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(611, 50, 99, 'B', 3, '2018-12-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(612, 50, 56, 'B', 1, '2016-09-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(613, 50, 56, 'A', 5, '2020-05-30', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(614, 50, 57, 'A', 3, '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(615, 50, 63, 'B', 5, '2016-08-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(616, 50, 77, 'B', 5, '2015-07-16', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(617, 50, 77, 'B', 6, '2019-12-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(618, 50, 125, 'A', 3, '2018-07-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(619, 4, 1, 'A', 4, '2017-03-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(620, 4, 95, 'A', 3, '2019-07-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(621, 4, 127, 'A', 3, '2019-10-09', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(622, 4, 11, 'A', 3, '2016-01-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(623, 4, 63, 'B', 1, '2018-12-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(624, 4, 63, 'A', 3, '2018-10-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(625, 4, 16, 'A', 1, '2020-06-04', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(626, 4, 16, 'A', 3, '2019-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(627, 4, 16, 'A', 5, '2020-02-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(628, 4, 75, 'A', 3, '2019-05-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(629, 4, 43, 'B', 1, '2016-02-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(630, 4, 2, 'A', 3, '2020-01-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(631, 4, 2, 'A', 5, '2016-08-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(632, 4, 5, 'A', 5, '2016-08-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(633, 4, 5, 'A', 6, '2016-11-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(634, 4, 109, 'A', 3, '2020-03-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(635, 4, 128, 'A', 5, '2017-05-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(636, 4, 95, 'B', 6, '2015-09-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(637, 4, 19, 'A', 3, '2019-07-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(638, 4, 98, 'A', 3, '2019-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(639, 4, 22, 'B', 1, '2020-10-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(640, 4, 51, 'A', 3, '2019-10-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(641, 4, 51, 'A', 5, '2016-09-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(642, 4, 51, 'A', 6, '2016-04-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(643, 4, 26, 'A', 3, '2020-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(644, 4, 26, 'A', 5, '2020-06-04', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(645, 4, 17, 'A', 6, '2020-02-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(646, 4, 23, 'A', 3, '2020-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(647, 4, 23, 'A', 6, '2020-03-09', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(648, 4, 129, 'B', 1, '2015-02-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(649, 4, 17, 'A', 1, '2020-07-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(650, 4, 17, 'A', 3, '2019-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(651, 4, 85, 'A', 5, '2020-06-04', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(652, 4, 27, 'A', 3, '2019-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(653, 4, 27, 'A', 5, '2016-03-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(654, 4, 27, 'A', 6, '2015-12-30', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(655, 4, 130, 'B', 3, '2019-12-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(656, 4, 90, 'A', 3, '2020-02-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(657, 4, 16, 'A', 4, '2019-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(658, 4, 41, 'A', 3, '2015-08-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(659, 4, 41, 'A', 5, '2016-07-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(660, 4, 42, 'A', 3, '2020-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(662, 4, 124, 'A', 5, '2017-07-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(663, 4, 47, 'A', 3, '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(665, 4, 97, 'A', 3, '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(666, 4, 50, 'A', 3, '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(667, 4, 50, 'B', 5, '2016-09-06', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(668, 4, 56, 'A', 3, '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(669, 4, 56, 'A', 5, '2020-08-15', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(670, 4, 63, 'A', 5, '2016-09-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(671, 4, 74, 'A', 3, '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(672, 4, 32, 'A', 3, '2019-04-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42');
-INSERT INTO `akreditasi` (`id`, `id_institusi`, `id_major`, `akreditasi`, `id_tingkat_pendidikan`, `tgl_kadaluarsa`, `created_at`, `updated_at`) VALUES
-(673, 4, 32, 'A', 5, '2019-07-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(674, 4, 77, 'B', 1, '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(675, 4, 77, 'A', 3, '2018-10-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(676, 4, 77, 'A', 5, '2016-01-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(677, 4, 125, 'A', 3, '2020-01-16', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(678, 4, 35, 'A', 3, '2019-02-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(679, 4, 35, 'B', 5, '2016-01-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(680, 4, 131, 'A', 3, '2019-04-25', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(683, 47, 50, 'A', 3, '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(684, 47, 99, 'A', 3, '2020-01-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(685, 47, 63, 'A', 3, '2016-10-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(686, 47, 63, 'B', 5, '2018-07-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(687, 47, 16, 'A', 1, '2018-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(688, 47, 16, 'A', 3, '2019-01-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(689, 47, 47, 'A', 3, '2016-06-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(691, 47, 47, 'B', 5, '2017-01-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(692, 47, 77, 'A', 3, '2018-09-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(693, 47, 77, 'B', 5, '2017-05-31', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(694, 87, 11, 'B', 3, '2016-05-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(695, 87, 116, 'A', 3, '2019-08-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(696, 87, 16, 'A', 3, '2018-07-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(697, 87, 16, 'B', 5, '2018-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(698, 87, 75, 'A', 3, '2016-11-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(699, 87, 75, 'B', 5, '2015-06-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(700, 87, 42, 'A', 5, '2020-01-16', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(702, 87, 2, 'A', 3, '2017-11-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(703, 87, 95, 'A', 3, '2016-07-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(704, 87, 95, 'A', 5, '2016-09-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(705, 87, 19, 'B', 3, '2018-02-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(706, 87, 98, 'B', 3, '2018-02-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(707, 87, 132, 'B', 3, '2020-03-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(708, 87, 26, 'B', 3, '2018-02-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(709, 87, 26, 'A', 5, '2018-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(710, 87, 23, 'A', 3, '2017-08-15', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(711, 87, 23, 'B', 5, '2019-10-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(712, 87, 17, 'A', 3, '2017-10-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(713, 87, 17, 'A', 5, '2015-05-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(714, 87, 133, 'B', 5, '2020-03-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(715, 87, 134, 'B', 5, '2019-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(716, 87, 27, 'A', 3, '2020-03-09', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(717, 87, 27, 'B', 5, '2017-05-16', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(718, 87, 16, 'B', 4, '2020-06-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(719, 87, 42, 'B', 3, '2018-07-20', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(721, 87, 47, 'A', 3, '2016-12-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(722, 87, 47, 'B', 5, '2016-01-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(723, 87, 50, 'B', 3, '2017-12-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(724, 87, 99, 'B', 3, '2018-02-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(725, 87, 57, 'B', 3, '2018-03-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(726, 87, 63, 'B', 3, '2016-08-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(727, 87, 63, 'B', 5, '2016-09-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(728, 87, 32, 'B', 3, '2017-07-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(729, 87, 77, 'A', 3, '2016-07-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(730, 87, 77, 'A', 5, '2018-12-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(731, 87, 77, 'B', 6, '2018-04-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(732, 44, 1, 'A', 4, '2017-03-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(733, 44, 95, 'A', 3, '2016-12-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(734, 44, 16, 'A', 1, '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(735, 44, 16, 'A', 5, '2018-10-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(736, 44, 75, 'A', 3, '2016-05-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(737, 44, 75, 'A', 5, '2019-02-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(738, 44, 75, 'B', 6, '2019-08-08', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(739, 44, 137, 'A', 3, '2018-09-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(740, 44, 2, 'A', 3, '2018-11-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(741, 44, 2, 'A', 5, '2020-09-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(742, 44, 95, 'A', 3, '2016-12-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(743, 44, 19, 'A', 3, '2018-09-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(744, 44, 51, 'A', 3, '2016-10-21', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(745, 44, 51, 'A', 5, '2016-01-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(746, 44, 51, 'A', 6, '2016-01-12', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(747, 44, 26, 'A', 1, '2018-12-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(748, 44, 26, 'A', 3, '2019-01-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(749, 44, 26, 'B', 5, '2015-10-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(750, 44, 26, 'A', 6, '2019-12-14', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(751, 44, 17, 'A', 6, '2019-05-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(752, 44, 23, 'A', 3, '2016-08-18', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(753, 44, 17, 'A', 3, '2016-04-02', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(754, 44, 17, 'A', 5, '2019-02-05', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(755, 44, 135, 'B', 1, '2018-11-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(756, 44, 27, 'A', 3, '2017-06-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(757, 44, 27, 'B', 5, '2018-08-30', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(758, 44, 41, 'A', 3, '2019-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(759, 44, 41, 'A', 6, '2020-09-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(760, 44, 41, 'A', 4, '2020-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(761, 44, 42, 'B', 3, '2018-11-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(762, 44, 53, 'A', 3, '2020-08-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(763, 44, 47, 'A', 3, '2015-10-29', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(764, 44, 47, 'A', 5, '2019-05-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(765, 44, 47, 'A', 6, '2019-10-10', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(766, 44, 50, 'A', 3, '2015-12-23', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(767, 44, 50, 'B', 5, '2018-09-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(768, 44, 56, 'A', 3, '2016-01-28', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(769, 44, 56, 'A', 5, '2017-06-01', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(770, 44, 56, 'A', 6, '2016-11-11', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(771, 44, 55, 'B', 3, '2016-01-07', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(772, 44, 57, 'B', 3, '2016-11-03', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(773, 44, 63, 'A', 3, '2020-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(774, 44, 63, 'A', 5, '2018-11-22', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(775, 44, 63, 'A', 6, '2017-07-27', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(776, 44, 77, 'A', 3, '2020-09-19', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(777, 44, 77, 'A', 5, '2017-01-13', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(778, 44, 77, 'A', 6, '2018-10-26', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(779, 44, 16, 'A', 3, '2020-01-24', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(780, 44, 41, 'A', 5, '2020-01-31', '2016-12-22 18:27:42', '2016-12-22 18:27:42'),
-(781, 101, 16, 'A', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(782, 101, 17, 'B', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(783, 101, 17, 'B', 5, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(784, 101, 53, 'B', 3, '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(785, 33, 16, 'A', 3, '2020-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(786, 33, 26, 'A', 3, '2019-01-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(787, 33, 26, 'B', 5, '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(788, 33, 17, 'A', 3, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(789, 33, 27, 'B', 3, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(790, 33, 16, 'B', 4, '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(791, 33, 90, 'B', 3, '2019-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(792, 33, 41, 'B', 3, '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(793, 33, 50, 'B', 3, '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(794, 5, 50, 'A', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(795, 5, 99, 'A', 3, '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(796, 5, 16, 'B', 1, '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(797, 5, 16, 'A', 3, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(798, 5, 16, 'B', 5, '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(799, 5, 1, 'B', 4, '2017-02-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(800, 5, 75, 'A', 3, '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(801, 5, 138, 'B', 1, '2015-05-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(802, 5, 95, 'B', 3, '2015-10-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(803, 5, 26, 'A', 3, '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(804, 5, 23, 'A', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(805, 5, 17, 'A', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(806, 5, 17, 'A', 5, '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(807, 5, 126, 'B', 1, '2016-08-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(808, 5, 41, 'A', 3, '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(809, 5, 50, 'A', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(810, 5, 56, 'B', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(811, 5, 57, 'A', 3, '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(812, 5, 63, 'B', 3, '2017-01-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(813, 5, 77, 'A', 3, '2019-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(814, 5, 77, 'B', 5, '2020-01-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(815, 68, 116, 'B', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(816, 54, 16, 'B', 1, '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(817, 54, 16, 'A', 3, '2016-04-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(818, 54, 17, 'A', 3, '2017-04-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(819, 54, 17, 'A', 5, '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(820, 54, 90, 'B', 3, '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(821, 54, 41, 'B', 3, '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(822, 54, 42, 'B', 3, '2017-12-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(823, 54, 47, 'B', 3, '2016-09-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(824, 54, 50, 'B', 3, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(825, 54, 55, 'B', 1, '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(826, 54, 77, 'A', 3, '2015-08-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(827, 54, 77, 'B', 5, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(828, 86, 116, 'B', 3, '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(829, 86, 16, 'B', 1, '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(830, 86, 16, 'B', 3, '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(831, 86, 23, 'B', 3, '2019-07-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(832, 86, 17, 'B', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(833, 86, 17, 'B', 5, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(834, 86, 106, 'B', 1, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(835, 86, 122, 'B', 3, '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(836, 60, 16, 'B', 1, '2017-01-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(837, 60, 16, 'B', 3, '2016-11-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(838, 60, 95, 'B', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(839, 60, 19, 'B', 3, '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(840, 60, 17, 'A', 3, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(841, 60, 17, 'A', 5, '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(842, 60, 126, 'B', 1, '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(843, 60, 42, 'B', 3, '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(845, 60, 47, 'B', 3, '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(846, 60, 47, 'B', 1, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(847, 60, 63, 'B', 1, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(848, 60, 63, 'B', 3, '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(849, 60, 32, 'B', 3, '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(850, 60, 77, 'B', 1, '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(851, 60, 77, 'B', 3, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(852, 60, 122, 'B', 3, '2015-09-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(853, 40, 95, 'B', 3, '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(854, 40, 47, 'B', 3, '2016-06-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(855, 40, 56, 'B', 3, '2018-11-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(856, 40, 77, 'B', 3, '2016-01-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(857, 40, 1, 'B', 4, '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(858, 40, 16, 'B', 3, '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(859, 40, 23, 'B', 3, '2020-06-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(860, 40, 17, 'A', 3, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(861, 40, 41, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(862, 40, 47, 'B', 1, '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(863, 40, 50, 'B', 3, '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(864, 40, 63, 'B', 3, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(865, 48, 116, 'A', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(866, 48, 40, 'A', 3, '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(867, 48, 26, 'A', 3, '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(868, 48, 17, 'A', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(869, 48, 16, 'A', 1, '2016-07-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(870, 48, 16, 'A', 3, '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(871, 48, 16, 'B', 5, '2016-09-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(872, 48, 138, 'B', 1, '2018-08-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(873, 48, 43, 'B', 1, '2019-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(874, 48, 2, 'A', 3, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(875, 48, 95, 'B', 3, '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(876, 48, 19, 'B', 3, '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(877, 48, 20, 'B', 3, '2019-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(878, 48, 23, 'B', 3, '2019-10-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(879, 48, 17, 'B', 5, '2016-11-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(880, 48, 27, 'B', 3, '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(881, 48, 16, 'B', 4, '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(882, 48, 20, 'B', 1, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(883, 48, 42, 'B', 3, '2018-03-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(884, 48, 47, 'B', 3, '2017-06-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(885, 48, 32, 'B', 3, '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(886, 48, 77, 'B', 3, '2017-01-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(887, 19, 2, 'A', 3, '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(888, 19, 5, 'B', 5, '2019-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(889, 19, 26, 'B', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(890, 19, 17, 'A', 3, '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(891, 19, 17, 'B', 5, '2018-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(892, 19, 16, 'B', 4, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(893, 19, 41, 'A', 3, '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(894, 19, 41, 'B', 5, '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(895, 19, 41, 'A', 4, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(896, 19, 47, 'B', 3, '2015-12-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(897, 19, 50, 'B', 3, '2016-11-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(898, 19, 63, 'A', 3, '2016-04-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(899, 19, 16, 'A', 3, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(900, 36, 50, 'A', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(901, 36, 99, 'B', 3, '2020-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(902, 36, 56, 'A', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(903, 36, 16, 'A', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(904, 36, 75, 'A', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(905, 36, 75, 'A', 5, '2016-07-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(906, 36, 75, 'B', 6, '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(907, 36, 19, 'A', 3, '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(908, 36, 17, 'A', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(909, 36, 17, 'B', 5, '2016-01-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(910, 36, 126, 'B', 1, '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(911, 36, 27, 'A', 3, '2020-03-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(912, 36, 50, 'A', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(913, 36, 56, 'B', 5, '2018-04-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(914, 36, 77, 'B', 1, '2013-06-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(915, 36, 77, 'A', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(916, 36, 77, 'B', 5, '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(917, 36, 77, 'B', 6, '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(918, 53, 16, 'A', 3, '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(919, 53, 75, 'A', 3, '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(920, 53, 17, 'A', 3, '2018-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(921, 53, 17, 'B', 5, '2020-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(922, 53, 41, 'B', 3, '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(923, 53, 41, 'B', 5, '2018-01-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(924, 53, 41, 'B', 4, '2020-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(925, 53, 42, 'B', 3, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(926, 53, 47, 'B', 3, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(927, 53, 99, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(928, 53, 77, 'B', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(929, 53, 31, 'A', 3, '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(930, 75, 31, 'A', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(931, 34, 16, 'A', 1, '2017-01-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(932, 34, 16, 'A', 3, '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(933, 34, 75, 'B', 3, '2017-10-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(934, 34, 7, 'B', 3, '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(935, 34, 8, 'B', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(936, 34, 26, 'B', 3, '2017-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(937, 34, 17, 'A', 3, '2016-09-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(938, 34, 17, 'B', 5, '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(939, 34, 104, 'B', 1, '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(940, 34, 106, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(941, 34, 90, 'B', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(942, 34, 42, 'B', 3, '2018-12-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(943, 34, 53, 'B', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(944, 34, 53, 'B', 5, '2020-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(945, 34, 47, 'B', 3, '2018-08-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(946, 34, 50, 'B', 3, '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(947, 34, 99, 'B', 3, '2018-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(948, 34, 55, 'B', 1, '2017-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(949, 11, 99, 'B', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(950, 11, 16, 'B', 3, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(951, 11, 75, 'A', 3, '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(952, 11, 2, 'A', 3, '2016-08-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(953, 11, 9, 'B', 3, '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(954, 11, 17, 'B', 3, '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(955, 11, 53, 'B', 3, '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(956, 32, 50, 'B', 3, '2016-03-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(957, 32, 16, 'B', 3, '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(958, 32, 99, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(959, 32, 16, 'B', 5, '2018-12-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(960, 32, 138, 'B', 1, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(961, 32, 43, 'B', 1, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(962, 32, 7, 'B', 3, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(963, 32, 8, 'B', 3, '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(964, 32, 17, 'A', 3, '2016-01-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(965, 32, 17, 'B', 5, '2019-05-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(966, 32, 16, 'B', 4, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(967, 32, 41, 'B', 3, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(968, 32, 42, 'B', 3, '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(969, 32, 140, 'B', 1, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(970, 32, 53, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(971, 32, 47, 'A', 3, '2020-10-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(972, 32, 99, 'B', 1, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(973, 32, 77, 'B', 3, '2020-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(974, 76, 75, 'A', 3, '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(975, 76, 7, 'A', 3, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(976, 76, 8, 'A', 3, '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(977, 76, 26, 'A', 3, '2017-12-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(978, 76, 17, 'A', 3, '2020-06-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(979, 76, 17, 'B', 5, '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(980, 76, 42, 'A', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(981, 76, 50, 'A', 3, '2019-10-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(982, 49, 16, 'A', 3, '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(983, 49, 2, 'B', 3, '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(984, 49, 2, 'B', 5, '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(985, 49, 8, 'B', 3, '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(986, 49, 19, 'B', 3, '2016-01-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(987, 49, 26, 'B', 3, '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(988, 49, 23, 'B', 3, '2016-01-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(989, 49, 141, 'B', 1, '2015-06-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(990, 49, 17, 'A', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(991, 49, 17, 'A', 5, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(992, 49, 17, 'A', 6, '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(993, 49, 27, 'B', 3, '2016-11-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(994, 49, 41, 'B', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(995, 49, 41, 'B', 5, '2018-01-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(996, 49, 53, 'A', 3, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(997, 49, 47, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(998, 49, 99, 'B', 1, '2017-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(999, 49, 99, 'A', 3, '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1000, 77, 116, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1001, 77, 13, 'B', 3, '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1002, 77, 16, 'A', 1, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1003, 77, 16, 'A', 3, '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1004, 77, 2, 'B', 3, '2016-02-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1005, 77, 19, 'B', 3, '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1006, 77, 16, 'B', 5, '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1007, 77, 51, 'B', 3, '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1008, 77, 26, 'A', 3, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1009, 77, 23, 'B', 3, '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1010, 77, 17, 'A', 3, '2017-11-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1011, 77, 17, 'A', 5, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1012, 77, 104, 'B', 1, '2017-04-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1013, 77, 106, 'A', 1, '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1014, 77, 27, 'B', 3, '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1015, 77, 47, 'B', 3, '2020-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1016, 77, 98, 'B', 3, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1017, 77, 63, 'B', 1, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1018, 77, 63, 'B', 3, '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1019, 77, 32, 'B', 3, '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1020, 77, 77, 'B', 5, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1021, 77, 122, 'A', 3, '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1022, 77, 33, 'B', 5, '2016-08-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1023, 77, 16, 'B', 4, '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1024, 41, 16, 'B', 3, '2016-01-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1025, 41, 75, 'B', 3, '2020-10-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1026, 41, 26, 'B', 3, '2020-10-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1027, 41, 17, 'B', 3, '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1028, 41, 17, 'B', 5, '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1029, 41, 50, 'B', 3, '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1030, 41, 77, 'B', 3, '2020-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1031, 80, 116, 'B', 3, '2016-05-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1032, 80, 16, 'B', 1, '2014-07-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1033, 80, 16, 'B', 3, '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1034, 80, 16, 'B', 5, '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1035, 80, 19, 'B', 3, '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1036, 80, 17, 'B', 3, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1037, 80, 17, 'B', 5, '2015-12-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1038, 80, 27, 'B', 3, '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1039, 80, 47, 'B', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1040, 80, 32, 'B', 3, '2016-09-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1041, 80, 77, 'B', 3, '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1042, 80, 122, 'B', 3, '2015-12-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1043, 62, 77, 'B', 3, '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1044, 67, 116, 'A', 3, '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1045, 67, 16, 'A', 3, '2018-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1046, 67, 95, 'B', 3, '2018-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1047, 67, 47, 'B', 3, '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1048, 67, 47, 'B', 1, '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1049, 67, 50, 'B', 3, '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1050, 67, 63, 'B', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1051, 67, 77, 'B', 3, '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1052, 96, 47, 'B', 3, '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1053, 58, 1, 'A', 4, '2017-03-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1054, 58, 95, 'A', 3, '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1055, 58, 77, 'B', 5, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1056, 58, 16, 'A', 3, '2018-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1057, 58, 75, 'B', 3, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1058, 58, 26, 'B', 3, '2020-06-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1059, 58, 17, 'A', 3, '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1060, 58, 17, 'A', 5, '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1061, 58, 41, 'B', 3, '2019-06-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1062, 58, 47, 'B', 3, '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1063, 58, 50, 'B', 3, '2017-02-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1064, 58, 99, 'B', 3, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1065, 58, 56, 'B', 3, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1066, 58, 63, 'B', 3, '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1067, 58, 77, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1068, 14, 16, 'A', 3, '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1069, 14, 26, 'A', 3, '2018-03-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1070, 14, 17, 'A', 3, '2018-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1071, 14, 17, 'B', 5, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1072, 14, 47, 'B', 3, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1073, 20, 16, 'B', 1, '2016-08-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1074, 20, 16, 'B', 3, '2020-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1075, 20, 2, 'A', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1076, 20, 19, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1077, 20, 23, 'A', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1078, 20, 17, 'B', 3, '2019-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1079, 20, 17, 'B', 5, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1080, 20, 106, 'A', 1, '2017-06-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1081, 20, 27, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1082, 20, 41, 'B', 3, '2018-04-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1083, 20, 42, 'B', 3, '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1084, 20, 63, 'B', 1, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1085, 20, 77, 'B', 1, '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1086, 89, 138, 'B', 1, '2017-06-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1087, 89, 2, 'A', 3, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1088, 89, 8, 'B', 3, '2020-06-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1089, 89, 19, 'B', 3, '2016-04-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1090, 89, 23, 'B', 3, '2015-11-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1091, 89, 17, 'B', 3, '2017-06-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1092, 89, 27, 'A', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1093, 89, 142, 'B', 1, '2017-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1094, 89, 42, 'B', 3, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1095, 89, 47, 'B', 1, '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1097, 69, 16, 'A', 1, '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1098, 69, 16, 'B', 3, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1099, 69, 2, 'A', 3, '2015-10-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1100, 69, 8, 'B', 3, '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1101, 69, 19, 'B', 3, '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1102, 69, 23, 'B', 3, '2015-08-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1103, 69, 17, 'B', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1104, 69, 17, 'B', 5, '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1105, 69, 106, 'B', 1, '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1106, 69, 27, 'B', 3, '2015-08-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1107, 69, 41, 'B', 3, '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1108, 69, 42, 'B', 3, '2018-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1109, 69, 47, 'B', 1, '2019-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1110, 69, 47, 'B', 1, '2016-12-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1111, 69, 99, 'B', 3, '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1112, 69, 63, 'B', 1, '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1113, 69, 77, 'B', 3, '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1114, 97, 19, 'B', 3, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1115, 97, 17, 'B', 3, '2017-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1116, 97, 27, 'B', 3, '2020-10-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1117, 97, 42, 'B', 3, '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1118, 97, 63, 'B', 1, '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1119, 97, 77, 'B', 1, '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1120, 84, 16, 'B', 1, '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1121, 84, 16, 'B', 3, '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1122, 84, 19, 'B', 3, '2016-06-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1123, 84, 23, 'B', 3, '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1124, 84, 17, 'B', 3, '2016-01-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1125, 84, 17, 'B', 5, '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1126, 84, 143, 'B', 1, '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1127, 84, 119, 'B', 2, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1128, 84, 27, 'B', 3, '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1129, 84, 41, 'B', 3, '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1130, 84, 42, 'B', 3, '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1131, 84, 47, 'B', 1, '2014-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1132, 84, 48, 'B', 2, '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1133, 84, 47, 'B', 1, '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1134, 84, 63, 'B', 1, '2018-08-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1135, 51, 16, 'B', 1, '2020-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1136, 51, 16, 'B', 3, '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1137, 51, 2, 'A', 3, '2015-10-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1138, 51, 8, 'B', 1, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1139, 51, 19, 'B', 3, '2017-08-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1140, 51, 23, 'B', 3, '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1141, 51, 17, 'B', 3, '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1142, 51, 144, 'B', 1, '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1143, 51, 27, 'B', 3, '2016-04-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1144, 51, 41, 'B', 3, '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1145, 51, 42, 'B', 3, '2015-09-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1146, 51, 145, 'B', 3, '2015-09-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1147, 51, 47, 'B', 1, '2019-11-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1148, 51, 56, 'B', 3, '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1149, 51, 63, 'B', 1, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1150, 51, 77, 'B', 1, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1151, 73, 16, 'B', 1, '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1152, 73, 16, 'B', 3, '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1153, 73, 2, 'A', 3, '2020-06-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1154, 73, 6, 'B', 1, '2016-03-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1155, 73, 19, 'B', 3, '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1156, 73, 23, 'A', 3, '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1157, 73, 17, 'B', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1158, 73, 27, 'B', 3, '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1159, 73, 42, 'B', 3, '2017-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1160, 73, 63, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1161, 73, 77, 'B', 1, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1162, 15, 16, 'B', 1, '2019-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1163, 15, 16, 'B', 3, '2017-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1164, 15, 2, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1165, 15, 19, 'B', 3, '2018-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1166, 15, 23, 'A', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1167, 15, 17, 'B', 3, '2017-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1168, 15, 106, 'A', 1, '2018-11-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1169, 15, 27, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1170, 15, 142, 'B', 1, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1171, 15, 42, 'B', 3, '2020-01-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1172, 15, 47, 'B', 1, '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1173, 15, 99, 'B', 3, '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1174, 15, 142, 'B', 1, '2015-07-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1175, 15, 77, 'B', 1, '2017-10-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1176, 35, 1, 'A', 4, '2017-02-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1177, 35, 95, 'A', 3, '2017-05-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1178, 35, 13, 'B', 5, '2019-11-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1179, 35, 16, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1180, 35, 16, 'A', 3, '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1181, 35, 16, 'B', 5, '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1182, 35, 24, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1183, 35, 2, 'A', 3, '2017-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1184, 35, 128, 'B', 5, '2018-04-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1185, 35, 95, 'B', 5, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1186, 35, 19, 'A', 3, '2018-01-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1187, 35, 20, 'B', 6, '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1188, 35, 26, 'A', 3, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1189, 35, 26, 'A', 5, '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1190, 35, 26, 'A', 6, '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1191, 35, 17, 'B', 5, '2018-04-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1192, 35, 23, 'A', 3, '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1193, 35, 25, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1194, 35, 146, 'B', 5, '2012-01-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1195, 35, 17, 'A', 3, '2016-01-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1196, 35, 17, 'A', 5, '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1197, 35, 104, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1198, 35, 106, 'A', 1, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1199, 35, 27, 'A', 3, '2018-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1200, 35, 147, 'A', 3, '2019-03-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1201, 35, 41, 'A', 3, '2019-12-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1202, 35, 41, 'B', 5, '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1203, 35, 41, 'B', 6, '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1204, 35, 41, 'A', 4, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1205, 35, 42, 'B', 3, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1206, 35, 99, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1207, 35, 99, 'B', 3, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1208, 35, 55, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1209, 35, 32, 'A', 3, '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1210, 35, 31, 'B', 3, '2015-08-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1211, 46, 1, 'A', 4, '2020-01-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1212, 46, 47, 'B', 3, '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1213, 46, 16, 'B', 1, '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1214, 46, 16, 'A', 3, '2017-10-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1215, 46, 16, 'B', 5, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1216, 46, 75, 'B', 3, '2015-10-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1217, 46, 95, 'A', 3, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1218, 46, 95, 'B', 5, '2016-08-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1219, 46, 26, 'B', 3, '2016-06-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1220, 46, 17, 'A', 3, '2018-04-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1221, 46, 17, 'B', 5, '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1222, 46, 41, 'B', 3, '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1223, 46, 47, 'B', 1, '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1224, 46, 50, 'B', 3, '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1225, 46, 99, 'B', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1226, 46, 63, 'B', 1, '2018-01-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1227, 46, 63, 'A', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1228, 46, 63, 'B', 5, '2018-04-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1229, 46, 77, 'B', 3, '2015-10-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1230, 37, 16, 'A', 3, '2016-09-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1231, 37, 8, 'B', 3, '2019-05-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1232, 37, 26, 'A', 3, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1233, 37, 17, 'B', 6, '2017-03-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1234, 37, 17, 'A', 3, '2015-12-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1235, 37, 17, 'B', 5, '2020-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1236, 37, 90, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1237, 37, 42, 'B', 3, '2017-06-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1238, 37, 50, 'B', 3, '2019-05-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1239, 37, 99, 'B', 3, '2020-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1240, 37, 57, 'B', 3, '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1241, 37, 63, 'B', 3, '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1242, 37, 31, 'A', 3, '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1243, 21, 16, 'B', 3, '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1244, 21, 75, 'B', 3, '2020-01-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1245, 21, 2, 'B', 3, '2018-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1246, 21, 7, 'B', 3, '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1247, 21, 8, 'A', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1248, 21, 9, 'B', 3, '2020-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1249, 21, 26, 'B', 3, '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1250, 21, 26, 'B', 5, '2018-01-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1251, 21, 17, 'B', 3, '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1252, 21, 27, 'B', 3, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1253, 21, 53, 'B', 3, '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1254, 21, 47, 'A', 3, '2020-06-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1255, 21, 50, 'B', 3, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1256, 21, 99, 'B', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1257, 21, 55, 'B', 3, '2015-08-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1258, 21, 77, 'A', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1259, 21, 31, 'B', 3, '2020-05-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1260, 21, 31, 'B', 5, '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1261, 21, 16, 'B', 3, '2017-05-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1262, 21, 17, 'B', 3, '2017-04-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1263, 21, 17, 'B', 5, '2016-01-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1264, 21, 41, 'B', 3, '2020-08-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1265, 10, 50, 'B', 3, '2016-04-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1266, 38, 148, 'B', 3, '2020-10-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1267, 38, 2, 'A', 3, '2017-04-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1268, 38, 19, 'B', 3, '2016-04-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1269, 38, 51, 'B', 3, '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1270, 38, 26, 'B', 3, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1271, 38, 17, 'B', 6, '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1272, 38, 17, 'B', 3, '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1273, 38, 86, 'B', 5, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1274, 38, 27, 'B', 3, '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1275, 38, 63, 'B', 1, '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1276, 102, 13, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1277, 102, 123, 'B', 3, '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1278, 102, 19, 'B', 3, '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1279, 102, 26, 'B', 3, '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1280, 102, 17, 'B', 3, '2016-07-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1281, 102, 27, 'B', 3, '2016-06-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1282, 102, 27, 'B', 5, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1283, 102, 47, 'B', 1, '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1284, 102, 77, 'B', 1, '2019-05-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1285, 102, 77, 'B', 3, '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1286, 102, 125, 'A', 3, '2017-10-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1287, 102, 122, 'B', 3, '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1288, 90, 116, 'B', 3, '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1289, 90, 123, 'B', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1290, 90, 16, 'A', 3, '2016-12-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
-INSERT INTO `akreditasi` (`id`, `id_institusi`, `id_major`, `akreditasi`, `id_tingkat_pendidikan`, `tgl_kadaluarsa`, `created_at`, `updated_at`) VALUES
-(1291, 90, 16, 'B', 5, '2018-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1292, 90, 75, 'B', 3, '2016-12-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1293, 90, 75, 'B', 5, '2019-05-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1294, 90, 2, 'B', 3, '2020-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1295, 90, 19, 'B', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1296, 90, 26, 'B', 3, '2015-11-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1297, 90, 17, 'B', 6, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1298, 90, 17, 'A', 3, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1299, 90, 17, 'B', 5, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1300, 90, 27, 'A', 3, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1301, 90, 90, 'B', 3, '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1302, 90, 42, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1303, 90, 47, 'B', 3, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1304, 90, 99, 'B', 3, '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1305, 90, 63, 'B', 3, '2019-05-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1306, 90, 32, 'B', 3, '2017-11-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1307, 90, 77, 'B', 3, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1308, 90, 125, 'B', 3, '2016-11-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1309, 9, 1, 'A', 4, '2017-03-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1310, 9, 95, 'A', 3, '2015-05-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1311, 9, 63, 'B', 3, '2020-01-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1312, 9, 47, 'B', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1313, 9, 27, 'B', 3, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1314, 9, 42, 'A', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1315, 9, 47, 'B', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1316, 9, 16, 'A', 3, '2016-01-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1317, 9, 17, 'B', 3, '2020-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1318, 9, 62, 'B', 1, '2015-02-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1319, 9, 41, 'A', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1320, 9, 99, 'B', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1321, 57, 16, 'B', 1, '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1322, 57, 16, 'A', 3, '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1323, 57, 16, 'A', 5, '2020-09-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1324, 57, 75, 'A', 3, '2019-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1325, 57, 138, 'B', 1, '2017-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1326, 57, 2, 'A', 3, '2015-10-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1327, 57, 7, 'B', 3, '2017-11-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1328, 57, 8, 'B', 1, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1329, 57, 8, 'A', 3, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1330, 57, 19, 'A', 3, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1331, 57, 118, 'B', 1, '2016-06-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1332, 57, 20, 'B', 3, '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1333, 57, 26, 'A', 3, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1334, 57, 26, 'B', 5, '2018-03-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1335, 57, 23, 'B', 3, '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1336, 57, 17, 'A', 3, '2018-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1337, 57, 17, 'A', 5, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1338, 57, 149, 'B', 1, '2016-05-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1339, 57, 86, 'B', 1, '2017-05-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1340, 57, 106, 'A', 1, '2017-04-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1341, 57, 143, 'B', 1, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1342, 57, 27, 'B', 3, '2019-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1343, 57, 16, 'B', 4, '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1344, 57, 90, 'B', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1345, 57, 41, 'B', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1346, 57, 42, 'B', 3, '2020-12-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1348, 57, 99, 'B', 1, '2019-05-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1349, 57, 99, 'B', 3, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1350, 57, 56, 'A', 1, '2016-07-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1351, 57, 56, 'B', 3, '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1352, 57, 63, 'B', 1, '2016-03-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1353, 57, 63, 'B', 5, '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1354, 57, 77, 'B', 1, '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1355, 57, 77, 'B', 5, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1356, 57, 122, 'B', 1, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1357, 57, 122, 'B', 3, '2014-06-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1358, 57, 31, 'B', 3, '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1359, 57, 116, 'B', 3, '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1360, 57, 50, 'A', 3, '2020-02-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1361, 57, 63, 'B', 1, '2016-03-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1362, 57, 63, 'A', 3, '2019-11-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1363, 57, 77, 'B', 1, '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1364, 57, 77, 'A', 3, '2019-06-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1365, 56, 26, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1366, 56, 17, 'B', 3, '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1367, 56, 17, 'B', 5, '2016-09-06', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1368, 56, 126, 'A', 1, '2017-06-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1369, 56, 53, 'B', 3, '2016-11-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1370, 56, 77, 'B', 1, '2012-11-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1371, 56, 77, 'B', 3, '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1372, 56, 122, 'B', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1373, 92, 116, 'B', 3, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1374, 92, 16, 'A', 1, '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1375, 92, 16, 'B', 3, '2019-04-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1376, 92, 2, 'A', 3, '2018-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1377, 92, 19, 'A', 3, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1378, 92, 17, 'B', 5, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1379, 92, 23, 'A', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1380, 92, 141, 'B', 1, '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1381, 92, 17, 'A', 3, '2019-05-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1383, 92, 104, 'B', 1, '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1384, 92, 27, 'B', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1385, 92, 53, 'B', 3, '2019-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1386, 92, 124, 'A', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1387, 92, 47, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1388, 92, 99, 'B', 3, '2019-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1389, 92, 56, 'A', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1390, 92, 56, 'B', 5, '2018-10-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1391, 92, 55, 'B', 1, '2020-10-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1392, 92, 63, 'B', 3, '2019-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1393, 92, 32, 'B', 3, '2019-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1394, 92, 77, 'A', 3, '2018-11-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1395, 92, 77, 'B', 5, '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1396, 92, 125, 'B', 3, '2018-10-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1397, 92, 122, 'B', 3, '2018-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1398, 23, 63, 'B', 3, '2016-07-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1399, 94, 116, 'B', 3, '2015-03-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1400, 94, 16, 'B', 1, '2019-02-05', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1401, 94, 16, 'B', 3, '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1402, 94, 16, 'B', 5, '2014-05-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1403, 94, 75, 'B', 3, '2017-11-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1404, 94, 138, 'B', 1, '2018-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1405, 94, 2, 'B', 3, '2016-01-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1406, 94, 2, 'B', 5, '2018-03-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1407, 94, 95, 'A', 3, '2016-09-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1408, 94, 95, 'B', 5, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1409, 94, 19, 'B', 1, '2017-10-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1410, 94, 19, 'B', 3, '2018-08-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1411, 94, 19, 'B', 5, '2018-03-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1412, 94, 51, 'B', 1, '2016-07-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1413, 94, 51, 'A', 3, '2018-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1414, 94, 26, 'B', 3, '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1415, 94, 26, 'B', 5, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1416, 94, 23, 'B', 3, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1417, 94, 17, 'A', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1418, 94, 17, 'B', 5, '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1419, 94, 27, 'B', 3, '2016-07-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1420, 94, 27, 'B', 5, '2013-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1421, 94, 16, 'B', 4, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1422, 94, 90, 'B', 6, '2017-07-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1423, 94, 41, 'B', 3, '2015-12-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1424, 94, 41, 'B', 4, '2020-01-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1425, 94, 42, 'B', 3, '2016-03-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1426, 94, 124, 'B', 5, '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1427, 94, 47, 'B', 3, '2015-10-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1428, 94, 50, 'B', 3, '2020-05-30', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1429, 94, 99, 'B', 5, '2017-03-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1430, 94, 56, 'B', 3, '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1431, 94, 56, 'B', 5, '2018-11-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1432, 94, 63, 'B', 3, '2015-02-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1433, 94, 63, 'B', 5, '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1434, 94, 63, 'B', 6, '2019-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1435, 94, 77, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1436, 112, 1, 'A', 4, '2017-10-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1437, 112, 50, 'A', 3, '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1438, 112, 16, 'A', 3, '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1439, 112, 16, 'B', 5, '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1440, 112, 2, 'B', 3, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1441, 112, 95, 'A', 3, '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1442, 112, 95, 'B', 5, '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1443, 112, 17, 'A', 3, '2020-08-15', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1444, 112, 17, 'A', 5, '2020-01-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1445, 112, 16, 'B', 4, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1446, 112, 41, 'A', 3, '2016-11-25', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1447, 112, 41, 'B', 4, '2020-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1448, 112, 47, 'A', 3, '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1449, 112, 99, 'A', 3, '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1450, 112, 56, 'A', 3, '2020-03-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1451, 1, 11, 'B', 3, '2016-01-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1452, 1, 16, 'B', 1, '2012-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1453, 1, 16, 'B', 3, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1454, 1, 16, 'B', 5, '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1455, 1, 75, 'B', 3, '2019-04-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1456, 1, 2, 'B', 3, '2016-08-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1457, 1, 19, 'B', 3, '2016-11-03', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1458, 1, 26, 'B', 3, '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1459, 1, 23, 'B', 3, '2015-12-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1460, 1, 17, 'A', 3, '2017-03-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1461, 1, 17, 'B', 5, '2019-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1462, 1, 85, 'B', 1, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1463, 1, 104, 'B', 1, '2019-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1464, 1, 126, 'B', 1, '2019-06-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1465, 1, 27, 'A', 3, '2016-08-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1466, 1, 116, 'B', 3, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1467, 1, 47, 'B', 1, '2012-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1468, 1, 47, 'B', 3, '2016-12-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1469, 1, 47, 'B', 5, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1470, 1, 99, 'B', 3, '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1471, 1, 56, 'B', 1, '2019-07-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1472, 1, 56, 'A', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1473, 1, 56, 'B', 5, '2016-07-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1474, 1, 63, 'A', 3, '2017-01-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1475, 1, 63, 'B', 5, '2019-05-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1476, 1, 32, 'B', 3, '2018-07-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1477, 1, 77, 'B', 1, '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1478, 1, 77, 'A', 3, '2016-09-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1479, 1, 77, 'B', 5, '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1480, 1, 122, 'B', 3, '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1481, 17, 16, 'A', 3, '2019-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1482, 17, 16, 'A', 1, '2012-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1483, 17, 16, 'B', 5, '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1484, 17, 75, 'A', 3, '2020-09-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1485, 17, 7, 'A', 3, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1486, 17, 8, 'A', 3, '2016-10-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1487, 17, 26, 'B', 3, '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1488, 17, 17, 'A', 3, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1489, 17, 17, 'B', 5, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1490, 17, 106, 'A', 1, '2012-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1491, 17, 150, 'B', 1, '2012-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1492, 17, 16, 'B', 4, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1493, 17, 90, 'B', 5, '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1494, 17, 76, 'B', 3, '2016-05-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1495, 17, 41, 'A', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1496, 17, 53, 'B', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1497, 17, 47, 'B', 3, '2016-07-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1498, 17, 50, 'B', 3, '2016-12-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1499, 17, 99, 'B', 3, '2020-09-19', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1500, 17, 63, 'B', 3, '2019-09-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1501, 17, 77, 'A', 3, '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1502, 17, 77, 'A', 5, '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1503, 30, 17, 'A', 3, '2018-09-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1504, 30, 104, 'A', 1, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1505, 30, 106, 'B', 1, '2020-10-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1506, 30, 97, 'B', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1507, 30, 50, 'A', 3, '2019-12-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1508, 30, 99, 'A', 1, '2015-05-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1509, 30, 55, 'A', 1, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1510, 30, 46, 'A', 3, '2019-01-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1511, 18, 16, 'A', 3, '2015-09-17', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1512, 18, 17, 'B', 5, '2020-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1513, 18, 16, 'B', 4, '2019-10-10', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1514, 18, 47, 'A', 3, '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1515, 18, 99, 'B', 3, '2020-12-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1516, 18, 57, 'A', 3, '2020-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1517, 18, 16, 'B', 5, '2020-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1518, 18, 75, 'A', 3, '2019-10-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1519, 18, 75, 'B', 5, '2019-07-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1520, 18, 94, 'B', 3, '2019-12-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1521, 18, 7, 'A', 3, '2017-01-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1522, 18, 8, 'A', 3, '2017-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1523, 18, 9, 'A', 3, '2017-06-01', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1524, 18, 9, 'B', 5, '2018-01-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1525, 18, 17, 'A', 3, '2020-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1526, 18, 90, 'B', 3, '2018-11-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1527, 18, 53, 'B', 3, '2020-02-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1528, 18, 50, 'A', 3, '2019-12-13', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1529, 18, 63, 'A', 3, '2019-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1530, 18, 77, 'A', 3, '2019-10-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1531, 2, 11, 'A', 3, '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1532, 2, 11, 'A', 4, '2020-01-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1533, 2, 16, 'A', 3, '2020-03-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1534, 2, 17, 'A', 3, '2020-10-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1535, 2, 16, 'B', 1, '2019-09-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1536, 2, 16, 'B', 5, '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1537, 2, 75, 'A', 3, '2019-11-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1538, 2, 75, 'B', 5, '2017-05-31', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1539, 2, 2, 'B', 3, '2016-08-07', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1540, 2, 151, 'A', 5, '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1541, 2, 95, 'B', 3, '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1542, 2, 19, 'B', 3, '2017-10-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1543, 2, 26, 'B', 3, '2019-09-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1544, 2, 17, 'B', 6, '2019-08-22', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1545, 2, 23, 'B', 3, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1546, 2, 17, 'A', 5, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1547, 2, 27, 'B', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1548, 2, 16, 'B', 4, '2020-06-27', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1549, 2, 116, 'B', 3, '2016-08-18', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1550, 2, 41, 'B', 3, '2018-09-11', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1551, 2, 42, 'A', 3, '2017-01-20', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1552, 2, 47, 'B', 3, '2018-07-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1553, 2, 47, 'B', 5, '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1554, 2, 99, 'B', 3, '2016-09-23', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1555, 2, 63, 'A', 3, '2016-09-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1556, 2, 63, 'B', 5, '2017-05-24', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1557, 2, 32, 'B', 3, '2019-03-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1558, 2, 77, 'B', 3, '2019-11-14', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1559, 2, 77, 'B', 5, '2017-05-16', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1560, 2, 33, 'B', 3, '2019-08-08', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1561, 39, 50, 'B', 3, '2020-03-28', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1562, 39, 16, 'B', 1, '2018-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1563, 39, 16, 'A', 3, '2020-07-02', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1564, 39, 6, 'B', 2, '2019-11-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1565, 39, 17, 'B', 1, '2014-11-09', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1566, 39, 17, 'A', 3, '2018-02-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1567, 39, 17, 'B', 5, '2016-10-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1568, 39, 126, 'B', 1, '2020-06-04', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1569, 39, 16, 'B', 4, '2014-12-21', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1570, 39, 42, 'B', 3, '2017-06-29', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1571, 39, 53, 'B', 3, '2018-10-26', '2016-12-22 20:47:09', '2016-12-22 20:47:09'),
-(1572, 39, 99, 'B', 3, '2016-08-12', '2016-12-22 20:47:09', '2016-12-22 20:47:09');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `bidang_usaha`
---
-
-CREATE TABLE IF NOT EXISTS `bidang_usaha` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for bidang_usaha
+-- ----------------------------
+DROP TABLE IF EXISTS `bidang_usaha`;
+CREATE TABLE `bidang_usaha` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `bidang_usaha` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `bidang_usaha`:
---
+-- ----------------------------
+-- Records of bidang_usaha
+-- ----------------------------
+INSERT INTO `bidang_usaha` VALUES ('1', 'Animal Health', null, null, null);
+INSERT INTO `bidang_usaha` VALUES ('2', 'Agriculture', '2016-09-22 00:45:24', '2016-09-22 00:45:24', null);
+INSERT INTO `bidang_usaha` VALUES ('3', 'Mining', '2016-09-22 00:31:53', '2016-09-22 00:31:53', null);
+INSERT INTO `bidang_usaha` VALUES ('4', 'Information & Communication Technology', '2016-09-22 00:41:53', '2016-09-22 00:41:53', null);
+INSERT INTO `bidang_usaha` VALUES ('5', 'Banking/Financial Services', '2016-09-22 00:45:39', '2016-09-22 00:45:39', null);
+INSERT INTO `bidang_usaha` VALUES ('6', 'Pharmaceutical', '2016-09-22 00:49:55', '2016-09-22 00:49:55', null);
+INSERT INTO `bidang_usaha` VALUES ('7', 'Hospitality', '2016-09-22 00:56:54', '2016-09-22 00:56:54', null);
+INSERT INTO `bidang_usaha` VALUES ('8', 'Construction', '2016-09-22 00:57:14', '2016-09-22 00:57:14', null);
+INSERT INTO `bidang_usaha` VALUES ('9', 'Advertising/Design', '2016-09-22 00:57:22', '2016-09-22 00:57:22', null);
+INSERT INTO `bidang_usaha` VALUES ('10', 'Transportation', '2016-09-22 00:57:31', '2016-09-22 00:57:31', null);
+INSERT INTO `bidang_usaha` VALUES ('11', 'Automotive', '2016-09-22 00:57:39', '2016-09-22 00:57:39', null);
+INSERT INTO `bidang_usaha` VALUES ('12', 'Oil & Gas', '2016-09-22 00:57:48', '2016-09-22 00:57:48', null);
+INSERT INTO `bidang_usaha` VALUES ('13', 'Forwarding & Warehouse', '2016-09-22 00:57:57', '2016-09-22 00:57:57', null);
+INSERT INTO `bidang_usaha` VALUES ('14', 'Terminal & Agency', '2016-09-22 00:58:05', '2016-09-22 00:58:05', null);
+INSERT INTO `bidang_usaha` VALUES ('15', 'Human Resource Development', '2016-09-22 00:58:13', '2016-09-22 00:58:13', null);
+INSERT INTO `bidang_usaha` VALUES ('16', 'Manufacturing', '2016-09-22 00:58:20', '2016-09-22 00:58:20', null);
+INSERT INTO `bidang_usaha` VALUES ('17', 'Tour and Travel', '2016-09-22 00:58:28', '2016-09-22 00:58:28', null);
+INSERT INTO `bidang_usaha` VALUES ('19', 'Other', null, null, null);
 
---
--- Dumping data for table `bidang_usaha`
---
-
-INSERT INTO `bidang_usaha` (`id`, `bidang_usaha`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'Animal Health', NULL, NULL, NULL),
-(2, 'Agriculture', '2016-09-22 00:45:24', '2016-09-22 00:45:24', NULL),
-(3, 'Mining', '2016-09-22 00:31:53', '2016-09-22 00:31:53', NULL),
-(4, 'Information & Communication Technology', '2016-09-22 00:41:53', '2016-09-22 00:41:53', NULL),
-(5, 'Banking/Financial Services', '2016-09-22 00:45:39', '2016-09-22 00:45:39', NULL),
-(6, 'Pharmaceutical', '2016-09-22 00:49:55', '2016-09-22 00:49:55', NULL),
-(7, 'Hospitality', '2016-09-22 00:56:54', '2016-09-22 00:56:54', NULL),
-(8, 'Construction', '2016-09-22 00:57:14', '2016-09-22 00:57:14', NULL),
-(9, 'Advertising/Design', '2016-09-22 00:57:22', '2016-09-22 00:57:22', NULL),
-(10, 'Transportation', '2016-09-22 00:57:31', '2016-09-22 00:57:31', NULL),
-(11, 'Automotive', '2016-09-22 00:57:39', '2016-09-22 00:57:39', NULL),
-(12, 'Oil & Gas', '2016-09-22 00:57:48', '2016-09-22 00:57:48', NULL),
-(13, 'Forwarding & Warehouse', '2016-09-22 00:57:57', '2016-09-22 00:57:57', NULL),
-(14, 'Terminal & Agency', '2016-09-22 00:58:05', '2016-09-22 00:58:05', NULL),
-(15, 'Human Resource Development', '2016-09-22 00:58:13', '2016-09-22 00:58:13', NULL),
-(16, 'Manufacturing', '2016-09-22 00:58:20', '2016-09-22 00:58:20', NULL),
-(17, 'Tour and Travel', '2016-09-22 00:58:28', '2016-09-22 00:58:28', NULL),
-(19, 'Other', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `detail_edu_bg`
---
-
-CREATE TABLE IF NOT EXISTS `detail_edu_bg` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for detail_edu_bg
+-- ----------------------------
+DROP TABLE IF EXISTS `detail_edu_bg`;
+CREATE TABLE `detail_edu_bg` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_pelamar` int(11) NOT NULL,
   `id_tingkat_pendidikan_1` int(11) NOT NULL,
   `id_institusi_1` int(11) NOT NULL,
@@ -1696,29 +1662,20 @@ CREATE TABLE IF NOT EXISTS `detail_edu_bg` (
   `start_year_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `end_year_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `detail_edu_bg`:
---
+-- ----------------------------
+-- Records of detail_edu_bg
+-- ----------------------------
 
---
--- Dumping data for table `detail_edu_bg`
---
-
-INSERT INTO `detail_edu_bg` (`id`, `id_pelamar`, `id_tingkat_pendidikan_1`, `id_institusi_1`, `other_institusi_1`, `id_major_1`, `other_major_1`, `gpa_1`, `start_year_1`, `end_year_1`, `id_tingkat_pendidikan_2`, `id_institusi_2`, `other_institusi_2`, `id_major_2`, `other_major_2`, `gpa_2`, `start_year_2`, `end_year_2`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, 24, '', 99, '', '3.90', '2012', '2016', NULL, 0, '', 0, '', '', '', '', '2016-12-29 01:16:01', '2016-12-29 01:16:01'),
-(2, 2, 3, 24, '', 99, '', '3.55', '2012', '2016', NULL, 0, '', 0, '', '', '', '', '2016-12-29 01:32:25', '2016-12-29 01:32:25');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `detail_we`
---
-
-CREATE TABLE IF NOT EXISTS `detail_we` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for detail_we
+-- ----------------------------
+DROP TABLE IF EXISTS `detail_we`;
+CREATE TABLE `detail_we` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_pelamar` int(11) DEFAULT NULL,
   `id_bidang_usaha_1` int(11) DEFAULT NULL,
   `other_bidang_usaha_1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -1737,49 +1694,39 @@ CREATE TABLE IF NOT EXISTS `detail_we` (
   `start_year_4` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `end_year_4` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `detail_we`:
---
+-- ----------------------------
+-- Records of detail_we
+-- ----------------------------
 
---
--- Dumping data for table `detail_we`
---
-
-INSERT INTO `detail_we` (`id`, `id_pelamar`, `id_bidang_usaha_1`, `other_bidang_usaha_1`, `start_year_1`, `end_year_1`, `id_bidang_usaha_2`, `other_bidang_usaha_2`, `start_year_2`, `end_year_2`, `id_bidang_usaha_3`, `other_bidang_usaha_3`, `start_year_3`, `end_year_3`, `id_bidang_usaha_4`, `other_bidang_usaha_4`, `start_year_4`, `end_year_4`, `created_at`, `updated_at`) VALUES
-(1, 1, 3, '', 'May 2013', 'Present Present', NULL, NULL, ' ', ' ', NULL, NULL, ' ', ' ', NULL, NULL, ' ', ' ', '2016-12-29 01:16:01', '2016-12-29 01:16:01'),
-(2, 2, 5, '', 'August 2014', 'Present Present', NULL, NULL, ' ', ' ', NULL, NULL, ' ', ' ', NULL, NULL, ' ', ' ', '2016-12-29 01:32:25', '2016-12-29 01:32:25');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `event_position`
---
-
-CREATE TABLE IF NOT EXISTS `event_position` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for event_position
+-- ----------------------------
+DROP TABLE IF EXISTS `event_position`;
+CREATE TABLE `event_position` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_vacancy_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `no_reqruitment_request` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `position_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `jumlah_dibutuhkan` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `event_position`:
---
+-- ----------------------------
+-- Records of event_position
+-- ----------------------------
 
--- --------------------------------------------------------
-
---
--- Table structure for table `event_vacancy`
---
-
-CREATE TABLE IF NOT EXISTS `event_vacancy` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for event_vacancy
+-- ----------------------------
+DROP TABLE IF EXISTS `event_vacancy`;
+CREATE TABLE `event_vacancy` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `event_code` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `domain` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `id_media` int(10) unsigned NOT NULL,
@@ -1807,268 +1754,267 @@ CREATE TABLE IF NOT EXISTS `event_vacancy` (
   `index_adv_media_effect_exp` int(11) NOT NULL DEFAULT '0',
   `is_active` int(11) NOT NULL DEFAULT '1',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `event_vacancy_id_media_foreign` (`id_media`),
+  CONSTRAINT `event_vacancy_id_media_foreign` FOREIGN KEY (`id_media`) REFERENCES `advertising_media` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `event_vacancy`:
---   `id_media`
---       `advertising_media` -> `id`
---
+-- ----------------------------
+-- Records of event_vacancy
+-- ----------------------------
+INSERT INTO `event_vacancy` VALUES ('1', 'TES123', 'formlamaran.medion.co.id', '4', '2016-11-22', '2017-04-01', '2016-11-22', '2017-04-01', '1000000.00', '1000000.00', '1', '1', '0', '0', '1', '1', '0', '0', '0', '0', '1', '1', '0', '0', '0', '0', '1', '2016-11-22 00:05:34', '2016-11-22 07:13:15');
 
---
--- Dumping data for table `event_vacancy`
---
-
-INSERT INTO `event_vacancy` (`id`, `event_code`, `domain`, `id_media`, `plan_start_date`, `plan_end_date`, `actual_start_date`, `actual_end_date`, `budget`, `cost`, `target_fresh`, `target_exp`, `actual_fresh`, `actual_exp`, `target_fresh_call`, `target_exp_call`, `actual_fresh_call`, `actual_exp_call`, `awaiting_fresh`, `awaiting_exp`, `target_fresh_pass`, `target_exp_pass`, `actual_fresh_pass`, `actual_exp_pass`, `index_adv_media_effect_fresh`, `index_adv_media_effect_exp`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, 'TES123', 'formlamaran.medion.co.id', 4, '2016-11-22', '2017-04-01', '2016-11-22', '2017-04-01', '1000000.00', '1000000.00', 1, 1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 1, '2016-11-22 00:05:34', '2016-11-22 07:13:15');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `iklan`
---
-
-CREATE TABLE IF NOT EXISTS `iklan` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for iklan
+-- ----------------------------
+DROP TABLE IF EXISTS `iklan`;
+CREATE TABLE `iklan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_kategori` int(11) NOT NULL,
   `id_media` int(11) NOT NULL,
   `plan_start_date` date NOT NULL,
   `plan_end_date` date NOT NULL,
-  `actual_start_date` date DEFAULT NULL,
-  `actual_end_date` date DEFAULT NULL,
+  `actual_start_date` date NOT NULL DEFAULT '0000-00-00',
+  `actual_end_date` date NOT NULL DEFAULT '0000-00-00',
   `domain` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `event_code` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `iklan`:
---
+-- ----------------------------
+-- Records of iklan
+-- ----------------------------
+INSERT INTO `iklan` VALUES ('10', '9', '9', '2018-02-23', '2018-03-10', '2018-02-21', '2018-04-27', 'jobfair.medion.co.id', '111', '2018-02-19 19:57:18', '2018-04-02 03:00:52');
+INSERT INTO `iklan` VALUES ('11', '4', '4', '2018-03-01', '2018-03-10', '2018-03-01', '2018-04-27', 'formlamaran.medion.co.id', '321', '2018-02-20 17:49:44', '2018-04-02 00:53:44');
+INSERT INTO `iklan` VALUES ('12', '13', '14', '2018-03-01', '2018-03-07', '2018-03-01', '2018-04-27', 'jobfair.medion.co.id', '', '2018-02-27 17:51:57', '2018-03-29 09:10:03');
+INSERT INTO `iklan` VALUES ('13', '9', '9', '2018-03-07', '2018-03-25', '2018-03-07', '2018-04-27', 'formlamaran.medion.co.id', '456', '2018-03-08 00:20:32', '2018-03-23 08:30:50');
+INSERT INTO `iklan` VALUES ('18', '4', '4', '2018-03-22', '2018-03-28', '2018-03-27', '2018-04-27', 'formlamaran.medion.co.id', '', '2018-03-22 02:15:54', '2018-03-29 09:25:26');
+INSERT INTO `iklan` VALUES ('19', '4', '4', '2018-03-23', '2018-03-24', '2018-03-29', '2018-03-31', 'formlamaran.medion.co.id', '', '2018-03-23 02:09:06', '2018-03-29 09:25:51');
+INSERT INTO `iklan` VALUES ('20', '4', '4', '2018-03-23', '2018-03-24', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 02:09:11', '2018-03-23 02:09:11');
+INSERT INTO `iklan` VALUES ('21', '4', '4', '2018-03-23', '2018-03-24', '2018-03-29', '2018-04-06', 'formlamaran.medion.co.id', '', '2018-03-23 02:09:20', '2018-03-29 09:27:06');
+INSERT INTO `iklan` VALUES ('22', '4', '4', '2018-03-23', '2018-03-24', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 02:09:45', '2018-03-23 02:09:45');
+INSERT INTO `iklan` VALUES ('23', '4', '4', '2018-03-23', '2018-03-24', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 02:09:51', '2018-03-23 02:09:51');
+INSERT INTO `iklan` VALUES ('24', '4', '4', '2018-03-23', '2018-03-24', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 02:10:02', '2018-03-23 02:10:02');
+INSERT INTO `iklan` VALUES ('25', '4', '4', '2018-03-23', '2018-03-24', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 02:10:16', '2018-03-23 02:10:16');
+INSERT INTO `iklan` VALUES ('26', '4', '4', '2018-03-24', '2018-03-31', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 02:10:22', '2018-03-23 02:10:22');
+INSERT INTO `iklan` VALUES ('27', '4', '4', '2018-03-24', '2018-03-30', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 02:10:35', '2018-03-23 02:10:35');
+INSERT INTO `iklan` VALUES ('28', '4', '4', '2018-03-24', '2018-03-31', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 08:15:16', '2018-03-23 08:15:16');
 
---
--- Dumping data for table `iklan`
---
-
-INSERT INTO `iklan` (`id`, `id_kategori`, `id_media`, `plan_start_date`, `plan_end_date`, `actual_start_date`, `actual_end_date`, `domain`, `event_code`, `created_at`, `updated_at`) VALUES
-(1, 7, 7, '2016-11-23', '2016-11-24', '2016-11-23', '2016-12-17', 'formlamaran.medion.co.id', 'E001', '2016-11-29 20:42:57', '2016-12-12 17:16:23'),
-(2, 4, 4, '2016-11-23', '2016-12-03', '2016-11-30', '2016-12-28', 'formlamaran.medion.co.id', '-', '2016-11-29 21:28:10', '2016-12-20 18:53:00'),
-(3, 5, 5, '2016-11-30', '2016-12-03', '2016-11-30', '2016-12-23', 'formlamaran.medion.co.id', '-', '2016-11-30 01:13:04', '2016-12-18 17:19:32'),
-(4, 6, 6, '2016-12-22', '2016-12-30', '2016-12-22', '2016-12-30', 'formlamaran.medion.co.id', '', '2016-12-20 20:04:15', '2016-12-20 20:04:15');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `institusi`
---
-
-CREATE TABLE IF NOT EXISTS `institusi` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for institusi
+-- ----------------------------
+DROP TABLE IF EXISTS `institusi`;
+CREATE TABLE `institusi` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_provinsi` int(10) unsigned NOT NULL,
   `id_kota` int(10) unsigned NOT NULL,
   `nama_institusi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `singkatan` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `institusi_id_provinsi_foreign` (`id_provinsi`),
+  KEY `institusi_id_kota_foreign` (`id_kota`)
 ) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `institusi`:
---
+-- ----------------------------
+-- Records of institusi
+-- ----------------------------
+INSERT INTO `institusi` VALUES ('1', '1', '1', 'UNIVERSITAS SYIAH KUALA', 'UNSYIAH', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('2', '2', '2', 'UNIVERSITAS UDAYANA', 'UNUD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('3', '2', '2', 'POLITEKNIK NEGERI BALI', 'PNB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('4', '3', '3', 'UNIVERSITAS GADJAH MADA', 'UGM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('5', '3', '3', 'UNIVERSITAS ISLAM INDONESIA', 'UII', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('6', '3', '3', 'UNIVERSITAS AHMAD DAHLAN', 'UAD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('7', '3', '3', 'UNIVERSITAS ATMA JAYA YOGYAKARTA', 'UAJY', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('9', '3', '39', 'UNIVERSITAS SANATA DHARMA', 'USD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('10', '3', '3', 'UNIVERSITAS PEMBANGUNAN NASIONAL VETERAN ', 'UPN VETERAN YOGYAKARTA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('11', '3', '3', 'UNIVERSITAS KRISTEN DUTA WACANA', 'UKDW', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('12', '3', '3', 'INSTITUT SAINS DAN TEKNOLOGI AKPRIND', 'IST AKPRIND', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('13', '3', '3', 'POLITEKNIK MEKATRONIKA SANATA DHARMA', 'PMSD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('14', '3', '3', 'UNIVERSITAS MUHAMMADIYAH YOGYAKARTA', 'UMY', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('15', '3', '3', 'UNIVERSITAS NEGERI YOGYAKARTA', 'UNY', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('16', '4', '4', 'UNIVERSITAS BINA NUSANTARA', 'BINUS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('17', '4', '4', 'UNIVERSITAS TARUMANAGARA', 'UNTAR', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('18', '4', '4', 'UNIVERSITAS TRISAKTI', 'USAKTI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('19', '4', '5', 'UNIVERSITAS KATOLIK INDONESIA ATMA JAYA', 'UNIKA ATMA JAYA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('20', '4', '6', 'UNIVERSITAS NEGERI JAKARTA', 'UNJ', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('21', '4', '7', 'UNIVERSITAS PELITA HARAPAN', 'UPH', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('22', '8', '19', 'UNIVERSITAS PELITA HARAPAN SURABAYA', 'UPH', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('23', '5', '8', 'UNIVERSITAS SULTAN AGENG TIRTAYASA', 'UNTIRTA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('24', '6', '9', 'INSTITUT TEKNOLOGI BANDUNG', 'ITB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('25', '6', '9', 'INSTITUT TEKNOLOGI NASIONAL', 'ITENAS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('26', '6', '9', 'INSTITUT TEKNOLOGI HARAPAN BANGSA', 'ITHB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('27', '6', '9', 'POLITEKNIK NEGERI BANDUNG', 'POLBAN', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('29', '6', '9', 'POLITEKNIK NEGERI MANUFAKTUR BANDUNG', 'POLMAN', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('30', '6', '9', 'TELKOM UNIVERSITY', 'TEL-U', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('31', '6', '9', 'SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER LIKMI', 'STMIK LIKMI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('32', '6', '9', 'UNIVERSITAS KRISTEN MARANATHA', 'MCU', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('33', '6', '9', 'UNIVERSITAS ISLAM BANDUNG', 'UNISBA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('34', '6', '9', 'UNIVERSITAS KOMPUTER INDONESIA', 'UNIKOM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('35', '6', '9', 'UNIVERSITAS PADJADJARAN', 'UNPAD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('36', '6', '9', 'UNIVERSITAS KATOLIK PARAHYANGAN', 'UNPAR', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('37', '6', '9', 'UNIVERSITAS PASUNDAN', 'UNPAS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('38', '6', '9', 'UNIVERSITAS PENDIDIKAN INDONESIA', 'UPI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('39', '6', '9', 'UNIVERSITAS WIDYATAMA', 'UTAMA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('40', '6', '10', 'UNIVERSITAS JENDERAL ACHMAD YANI', 'UNJANI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('41', '6', '9', 'UNIVERSITAS LANGLANG BUANA', 'UNLA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('42', '6', '9', 'POLITEKNIK POS INDONESIA', 'POLTEKPOS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('43', '6', '11', 'INSTITUT PERTANIAN BOGOR', 'IPB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('44', '6', '12', 'UNIVERSITAS INDONESIA', 'UI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('45', '6', '12', 'POLITEKNIK NEGERI JAKARTA', 'PNJ', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('46', '6', '12', 'UNIVERSITAS PANCASILA', 'UP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('47', '6', '12', 'UNIVERSITAS GUNADARMA', 'UG', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('48', '7', '13', 'UNIVERSITAS JENDERAL SOEDIRMAN', 'UNSOED', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('49', '7', '14', 'UNIVERSITAS KRISTEN SATYA WACANA', 'UKSW', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('50', '7', '15', 'UNIVERSITAS DIPONEGORO', 'UNDIP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('51', '7', '15', 'UNIVERSITAS NEGERI SEMARANG', 'UNNES', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('52', '7', '15', 'POLITEKNIK NEGERI SEMARANG', 'POLINES', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('53', '7', '15', 'UNIVERSITAS KATOLIK SOEGIJAPRANATA', 'UNIKA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('54', '7', '15', 'UNIVERSITAS ISLAM SULTAN AGUNG', 'UNISSULA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('55', '7', '15', 'UNIVERSITAS DIAN NUSWANTORO', 'UDINUS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('56', '7', '15', 'UNIVERSITAS SEMARANG', 'USM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('57', '7', '40', 'UNIVERSITAS SEBELAS MARET', 'UNS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('58', '7', '40', 'UNIVERSITAS MUHAMMADIYAH SURAKARTA', 'UMS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('59', '7', '40', 'POLITEKNIK AKADEMI TEKNIK MESIN INDUSTRI SURAKARTA', 'POLTEK ATMI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('60', '8', '17', 'UNIVERSITAS JEMBER', 'UNEJ', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('61', '8', '17', 'POLITEKNIK NEGERI JEMBER', 'POLIJE', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('62', '8', '17', 'UNIVERSITAS MUHAMMADIYAH JEMBER', 'UMJ', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('63', '8', '18', 'UNIVERSITAS BRAWIJAYA', 'UB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('64', '8', '18', 'INSTITUT TEKNOLOGI NASIONAL MALANG', 'ITN MALANG', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('65', '8', '18', 'POLITEKNIK NEGERI MALANG', 'POLINEMA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('67', '8', '18', 'UNIVERSITAS MUHAMMADIYAH MALANG', 'UMM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('68', '8', '18', 'UNIVERSITAS ISLAM MALANG', 'UNISMA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('69', '8', '18', 'UNIVERSITAS NEGERI MALANG', 'UM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('70', '8', '19', 'POLITEKNIK ELEKTRONIKA NEGERI SURABAYA', 'PENS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('71', '8', '19', 'UNIVERSITAS AIRLANGGA', 'UNAIR', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('72', '8', '19', 'INSTITUT TEKNOLOGI SEPULUH NOPEMBER', 'ITS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('73', '8', '19', 'UNIVERSITAS NEGERI SURABAYA', 'UNESA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('74', '8', '19', 'POLITEKNIK UBAYA', 'POLTEK UBAYA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('75', '8', '19', 'UNIVERSITAS KATOLIK WIDYA MANDALA SURABAYA', 'UKWMS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('76', '8', '19', 'UNIVERSITAS KRISTEN PETRA', 'UK PETRA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('77', '9', '20', 'UNIVERSITAS LAMPUNG', 'UNILA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('78', '9', '20', 'POLITEKNIK NEGERI LAMPUNG', 'POLINELA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('79', '9', '20', 'UNIVERSITAS BANDAR LAMPUNG', 'UBL', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('80', '10', '21', 'UNIVERSITAS MATARAM', 'UNRAM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('81', '11', '22', 'UNIVERSITAS ANDALAS', 'UNAND', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('82', '11', '23', 'POLITEKNIK PERTANIAN NEGERI PAYAKUMBUH', 'POLITANI PAYAKUMBUH', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('83', '11', '22', 'POLITEKNIK NEGERI PADANG', 'PNP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('84', '11', '22', 'UNIVERSITAS NEGERI PADANG', 'UNP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('85', '12', '24', 'UNIVERSITAS BENGKULU', 'UNIB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('86', '13', '25', 'UNIVERSITAS JAMBI', 'UNJA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('87', '14', '26', 'UNIVERSITAS HASANUDDIN', 'UNHAS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('88', '14', '26', 'POLITEKNIK NEGERI UJUNG PANDANG', 'PNUP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('89', '14', '26', 'UNIVERSITAS NEGERI MAKASSAR', 'UNM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('90', '15', '27', 'UNIVERSITAS SAM RATULANGI', 'UNSRAT', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('91', '15', '27', 'POLITEKNIK NEGERI MANADO', 'POLIMDO', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('92', '16', '28', 'UNIVERSITAS SRIWIJAYA', 'UNSRI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('93', '16', '28', 'POLITEKNIK NEGERI SRIWIJAYA', 'POLSRI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('94', '17', '29', 'UNIVERSITAS SUMATERA UTARA', 'USU', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('95', '17', '29', 'POLITEKNIK NEGERI MEDAN', 'POLMED', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('96', '17', '29', 'UNIVERSITAS MUHAMMADIYAH SUMATERA UTARA', 'UMSU', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('97', '17', '29', 'UNIVERSITAS NEGERI MEDAN', 'UNIMED', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('98', '18', '30', 'POLITEKNIK NEGERI BANJARMASIN', 'POLIBAN', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('99', '19', '31', 'POLITEKNIK NEGERI PONTIANAK', 'POLNEP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('100', '20', '32', 'POLITEKNIK NEGERI SAMARINDA', 'POLNES', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('101', '21', '33', 'UNIVERSITAS INTERNASIONAL BATAM', 'UIB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('102', '21', '34', 'UNIVERSITAS RIAU', 'UR', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('103', '4', '4', 'UNIVERSITAS MERCU BUANA', 'UMB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('104', '3', '36', 'UNIVERSITAS MERCU BUANA YOGYAKARTA', 'UMBY', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('105', '4', '6', 'UNIVERSITAS KRISTEN INDONESIA', 'UKI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('106', '22', '35', 'UNIVERSITAS KRISTEN INDONESIA MALUKU', 'UKIM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('107', '14', '26', 'UNIVERSITAS KRISTEN INDONESIA PAULUS MAKASSAR', 'UKI PAULUS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('108', '15', '37', 'UNIVERSITAS KRISTEN INDONESIA TOMOHON', 'UKIT', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('109', '14', '38', 'UNIVERSITAS KRISTEN INDONESIA TORAJA', 'UKI TORAJA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('110', '18', '30', 'UNIVERSITAS LAMBUNG MANGKURAT', 'UNLAM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('111', '20', '32', 'UNIVERSITAS MULAWARMAN', 'UNMUL', '2016-12-21 02:15:26', '2016-12-21 02:15:26', null);
+INSERT INTO `institusi` VALUES ('112', '8', '19', 'UNIVERSITAS SURABAYA', 'UBAYA', null, null, null);
+INSERT INTO `institusi` VALUES ('113', '6', '9', 'Other', 'Other', null, null, null);
 
---
--- Dumping data for table `institusi`
---
-
-INSERT INTO `institusi` (`id`, `id_provinsi`, `id_kota`, `nama_institusi`, `singkatan`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, 'UNIVERSITAS SYIAH KUALA', 'UNSYIAH', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(2, 2, 2, 'UNIVERSITAS UDAYANA', 'UNUD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(3, 2, 2, 'POLITEKNIK NEGERI BALI', 'PNB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(4, 3, 3, 'UNIVERSITAS GADJAH MADA', 'UGM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(5, 3, 3, 'UNIVERSITAS ISLAM INDONESIA', 'UII', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(6, 3, 3, 'UNIVERSITAS AHMAD DAHLAN', 'UAD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(7, 3, 3, 'UNIVERSITAS ATMA JAYA YOGYAKARTA', 'UAJY', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(9, 3, 39, 'UNIVERSITAS SANATA DHARMA', 'USD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(10, 3, 3, 'UNIVERSITAS PEMBANGUNAN NASIONAL VETERAN ', 'UPN VETERAN YOGYAKARTA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(11, 3, 3, 'UNIVERSITAS KRISTEN DUTA WACANA', 'UKDW', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(12, 3, 3, 'INSTITUT SAINS DAN TEKNOLOGI AKPRIND', 'IST AKPRIND', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(13, 3, 3, 'POLITEKNIK MEKATRONIKA SANATA DHARMA', 'PMSD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(14, 3, 3, 'UNIVERSITAS MUHAMMADIYAH YOGYAKARTA', 'UMY', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(15, 3, 3, 'UNIVERSITAS NEGERI YOGYAKARTA', 'UNY', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(16, 4, 4, 'UNIVERSITAS BINA NUSANTARA', 'BINUS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(17, 4, 4, 'UNIVERSITAS TARUMANAGARA', 'UNTAR', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(18, 4, 4, 'UNIVERSITAS TRISAKTI', 'USAKTI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(19, 4, 5, 'UNIVERSITAS KATOLIK INDONESIA ATMA JAYA', 'UNIKA ATMA JAYA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(20, 4, 6, 'UNIVERSITAS NEGERI JAKARTA', 'UNJ', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(21, 4, 7, 'UNIVERSITAS PELITA HARAPAN', 'UPH', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(22, 8, 19, 'UNIVERSITAS PELITA HARAPAN SURABAYA', 'UPH', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(23, 5, 8, 'UNIVERSITAS SULTAN AGENG TIRTAYASA', 'UNTIRTA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(24, 6, 9, 'INSTITUT TEKNOLOGI BANDUNG', 'ITB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(25, 6, 9, 'INSTITUT TEKNOLOGI NASIONAL', 'ITENAS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(26, 6, 9, 'INSTITUT TEKNOLOGI HARAPAN BANGSA', 'ITHB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(27, 6, 9, 'POLITEKNIK NEGERI BANDUNG', 'POLBAN', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(29, 6, 9, 'POLITEKNIK NEGERI MANUFAKTUR BANDUNG', 'POLMAN', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(30, 6, 9, 'TELKOM UNIVERSITY', 'TEL-U', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(31, 6, 9, 'SEKOLAH TINGGI MANAJEMEN INFORMATIKA DAN KOMPUTER LIKMI', 'STMIK LIKMI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(32, 6, 9, 'UNIVERSITAS KRISTEN MARANATHA', 'MCU', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(33, 6, 9, 'UNIVERSITAS ISLAM BANDUNG', 'UNISBA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(34, 6, 9, 'UNIVERSITAS KOMPUTER INDONESIA', 'UNIKOM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(35, 6, 9, 'UNIVERSITAS PADJADJARAN', 'UNPAD', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(36, 6, 9, 'UNIVERSITAS KATOLIK PARAHYANGAN', 'UNPAR', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(37, 6, 9, 'UNIVERSITAS PASUNDAN', 'UNPAS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(38, 6, 9, 'UNIVERSITAS PENDIDIKAN INDONESIA', 'UPI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(39, 6, 9, 'UNIVERSITAS WIDYATAMA', 'UTAMA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(40, 6, 10, 'UNIVERSITAS JENDERAL ACHMAD YANI', 'UNJANI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(41, 6, 9, 'UNIVERSITAS LANGLANG BUANA', 'UNLA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(42, 6, 9, 'POLITEKNIK POS INDONESIA', 'POLTEKPOS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(43, 6, 11, 'INSTITUT PERTANIAN BOGOR', 'IPB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(44, 6, 12, 'UNIVERSITAS INDONESIA', 'UI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(45, 6, 12, 'POLITEKNIK NEGERI JAKARTA', 'PNJ', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(46, 6, 12, 'UNIVERSITAS PANCASILA', 'UP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(47, 6, 12, 'UNIVERSITAS GUNADARMA', 'UG', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(48, 7, 13, 'UNIVERSITAS JENDERAL SOEDIRMAN', 'UNSOED', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(49, 7, 14, 'UNIVERSITAS KRISTEN SATYA WACANA', 'UKSW', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(50, 7, 15, 'UNIVERSITAS DIPONEGORO', 'UNDIP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(51, 7, 15, 'UNIVERSITAS NEGERI SEMARANG', 'UNNES', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(52, 7, 15, 'POLITEKNIK NEGERI SEMARANG', 'POLINES', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(53, 7, 15, 'UNIVERSITAS KATOLIK SOEGIJAPRANATA', 'UNIKA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(54, 7, 15, 'UNIVERSITAS ISLAM SULTAN AGUNG', 'UNISSULA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(55, 7, 15, 'UNIVERSITAS DIAN NUSWANTORO', 'UDINUS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(56, 7, 15, 'UNIVERSITAS SEMARANG', 'USM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(57, 7, 40, 'UNIVERSITAS SEBELAS MARET', 'UNS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(58, 7, 40, 'UNIVERSITAS MUHAMMADIYAH SURAKARTA', 'UMS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(59, 7, 40, 'POLITEKNIK AKADEMI TEKNIK MESIN INDUSTRI SURAKARTA', 'POLTEK ATMI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(60, 8, 17, 'UNIVERSITAS JEMBER', 'UNEJ', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(61, 8, 17, 'POLITEKNIK NEGERI JEMBER', 'POLIJE', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(62, 8, 17, 'UNIVERSITAS MUHAMMADIYAH JEMBER', 'UMJ', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(63, 8, 18, 'UNIVERSITAS BRAWIJAYA', 'UB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(64, 8, 18, 'INSTITUT TEKNOLOGI NASIONAL MALANG', 'ITN MALANG', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(65, 8, 18, 'POLITEKNIK NEGERI MALANG', 'POLINEMA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(67, 8, 18, 'UNIVERSITAS MUHAMMADIYAH MALANG', 'UMM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(68, 8, 18, 'UNIVERSITAS ISLAM MALANG', 'UNISMA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(69, 8, 18, 'UNIVERSITAS NEGERI MALANG', 'UM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(70, 8, 19, 'POLITEKNIK ELEKTRONIKA NEGERI SURABAYA', 'PENS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(71, 8, 19, 'UNIVERSITAS AIRLANGGA', 'UNAIR', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(72, 8, 19, 'INSTITUT TEKNOLOGI SEPULUH NOPEMBER', 'ITS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(73, 8, 19, 'UNIVERSITAS NEGERI SURABAYA', 'UNESA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(74, 8, 19, 'POLITEKNIK UBAYA', 'POLTEK UBAYA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(75, 8, 19, 'UNIVERSITAS KATOLIK WIDYA MANDALA SURABAYA', 'UKWMS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(76, 8, 19, 'UNIVERSITAS KRISTEN PETRA', 'UK PETRA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(77, 9, 20, 'UNIVERSITAS LAMPUNG', 'UNILA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(78, 9, 20, 'POLITEKNIK NEGERI LAMPUNG', 'POLINELA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(79, 9, 20, 'UNIVERSITAS BANDAR LAMPUNG', 'UBL', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(80, 10, 21, 'UNIVERSITAS MATARAM', 'UNRAM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(81, 11, 22, 'UNIVERSITAS ANDALAS', 'UNAND', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(82, 11, 23, 'POLITEKNIK PERTANIAN NEGERI PAYAKUMBUH', 'POLITANI PAYAKUMBUH', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(83, 11, 22, 'POLITEKNIK NEGERI PADANG', 'PNP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(84, 11, 22, 'UNIVERSITAS NEGERI PADANG', 'UNP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(85, 12, 24, 'UNIVERSITAS BENGKULU', 'UNIB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(86, 13, 25, 'UNIVERSITAS JAMBI', 'UNJA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(87, 14, 26, 'UNIVERSITAS HASANUDDIN', 'UNHAS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(88, 14, 26, 'POLITEKNIK NEGERI UJUNG PANDANG', 'PNUP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(89, 14, 26, 'UNIVERSITAS NEGERI MAKASSAR', 'UNM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(90, 15, 27, 'UNIVERSITAS SAM RATULANGI', 'UNSRAT', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(91, 15, 27, 'POLITEKNIK NEGERI MANADO', 'POLIMDO', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(92, 16, 28, 'UNIVERSITAS SRIWIJAYA', 'UNSRI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(93, 16, 28, 'POLITEKNIK NEGERI SRIWIJAYA', 'POLSRI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(94, 17, 29, 'UNIVERSITAS SUMATERA UTARA', 'USU', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(95, 17, 29, 'POLITEKNIK NEGERI MEDAN', 'POLMED', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(96, 17, 29, 'UNIVERSITAS MUHAMMADIYAH SUMATERA UTARA', 'UMSU', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(97, 17, 29, 'UNIVERSITAS NEGERI MEDAN', 'UNIMED', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(98, 18, 30, 'POLITEKNIK NEGERI BANJARMASIN', 'POLIBAN', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(99, 19, 31, 'POLITEKNIK NEGERI PONTIANAK', 'POLNEP', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(100, 20, 32, 'POLITEKNIK NEGERI SAMARINDA', 'POLNES', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(101, 21, 33, 'UNIVERSITAS INTERNASIONAL BATAM', 'UIB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(102, 21, 34, 'UNIVERSITAS RIAU', 'UR', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(103, 4, 4, 'UNIVERSITAS MERCU BUANA', 'UMB', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(104, 3, 36, 'UNIVERSITAS MERCU BUANA YOGYAKARTA', 'UMBY', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(105, 4, 6, 'UNIVERSITAS KRISTEN INDONESIA', 'UKI', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(106, 22, 35, 'UNIVERSITAS KRISTEN INDONESIA MALUKU', 'UKIM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(107, 14, 26, 'UNIVERSITAS KRISTEN INDONESIA PAULUS MAKASSAR', 'UKI PAULUS', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(108, 15, 37, 'UNIVERSITAS KRISTEN INDONESIA TOMOHON', 'UKIT', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(109, 14, 38, 'UNIVERSITAS KRISTEN INDONESIA TORAJA', 'UKI TORAJA', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(110, 18, 30, 'UNIVERSITAS LAMBUNG MANGKURAT', 'UNLAM', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(111, 20, 32, 'UNIVERSITAS MULAWARMAN', 'UNMUL', '2016-12-21 02:15:26', '2016-12-21 02:15:26', NULL),
-(112, 8, 19, 'UNIVERSITAS SURABAYA', 'UBAYA', NULL, NULL, NULL),
-(113, 6, 9, 'Other', 'Other', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `kota`
---
-
-CREATE TABLE IF NOT EXISTS `kota` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for kota
+-- ----------------------------
+DROP TABLE IF EXISTS `kota`;
+CREATE TABLE `kota` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_provinsi` int(10) unsigned NOT NULL,
   `kota` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `kota_id_provinsi_foreign` (`id_provinsi`),
+  CONSTRAINT `kota_id_provinsi_foreign` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `kota`:
---   `id_provinsi`
---       `provinsi` -> `id`
---
+-- ----------------------------
+-- Records of kota
+-- ----------------------------
+INSERT INTO `kota` VALUES ('1', '1', 'BANDA ACEH', '2016-09-23 00:42:49', '2016-09-23 00:42:49', null);
+INSERT INTO `kota` VALUES ('2', '2', 'DENPASAR', null, null, null);
+INSERT INTO `kota` VALUES ('3', '3', 'YOGYAKARTA', null, null, null);
+INSERT INTO `kota` VALUES ('4', '4', 'JAKARTA BARAT', null, null, null);
+INSERT INTO `kota` VALUES ('5', '4', 'JAKARTA SELATAN', null, null, null);
+INSERT INTO `kota` VALUES ('6', '4', 'JAKARTA TIMUR', null, null, null);
+INSERT INTO `kota` VALUES ('7', '5', 'TANGERANG', null, null, null);
+INSERT INTO `kota` VALUES ('8', '5', 'SERANG', null, null, null);
+INSERT INTO `kota` VALUES ('9', '6', 'BANDUNG', null, null, null);
+INSERT INTO `kota` VALUES ('10', '6', 'CIMAHI', null, null, null);
+INSERT INTO `kota` VALUES ('11', '6', 'BOGOR', null, null, null);
+INSERT INTO `kota` VALUES ('12', '6', 'DEPOK', null, null, null);
+INSERT INTO `kota` VALUES ('13', '7', 'PURWOKERTO', null, null, null);
+INSERT INTO `kota` VALUES ('14', '7', 'SALATIGA', null, null, null);
+INSERT INTO `kota` VALUES ('15', '7', 'SEMARANG', null, null, null);
+INSERT INTO `kota` VALUES ('16', '7', 'SOLO', null, null, null);
+INSERT INTO `kota` VALUES ('17', '8', 'JEMBER', null, null, null);
+INSERT INTO `kota` VALUES ('18', '8', 'MALANG', null, null, null);
+INSERT INTO `kota` VALUES ('19', '8', 'SURABAYA', null, null, null);
+INSERT INTO `kota` VALUES ('20', '9', 'BANDAR LAMPUNG', null, null, null);
+INSERT INTO `kota` VALUES ('21', '10', 'MATARAM', null, null, null);
+INSERT INTO `kota` VALUES ('22', '11', 'PADANG', null, null, null);
+INSERT INTO `kota` VALUES ('23', '11', 'PAYAKUMBUH', null, null, null);
+INSERT INTO `kota` VALUES ('24', '12', 'BENGKULU', null, null, null);
+INSERT INTO `kota` VALUES ('25', '13', 'JAMBI', null, null, null);
+INSERT INTO `kota` VALUES ('26', '14', 'MAKASSAR', null, null, null);
+INSERT INTO `kota` VALUES ('27', '15', 'MANADO', null, null, null);
+INSERT INTO `kota` VALUES ('28', '16', 'PALEMBANG', null, null, null);
+INSERT INTO `kota` VALUES ('29', '17', 'MEDAN', null, null, null);
+INSERT INTO `kota` VALUES ('30', '18', 'BANJARMASIN', null, null, null);
+INSERT INTO `kota` VALUES ('31', '19', 'PONTIANAK', null, null, null);
+INSERT INTO `kota` VALUES ('32', '20', 'SAMARINDA', null, null, null);
+INSERT INTO `kota` VALUES ('33', '21', 'BATAM', null, null, null);
+INSERT INTO `kota` VALUES ('34', '21', 'PEKANBARU', null, null, null);
+INSERT INTO `kota` VALUES ('35', '22', 'AMBON', null, null, null);
+INSERT INTO `kota` VALUES ('36', '3', 'BANTUL', null, null, null);
+INSERT INTO `kota` VALUES ('37', '15', 'TOMOHON', null, null, null);
+INSERT INTO `kota` VALUES ('38', '14', 'TANA TORAJA', null, null, null);
+INSERT INTO `kota` VALUES ('39', '3', 'SLEMAN', null, null, null);
+INSERT INTO `kota` VALUES ('40', '7', 'SURAKARTA', null, null, null);
+INSERT INTO `kota` VALUES ('41', '4', 'JAKARTA UTARA', null, null, null);
+INSERT INTO `kota` VALUES ('42', '4', 'JAKARTA PUSAT', null, null, null);
+INSERT INTO `kota` VALUES ('43', '23', 'TANJUNG PINANG', null, null, null);
+INSERT INTO `kota` VALUES ('44', '24', 'PANGKAL PINANG', null, null, null);
+INSERT INTO `kota` VALUES ('45', '25', 'KUPANG', null, null, null);
+INSERT INTO `kota` VALUES ('46', '26', 'PALANGKARAYA', null, null, null);
+INSERT INTO `kota` VALUES ('47', '27', 'TANJUNG SELOR', null, null, null);
+INSERT INTO `kota` VALUES ('48', '29', 'MAMUJU', null, null, null);
+INSERT INTO `kota` VALUES ('49', '28', 'PALU', null, null, null);
+INSERT INTO `kota` VALUES ('50', '30', 'KENDARI', null, null, null);
+INSERT INTO `kota` VALUES ('51', '31', 'GORONTALO', null, null, null);
+INSERT INTO `kota` VALUES ('52', '32', 'SOFIFI', null, null, null);
+INSERT INTO `kota` VALUES ('53', '34', 'MANOKWARI', null, null, null);
+INSERT INTO `kota` VALUES ('54', '33', 'JAYAPURA', null, null, null);
 
---
--- Dumping data for table `kota`
---
-
-INSERT INTO `kota` (`id`, `id_provinsi`, `kota`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'BANDA ACEH', '2016-09-23 00:42:49', '2016-09-23 00:42:49', NULL),
-(2, 2, 'DENPASAR', NULL, NULL, NULL),
-(3, 3, 'YOGYAKARTA', NULL, NULL, NULL),
-(4, 4, 'JAKARTA BARAT', NULL, NULL, NULL),
-(5, 4, 'JAKARTA SELATAN', NULL, NULL, NULL),
-(6, 4, 'JAKARTA TIMUR', NULL, NULL, NULL),
-(7, 5, 'TANGERANG', NULL, NULL, NULL),
-(8, 5, 'SERANG', NULL, NULL, NULL),
-(9, 6, 'BANDUNG', NULL, NULL, NULL),
-(10, 6, 'CIMAHI', NULL, NULL, NULL),
-(11, 6, 'BOGOR', NULL, NULL, NULL),
-(12, 6, 'DEPOK', NULL, NULL, NULL),
-(13, 7, 'PURWOKERTO', NULL, NULL, NULL),
-(14, 7, 'SALATIGA', NULL, NULL, NULL),
-(15, 7, 'SEMARANG', NULL, NULL, NULL),
-(16, 7, 'SOLO', NULL, NULL, NULL),
-(17, 8, 'JEMBER', NULL, NULL, NULL),
-(18, 8, 'MALANG', NULL, NULL, NULL),
-(19, 8, 'SURABAYA', NULL, NULL, NULL),
-(20, 9, 'BANDAR LAMPUNG', NULL, NULL, NULL),
-(21, 10, 'MATARAM', NULL, NULL, NULL),
-(22, 11, 'PADANG', NULL, NULL, NULL),
-(23, 11, 'PAYAKUMBUH', NULL, NULL, NULL),
-(24, 12, 'BENGKULU', NULL, NULL, NULL),
-(25, 13, 'JAMBI', NULL, NULL, NULL),
-(26, 14, 'MAKASSAR', NULL, NULL, NULL),
-(27, 15, 'MANADO', NULL, NULL, NULL),
-(28, 16, 'PALEMBANG', NULL, NULL, NULL),
-(29, 17, 'MEDAN', NULL, NULL, NULL),
-(30, 18, 'BANJARMASIN', NULL, NULL, NULL),
-(31, 19, 'PONTIANAK', NULL, NULL, NULL),
-(32, 20, 'SAMARINDA', NULL, NULL, NULL),
-(33, 21, 'BATAM', NULL, NULL, NULL),
-(34, 21, 'PEKANBARU', NULL, NULL, NULL),
-(35, 22, 'AMBON', NULL, NULL, NULL),
-(36, 3, 'BANTUL', NULL, NULL, NULL),
-(37, 15, 'TOMOHON', NULL, NULL, NULL),
-(38, 14, 'TANA TORAJA', NULL, NULL, NULL),
-(39, 3, 'SLEMAN', NULL, NULL, NULL),
-(40, 7, 'SURAKARTA', NULL, NULL, NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `loker`
---
-
-CREATE TABLE IF NOT EXISTS `loker` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for loker
+-- ----------------------------
+DROP TABLE IF EXISTS `loker`;
+CREATE TABLE `loker` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_iklan` int(11) NOT NULL,
   `budget` decimal(12,2) NOT NULL DEFAULT '0.00',
   `cost` decimal(12,2) NOT NULL DEFAULT '0.00',
@@ -2095,268 +2041,259 @@ CREATE TABLE IF NOT EXISTS `loker` (
   `index_adv_media_effect_fresh` double(8,2) NOT NULL DEFAULT '0.00',
   `index_adv_media_effect_exp` double(8,2) NOT NULL DEFAULT '0.00',
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `loker`:
---
+-- ----------------------------
+-- Records of loker
+-- ----------------------------
+INSERT INTO `loker` VALUES ('1', '1', '500000.00', '500000.00', '1', '14', '36', 'RCR0011', 'TSR', 'Technical Sales Representative', '6', '4', '0', '0', '4', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 20:53:09', '2016-12-26 19:20:57');
+INSERT INTO `loker` VALUES ('2', '1', '1000000.00', '1000000.00', '3', '19', '54', 'RCR0022', 'EAD', 'Programmer', '8', '5', '0', '0', '4', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 20:54:40', '2016-12-26 19:21:10');
+INSERT INTO `loker` VALUES ('3', '2', '100000.00', '100000.00', '1', '4', '12', 'RCR0002', 'Dokter Hewan', 'Dokter Hewan', '5', '5', '0', '1', '2', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 23:05:46', '2016-12-26 23:41:07');
+INSERT INTO `loker` VALUES ('4', '1', '100000.00', '100000.00', '2', '18', '50', 'RCR0003', 'HR', 'Human Resource', '8', '6', '0', '0', '6', '0', '5', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:08:36', '2016-12-05 22:58:45');
+INSERT INTO `loker` VALUES ('5', '2', '100000.00', '100000.00', '4', '1', '1', 'RCR0004', 'Apoteker', 'Apoteker', '2', '2', '0', '1', '1', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:11:46', '2016-12-26 23:41:21');
+INSERT INTO `loker` VALUES ('6', '2', '100000.00', '100000.00', '2', '19', '55', 'RCR0005', 'EAS', 'Analist', '5', '5', '0', '0', '3', '0', '3', '0', '2', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:54:51', '2016-11-30 00:54:51');
+INSERT INTO `loker` VALUES ('7', '3', '500000.00', '500000.00', '2', '19', '52', 'RCR0006', 'EAD', 'Programmer', '10', '5', '0', '0', '5', '0', '4', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 01:14:05', '2016-11-30 01:14:05');
+INSERT INTO `loker` VALUES ('8', '3', '100000.00', '100000.00', '3', '19', '53', 'RCR0007', 'Analist', 'Analist', '5', '5', '0', '0', '3', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 19:08:52', '2016-11-30 19:08:52');
+INSERT INTO `loker` VALUES ('9', '2', '100000.00', '100000.00', '5', '22', '71', 'RCR0008', 'Asst Manager Engginering', 'Asst Manager Engginering', '5', '5', '0', '0', '2', '0', '2', '0', '2', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 23:52:38', '2016-11-30 23:52:38');
+INSERT INTO `loker` VALUES ('10', '1', '750000.00', '750000.00', '1', '1', '1', 'RCR0012', 'NSM', 'Network Administrator', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-06 02:01:16', '2016-12-06 02:05:07');
+INSERT INTO `loker` VALUES ('11', '4', '100000.00', '100000.00', '1', '1', '1', 'RCR0102', 'TSR', 'Sales', '3', '3', '0', '1', '3', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-20 20:04:56', '2016-12-29 01:13:41');
+INSERT INTO `loker` VALUES ('12', '4', '1000000.00', '1000000.00', '3', '18', '50', 'RCR1001', 'HRD', 'HRDRS', '2', '2', '0', '2', '2', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-22 23:33:22', '2016-12-29 01:13:56');
+INSERT INTO `loker` VALUES ('13', '5', '900000.00', '0.00', '3', '18', '88', 'RCR0001', 'HR Recruitment', 'HRD', '10', '10', '2', '3', '10', '0', '5', '0', '2', '2', '0', '0', '0', '0', '0.00', '0.00', '2017-01-03 20:11:40', '2017-01-03 20:11:40');
+INSERT INTO `loker` VALUES ('14', '6', '3000000.00', '0.00', '3', '8', '22', 'RCR201708010002', 'Legal Officer', 'Legal Officer', '0', '15', '0', '0', '0', '0', '8', '0', '0', '0', '0', '4', '0', '0', '0.00', '0.00', '2017-03-13 20:15:43', '2017-03-13 20:15:43');
+INSERT INTO `loker` VALUES ('15', '6', '0.00', '0.00', '4', '4', '11', 'RCR201708010003', 'Technical Sales Representative', 'Technical Sales Representative', '100', '50', '0', '0', '80', '0', '30', '0', '0', '0', '2', '1', '0', '0', '0.00', '0.00', '2017-03-13 20:23:53', '2017-03-13 20:23:53');
+INSERT INTO `loker` VALUES ('16', '7', '300000000.00', '0.00', '1', '1', '95', 'rcr12023456777', 'cf', 'cc', '90', '60', '0', '0', '45', '0', '20', '0', '0', '0', '1', '1', '0', '0', '0.00', '0.00', '2017-03-15 20:45:17', '2017-03-15 20:45:17');
+INSERT INTO `loker` VALUES ('17', '9', '500000.00', '0.00', '3', '1', '95', 'adsfadf', 'programmer', 'Programmer', '50', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2018-02-07 00:15:06', '2018-02-07 00:15:06');
+INSERT INTO `loker` VALUES ('18', '9', '0.00', '0.00', '1', '1', '95', 'sdfgs', '', 'ONcom', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2018-02-07 00:15:50', '2018-02-07 00:15:50');
+INSERT INTO `loker` VALUES ('21', '11', '1000000.00', '2000000.00', '1', '18', '87', 'RCR003', 'Manajemen', 'Manajemen Staff', '200', '50', '0', '0', '100', '0', '20', '0', '0', '0', '5', '2', '0', '0', '0.00', '0.00', '2018-02-20 17:50:59', '2018-02-20 17:50:59');
+INSERT INTO `loker` VALUES ('25', '13', '900000000.00', '800000000.00', '1', '1', '1', 'RCR123', 'ENAK', 'GAK ENAK', '20', '10', '0', '0', '10', '0', '10', '0', '14', '10', '10', '10', '0', '0', '0.00', '0.00', '2018-03-23 08:05:38', '2018-03-23 08:30:02');
+INSERT INTO `loker` VALUES ('26', '10', '9000000.00', '9000000.00', '1', '23', '17', 'RCR246', 'Farmasi', 'Farmasi Publish', '200', '100', '0', '0', '100', '0', '50', '0', '0', '0', '50', '10', '0', '0', '0.00', '0.00', '2018-03-28 07:49:04', '2018-03-28 07:49:04');
+INSERT INTO `loker` VALUES ('27', '21', '8000000.00', '9000000.00', '1', '1', '1', 'RCR777', 'Posisi IT', 'Computer Engineering', '200', '100', '0', '0', '50', '0', '20', '0', '10', '10', '10', '10', '0', '0', '0.00', '0.00', '2018-03-29 07:57:50', '2018-03-29 07:57:50');
+INSERT INTO `loker` VALUES ('28', '27', '8000000.00', '7000000.00', '3', '1', '1', 'RCR888', 'posisi sisi', 'Tukang Elas', '100', '100', '0', '0', '100', '0', '100', '0', '100', '100', '100', '100', '0', '0', '0.00', '0.00', '2018-03-29 07:59:09', '2018-03-29 07:59:09');
+INSERT INTO `loker` VALUES ('29', '18', '90000000.00', '50000000.00', '1', '1', '1', 'RCR111', 'Posisi brau', 'baru posisi', '100', '100', '0', '0', '100', '0', '100', '0', '100', '100', '100', '100', '0', '0', '0.00', '0.00', '2018-03-29 08:44:26', '2018-03-29 08:44:26');
 
---
--- Dumping data for table `loker`
---
-
-INSERT INTO `loker` (`id`, `id_iklan`, `budget`, `cost`, `id_tingkat_pendidikan`, `id_major_grup`, `id_major`, `no_rcr`, `position_name`, `position_publish`, `target_fresh`, `target_exp`, `actual_fresh`, `actual_exp`, `target_pg_fresh`, `actual_pg_fresh`, `target_pg_exp`, `actual_pg_exp`, `awaiting_fresh`, `awaiting_exp`, `target_pass_fresh`, `target_pass_exp`, `actual_pass_fresh`, `actual_pass_exp`, `index_adv_media_effect_fresh`, `index_adv_media_effect_exp`, `created_at`, `updated_at`) VALUES
-(1, 1, '500000.00', '500000.00', 1, 14, 36, 'RCR0011', 'TSR', 'Technical Sales Representative', 6, 4, 0, 0, 4, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-29 20:53:09', '2016-12-26 19:20:57'),
-(2, 1, '1000000.00', '1000000.00', 3, 19, 54, 'RCR0022', 'EAD', 'Programmer', 8, 5, 0, 0, 4, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-29 20:54:40', '2016-12-26 19:21:10'),
-(3, 2, '100000.00', '100000.00', 1, 4, 12, 'RCR0002', 'Dokter Hewan', 'Dokter Hewan', 5, 5, 0, 1, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-29 23:05:46', '2016-12-26 23:41:07'),
-(4, 1, '100000.00', '100000.00', 2, 18, 50, 'RCR0003', 'HR', 'Human Resource', 8, 6, 0, 0, 6, 0, 5, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-30 00:08:36', '2016-12-05 22:58:45'),
-(5, 2, '100000.00', '100000.00', 4, 1, 1, 'RCR0004', 'Apoteker', 'Apoteker', 2, 2, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-30 00:11:46', '2016-12-26 23:41:21'),
-(6, 2, '100000.00', '100000.00', 2, 19, 55, 'RCR0005', 'EAS', 'Analist', 5, 5, 0, 0, 3, 0, 3, 0, 2, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-30 00:54:51', '2016-11-30 00:54:51'),
-(7, 3, '500000.00', '500000.00', 2, 19, 52, 'RCR0006', 'EAD', 'Programmer', 10, 5, 0, 0, 5, 0, 4, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-30 01:14:05', '2016-11-30 01:14:05'),
-(8, 3, '100000.00', '100000.00', 3, 19, 53, 'RCR0007', 'Analist', 'Analist', 5, 5, 0, 0, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-30 19:08:52', '2016-11-30 19:08:52'),
-(9, 2, '100000.00', '100000.00', 5, 22, 71, 'RCR0008', 'Asst Manager Engginering', 'Asst Manager Engginering', 5, 5, 0, 0, 2, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-11-30 23:52:38', '2016-11-30 23:52:38'),
-(10, 1, '750000.00', '750000.00', 1, 1, 1, 'RCR0012', 'NSM', 'Network Administrator', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-12-06 02:01:16', '2016-12-06 02:05:07'),
-(11, 4, '100000.00', '100000.00', 1, 1, 1, 'RCR0102', 'TSR', 'Sales', 3, 3, 0, 1, 3, 0, 3, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-12-20 20:04:56', '2016-12-29 01:13:41'),
-(12, 4, '1000000.00', '1000000.00', 3, 18, 50, 'RCR1001', 'HRD', 'HRDRS', 2, 2, 0, 2, 2, 0, 2, 0, 0, 0, 0, 0, 0, 0, 0.00, 0.00, '2016-12-22 23:33:22', '2016-12-29 01:13:56');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `major`
---
-
-CREATE TABLE IF NOT EXISTS `major` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for major
+-- ----------------------------
+DROP TABLE IF EXISTS `major`;
+CREATE TABLE `major` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_grup` int(10) unsigned NOT NULL,
   `kode_major` varchar(10) COLLATE utf8_unicode_ci NOT NULL,
   `major` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `major_id_grup_foreign` (`id_grup`),
+  CONSTRAINT `major_id_grup_foreign` FOREIGN KEY (`id_grup`) REFERENCES `major_grup` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `major`:
---   `id_grup`
---       `major_grup` -> `id`
---
+-- ----------------------------
+-- Records of major
+-- ----------------------------
+INSERT INTO `major` VALUES ('1', '1', 'A1', 'Pharmacist', '2016-09-23 01:46:37', '2016-09-23 01:46:37', null);
+INSERT INTO `major` VALUES ('2', '2', 'B1', 'Biology', '2016-09-23 02:05:14', '2016-09-23 02:05:14', null);
+INSERT INTO `major` VALUES ('3', '2', 'B2', 'Biochemistry', '2016-09-23 02:06:46', '2016-09-23 02:06:46', null);
+INSERT INTO `major` VALUES ('4', '2', 'B3', 'Microbiology', '2016-09-26 19:27:22', '2016-09-26 19:27:22', null);
+INSERT INTO `major` VALUES ('5', '2', 'B4', 'Biotechnology', '2016-09-26 19:27:46', '2016-09-26 19:27:46', null);
+INSERT INTO `major` VALUES ('6', '3', 'C1', 'Graphic Design', '2016-09-26 19:28:01', '2016-09-26 19:28:01', null);
+INSERT INTO `major` VALUES ('7', '3', 'C2', 'Interior Design', '2016-09-26 19:32:23', '2016-09-26 19:32:23', null);
+INSERT INTO `major` VALUES ('8', '3', 'C3', 'Visual Communication Design', '2016-09-26 19:32:37', '2016-09-26 19:32:37', null);
+INSERT INTO `major` VALUES ('9', '3', 'C4', 'Product Design', '2016-09-26 19:32:52', '2016-09-26 19:32:52', null);
+INSERT INTO `major` VALUES ('10', '3', 'C5', 'Visual Arts', '2016-09-26 19:33:04', '2016-09-26 19:33:04', null);
+INSERT INTO `major` VALUES ('11', '4', 'D1', 'Veterinarian', '2016-09-26 19:34:03', '2016-09-26 19:34:03', null);
+INSERT INTO `major` VALUES ('12', '4', 'D2', 'Veterinary Public Health', '2016-09-26 19:34:15', '2016-09-26 19:34:15', null);
+INSERT INTO `major` VALUES ('13', '5', 'E1', 'Business Administration', '2016-09-26 19:35:14', '2016-09-26 19:35:14', null);
+INSERT INTO `major` VALUES ('14', '5', 'E2', 'International Business Management', '2016-09-26 19:35:27', '2016-09-26 19:35:27', null);
+INSERT INTO `major` VALUES ('15', '5', 'E3', 'State Administration', '2016-09-26 19:35:42', '2016-09-26 19:35:42', null);
+INSERT INTO `major` VALUES ('16', '5', 'E4', 'Accounting', '2016-09-26 19:36:09', '2016-09-26 19:36:09', null);
+INSERT INTO `major` VALUES ('17', '5', 'E5', 'Management', '2016-09-26 19:39:01', '2016-09-26 19:39:01', null);
+INSERT INTO `major` VALUES ('18', '5', 'E6', 'Economics', '2016-09-26 19:39:13', '2016-09-26 19:39:13', null);
+INSERT INTO `major` VALUES ('19', '6', 'F1', 'Physics', '2016-09-26 19:40:15', '2016-09-26 19:40:15', null);
+INSERT INTO `major` VALUES ('20', '7', 'G1', 'International Relations', '2016-09-26 19:40:31', '2016-09-26 19:40:31', null);
+INSERT INTO `major` VALUES ('21', '7', 'G2', 'International Trade', '2016-09-26 19:40:51', '2016-09-26 19:40:51', null);
+INSERT INTO `major` VALUES ('22', '8', 'H1', 'Law', '2016-09-26 19:41:38', '2016-09-26 19:41:38', null);
+INSERT INTO `major` VALUES ('23', '9', 'I1', 'Chemistry', '2016-09-26 19:42:07', '2016-09-26 19:42:07', null);
+INSERT INTO `major` VALUES ('24', '9', 'I2', 'Chemical Analysis', '2016-09-26 19:42:22', '2016-09-26 19:42:22', null);
+INSERT INTO `major` VALUES ('25', '9', 'I3', 'Industrial Chemistry', '2016-09-26 19:42:55', '2016-09-26 19:42:55', null);
+INSERT INTO `major` VALUES ('26', '10', 'J1', 'Communication Science', '2016-09-26 19:43:12', '2016-09-26 19:43:12', null);
+INSERT INTO `major` VALUES ('27', '11', 'K1', 'Mathematics', '2016-09-26 19:43:28', '2016-09-26 19:43:28', null);
+INSERT INTO `major` VALUES ('28', '12', 'L1', 'Fisheries Science', '2016-09-26 19:43:46', '2016-09-26 19:43:46', null);
+INSERT INTO `major` VALUES ('29', '13', 'M1', 'Agricultural Science', '2016-09-26 19:44:09', '2016-09-26 19:44:09', null);
+INSERT INTO `major` VALUES ('30', '13', 'M2', 'Forest Product Technology', '2016-09-26 19:45:21', '2016-09-26 19:45:21', null);
+INSERT INTO `major` VALUES ('31', '13', 'M3', 'Food Technology', '2016-09-26 19:45:33', '2016-09-26 19:45:33', null);
+INSERT INTO `major` VALUES ('32', '13', 'M4', 'Agricultural Engineering', '2016-09-26 19:45:46', '2016-09-26 19:45:46', null);
+INSERT INTO `major` VALUES ('33', '13', 'M5', 'Agricultural Industrial Technology', '2016-09-26 19:46:03', '2016-09-26 19:46:03', null);
+INSERT INTO `major` VALUES ('34', '14', 'N1', 'Animal Husbandry', '2016-09-26 19:48:38', '2016-09-26 19:48:38', null);
+INSERT INTO `major` VALUES ('35', '14', 'N2', 'Animal Nutrition & Feed Technology', '2016-09-26 19:48:52', '2016-09-26 19:48:52', null);
+INSERT INTO `major` VALUES ('36', '14', 'N3', 'Animal Nutrition', '2016-09-26 19:49:12', '2016-09-26 19:49:12', null);
+INSERT INTO `major` VALUES ('37', '14', 'N4', 'Animal Feed Technology', '2016-09-26 19:52:02', '2016-09-26 19:52:02', null);
+INSERT INTO `major` VALUES ('38', '14', 'N5', 'Livestock Agricultural Economics', '2016-09-26 19:52:27', '2016-09-26 19:52:27', null);
+INSERT INTO `major` VALUES ('39', '14', 'N6', 'Farm Business Management', '2016-09-26 19:52:42', '2016-09-26 19:52:42', null);
+INSERT INTO `major` VALUES ('40', '14', 'N7', 'Livestock Production Technology', '2016-09-26 19:52:59', '2016-09-26 19:52:59', null);
+INSERT INTO `major` VALUES ('41', '15', 'O1', 'Psychology', '2016-09-26 19:53:12', '2016-09-26 19:53:12', null);
+INSERT INTO `major` VALUES ('42', '16', 'P1', 'English Literature', '2016-09-26 19:54:34', '2016-09-26 19:54:34', null);
+INSERT INTO `major` VALUES ('43', '16', 'P2', 'Chinese Language', '2016-09-26 19:54:47', '2016-09-26 19:54:47', null);
+INSERT INTO `major` VALUES ('44', '17', 'Q1', 'Electronics Engineering', '2016-09-26 19:55:06', '2016-09-26 19:55:06', null);
+INSERT INTO `major` VALUES ('45', '17', 'Q2', 'Electricity Engineering', '2016-09-26 19:55:23', '2016-09-26 19:55:23', null);
+INSERT INTO `major` VALUES ('46', '17', 'Q3', 'Telecommunications Engineering', '2016-09-26 19:55:52', '2016-09-26 19:55:52', null);
+INSERT INTO `major` VALUES ('47', '17', 'Q4', 'Electrical Engineering', '2016-09-26 19:56:05', '2016-09-26 19:56:05', null);
+INSERT INTO `major` VALUES ('48', '17', 'Q5', 'Industrial Electrical Engineering', '2016-09-26 19:56:17', '2016-09-26 19:56:17', null);
+INSERT INTO `major` VALUES ('49', '17', 'Q6', 'Electrical Engineering Education', '2016-09-26 19:56:31', '2016-09-26 19:56:31', null);
+INSERT INTO `major` VALUES ('50', '18', 'R1', 'Industrial Engineering', '2016-09-26 19:56:55', '2016-09-26 19:56:55', null);
+INSERT INTO `major` VALUES ('51', '19', 'S1', 'Computer Science', '2016-09-26 19:57:13', '2016-09-26 19:57:13', null);
+INSERT INTO `major` VALUES ('52', '19', 'S2', 'Management Information System', '2016-09-26 19:57:26', '2016-09-26 19:57:26', null);
+INSERT INTO `major` VALUES ('53', '19', 'S3', 'Information Systems', '2016-09-26 19:57:38', '2016-09-26 19:57:38', null);
+INSERT INTO `major` VALUES ('54', '19', 'S4', 'Information Technology', '2016-09-26 19:57:51', '2016-09-26 19:57:51', null);
+INSERT INTO `major` VALUES ('55', '19', 'S5', 'Computer Engineering', '2016-09-26 19:58:04', '2016-09-26 19:58:04', null);
+INSERT INTO `major` VALUES ('56', '20', 'T1', 'Chemical Engineering', '2016-09-26 19:58:30', '2016-09-26 19:58:30', null);
+INSERT INTO `major` VALUES ('57', '21', 'U1', 'Environmental Engineering', '2016-09-26 19:58:49', '2016-09-26 19:58:49', null);
+INSERT INTO `major` VALUES ('58', '21', 'U2', 'Health & Safety Engineering', '2016-09-26 19:59:11', '2016-09-26 19:59:11', null);
+INSERT INTO `major` VALUES ('59', '21', 'U3', 'Environmental Health', '2016-09-26 19:59:27', '2016-09-26 19:59:27', null);
+INSERT INTO `major` VALUES ('61', '22', 'V2', 'Manufacturing Technology', '2016-09-26 20:00:08', '2016-09-26 20:00:08', null);
+INSERT INTO `major` VALUES ('62', '22', 'V3', 'Mechatronics', '2016-09-26 20:00:28', '2016-09-26 20:00:28', null);
+INSERT INTO `major` VALUES ('63', '22', 'V4', 'Mechanical Engineering', '2016-09-26 20:00:40', '2016-09-26 20:00:40', null);
+INSERT INTO `major` VALUES ('64', '22', 'V5', 'Production Mechanical Engineering', '2016-09-26 20:00:54', '2016-09-26 20:00:54', null);
+INSERT INTO `major` VALUES ('65', '22', 'V6', 'Automotive Mechanical Technology', '2016-09-26 20:01:07', '2016-09-26 20:01:07', null);
+INSERT INTO `major` VALUES ('66', '22', 'V7', 'Casting Metal Technology', '2016-09-26 20:01:20', '2016-09-26 20:01:20', null);
+INSERT INTO `major` VALUES ('67', '22', 'V8', 'Refrigeration and Air Conditioning Engineering', '2016-09-26 20:01:35', '2016-09-26 20:01:35', null);
+INSERT INTO `major` VALUES ('68', '22', 'V9', 'Heavy Equipment Engineering', '2016-09-26 20:01:50', '2016-09-26 20:01:50', null);
+INSERT INTO `major` VALUES ('69', '22', 'V10', 'Instrumentation & Metrology Engineering', '2016-09-26 20:02:08', '2016-09-26 20:02:08', null);
+INSERT INTO `major` VALUES ('70', '22', 'V11', 'Aeronautics Engineering', '2016-09-26 20:02:23', '2016-09-26 20:02:23', null);
+INSERT INTO `major` VALUES ('71', '22', 'V12', 'Machine Tools Engineering', '2016-09-26 20:02:36', '2016-09-26 20:02:36', null);
+INSERT INTO `major` VALUES ('72', '22', 'V13', 'Machinery Engineering', '2016-09-26 20:02:50', '2016-09-26 20:02:50', null);
+INSERT INTO `major` VALUES ('73', '22', 'V14', 'Instrumentation Engineering', '2016-09-26 20:03:03', '2016-09-26 20:03:03', null);
+INSERT INTO `major` VALUES ('74', '23', 'W1', 'Nuclear Engineering', '2016-09-26 20:03:23', '2016-09-26 20:03:23', null);
+INSERT INTO `major` VALUES ('75', '24', 'X1', 'Architecture', '2016-09-26 20:03:38', '2016-09-26 20:03:38', null);
+INSERT INTO `major` VALUES ('76', '24', 'X2', 'Planology', '2016-09-26 20:03:49', '2016-09-26 20:03:49', null);
+INSERT INTO `major` VALUES ('77', '24', 'X3', 'Civil Engineering', '2016-09-26 20:04:01', '2016-09-26 20:04:01', null);
+INSERT INTO `major` VALUES ('78', '24', 'X4', 'Ocean Engineering', '2016-09-26 20:04:14', '2016-09-26 20:04:14', null);
+INSERT INTO `major` VALUES ('80', '14', 'N8', 'Technology and Management Of Livestock', null, null, null);
+INSERT INTO `major` VALUES ('81', '2', 'B5', 'Biophysics', null, null, null);
+INSERT INTO `major` VALUES ('82', '2', 'B6', 'Plant Biology', null, null, null);
+INSERT INTO `major` VALUES ('83', '12', 'L2', 'Expertise Production Technology and Fisheries Management', null, null, null);
+INSERT INTO `major` VALUES ('84', '24', 'X5', 'Communication and Community Development', null, null, null);
+INSERT INTO `major` VALUES ('85', '14', 'N9', 'Agribusiness management', null, null, null);
+INSERT INTO `major` VALUES ('86', '5', 'E7', 'Business management', null, null, null);
+INSERT INTO `major` VALUES ('87', '18', 'R2', 'Industrial management', null, null, null);
+INSERT INTO `major` VALUES ('88', '18', 'R3', 'Industrial Management Services Food and Nutrition', null, null, null);
+INSERT INTO `major` VALUES ('89', '2', 'B7', 'Plant Breeding and Biotechnology', null, null, null);
+INSERT INTO `major` VALUES ('90', '24', 'X6', 'Regional planning', null, null, null);
+INSERT INTO `major` VALUES ('91', '24', 'X7', 'Mechanical and Environmental Management', null, null, null);
+INSERT INTO `major` VALUES ('92', '22', 'V15', 'Mechanical Engineering and Biosystems', null, null, null);
+INSERT INTO `major` VALUES ('93', '22', 'V16', 'Mechanical Engineering Agriculture and Food', null, null, null);
+INSERT INTO `major` VALUES ('94', '3', 'C6', 'Landscape Architecture', null, null, null);
+INSERT INTO `major` VALUES ('95', '1', 'A2', 'PHARMACY', null, null, null);
+INSERT INTO `major` VALUES ('96', '18', 'R4', 'Industrial Engineering and Management', null, null, null);
+INSERT INTO `major` VALUES ('97', '6', 'F2', 'Physics technic', null, null, null);
+INSERT INTO `major` VALUES ('98', '6', 'F3', 'Geophysical engineering', null, null, null);
+INSERT INTO `major` VALUES ('99', '19', 'S6', 'Technical Information', null, null, null);
+INSERT INTO `major` VALUES ('100', '2', 'B8', 'Biomanagement', null, null, null);
+INSERT INTO `major` VALUES ('101', '22', 'V17', 'mechanical engineering industry', null, null, null);
+INSERT INTO `major` VALUES ('102', '22', 'V18', 'Metal Casting Techniques', null, null, null);
+INSERT INTO `major` VALUES ('103', '18', 'R5', 'Air Cooling Techniques and Procedures', null, null, null);
+INSERT INTO `major` VALUES ('104', '19', 'S7', 'Informatics Management', null, null, null);
+INSERT INTO `major` VALUES ('105', '5', 'E8', 'Asset management', null, null, null);
+INSERT INTO `major` VALUES ('106', '5', 'E9', 'Marketing Management', null, null, null);
+INSERT INTO `major` VALUES ('107', '17', 'Q7', 'Energy Conversion Techniques', null, null, null);
+INSERT INTO `major` VALUES ('108', '13', 'M6', 'Food Industry Technology', null, null, null);
+INSERT INTO `major` VALUES ('109', '12', 'L3', 'Aquaculture', null, null, null);
+INSERT INTO `major` VALUES ('110', '13', 'M7', 'Agricultural mechanization', null, null, null);
+INSERT INTO `major` VALUES ('111', '5', 'E10', 'Management Accounting', null, null, null);
+INSERT INTO `major` VALUES ('112', '26', 'Z1', 'Digital Telecommunications Network', null, null, null);
+INSERT INTO `major` VALUES ('113', '22', 'V19', 'Automotive Engineering Electronics', null, null, null);
+INSERT INTO `major` VALUES ('114', '19', 'S8', 'Computer and Network Engineering', null, null, null);
+INSERT INTO `major` VALUES ('115', '13', 'M8', 'Agribusiness Agriculture', null, null, null);
+INSERT INTO `major` VALUES ('116', '14', 'N10', 'livestock', null, null, null);
+INSERT INTO `major` VALUES ('117', '12', 'L4', 'Fisheries and Marine Biotechnology', null, null, null);
+INSERT INTO `major` VALUES ('118', '24', 'X8', 'Hiperkes and Safety', null, null, null);
+INSERT INTO `major` VALUES ('119', '27', 'AA1', 'Hotel Management', null, null, null);
+INSERT INTO `major` VALUES ('120', '26', 'Z2', 'Media and Communication', null, null, null);
+INSERT INTO `major` VALUES ('121', '5', 'E11', 'Education Profession accountants', null, null, null);
+INSERT INTO `major` VALUES ('122', '13', 'M9', 'Agricultural Technology', null, null, null);
+INSERT INTO `major` VALUES ('123', '12', 'L5', 'Agribusiness Fisheries', null, null, null);
+INSERT INTO `major` VALUES ('124', '3', 'C7', 'Architectural Engineering', null, null, null);
+INSERT INTO `major` VALUES ('125', '12', 'L6', 'Fishery Product Technology', null, null, null);
+INSERT INTO `major` VALUES ('126', '5', 'E12', 'Company management', null, null, null);
+INSERT INTO `major` VALUES ('127', '14', 'N11', 'Science and Livestock Industry', null, null, null);
+INSERT INTO `major` VALUES ('128', '13', 'M10', 'Agricultural Economics', null, null, null);
+INSERT INTO `major` VALUES ('129', '19', 'S9', 'Computer and Information Systems', null, null, null);
+INSERT INTO `major` VALUES ('130', '13', 'M11', 'Agricultural Microbiology', null, null, null);
+INSERT INTO `major` VALUES ('131', '13', 'M12', 'Food Technology and Agricultural Products', null, null, null);
+INSERT INTO `major` VALUES ('132', '8', 'H2', 'Administrative Law', null, null, null);
+INSERT INTO `major` VALUES ('133', '5', 'E13', 'Financial Management', null, null, null);
+INSERT INTO `major` VALUES ('134', '5', 'E14', 'Urban Management', null, null, null);
+INSERT INTO `major` VALUES ('135', '5', 'E15', 'Information and Document Management', null, null, null);
+INSERT INTO `major` VALUES ('137', '3', 'C8', 'Interior Architecture', '2016-12-22 18:06:13', '2016-12-22 18:06:13', null);
+INSERT INTO `major` VALUES ('138', '16', 'P3', 'English', '2016-12-22 19:29:14', '2016-12-22 19:29:15', null);
+INSERT INTO `major` VALUES ('139', '12', 'L7', 'Management of Fisheries Resources', '2016-12-22 19:40:06', '2016-12-22 19:40:06', null);
+INSERT INTO `major` VALUES ('140', '3', 'C9', 'Arts And Design', '2016-12-22 19:49:24', '2016-12-22 19:49:24', null);
+INSERT INTO `major` VALUES ('141', '19', 'S10', 'Computerized Accounting', '2016-12-22 19:50:44', '2016-12-22 19:50:44', null);
+INSERT INTO `major` VALUES ('142', '22', 'V20', 'Automotive Engineering', '2016-12-22 19:54:14', '2016-12-22 19:54:14', null);
+INSERT INTO `major` VALUES ('143', '5', 'E16', 'Trade Management', '2016-12-22 19:55:18', '2016-12-22 19:55:18', null);
+INSERT INTO `major` VALUES ('144', '5', 'E17', 'Office Management', '2016-12-22 19:57:01', '2016-12-22 19:57:01', null);
+INSERT INTO `major` VALUES ('145', '3', 'C10', 'Art', '2016-12-22 19:58:15', '2016-12-22 19:58:15', null);
+INSERT INTO `major` VALUES ('146', '9', 'I4', 'Organic Chemistry', '2016-12-22 20:02:01', '2016-12-22 20:02:01', null);
+INSERT INTO `major` VALUES ('147', '12', 'L8', 'Fishery', '2016-12-22 20:03:12', '2016-12-22 20:03:12', null);
+INSERT INTO `major` VALUES ('148', '16', 'P4', 'English language and literature', '2016-12-22 20:04:40', '2016-12-22 20:04:40', null);
+INSERT INTO `major` VALUES ('149', '5', 'E18', 'Administrative Management', '2016-12-22 20:10:05', '2016-12-22 20:10:05', null);
+INSERT INTO `major` VALUES ('150', '5', 'E19', 'Tax Management', '2016-12-22 20:17:26', '2016-12-22 20:17:26', null);
+INSERT INTO `major` VALUES ('151', '13', 'M13', 'Agricultural Biotechnology', '2016-12-22 20:21:27', '2016-12-22 20:21:27', null);
+INSERT INTO `major` VALUES ('152', '25', 'Other', 'Other', '2016-12-25 18:06:00', '2016-12-25 18:06:00', null);
 
---
--- Dumping data for table `major`
---
-
-INSERT INTO `major` (`id`, `id_grup`, `kode_major`, `major`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 'A1', 'Pharmacist', '2016-09-23 01:46:37', '2016-09-23 01:46:37', NULL),
-(2, 2, 'B1', 'Biology', '2016-09-23 02:05:14', '2016-09-23 02:05:14', NULL),
-(3, 2, 'B2', 'Biochemistry', '2016-09-23 02:06:46', '2016-09-23 02:06:46', NULL),
-(4, 2, 'B3', 'Microbiology', '2016-09-26 19:27:22', '2016-09-26 19:27:22', NULL),
-(5, 2, 'B4', 'Biotechnology', '2016-09-26 19:27:46', '2016-09-26 19:27:46', NULL),
-(6, 3, 'C1', 'Graphic Design', '2016-09-26 19:28:01', '2016-09-26 19:28:01', NULL),
-(7, 3, 'C2', 'Interior Design', '2016-09-26 19:32:23', '2016-09-26 19:32:23', NULL),
-(8, 3, 'C3', 'Visual Communication Design', '2016-09-26 19:32:37', '2016-09-26 19:32:37', NULL),
-(9, 3, 'C4', 'Product Design', '2016-09-26 19:32:52', '2016-09-26 19:32:52', NULL),
-(10, 3, 'C5', 'Visual Arts', '2016-09-26 19:33:04', '2016-09-26 19:33:04', NULL),
-(11, 4, 'D1', 'Veterinarian', '2016-09-26 19:34:03', '2016-09-26 19:34:03', NULL),
-(12, 4, 'D2', 'Veterinary Public Health', '2016-09-26 19:34:15', '2016-09-26 19:34:15', NULL),
-(13, 5, 'E1', 'Business Administration', '2016-09-26 19:35:14', '2016-09-26 19:35:14', NULL),
-(14, 5, 'E2', 'International Business Management', '2016-09-26 19:35:27', '2016-09-26 19:35:27', NULL),
-(15, 5, 'E3', 'State Administration', '2016-09-26 19:35:42', '2016-09-26 19:35:42', NULL),
-(16, 5, 'E4', 'Accounting', '2016-09-26 19:36:09', '2016-09-26 19:36:09', NULL),
-(17, 5, 'E5', 'Management', '2016-09-26 19:39:01', '2016-09-26 19:39:01', NULL),
-(18, 5, 'E6', 'Economics', '2016-09-26 19:39:13', '2016-09-26 19:39:13', NULL),
-(19, 6, 'F1', 'Physics', '2016-09-26 19:40:15', '2016-09-26 19:40:15', NULL),
-(20, 7, 'G1', 'International Relations', '2016-09-26 19:40:31', '2016-09-26 19:40:31', NULL),
-(21, 7, 'G2', 'International Trade', '2016-09-26 19:40:51', '2016-09-26 19:40:51', NULL),
-(22, 8, 'H1', 'Law', '2016-09-26 19:41:38', '2016-09-26 19:41:38', NULL),
-(23, 9, 'I1', 'Chemistry', '2016-09-26 19:42:07', '2016-09-26 19:42:07', NULL),
-(24, 9, 'I2', 'Chemical Analysis', '2016-09-26 19:42:22', '2016-09-26 19:42:22', NULL),
-(25, 9, 'I3', 'Industrial Chemistry', '2016-09-26 19:42:55', '2016-09-26 19:42:55', NULL),
-(26, 10, 'J1', 'Communication Science', '2016-09-26 19:43:12', '2016-09-26 19:43:12', NULL),
-(27, 11, 'K1', 'Mathematics', '2016-09-26 19:43:28', '2016-09-26 19:43:28', NULL),
-(28, 12, 'L1', 'Fisheries Science', '2016-09-26 19:43:46', '2016-09-26 19:43:46', NULL),
-(29, 13, 'M1', 'Agricultural Science', '2016-09-26 19:44:09', '2016-09-26 19:44:09', NULL),
-(30, 13, 'M2', 'Forest Product Technology', '2016-09-26 19:45:21', '2016-09-26 19:45:21', NULL),
-(31, 13, 'M3', 'Food Technology', '2016-09-26 19:45:33', '2016-09-26 19:45:33', NULL),
-(32, 13, 'M4', 'Agricultural Engineering', '2016-09-26 19:45:46', '2016-09-26 19:45:46', NULL),
-(33, 13, 'M5', 'Agricultural Industrial Technology', '2016-09-26 19:46:03', '2016-09-26 19:46:03', NULL),
-(34, 14, 'N1', 'Animal Husbandry', '2016-09-26 19:48:38', '2016-09-26 19:48:38', NULL),
-(35, 14, 'N2', 'Animal Nutrition & Feed Technology', '2016-09-26 19:48:52', '2016-09-26 19:48:52', NULL),
-(36, 14, 'N3', 'Animal Nutrition', '2016-09-26 19:49:12', '2016-09-26 19:49:12', NULL),
-(37, 14, 'N4', 'Animal Feed Technology', '2016-09-26 19:52:02', '2016-09-26 19:52:02', NULL),
-(38, 14, 'N5', 'Livestock Agricultural Economics', '2016-09-26 19:52:27', '2016-09-26 19:52:27', NULL),
-(39, 14, 'N6', 'Farm Business Management', '2016-09-26 19:52:42', '2016-09-26 19:52:42', NULL),
-(40, 14, 'N7', 'Livestock Production Technology', '2016-09-26 19:52:59', '2016-09-26 19:52:59', NULL),
-(41, 15, 'O1', 'Psychology', '2016-09-26 19:53:12', '2016-09-26 19:53:12', NULL),
-(42, 16, 'P1', 'English Literature', '2016-09-26 19:54:34', '2016-09-26 19:54:34', NULL),
-(43, 16, 'P2', 'Chinese Language', '2016-09-26 19:54:47', '2016-09-26 19:54:47', NULL),
-(44, 17, 'Q1', 'Electronics Engineering', '2016-09-26 19:55:06', '2016-09-26 19:55:06', NULL),
-(45, 17, 'Q2', 'Electricity Engineering', '2016-09-26 19:55:23', '2016-09-26 19:55:23', NULL),
-(46, 17, 'Q3', 'Telecommunications Engineering', '2016-09-26 19:55:52', '2016-09-26 19:55:52', NULL),
-(47, 17, 'Q4', 'Electrical Engineering', '2016-09-26 19:56:05', '2016-09-26 19:56:05', NULL),
-(48, 17, 'Q5', 'Industrial Electrical Engineering', '2016-09-26 19:56:17', '2016-09-26 19:56:17', NULL),
-(49, 17, 'Q6', 'Electrical Engineering Education', '2016-09-26 19:56:31', '2016-09-26 19:56:31', NULL),
-(50, 18, 'R1', 'Industrial Engineering', '2016-09-26 19:56:55', '2016-09-26 19:56:55', NULL),
-(51, 19, 'S1', 'Computer Science', '2016-09-26 19:57:13', '2016-09-26 19:57:13', NULL),
-(52, 19, 'S2', 'Management Information System', '2016-09-26 19:57:26', '2016-09-26 19:57:26', NULL),
-(53, 19, 'S3', 'Information Systems', '2016-09-26 19:57:38', '2016-09-26 19:57:38', NULL),
-(54, 19, 'S4', 'Information Technology', '2016-09-26 19:57:51', '2016-09-26 19:57:51', NULL),
-(55, 19, 'S5', 'Computer Engineering', '2016-09-26 19:58:04', '2016-09-26 19:58:04', NULL),
-(56, 20, 'T1', 'Chemical Engineering', '2016-09-26 19:58:30', '2016-09-26 19:58:30', NULL),
-(57, 21, 'U1', 'Environmental Engineering', '2016-09-26 19:58:49', '2016-09-26 19:58:49', NULL),
-(58, 21, 'U2', 'Health & Safety Engineering', '2016-09-26 19:59:11', '2016-09-26 19:59:11', NULL),
-(59, 21, 'U3', 'Environmental Health', '2016-09-26 19:59:27', '2016-09-26 19:59:27', NULL),
-(61, 22, 'V2', 'Manufacturing Technology', '2016-09-26 20:00:08', '2016-09-26 20:00:08', NULL),
-(62, 22, 'V3', 'Mechatronics', '2016-09-26 20:00:28', '2016-09-26 20:00:28', NULL),
-(63, 22, 'V4', 'Mechanical Engineering', '2016-09-26 20:00:40', '2016-09-26 20:00:40', NULL),
-(64, 22, 'V5', 'Production Mechanical Engineering', '2016-09-26 20:00:54', '2016-09-26 20:00:54', NULL),
-(65, 22, 'V6', 'Automotive Mechanical Technology', '2016-09-26 20:01:07', '2016-09-26 20:01:07', NULL),
-(66, 22, 'V7', 'Casting Metal Technology', '2016-09-26 20:01:20', '2016-09-26 20:01:20', NULL),
-(67, 22, 'V8', 'Refrigeration and Air Conditioning Engineering', '2016-09-26 20:01:35', '2016-09-26 20:01:35', NULL),
-(68, 22, 'V9', 'Heavy Equipment Engineering', '2016-09-26 20:01:50', '2016-09-26 20:01:50', NULL),
-(69, 22, 'V10', 'Instrumentation & Metrology Engineering', '2016-09-26 20:02:08', '2016-09-26 20:02:08', NULL),
-(70, 22, 'V11', 'Aeronautics Engineering', '2016-09-26 20:02:23', '2016-09-26 20:02:23', NULL),
-(71, 22, 'V12', 'Machine Tools Engineering', '2016-09-26 20:02:36', '2016-09-26 20:02:36', NULL),
-(72, 22, 'V13', 'Machinery Engineering', '2016-09-26 20:02:50', '2016-09-26 20:02:50', NULL),
-(73, 22, 'V14', 'Instrumentation Engineering', '2016-09-26 20:03:03', '2016-09-26 20:03:03', NULL),
-(74, 23, 'W1', 'Nuclear Engineering', '2016-09-26 20:03:23', '2016-09-26 20:03:23', NULL),
-(75, 24, 'X1', 'Architecture', '2016-09-26 20:03:38', '2016-09-26 20:03:38', NULL),
-(76, 24, 'X2', 'Planology', '2016-09-26 20:03:49', '2016-09-26 20:03:49', NULL),
-(77, 24, 'X3', 'Civil Engineering', '2016-09-26 20:04:01', '2016-09-26 20:04:01', NULL),
-(78, 24, 'X4', 'Ocean Engineering', '2016-09-26 20:04:14', '2016-09-26 20:04:14', NULL),
-(80, 14, 'N8', 'Technology and Management Of Livestock', NULL, NULL, NULL),
-(81, 2, 'B5', 'Biophysics', NULL, NULL, NULL),
-(82, 2, 'B6', 'Plant Biology', NULL, NULL, NULL),
-(83, 12, 'L2', 'Expertise Production Technology and Fisheries Management', NULL, NULL, NULL),
-(84, 24, 'X5', 'Communication and Community Development', NULL, NULL, NULL),
-(85, 14, 'N9', 'Agribusiness management', NULL, NULL, NULL),
-(86, 5, 'E7', 'Business management', NULL, NULL, NULL),
-(87, 18, 'R2', 'Industrial management', NULL, NULL, NULL),
-(88, 18, 'R3', 'Industrial Management Services Food and Nutrition', NULL, NULL, NULL),
-(89, 2, 'B7', 'Plant Breeding and Biotechnology', NULL, NULL, NULL),
-(90, 24, 'X6', 'Regional planning', NULL, NULL, NULL),
-(91, 24, 'X7', 'Mechanical and Environmental Management', NULL, NULL, NULL),
-(92, 22, 'V15', 'Mechanical Engineering and Biosystems', NULL, NULL, NULL),
-(93, 22, 'V16', 'Mechanical Engineering Agriculture and Food', NULL, NULL, NULL),
-(94, 3, 'C6', 'Landscape Architecture', NULL, NULL, NULL),
-(95, 1, 'A2', 'PHARMACY', NULL, NULL, NULL),
-(96, 18, 'R4', 'Industrial Engineering and Management', NULL, NULL, NULL),
-(97, 6, 'F2', 'Physics technic', NULL, NULL, NULL),
-(98, 6, 'F3', 'Geophysical engineering', NULL, NULL, NULL),
-(99, 19, 'S6', 'Technical Information', NULL, NULL, NULL),
-(100, 2, 'B8', 'Biomanagement', NULL, NULL, NULL),
-(101, 22, 'V17', 'mechanical engineering industry', NULL, NULL, NULL),
-(102, 22, 'V18', 'Metal Casting Techniques', NULL, NULL, NULL),
-(103, 18, 'R5', 'Air Cooling Techniques and Procedures', NULL, NULL, NULL),
-(104, 19, 'S7', 'Informatics Management', NULL, NULL, NULL),
-(105, 5, 'E8', 'Asset management', NULL, NULL, NULL),
-(106, 5, 'E9', 'Marketing Management', NULL, NULL, NULL),
-(107, 17, 'Q7', 'Energy Conversion Techniques', NULL, NULL, NULL),
-(108, 13, 'M6', 'Food Industry Technology', NULL, NULL, NULL),
-(109, 12, 'L3', 'Aquaculture', NULL, NULL, NULL),
-(110, 13, 'M7', 'Agricultural mechanization', NULL, NULL, NULL),
-(111, 5, 'E10', 'Management Accounting', NULL, NULL, NULL),
-(112, 26, 'Z1', 'Digital Telecommunications Network', NULL, NULL, NULL),
-(113, 22, 'V19', 'Automotive Engineering Electronics', NULL, NULL, NULL),
-(114, 19, 'S8', 'Computer and Network Engineering', NULL, NULL, NULL),
-(115, 13, 'M8', 'Agribusiness Agriculture', NULL, NULL, NULL),
-(116, 14, 'N10', 'livestock', NULL, NULL, NULL),
-(117, 12, 'L4', 'Fisheries and Marine Biotechnology', NULL, NULL, NULL),
-(118, 24, 'X8', 'Hiperkes and Safety', NULL, NULL, NULL),
-(119, 27, 'AA1', 'Hotel Management', NULL, NULL, NULL),
-(120, 26, 'Z2', 'Media and Communication', NULL, NULL, NULL),
-(121, 5, 'E11', 'Education Profession accountants', NULL, NULL, NULL),
-(122, 13, 'M9', 'Agricultural Technology', NULL, NULL, NULL),
-(123, 12, 'L5', 'Agribusiness Fisheries', NULL, NULL, NULL),
-(124, 3, 'C7', 'Architectural Engineering', NULL, NULL, NULL),
-(125, 12, 'L6', 'Fishery Product Technology', NULL, NULL, NULL),
-(126, 5, 'E12', 'Company management', NULL, NULL, NULL),
-(127, 14, 'N11', 'Science and Livestock Industry', NULL, NULL, NULL),
-(128, 13, 'M10', 'Agricultural Economics', NULL, NULL, NULL),
-(129, 19, 'S9', 'Computer and Information Systems', NULL, NULL, NULL),
-(130, 13, 'M11', 'Agricultural Microbiology', NULL, NULL, NULL),
-(131, 13, 'M12', 'Food Technology and Agricultural Products', NULL, NULL, NULL),
-(132, 8, 'H2', 'Administrative Law', NULL, NULL, NULL),
-(133, 5, 'E13', 'Financial Management', NULL, NULL, NULL),
-(134, 5, 'E14', 'Urban Management', NULL, NULL, NULL),
-(135, 5, 'E15', 'Information and Document Management', NULL, NULL, NULL),
-(137, 3, 'C8', 'Interior Architecture', '2016-12-22 18:06:13', '2016-12-22 18:06:13', NULL),
-(138, 16, 'P3', 'English', '2016-12-22 19:29:14', '2016-12-22 19:29:15', NULL),
-(139, 12, 'L7', 'Management of Fisheries Resources', '2016-12-22 19:40:06', '2016-12-22 19:40:06', NULL),
-(140, 3, 'C9', 'Arts And Design', '2016-12-22 19:49:24', '2016-12-22 19:49:24', NULL),
-(141, 19, 'S10', 'Computerized Accounting', '2016-12-22 19:50:44', '2016-12-22 19:50:44', NULL),
-(142, 22, 'V20', 'Automotive Engineering', '2016-12-22 19:54:14', '2016-12-22 19:54:14', NULL),
-(143, 5, 'E16', 'Trade Management', '2016-12-22 19:55:18', '2016-12-22 19:55:18', NULL),
-(144, 5, 'E17', 'Office Management', '2016-12-22 19:57:01', '2016-12-22 19:57:01', NULL),
-(145, 3, 'C10', 'Art', '2016-12-22 19:58:15', '2016-12-22 19:58:15', NULL),
-(146, 9, 'I4', 'Organic Chemistry', '2016-12-22 20:02:01', '2016-12-22 20:02:01', NULL),
-(147, 12, 'L8', 'Fishery', '2016-12-22 20:03:12', '2016-12-22 20:03:12', NULL),
-(148, 16, 'P4', 'English language and literature', '2016-12-22 20:04:40', '2016-12-22 20:04:40', NULL),
-(149, 5, 'E18', 'Administrative Management', '2016-12-22 20:10:05', '2016-12-22 20:10:05', NULL),
-(150, 5, 'E19', 'Tax Management', '2016-12-22 20:17:26', '2016-12-22 20:17:26', NULL),
-(151, 13, 'M13', 'Agricultural Biotechnology', '2016-12-22 20:21:27', '2016-12-22 20:21:27', NULL),
-(152, 25, 'Other', 'Other', '2016-12-25 18:06:00', '2016-12-25 18:06:00', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `major_grup`
---
-
-CREATE TABLE IF NOT EXISTS `major_grup` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for major_grup
+-- ----------------------------
+DROP TABLE IF EXISTS `major_grup`;
+CREATE TABLE `major_grup` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `kode` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `nama_grup` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `major_grup`:
---
+-- ----------------------------
+-- Records of major_grup
+-- ----------------------------
+INSERT INTO `major_grup` VALUES ('1', 'A', 'Apoteker', '2016-09-23 01:21:08', '2016-09-23 01:21:08', null);
+INSERT INTO `major_grup` VALUES ('2', 'B', 'Biologi', '2016-09-23 01:22:26', '2016-09-23 01:22:26', null);
+INSERT INTO `major_grup` VALUES ('3', 'C', 'Desain', '2016-09-23 01:22:38', '2016-09-23 01:22:38', null);
+INSERT INTO `major_grup` VALUES ('4', 'D', 'Dokter Hewan', '2016-09-23 01:22:52', '2016-09-23 01:22:52', null);
+INSERT INTO `major_grup` VALUES ('5', 'E', 'Ekonomi', '2016-09-26 19:21:28', '2016-09-26 19:21:28', null);
+INSERT INTO `major_grup` VALUES ('6', 'F', 'Fisika', '2016-09-26 19:21:44', '2016-09-26 19:21:44', null);
+INSERT INTO `major_grup` VALUES ('7', 'G', 'Hubungan Internasional', '2016-09-26 19:21:55', '2016-09-26 19:21:55', null);
+INSERT INTO `major_grup` VALUES ('8', 'H', 'Hukum', '2016-09-26 19:22:04', '2016-09-26 19:22:04', null);
+INSERT INTO `major_grup` VALUES ('9', 'I', 'Kimia', '2016-09-26 19:22:28', '2016-09-26 19:22:28', null);
+INSERT INTO `major_grup` VALUES ('10', 'J', 'Komunikasi', '2016-09-26 19:22:40', '2016-09-26 19:22:40', null);
+INSERT INTO `major_grup` VALUES ('11', 'K', 'Matematika', '2016-09-26 19:22:52', '2016-09-26 19:22:52', null);
+INSERT INTO `major_grup` VALUES ('12', 'L', 'Perikanan', '2016-09-26 19:23:09', '2016-09-26 19:23:09', null);
+INSERT INTO `major_grup` VALUES ('13', 'M', 'Pertanian', '2016-09-26 19:23:19', '2016-09-26 19:23:19', null);
+INSERT INTO `major_grup` VALUES ('14', 'N', 'Peternakan', '2016-09-26 19:23:29', '2016-09-26 19:23:29', null);
+INSERT INTO `major_grup` VALUES ('15', 'O', 'Psikologi', '2016-09-26 19:23:39', '2016-09-26 19:23:39', null);
+INSERT INTO `major_grup` VALUES ('16', 'P', 'Sastra', '2016-09-26 19:23:49', '2016-09-26 19:23:49', null);
+INSERT INTO `major_grup` VALUES ('17', 'Q', 'Teknik Elektro', '2016-09-26 19:23:59', '2016-09-26 19:23:59', null);
+INSERT INTO `major_grup` VALUES ('18', 'R', 'Teknik Industri', '2016-09-26 19:24:12', '2016-09-26 19:24:12', null);
+INSERT INTO `major_grup` VALUES ('19', 'S', 'Teknik Informatika', '2016-09-26 19:24:22', '2016-09-26 19:24:22', null);
+INSERT INTO `major_grup` VALUES ('20', 'T', 'Teknik Kimia', '2016-09-26 19:24:32', '2016-09-26 19:24:32', null);
+INSERT INTO `major_grup` VALUES ('21', 'U', 'Teknik Lingkungan', '2016-09-26 19:24:43', '2016-09-26 19:24:43', null);
+INSERT INTO `major_grup` VALUES ('22', 'V', 'Teknik Mesin', '2016-09-26 19:24:55', '2016-09-26 19:24:55', null);
+INSERT INTO `major_grup` VALUES ('23', 'W', 'Teknik Nuklir', '2016-09-26 19:25:05', '2016-09-26 19:25:05', null);
+INSERT INTO `major_grup` VALUES ('24', 'X', 'Teknik Sipil', '2016-09-26 19:25:19', '2016-09-26 19:25:19', null);
+INSERT INTO `major_grup` VALUES ('25', 'Other', 'Other', '2016-09-27 01:14:30', '2016-09-27 01:14:30', null);
+INSERT INTO `major_grup` VALUES ('26', 'Z', 'Teknik Telekomunikasi', '2016-12-23 02:31:41', '2016-12-23 02:31:41', null);
+INSERT INTO `major_grup` VALUES ('27', 'AA', 'Perhotelan', '2016-12-23 02:31:41', '2016-12-23 02:31:41', null);
 
---
--- Dumping data for table `major_grup`
---
-
-INSERT INTO `major_grup` (`id`, `kode`, `nama_grup`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'A', 'Apoteker', '2016-09-23 01:21:08', '2016-09-23 01:21:08', NULL),
-(2, 'B', 'Biologi', '2016-09-23 01:22:26', '2016-09-23 01:22:26', NULL),
-(3, 'C', 'Desain', '2016-09-23 01:22:38', '2016-09-23 01:22:38', NULL),
-(4, 'D', 'Dokter Hewan', '2016-09-23 01:22:52', '2016-09-23 01:22:52', NULL),
-(5, 'E', 'Ekonomi', '2016-09-26 19:21:28', '2016-09-26 19:21:28', NULL),
-(6, 'F', 'Fisika', '2016-09-26 19:21:44', '2016-09-26 19:21:44', NULL),
-(7, 'G', 'Hubungan Internasional', '2016-09-26 19:21:55', '2016-09-26 19:21:55', NULL),
-(8, 'H', 'Hukum', '2016-09-26 19:22:04', '2016-09-26 19:22:04', NULL),
-(9, 'I', 'Kimia', '2016-09-26 19:22:28', '2016-09-26 19:22:28', NULL),
-(10, 'J', 'Komunikasi', '2016-09-26 19:22:40', '2016-09-26 19:22:40', NULL),
-(11, 'K', 'Matematika', '2016-09-26 19:22:52', '2016-09-26 19:22:52', NULL),
-(12, 'L', 'Perikanan', '2016-09-26 19:23:09', '2016-09-26 19:23:09', NULL),
-(13, 'M', 'Pertanian', '2016-09-26 19:23:19', '2016-09-26 19:23:19', NULL),
-(14, 'N', 'Peternakan', '2016-09-26 19:23:29', '2016-09-26 19:23:29', NULL),
-(15, 'O', 'Psikologi', '2016-09-26 19:23:39', '2016-09-26 19:23:39', NULL),
-(16, 'P', 'Sastra', '2016-09-26 19:23:49', '2016-09-26 19:23:49', NULL),
-(17, 'Q', 'Teknik Elektro', '2016-09-26 19:23:59', '2016-09-26 19:23:59', NULL),
-(18, 'R', 'Teknik Industri', '2016-09-26 19:24:12', '2016-09-26 19:24:12', NULL),
-(19, 'S', 'Teknik Informatika', '2016-09-26 19:24:22', '2016-09-26 19:24:22', NULL),
-(20, 'T', 'Teknik Kimia', '2016-09-26 19:24:32', '2016-09-26 19:24:32', NULL),
-(21, 'U', 'Teknik Lingkungan', '2016-09-26 19:24:43', '2016-09-26 19:24:43', NULL),
-(22, 'V', 'Teknik Mesin', '2016-09-26 19:24:55', '2016-09-26 19:24:55', NULL),
-(23, 'W', 'Teknik Nuklir', '2016-09-26 19:25:05', '2016-09-26 19:25:05', NULL),
-(24, 'X', 'Teknik Sipil', '2016-09-26 19:25:19', '2016-09-26 19:25:19', NULL),
-(25, 'Other', 'Other', '2016-09-27 01:14:30', '2016-09-27 01:14:30', NULL),
-(26, 'Z', 'Teknik Telekomunikasi', '2016-12-23 02:31:41', '2016-12-23 02:31:41', NULL),
-(27, 'AA', 'Perhotelan', '2016-12-23 02:31:41', '2016-12-23 02:31:41', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `menu_user`
---
-
-CREATE TABLE IF NOT EXISTS `menu_user` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for menu_user
+-- ----------------------------
+DROP TABLE IF EXISTS `menu_user`;
+CREATE TABLE `menu_user` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_induk` int(11) NOT NULL,
   `menu` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `icon` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -2364,92 +2301,84 @@ CREATE TABLE IF NOT EXISTS `menu_user` (
   `no_urut` int(11) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `menu_user`:
---
+-- ----------------------------
+-- Records of menu_user
+-- ----------------------------
+INSERT INTO `menu_user` VALUES ('1', '0', 'Dashboard', 'menu-icon fa fa-tachometer', 'dashboard', '1', '2016-12-06 01:05:52', '2016-12-28 18:40:08', null);
+INSERT INTO `menu_user` VALUES ('2', '0', 'Master', 'menu-icon fa fa-server', '#', '2', '2016-12-06 01:06:30', '2017-01-01 21:09:41', null);
+INSERT INTO `menu_user` VALUES ('3', '2', 'Bidang Usaha', 'menu-icon fa fa-caret-right', 'bidang_usaha', '1', '2016-12-06 01:08:26', '2016-12-06 01:08:26', null);
+INSERT INTO `menu_user` VALUES ('4', '2', 'Institusi', 'menu-icon fa fa-caret-right', 'institusi', '2', '2016-12-06 01:08:56', '2016-12-06 01:08:56', null);
+INSERT INTO `menu_user` VALUES ('5', '2', 'Provinsi', 'menu-icon fa fa-caret-right', 'provinsi', '3', '2016-12-06 01:09:18', '2017-01-11 20:11:10', null);
+INSERT INTO `menu_user` VALUES ('6', '2', 'Kota', 'menu-icon fa fa-caret-right', 'kota', '4', '2016-12-06 01:09:39', '2016-12-06 01:09:39', null);
+INSERT INTO `menu_user` VALUES ('7', '2', 'Major Grup', 'menu-icon fa fa-caret-right', 'major_grup', '5', '2016-12-06 01:10:03', '2016-12-06 01:10:03', null);
+INSERT INTO `menu_user` VALUES ('8', '2', 'Major', 'menu-icon fa fa-caret-right', 'major', '6', '2016-12-06 01:10:25', '2016-12-06 01:10:25', null);
+INSERT INTO `menu_user` VALUES ('9', '2', 'Advertising Category', 'menu-icon fa fa-caret-right', 'advertising_category', '7', '2016-12-06 01:10:56', '2016-12-06 01:10:56', null);
+INSERT INTO `menu_user` VALUES ('10', '2', 'Advertising Media', 'menu-icon fa fa-caret-right', 'advertising_media', '8', '2016-12-06 01:11:34', '2016-12-06 01:11:34', null);
+INSERT INTO `menu_user` VALUES ('12', '2', 'Tingkat Pendidikan', 'menu-icon fa fa-caret-right', 'tingkat_pendidikan', '10', '2016-12-06 01:12:27', '2016-12-06 01:12:27', null);
+INSERT INTO `menu_user` VALUES ('13', '2', 'Tanggal Psychotest', 'menu-icon fa fa-caret-right', 'tanggal_psychotest', '11', '2016-12-06 01:12:52', '2016-12-06 01:12:52', null);
+INSERT INTO `menu_user` VALUES ('14', '0', 'Pelamar', 'menu-icon fa fa-users', 'pelamar', '4', '2016-12-06 01:13:18', '2016-12-28 18:38:18', null);
+INSERT INTO `menu_user` VALUES ('15', '2', 'Menu', 'menu-icon fa fa-caret-right', 'menu_user', '14', '2016-12-06 01:14:16', '2016-12-21 18:57:12', null);
+INSERT INTO `menu_user` VALUES ('17', '2', 'Akreditasi', 'menu-icon fa fa-caret-right', 'akreditasi', '13', '2016-12-21 18:57:40', '2016-12-21 18:57:40', null);
+INSERT INTO `menu_user` VALUES ('19', '0', 'Vacancy Advertising', 'menu-icon fa fa-sitemap', 'vacancy_advertising', '3', '2016-12-27 21:20:34', '2017-01-11 20:11:00', null);
+INSERT INTO `menu_user` VALUES ('21', '2', 'User', 'menu-icon fa fa-caret-right', 'user', '13', '2016-12-30 01:57:53', '2016-12-30 01:57:53', null);
+INSERT INTO `menu_user` VALUES ('22', '2', 'Kriteria Syarat', ' 	menu-icon fa fa-caret-right', 'kriteria_syarat', '11', '2018-03-08 17:48:59', '2018-03-08 17:48:59', null);
 
---
--- Dumping data for table `menu_user`
---
-
-INSERT INTO `menu_user` (`id`, `id_induk`, `menu`, `icon`, `url`, `no_urut`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 0, 'Dashboard', 'menu-icon fa fa-tachometer', 'dashboard', 1, '2016-12-06 01:05:52', '2016-12-28 18:40:08', NULL),
-(2, 0, 'Master', 'menu-icon fa fa-desktop', '#', 2, '2016-12-06 01:06:30', '2016-12-13 19:05:10', NULL),
-(3, 2, 'Bidang Usaha', 'menu-icon fa fa-caret-right', 'bidang_usaha', 1, '2016-12-06 01:08:26', '2016-12-06 01:08:26', NULL),
-(4, 2, 'Institusi', 'menu-icon fa fa-caret-right', 'institusi', 2, '2016-12-06 01:08:56', '2016-12-06 01:08:56', NULL),
-(5, 2, 'Provinsi', 'menu-icon fa fa-caret-right', 'provinsi', 3, '2016-12-06 01:09:18', '2016-12-06 01:09:18', NULL),
-(6, 2, 'Kota', 'menu-icon fa fa-caret-right', 'kota', 4, '2016-12-06 01:09:39', '2016-12-06 01:09:39', NULL),
-(7, 2, 'Major Grup', 'menu-icon fa fa-caret-right', 'major_grup', 5, '2016-12-06 01:10:03', '2016-12-06 01:10:03', NULL),
-(8, 2, 'Major', 'menu-icon fa fa-caret-right', 'major', 6, '2016-12-06 01:10:25', '2016-12-06 01:10:25', NULL),
-(9, 2, 'Advertising Category', 'menu-icon fa fa-caret-right', 'advertising_category', 7, '2016-12-06 01:10:56', '2016-12-06 01:10:56', NULL),
-(10, 2, 'Advertising Media', 'menu-icon fa fa-caret-right', 'advertising_media', 8, '2016-12-06 01:11:34', '2016-12-06 01:11:34', NULL),
-(12, 2, 'Tingkat Pendidikan', 'menu-icon fa fa-caret-right', 'tingkat_pendidikan', 10, '2016-12-06 01:12:27', '2016-12-06 01:12:27', NULL),
-(13, 2, 'Tanggal Psychotest', 'menu-icon fa fa-caret-right', 'tanggal_psychotest', 11, '2016-12-06 01:12:52', '2016-12-06 01:12:52', NULL),
-(14, 0, 'Pelamar', 'menu-icon fa fa-users', 'pelamar', 4, '2016-12-06 01:13:18', '2016-12-28 18:38:18', NULL),
-(15, 2, 'Menu', 'menu-icon fa fa-caret-right', 'menu_user', 14, '2016-12-06 01:14:16', '2016-12-21 18:57:12', NULL),
-(17, 2, 'Akreditasi', 'menu-icon fa fa-caret-right', 'akreditasi', 13, '2016-12-21 18:57:40', '2016-12-21 18:57:40', NULL),
-(19, 0, 'Vacancy Advertising', 'menu-icon fa fa-list', 'vacancy_advertising', 3, '2016-12-27 21:20:34', '2016-12-28 18:39:09', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `migrations`
---
-
-CREATE TABLE IF NOT EXISTS `migrations` (
+-- ----------------------------
+-- Table structure for migrations
+-- ----------------------------
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `migrations`:
---
+-- ----------------------------
+-- Records of migrations
+-- ----------------------------
+INSERT INTO `migrations` VALUES ('2016_09_21_094235_formlmaran', '1');
+INSERT INTO `migrations` VALUES ('2016_09_29_022416_form_lamaran2', '1');
+INSERT INTO `migrations` VALUES ('2016_11_22_031829_tanggal_psikotes', '2');
+INSERT INTO `migrations` VALUES ('2016_11_22_085031_Pelamar', '3');
+INSERT INTO `migrations` VALUES ('2016_11_25_072448_iklan_loker', '4');
+INSERT INTO `migrations` VALUES ('2016_12_06_075140_Menu', '5');
+INSERT INTO `migrations` VALUES ('2016_12_15_015010_tanggal_psychotest_rev', '6');
+INSERT INTO `migrations` VALUES ('2016_12_16_025546_detail_educational_background', '7');
+INSERT INTO `migrations` VALUES ('2016_12_16_033004_detail_educational_we', '8');
+INSERT INTO `migrations` VALUES ('2016_12_22_011442_akreditasi', '9');
+INSERT INTO `migrations` VALUES ('2014_10_12_000000_create_users_table', '10');
+INSERT INTO `migrations` VALUES ('2014_10_12_100000_create_password_resets_table', '10');
+INSERT INTO `migrations` VALUES ('2016_12_30_090137_add_last_login_column_to_users_table', '11');
+INSERT INTO `migrations` VALUES ('2018_03_08_080847_syarat', '12');
+INSERT INTO `migrations` VALUES ('2018_03_09_010146_syarat_add_keterangan', '13');
+INSERT INTO `migrations` VALUES ('2018_03_23_071135_add_tgl_psychotest', '14');
+INSERT INTO `migrations` VALUES ('2018_03_28_070519_posisi', '15');
 
---
--- Dumping data for table `migrations`
---
-
-INSERT INTO `migrations` (`migration`, `batch`) VALUES
-('2016_09_21_094235_formlmaran', 1),
-('2016_09_29_022416_form_lamaran2', 1),
-('2016_11_22_031829_tanggal_psikotes', 2),
-('2016_11_22_085031_Pelamar', 3),
-('2016_11_25_072448_iklan_loker', 4),
-('2016_12_06_075140_Menu', 5),
-('2016_12_15_015010_tanggal_psychotest_rev', 6),
-('2016_12_16_025546_detail_educational_background', 7),
-('2016_12_16_033004_detail_educational_we', 8),
-('2016_12_22_011442_akreditasi', 9),
-('2014_10_12_000000_create_users_table', 10),
-('2014_10_12_100000_create_password_resets_table', 10);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `password_resets`
---
-
-CREATE TABLE IF NOT EXISTS `password_resets` (
+-- ----------------------------
+-- Table structure for password_resets
+-- ----------------------------
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  KEY `password_resets_email_index` (`email`),
+  KEY `password_resets_token_index` (`token`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `password_resets`:
---
+-- ----------------------------
+-- Records of password_resets
+-- ----------------------------
 
--- --------------------------------------------------------
-
---
--- Table structure for table `pelamar`
---
-
-CREATE TABLE IF NOT EXISTS `pelamar` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for pelamar
+-- ----------------------------
+DROP TABLE IF EXISTS `pelamar`;
+CREATE TABLE `pelamar` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `no_applicant` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `job_interest_1` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `job_interest_2` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2487,429 +2416,316 @@ CREATE TABLE IF NOT EXISTS `pelamar` (
   `browser` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `keterangan` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `pelamar_id_tingkat_pendidikan_foreign` (`id_tingkat_pendidikan`),
+  KEY `pelamar_id_institusi_foreign` (`id_institusi`),
+  KEY `pelamar_id_major_foreign` (`id_major`),
+  KEY `pelamar_id_bidang_usaha_foreign` (`id_bidang_usaha`),
+  KEY `pelamar_id_tgl_psychotest_foreign` (`id_tgl_psychotest`),
+  CONSTRAINT `pelamar_id_major_foreign` FOREIGN KEY (`id_major`) REFERENCES `major` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pelamar_id_tingkat_pendidikan_foreign` FOREIGN KEY (`id_tingkat_pendidikan`) REFERENCES `tingkat_pendidikan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `pelamar`:
---   `id_major`
---       `major` -> `id`
---   `id_tingkat_pendidikan`
---       `tingkat_pendidikan` -> `id`
---
+-- ----------------------------
+-- Records of pelamar
+-- ----------------------------
 
---
--- Dumping data for table `pelamar`
---
+-- ----------------------------
+-- Table structure for posisi
+-- ----------------------------
+DROP TABLE IF EXISTS `posisi`;
+CREATE TABLE `posisi` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `divisi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `posisi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `posisi_publish` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `pelamar` (`id`, `no_applicant`, `job_interest_1`, `job_interest_2`, `job_interest_3`, `job_interest_4`, `id_iklan`, `medion_employee_name`, `nama`, `jenis_kelamin`, `status`, `tgl_lahir`, `email`, `mobile_phone`, `photo`, `id_tingkat_pendidikan`, `id_institusi`, `other_institusi`, `id_major`, `other_major`, `gpa`, `start_year_education`, `end_year_education`, `id_bidang_usaha`, `other_bidang_usaha`, `start_year_work_experience`, `end_year_work_experience`, `id_tgl_psychotest`, `pernah_pkl_dimedion`, `tgl_praktek_start`, `tgl_praktek_end`, `pernah_psychotest_dimedion`, `tgl_psychotest_dimedion`, `status_pelamar`, `ip_address`, `browser`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 'APL20161229001', 'RCR1001', 'RCR0102', NULL, NULL, 4, '', 'Dani Kurniawan', 'Laki-Laki', 'Married', '5/9/1991', 'dann.sevens@gmail.com', '082320250897', 'Dani Kurniawan 20161229.jpg', 3, 24, '', 99, '', '3.90', 'August 2012', 'August 2016', 3, '', 'May 2013', 'Present Present', 5, 'Yes', 'August 2015', 'December 2015', 'Yes', 'May 2016', 'Passed', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0', 'actual_exp', '2016-12-29 01:16:01', '2016-12-29 01:16:01'),
-(2, 'APL20161229002', 'RCR1001', '', NULL, NULL, 4, '', 'Hendri Pratama', 'Laki-Laki', 'Married', '4/12/1992', 'hendri@gmail.com', '082320250822', 'Hendri Pratama 20161229.jpg', 3, 24, '', 99, '', '3.55', 'June 2012', 'June 2016', 5, '', 'August 2014', 'Present Present', 5, 'No', '', '', 'No', '', 'Passed', '::1', 'Mozilla/5.0 (Windows NT 6.3; WOW64; rv:50.0) Gecko/20100101 Firefox/50.0', 'actual_exp', '2016-12-29 01:32:25', '2016-12-29 01:32:25');
+-- ----------------------------
+-- Records of posisi
+-- ----------------------------
+INSERT INTO `posisi` VALUES ('1', 'MAB', 'Customer Service', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('2', 'MAB', 'Marketing Analyst', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('3', 'MAB', 'Technical Support', 'Animal Health Consultant', null, null);
+INSERT INTO `posisi` VALUES ('4', 'MAB', 'Animal Health Consultant', 'Animal Health Consultant', null, null);
+INSERT INTO `posisi` VALUES ('5', 'MAB', 'Product Management – PP ', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('6', 'MAB', 'Product Management – BP ', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('7', 'MAB', 'Product Management – PE ', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('8', 'MAB', 'Product Promotion', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('9', 'MAB', 'Personnel Support', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('10', 'MAB', 'UKK', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('11', 'MAB', 'Database', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('12', 'MAB', 'Regional Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('13', 'MAB', 'Technical Sales Representative', 'Technical Sales Representative', null, null);
+INSERT INTO `posisi` VALUES ('14', 'MAB', 'Teknisi Peternakan', 'Field Technician', null, null);
+INSERT INTO `posisi` VALUES ('15', 'MAB', 'Laboran', 'Laboratory Technician', null, null);
+INSERT INTO `posisi` VALUES ('16', 'MAB', 'Administrasi WSR', 'Administration', null, null);
+INSERT INTO `posisi` VALUES ('17', 'MAB', 'Inventory Control', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('18', 'MAB', 'Store', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('19', 'MAB', 'Distribution', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('20', 'MAB', 'Transportation', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('21', 'MAB', 'Regional Controller', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('22', 'MAB', 'Account Receivable', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('23', 'QA', 'Auditors', 'Audit', null, null);
+INSERT INTO `posisi` VALUES ('24', 'QA', 'System Analysts', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('25', 'QA', 'Production Analysts', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('26', 'QA', 'Validation & Calibration', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('27', 'CORP R&D', 'Registration & Regulation', 'Product Registration & Regulation', null, null);
+INSERT INTO `posisi` VALUES ('28', 'CORP R&D', 'R&D – Animal Trial', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('29', 'CORP R&D', 'Molecular Biology', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('30', 'INT\'L SALES', 'Business Development', 'International Marketing', null, null);
+INSERT INTO `posisi` VALUES ('31', 'INT\'L SALES', 'Administration Export', 'International Marketing', null, null);
+INSERT INTO `posisi` VALUES ('32', 'BP', 'Biosafety, Biosecurity & QA', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('33', 'BP', 'Finance & Accounting', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('34', 'BP', 'Purchasing', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('35', 'BP', 'Laboraty & Validation', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('36', 'BP', 'BP – Animal Trial', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('37', 'BP', 'Research & Development', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('38', 'BP', 'Production Planning', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('39', 'BP', 'Inventory Control', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('40', 'BP', 'Packaging', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('41', 'BP', 'Viral Active', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('42', 'BP', 'Viral Inactive', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('43', 'BP', 'Bacterial', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('44', 'BP', 'Sterile Tools & Media Preparation', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('45', 'BP', 'Emulsification', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('46', 'BP', 'San Egg Production', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('47', 'BP', 'SPF Egg Production', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('48', 'CC & IS', 'Procurement', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('49', 'CC & IS', 'Advertising & Publication', 'Advertising & Publication', null, null);
+INSERT INTO `posisi` VALUES ('50', 'CC & IS', 'Customer Intimacy', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('51', 'CC & IS', 'Corporate Design Communication', 'Graphic Design', null, null);
+INSERT INTO `posisi` VALUES ('52', 'CC & IS', 'Events & CSR', 'Events & CSR', null, null);
+INSERT INTO `posisi` VALUES ('53', 'CC & IS', 'Hardware Service', 'Information Technology – Hardware ', null, null);
+INSERT INTO `posisi` VALUES ('54', 'CC & IS', 'Hardware Maintenance', 'Information Technology – Hardware ', null, null);
+INSERT INTO `posisi` VALUES ('55', 'CC & IS', 'Network Service', 'Information Technology – Hardware ', null, null);
+INSERT INTO `posisi` VALUES ('56', 'CC & IS', 'Network Maintenance', 'Information Technology – Hardware ', null, null);
+INSERT INTO `posisi` VALUES ('57', 'CC & IS', 'Provision', 'Information Technology – Hardware ', null, null);
+INSERT INTO `posisi` VALUES ('58', 'CC & IS', 'Inventory', 'Information Technology – Hardware ', null, null);
+INSERT INTO `posisi` VALUES ('59', 'CC & IS', 'Quality Control', 'Information Technology – Hardware ', null, null);
+INSERT INTO `posisi` VALUES ('60', 'CC & IS', 'WSR', 'Information Technology – Hardware ', null, null);
+INSERT INTO `posisi` VALUES ('61', 'CC & IS', 'Application Development', 'Information System – Programmer ', null, null);
+INSERT INTO `posisi` VALUES ('62', 'CC & IS', 'Business System Analyst', 'Information System – Programmer ', null, null);
+INSERT INTO `posisi` VALUES ('63', 'CC & IS', 'ERP Production Support', 'Information System – Support ', null, null);
+INSERT INTO `posisi` VALUES ('64', 'CC & IS', 'ERP Finance & Supply Chain Management', 'Information System – Support ', null, null);
+INSERT INTO `posisi` VALUES ('65', 'CC & IS', 'ERP Sales & Marketing', 'Information System – Support ', null, null);
+INSERT INTO `posisi` VALUES ('66', 'CC & IS', 'ERP Integration & Enterprise Reporting', 'Information System – Support ', null, null);
+INSERT INTO `posisi` VALUES ('67', 'CC & IS', 'Database Admin', 'Information System – Support ', null, null);
+INSERT INTO `posisi` VALUES ('68', 'CC & IS', 'Server Admin', 'Information System – Support ', null, null);
+INSERT INTO `posisi` VALUES ('69', 'CC & IS', 'Client Service', 'Information System – Support ', null, null);
+INSERT INTO `posisi` VALUES ('70', 'ENG', 'Capital System', 'Capital System Engineering', null, null);
+INSERT INTO `posisi` VALUES ('71', 'ENG', 'PE Innovation Engineering', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('72', 'ENG', 'Utilities & General Equipment Innovation Engineering', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('73', 'ENG', 'BP Maintenance 1 Engineering', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('74', 'ENG', 'BP Maintenance 2 Engineering', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('75', 'ENG', 'BP Maintenance 3 Engineering', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('76', 'ENG', 'Vehicle Maintenance Engineering', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('77', 'ENG', 'Residential & Industrial Maintenance Engineering', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('78', 'ENG', 'Inventory', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('79', 'ENG', 'Utility Support', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('80', 'ENG', 'Civil Industrial Project Engineering', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('81', 'ENG', 'Civil Residential Project Engineering', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('82', 'ENG', 'MEP & HVAC Project Engineering', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('83', 'ENG', 'Building Maintenance Engineering', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('84', 'CORP & CAP PURCHASE', 'Corporate Purchase', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('85', 'CORP & CAP PURCHASE', 'Capital Purchase', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('86', 'F&A', 'Family Office Support', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('87', 'F&A', 'Financial Internal Audit', 'Audit', null, null);
+INSERT INTO `posisi` VALUES ('88', 'F&A', 'HDH Finance', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('89', 'F&A', 'Medilea Finance', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('90', 'F&A', 'Company Group Finance Accounting', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('91', 'F&A', 'Hotel Finance', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('92', 'F&A', 'Plasa/SEL Finance', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('93', 'F&A', 'Corporate Asset Management', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('94', 'F&A', 'Corporate Cash Management', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('95', 'F&A', 'Corporate Account Payable', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('96', 'F&A', 'MFJ & GPE Tax', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('97', 'F&A', 'Company Group Tax', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('98', 'F&A', 'MFJ & GPE Finance Accounting', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('99', 'F&A', 'MFJ & GPE Account Receivable', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('100', 'F&A', 'MFJ Manufacture Cost Accounting', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('101', 'F&A', 'GPE Finance', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('102', 'PE&P', 'Finance & Accounting', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('103', 'PE&P', 'Purchasing', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('104', 'PE&P', 'Product Management', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('105', 'PE&P', 'Plastic Production', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('106', 'PE&P', 'Non Plastic Production', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('107', 'PE&P', 'Setting & Maintenance', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('108', 'PE&P', 'Research Development Quality Control', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('109', 'PE&P', 'PPIC', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('110', 'PE&P', 'Store & Distribution', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('111', 'PE&P', 'HR/GA', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('112', 'PE&P', 'PCH/F&A', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('113', 'PP', 'Finance & Accounting', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('114', 'PP', 'New Products Development', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('115', 'PP', 'Regular Products Development', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('116', 'PP', 'Analytical Methods Development', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('117', 'PP', 'Purchasing', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('118', 'PP', 'Quality Control', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('119', 'PP', 'Production Planning & Controlling', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('120', 'PP', 'Warehouse, Dispensing, Administration Design', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('121', 'PP', 'Powder, Capsule, Caplet', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('122', 'PP', 'Liquid', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('123', 'PP', 'Premix & Beta-Lactam', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('124', 'PP', 'Maintenance', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('125', 'HR & GA', 'Man Power Planning Headcount', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('126', 'HR & GA', 'Recruitment & Selection 1', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('127', 'HR & GA', 'Recruitment & Selection 2', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('128', 'HR & GA', 'Competency & Career Development', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('129', 'HR & GA', 'Job Grading, Performance Appraisal 1-2', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('130', 'HR & GA', 'Job Grading, Performance Appraisal 3', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('131', 'HR & GA', 'Health Safety Environment', 'Health Safety Environment', null, null);
+INSERT INTO `posisi` VALUES ('132', 'HR & GA', 'Industrial Relation & Security', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('133', 'HR & GA', 'House Keeping & Landscaping', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('134', 'HR & GA', 'Office Supplies', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('135', 'HR & GA', 'Payroll', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('136', 'HR & GA', 'Company Benefit', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('137', 'HR & GA', 'Legal Benefit', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('138', 'HR & GA', 'Event Management', 'Events & CSR', null, null);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `provinsi`
---
-
-CREATE TABLE IF NOT EXISTS `provinsi` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for provinsi
+-- ----------------------------
+DROP TABLE IF EXISTS `provinsi`;
+CREATE TABLE `provinsi` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `province` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `deleted_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `provinsi`:
---
+-- ----------------------------
+-- Records of provinsi
+-- ----------------------------
+INSERT INTO `provinsi` VALUES ('1', 'NANGGRO ACEH DARUSSALAM', '2016-09-22 20:40:41', '2016-09-22 20:40:41', null);
+INSERT INTO `provinsi` VALUES ('2', 'BALI', '2016-09-22 20:54:59', '2016-09-22 20:54:59', null);
+INSERT INTO `provinsi` VALUES ('3', 'DAERAH ISTIMEWA YOGYAKARTA', '2016-09-22 20:55:09', '2016-09-22 20:55:09', null);
+INSERT INTO `provinsi` VALUES ('4', 'DKI JAKARTA', '2016-09-22 20:55:23', '2016-09-22 20:55:23', null);
+INSERT INTO `provinsi` VALUES ('5', 'BANTEN', '2016-09-22 20:55:32', '2016-09-22 20:55:32', null);
+INSERT INTO `provinsi` VALUES ('6', 'JAWA BARAT', '2016-09-22 20:55:39', '2016-09-22 20:55:39', null);
+INSERT INTO `provinsi` VALUES ('7', 'JAWA TENGAH', '2016-09-22 20:56:12', '2016-09-22 20:56:12', null);
+INSERT INTO `provinsi` VALUES ('8', 'JAWA TIMUR', '2016-09-22 20:56:22', '2016-09-22 20:56:22', null);
+INSERT INTO `provinsi` VALUES ('9', 'LAMPUNG', '2016-09-22 20:56:32', '2016-09-22 20:56:32', null);
+INSERT INTO `provinsi` VALUES ('10', 'NUSA TENGGARA BARAT', '2016-09-22 20:56:55', '2016-09-22 20:56:55', null);
+INSERT INTO `provinsi` VALUES ('11', 'SUMATERA BARAT', '2016-09-22 20:57:12', '2016-09-22 20:57:12', null);
+INSERT INTO `provinsi` VALUES ('12', 'BENGKULU', '2016-09-22 20:57:24', '2016-09-22 20:57:24', null);
+INSERT INTO `provinsi` VALUES ('13', 'JAMBI', '2016-09-22 20:57:33', '2016-09-22 20:57:33', null);
+INSERT INTO `provinsi` VALUES ('14', 'SULAWESI SELATAN', '2016-09-22 20:57:41', '2016-09-22 20:57:41', null);
+INSERT INTO `provinsi` VALUES ('15', 'SULAWESI UTARA', '2016-09-22 20:57:50', '2016-09-22 20:57:50', null);
+INSERT INTO `provinsi` VALUES ('16', 'SUMATERA SELATAN', '2016-09-22 20:57:58', '2016-09-22 20:57:58', null);
+INSERT INTO `provinsi` VALUES ('17', 'SUMATERA UTARA', '2016-09-22 20:58:05', '2016-09-22 20:58:05', null);
+INSERT INTO `provinsi` VALUES ('18', 'KALIMANTAN SELATAN', '2016-09-22 20:58:14', '2016-09-22 20:58:14', null);
+INSERT INTO `provinsi` VALUES ('19', 'KALIMANTAN BARAT', '2016-09-22 20:58:22', '2016-09-22 20:58:22', null);
+INSERT INTO `provinsi` VALUES ('20', 'KALIMANTAN TIMUR', '2016-09-22 20:58:31', '2016-09-22 20:58:31', null);
+INSERT INTO `provinsi` VALUES ('21', 'RIAU', '2016-09-22 20:58:37', '2016-09-22 20:58:37', null);
+INSERT INTO `provinsi` VALUES ('22', 'MALUKU', null, null, null);
+INSERT INTO `provinsi` VALUES ('23', 'KEPULAUAN RIAU', null, null, null);
+INSERT INTO `provinsi` VALUES ('24', 'BANGKA BELITUNG', null, null, null);
+INSERT INTO `provinsi` VALUES ('25', 'NUSA TENGGARA TIMUR', null, null, null);
+INSERT INTO `provinsi` VALUES ('26', 'KALIMANTAN TENGAH', null, null, null);
+INSERT INTO `provinsi` VALUES ('27', 'KALIMANTAN UTARA', null, null, null);
+INSERT INTO `provinsi` VALUES ('28', 'SULAWESI TENGAH', null, null, null);
+INSERT INTO `provinsi` VALUES ('29', 'SULAWESI BARAT', null, null, null);
+INSERT INTO `provinsi` VALUES ('30', 'SULAWESI TENGGARA', null, null, null);
+INSERT INTO `provinsi` VALUES ('31', 'GORONTALO', null, null, null);
+INSERT INTO `provinsi` VALUES ('32', 'MALUKU UTARA', null, null, null);
+INSERT INTO `provinsi` VALUES ('33', 'PAPUA', null, null, null);
+INSERT INTO `provinsi` VALUES ('34', 'PAPUA BARAT', null, null, null);
 
---
--- Dumping data for table `provinsi`
---
+-- ----------------------------
+-- Table structure for syarat
+-- ----------------------------
+DROP TABLE IF EXISTS `syarat`;
+CREATE TABLE `syarat` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `gpa` double(4,2) NOT NULL,
+  `akreditasi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `masa_studi` int(11) NOT NULL,
+  `usia` int(11) NOT NULL,
+  `keterangan` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
-INSERT INTO `provinsi` (`id`, `province`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'ACEH', '2016-09-22 20:40:41', '2016-09-22 20:40:41', NULL),
-(2, 'BALI', '2016-09-22 20:54:59', '2016-09-22 20:54:59', NULL),
-(3, 'DAERAH ISTIMEWA YOGYAKARTA', '2016-09-22 20:55:09', '2016-09-22 20:55:09', NULL),
-(4, 'DKI JAKARTA', '2016-09-22 20:55:23', '2016-09-22 20:55:23', NULL),
-(5, 'BANTEN', '2016-09-22 20:55:32', '2016-09-22 20:55:32', NULL),
-(6, 'JAWA BARAT', '2016-09-22 20:55:39', '2016-09-22 20:55:39', NULL),
-(7, 'JAWA TENGAH', '2016-09-22 20:56:12', '2016-09-22 20:56:12', NULL),
-(8, 'JAWA TIMUR', '2016-09-22 20:56:22', '2016-09-22 20:56:22', NULL),
-(9, 'LAMPUNG', '2016-09-22 20:56:32', '2016-09-22 20:56:32', NULL),
-(10, 'NUSA TENGGARA BARAT', '2016-09-22 20:56:55', '2016-09-22 20:56:55', NULL),
-(11, 'SUMATERA BARAT', '2016-09-22 20:57:12', '2016-09-22 20:57:12', NULL),
-(12, 'BENGKULU', '2016-09-22 20:57:24', '2016-09-22 20:57:24', NULL),
-(13, 'JAMBI', '2016-09-22 20:57:33', '2016-09-22 20:57:33', NULL),
-(14, 'SULAWESI SELATAN', '2016-09-22 20:57:41', '2016-09-22 20:57:41', NULL),
-(15, 'SULAWESI UTARA', '2016-09-22 20:57:50', '2016-09-22 20:57:50', NULL),
-(16, 'SUMATERA SELATAN', '2016-09-22 20:57:58', '2016-09-22 20:57:58', NULL),
-(17, 'SUMATERA UTARA', '2016-09-22 20:58:05', '2016-09-22 20:58:05', NULL),
-(18, 'KALIMANTAN SELATAN', '2016-09-22 20:58:14', '2016-09-22 20:58:14', NULL),
-(19, 'KALIMANTAN BARAT', '2016-09-22 20:58:22', '2016-09-22 20:58:22', NULL),
-(20, 'KALIMANTAN TIMUR', '2016-09-22 20:58:31', '2016-09-22 20:58:31', NULL),
-(21, 'RIAU', '2016-09-22 20:58:37', '2016-09-22 20:58:37', NULL),
-(22, 'MALUKU', NULL, NULL, NULL);
+-- ----------------------------
+-- Records of syarat
+-- ----------------------------
+INSERT INTO `syarat` VALUES ('1', '2.75', 'B', '5', '18', 'Developer Staff', '2018-03-08 20:00:48', '2018-04-02 08:44:13');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `tanggal_psychotest`
---
-
-CREATE TABLE IF NOT EXISTS `tanggal_psychotest` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for tanggal_psychotest
+-- ----------------------------
+DROP TABLE IF EXISTS `tanggal_psychotest`;
+CREATE TABLE `tanggal_psychotest` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `id_iklan` int(11) NOT NULL,
   `id_kota` int(11) NOT NULL,
   `tanggal` date NOT NULL,
+  `kuota` int(11) NOT NULL,
   `keterangan` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `tanggal_psychotest`:
---
+-- ----------------------------
+-- Records of tanggal_psychotest
+-- ----------------------------
+INSERT INTO `tanggal_psychotest` VALUES ('10', '10', '9', '2018-03-26', '0', 'Psikotes', '2018-02-20 00:31:19', '2018-02-20 00:31:19');
+INSERT INTO `tanggal_psychotest` VALUES ('11', '13', '1', '2018-03-24', '0', '', '2018-03-08 01:39:27', '2018-03-08 01:39:27');
+INSERT INTO `tanggal_psychotest` VALUES ('12', '10', '2', '2018-03-25', '0', '', '2018-03-08 01:39:40', '2018-03-08 01:39:40');
+INSERT INTO `tanggal_psychotest` VALUES ('13', '10', '10', '2018-04-03', '27', '', '2018-03-08 01:39:50', '2018-03-23 08:47:58');
 
---
--- Dumping data for table `tanggal_psychotest`
---
-
-INSERT INTO `tanggal_psychotest` (`id`, `id_iklan`, `id_kota`, `tanggal`, `keterangan`, `created_at`, `updated_at`) VALUES
-(1, 2, 9, '2016-12-31', 'Medion BC', '2016-12-15 02:32:23', '2016-12-15 02:32:23'),
-(2, 3, 3, '2016-12-30', 'WSR 90', '2016-12-14 20:09:07', '2016-12-14 20:09:07'),
-(3, 1, 10, '2016-12-29', 'Medion BC Ruang Gelatik', '2016-12-14 20:59:29', '2016-12-14 20:59:29'),
-(4, 3, 9, '2017-01-05', 'Medion CR', '2016-12-20 18:52:07', '2016-12-20 18:52:07'),
-(5, 4, 9, '2017-01-05', 'Medion BC', '2016-12-22 23:41:12', '2016-12-22 23:41:12');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tingkat_pendidikan`
---
-
-CREATE TABLE IF NOT EXISTS `tingkat_pendidikan` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for tingkat_pendidikan
+-- ----------------------------
+DROP TABLE IF EXISTS `tingkat_pendidikan`;
+CREATE TABLE `tingkat_pendidikan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tingkat` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `no_urut` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `deleted_at` timestamp NULL DEFAULT NULL
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `tingkat_pendidikan`:
---
+-- ----------------------------
+-- Records of tingkat_pendidikan
+-- ----------------------------
+INSERT INTO `tingkat_pendidikan` VALUES ('1', 'D3', '1', '2016-10-20 07:05:30', '2018-04-02 15:21:52', null);
+INSERT INTO `tingkat_pendidikan` VALUES ('2', 'D4', '2', '2016-10-20 07:05:37', '2016-10-20 07:05:37', null);
+INSERT INTO `tingkat_pendidikan` VALUES ('3', 'S1', '3', '2016-10-20 07:05:49', '2016-10-20 07:05:49', null);
+INSERT INTO `tingkat_pendidikan` VALUES ('4', 'Profesi', '4', '2016-10-20 07:06:01', '2016-10-20 07:06:01', null);
+INSERT INTO `tingkat_pendidikan` VALUES ('5', 'S2', '5', '2016-10-20 07:06:08', '2016-10-20 07:06:08', null);
+INSERT INTO `tingkat_pendidikan` VALUES ('6', 'S3', '6', '2016-12-22 03:48:25', '2016-12-22 03:48:25', null);
 
---
--- Dumping data for table `tingkat_pendidikan`
---
-
-INSERT INTO `tingkat_pendidikan` (`id`, `tingkat`, `no_urut`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 'D3', 1, '2016-10-20 07:05:30', '2016-10-20 07:05:30', NULL),
-(2, 'D4', 2, '2016-10-20 07:05:37', '2016-10-20 07:05:37', NULL),
-(3, 'S1', 3, '2016-10-20 07:05:49', '2016-10-20 07:05:49', NULL),
-(4, 'Profesi', 4, '2016-10-20 07:06:01', '2016-10-20 07:06:01', NULL),
-(5, 'S2', 5, '2016-10-20 07:06:08', '2016-10-20 07:06:08', NULL),
-(6, 'S3', 6, '2016-12-22 03:48:25', '2016-12-22 03:48:25', NULL);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` int(10) unsigned NOT NULL,
+-- ----------------------------
+-- Table structure for users
+-- ----------------------------
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `last_login` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- RELATIONS FOR TABLE `users`:
---
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Dani Kurniawan', 'dann.sevens@gmail.com', '$2y$10$hrS2GLyN.1ZHgqIx1bC/1.kBT0vSxmMEMsw.B8TnW1zfzrwvqYUmi', 'QcRjgNGtpciTQLrRA4WRtGaLFwBNI07vZh09SNjWnsw8DRnk2lbo22cXRPhB', '2016-12-27 23:38:37', '2016-12-29 02:36:42');
-
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `advertising_category`
---
-ALTER TABLE `advertising_category`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `advertising_media`
---
-ALTER TABLE `advertising_media`
-  ADD PRIMARY KEY (`id`), ADD KEY `advertising_media_id_kategori_foreign` (`id_kategori`);
-
---
--- Indexes for table `akreditasi`
---
-ALTER TABLE `akreditasi`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `bidang_usaha`
---
-ALTER TABLE `bidang_usaha`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `detail_edu_bg`
---
-ALTER TABLE `detail_edu_bg`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `detail_we`
---
-ALTER TABLE `detail_we`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event_position`
---
-ALTER TABLE `event_position`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `event_vacancy`
---
-ALTER TABLE `event_vacancy`
-  ADD PRIMARY KEY (`id`), ADD KEY `event_vacancy_id_media_foreign` (`id_media`);
-
---
--- Indexes for table `iklan`
---
-ALTER TABLE `iklan`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `institusi`
---
-ALTER TABLE `institusi`
-  ADD PRIMARY KEY (`id`), ADD KEY `institusi_id_provinsi_foreign` (`id_provinsi`), ADD KEY `institusi_id_kota_foreign` (`id_kota`);
-
---
--- Indexes for table `kota`
---
-ALTER TABLE `kota`
-  ADD PRIMARY KEY (`id`), ADD KEY `kota_id_provinsi_foreign` (`id_provinsi`);
-
---
--- Indexes for table `loker`
---
-ALTER TABLE `loker`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `major`
---
-ALTER TABLE `major`
-  ADD PRIMARY KEY (`id`), ADD KEY `major_id_grup_foreign` (`id_grup`);
-
---
--- Indexes for table `major_grup`
---
-ALTER TABLE `major_grup`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `menu_user`
---
-ALTER TABLE `menu_user`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`), ADD KEY `password_resets_token_index` (`token`);
-
---
--- Indexes for table `pelamar`
---
-ALTER TABLE `pelamar`
-  ADD PRIMARY KEY (`id`), ADD KEY `pelamar_id_tingkat_pendidikan_foreign` (`id_tingkat_pendidikan`), ADD KEY `pelamar_id_institusi_foreign` (`id_institusi`), ADD KEY `pelamar_id_major_foreign` (`id_major`), ADD KEY `pelamar_id_bidang_usaha_foreign` (`id_bidang_usaha`), ADD KEY `pelamar_id_tgl_psychotest_foreign` (`id_tgl_psychotest`);
-
---
--- Indexes for table `provinsi`
---
-ALTER TABLE `provinsi`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tanggal_psychotest`
---
-ALTER TABLE `tanggal_psychotest`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `tingkat_pendidikan`
---
-ALTER TABLE `tingkat_pendidikan`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `advertising_category`
---
-ALTER TABLE `advertising_category`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `advertising_media`
---
-ALTER TABLE `advertising_media`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
---
--- AUTO_INCREMENT for table `akreditasi`
---
-ALTER TABLE `akreditasi`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=1573;
---
--- AUTO_INCREMENT for table `bidang_usaha`
---
-ALTER TABLE `bidang_usaha`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=20;
---
--- AUTO_INCREMENT for table `detail_edu_bg`
---
-ALTER TABLE `detail_edu_bg`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `detail_we`
---
-ALTER TABLE `detail_we`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `event_position`
---
-ALTER TABLE `event_position`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `event_vacancy`
---
-ALTER TABLE `event_vacancy`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT for table `iklan`
---
-ALTER TABLE `iklan`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
---
--- AUTO_INCREMENT for table `institusi`
---
-ALTER TABLE `institusi`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=114;
---
--- AUTO_INCREMENT for table `kota`
---
-ALTER TABLE `kota`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=41;
---
--- AUTO_INCREMENT for table `loker`
---
-ALTER TABLE `loker`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=13;
---
--- AUTO_INCREMENT for table `major`
---
-ALTER TABLE `major`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=153;
---
--- AUTO_INCREMENT for table `major_grup`
---
-ALTER TABLE `major_grup`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=28;
---
--- AUTO_INCREMENT for table `menu_user`
---
-ALTER TABLE `menu_user`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=21;
---
--- AUTO_INCREMENT for table `pelamar`
---
-ALTER TABLE `pelamar`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
---
--- AUTO_INCREMENT for table `provinsi`
---
-ALTER TABLE `provinsi`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
---
--- AUTO_INCREMENT for table `tanggal_psychotest`
---
-ALTER TABLE `tanggal_psychotest`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
---
--- AUTO_INCREMENT for table `tingkat_pendidikan`
---
-ALTER TABLE `tingkat_pendidikan`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `advertising_media`
---
-ALTER TABLE `advertising_media`
-ADD CONSTRAINT `advertising_media_id_kategori_foreign` FOREIGN KEY (`id_kategori`) REFERENCES `advertising_category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `event_vacancy`
---
-ALTER TABLE `event_vacancy`
-ADD CONSTRAINT `event_vacancy_id_media_foreign` FOREIGN KEY (`id_media`) REFERENCES `advertising_media` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `kota`
---
-ALTER TABLE `kota`
-ADD CONSTRAINT `kota_id_provinsi_foreign` FOREIGN KEY (`id_provinsi`) REFERENCES `provinsi` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `major`
---
-ALTER TABLE `major`
-ADD CONSTRAINT `major_id_grup_foreign` FOREIGN KEY (`id_grup`) REFERENCES `major_grup` (`id`) ON DELETE CASCADE;
-
---
--- Constraints for table `pelamar`
---
-ALTER TABLE `pelamar`
-ADD CONSTRAINT `pelamar_id_major_foreign` FOREIGN KEY (`id_major`) REFERENCES `major` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `pelamar_id_tingkat_pendidikan_foreign` FOREIGN KEY (`id_tingkat_pendidikan`) REFERENCES `tingkat_pendidikan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+-- ----------------------------
+-- Records of users
+-- ----------------------------
+INSERT INTO `users` VALUES ('1', 'Dani Kurniawan', 'dann.sevens@gmail.com', '$2y$10$oXPQmqa0ZUN0/QqTiWs.VugJS9nnQ7de.RsBMZcZKc4cr59XNpEfu', 'iRmjZ4Z1FIn8ewjPCiXMsTrIJBwjFEuobz5wkHkFinEIVuRqvZNFkuUHpSpY', '2018-04-02 16:03:53', '2016-12-27 23:38:37', '2017-05-03 18:25:25');
+INSERT INTO `users` VALUES ('2', 'User', 'user@medion.co.id', '$2y$10$ZQtRUldzDirPwHvGye5bh.vv3IGdIFJGlc.V.AySQZGY9M9z5bhrO', 'tTPnCtAKZnzAD9PojJpaWmYADD0OShgfFXGsXQ1dtaTThhnvK8NLsI8BVI41', '2018-04-03 08:10:30', '2016-12-29 02:42:27', '2018-04-03 01:10:30');

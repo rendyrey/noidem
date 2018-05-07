@@ -1,144 +1,114 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-		<meta charset="utf-8" />
-		<title>Login Page - Form Lamaran</title>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<meta name="description" content="User login page" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
-		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
-		<link rel="stylesheet" href="assets/css/fonts.googleapis.com.css" />
-		<link rel="stylesheet" href="assets/css/ace.min.css" />
-		<link rel="stylesheet" href="assets/css/ace-rtl.min.css" />
-	</head>
-	<style type="text/css">
-		#spinner {
+  <title>Login Administrator | Medion </title>
 
-	    background: #FFFFFF;
-		filter:alpha(opacity=60); /* IE */
-		-moz-opacity:0.5; /* Mozilla */
-		opacity: 0.5; /* CSS3 */
-		position: fixed; height: 100%;
-		width:100%;
-		text-align:center;
-	 	overflow: auto;
-	 	z-index:1234; 
+  <!-- Bootstrap -->
+  <link href="{{URL::asset('assets/gentelella/vendors/bootstrap/dist/css/bootstrap.min.css')}}" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link href="{{URL::asset('assets/gentelella/vendors/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+  <!-- NProgress -->
+  <link href="{{URL::asset('assets/gentelella/vendors/nprogress/nprogress.css')}}" rel="stylesheet">
+  <!-- Animate.css -->
+  <link href="{{URL::asset('assets/gentelella/vendors/animate.css/animate.min.css')}}" rel="stylesheet">
 
-	}
+  <!-- Custom Theme Style -->
+  <link href="{{URL::asset('assets/gentelella/build/css/custom.min.css')}}" rel="stylesheet">
+</head>
+<style type="text/css">
 
-		.img_loader {
+#spinner {
+  background: #FFFFFF;
+  filter:alpha(opacity=60); /* IE */
+  -moz-opacity:0.5; /* Mozilla */
+  opacity: 0.5; /* CSS3 */
+  position: fixed; height: 100%;
+  width:100%;
+  text-align:center;
+  overflow: auto;
+  z-index:1234;
 
-	    position: absolute;
-	    margin: auto;
-	    top: 0;
-	    left: 0;
-	    right: 0;
-	    bottom: 0;
+}
 
-	}
-	</style>
+.img_loader {
 
-	<body class="login-layout light-login" background="assets/2.jpeg">
-	<div id="spinner" style="display:none;">
-    <img class="img_loader" src="assets/loader2.gif" alt="Loading" />
-	</div>	
-		<div class="main-container">		
-			<div class="main-content">
-				<div class="row">			
-					<div class="col-sm-10 col-sm-offset-1">
-						<div class="login-container">
-							<div class="center">
-								<h1>
-									
-									<span class="red">Form Lamaran</span>
-									<span class="white" id="id-text2">- Login</span>
-								</h1>
-							</div>
+  position: absolute;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 
-							<div class="space-6"></div>
+}
+</style>
 
-							<div class="position-relative">
-								<div id="login-box" class="login-box visible widget-box no-border">
-									<div class="widget-body">
-										<div class="widget-main">
-											<h4 class="header blue lighter bigger">
-												<i class="ace-icon fa fa-coffee green"></i>
-												Please Enter Your Information<br/>
-												email : user@medion.co.id, password: coba123
-											</h4>
+<body class="login">
+  <div>
+    <a class="hiddenanchor" id="signup"></a>
+    <a class="hiddenanchor" id="signin"></a>
+    <div id="spinner" style="display:none;">
+      <img class="img_loader" src="assets/loader2.gif" alt="Loading" />
+    </div>
+    <div class="login_wrapper">
+      <div class="animate form login_form">
+        <section class="login_content">
+          <form action="{{ url('/login') }}" method="POST" id="form_login" role="form">
+            {{ csrf_field() }}
+            <h1>Login Admin</h1>
+            <div>
+              <input type="text" name="email" class="form-control" placeholder="Email" required="" id="email" />
+              {{ $errors->first('email') }}
+            </div>
+            <div>
+              <input type="password" name="password" class="form-control" placeholder="Password" required="" id="password" />
+            </div>
+            <div>
+              <button type="submit" class="btn btn-info" id="submit">Log in</a>
+              </div>
 
-											<div class="space-6"></div>
+            </form>
+            <div class="clearfix"></div>
 
-											<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}" id="form_login">
-											{{ csrf_field() }}
-											
-												<fieldset>
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" name="email" class="form-control" placeholder="Email" id="email" />
-															<i class="ace-icon fa fa-user"></i>
-															@if ($errors->has('email'))
-							                                    <span class="help-block">
-							                                        <strong>{{ $errors->first('email') }}</strong>
-							                                    </span>
-							                                @endif
-														</span>
-													</label>
+            <div class="separator">
 
-													<label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="password" name="password" class="form-control" placeholder="Password" id="password" />
-															<i class="ace-icon fa fa-lock"></i>
-															@if ($errors->has('password'))
-							                                    <span class="help-block">
-							                                        <strong>{{ $errors->first('password') }}</strong>
-							                                    </span>
-							                                @endif
-														</span>
-													</label>
 
-													<div class="space"></div>
+              <div class="clearfix"></div>
+              <br />
 
-													<div class="clearfix">
-														<button type="submit" class="width-35 pull-right btn btn-sm btn-primary" id="submit">
-															<i class="ace-icon fa fa-sign-in"></i>
-															<span class="bigger-110">Login</span>
-														</button>
-													</div>
+              <div>
+                {{-- <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1> --}}
+                <p>©{{date('Y')}} All Rights Reserved. PT. Medion Farma Jaya</p>
+              </div>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="assets/js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript">
+  if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+  </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $("#spinner").bind("ajaxSend", function() {
+      $(this).show();
+    }).bind("ajaxStop", function() {
+      $(this).hide();
+    }).bind("ajaxError", function() {
+      $(this).hide();
+    });
 
-													<div class="space-4"></div>
-												</fieldset>
-											</form>
-										</div><!-- /.widget-main -->
-									</div><!-- /.widget-body -->
-								</div><!-- /.login-box -->
-							</div><!-- /.position-relative -->
-						</div>
-					</div><!-- /.col -->
-				</div><!-- /.row -->
-			</div><!-- /.main-content -->
-		</div><!-- /.main-container -->
-		<script src="assets/js/jquery-2.1.4.min.js"></script>
-		<script type="text/javascript">
-			if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-		</script>
-		<script type="text/javascript">
-		$(document).ready(function(){
-		    $("#spinner").bind("ajaxSend", function() {
-		        $(this).show();
-		    }).bind("ajaxStop", function() {
-		        $(this).hide();
-		    }).bind("ajaxError", function() {
-		        $(this).hide();
-		    });
+    $('#submit').click(function() {
+      $('#spinner').show();
+    });
 
-		    $('#submit').click(function() {
-		        $('#spinner').show();
-		    });
-		 
-		 });
-		</script>
-	</body>
-</html>
+  });
+  </script>
+  </html>

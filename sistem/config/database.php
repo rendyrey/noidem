@@ -78,6 +78,16 @@ return [
             'schema' => 'public',
         ],
 
+        'sqlsrv' => [
+            'driver' => 'sqlsrv',
+            'host' => env('DB_HOST','172.16.31.76'),
+            'database' => env('DB_DATABASE','dbformlamaran'),
+            'username' => env('DB_USERNAME','root'),
+            'password' => env('DB_PASSWORD',''),
+            'charset' => 'utf8',
+            'prefix' => '',
+        ],
+
     ],
 
     /*
