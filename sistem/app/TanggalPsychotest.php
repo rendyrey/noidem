@@ -24,4 +24,8 @@ class TanggalPsychotest extends Model
     {
     	return $this->belongsTo('App\Kota', 'id_kota');
     }
+
+    public function test_method(){
+        return $this->belongsTo('App\TestMethod','id_test_method');
+    }
 }

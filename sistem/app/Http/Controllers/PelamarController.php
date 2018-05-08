@@ -18,6 +18,7 @@ use App\Pelamar;
 use App\Iklan;
 use App\DetailEducation;
 use App\DetailWorkExperience;
+use App\TestMethod;
 use Input;
 use Intervention\Image\Facades\Image as Image;
 use Carbon\Carbon;
@@ -784,6 +785,7 @@ class PelamarController extends Controller
 	public function pelamar_inproses(){
 		$data['pelamar'] = Pelamar::all();
 		$data['kota'] = Kota::all()->lists('kota','id');
+		$data['test_method'] = TestMethod::all()->lists('method','id');
 		return view('admin.pelamar.pelamar_inproses',$data);
 	}
 
@@ -798,13 +800,59 @@ class PelamarController extends Controller
 		foreach($psychotest as $value){
 			$e = array();
 			$e['id'] = $value->id;
-			$e['title'] = "Quota left $value->kuota_left, Quota $value->kuota, ".$value->kota->kota;
+			$e['title'] = "Quota left $value->kuota_left, Quota $value->kuota, ".$value->kota->kota." | ".$value->test_method->method;
 			$e['start'] = $value->tanggal;
 			$e['end'] = $value->tanggal;
 			$e['allDay'] = TRUE;
+			$e['tanggal'] = $value->tanggal;
+			$e['kuota'] = $value->kuota;
+			$e['kuota_left'] = $value->kuota_left;
+			$e['id_kota'] = $value->id_kota;
 			array_push($events,$e);
 		}
 		echo json_encode($events);
+	}
+
+	public function tambah_schedule(Request $request){
+		$this->validate($request,[
+			'tanggal'=>'required',
+			'id_kota'=>'required|numeric',
+			'kuota'=>'required|numeric',
+			'id_test_method'=>'required|numeric'
+		]);
+
+		$psychotest = new TanggalPsychotest;
+		$psychotest->tanggal = $request->tanggal;
+		$psychotest->id_kota = $request->id_kota;
+		$psychotest->kuota_left = $request->kuota;
+		$psychotest->kuota = $request->kuota;
+		$psychotest->id_test_method = $request->id_test_method;
+		$psychotest->save();
+	}
+
+	public function update_schedule(Request $request){
+		$this->validate($request,[
+			'tanggal'=>'required',
+			'kuota'=>'required|numeric',
+			'kuota_left'=>'required|numeric',
+			'id_kota'=>'required|numeric',
+			'id_test_method'=>'required|numeric'
+		]);
+		$edit = TanggalPsychotest::find($request->id);
+		$edit->tanggal = $request->tanggal;
+		$edit->kuota = $request->kuota;
+		$edit->kuota_left = $request->kuota_left;
+		$edit->id_kota = $request->id_kota;
+		$edit->id_test_method = $request->id_test_method;
+		$edit->save();
+		return redirect('pelamar_inproses')->with('message','Data berhasil disimpan!')->with('panel','success');
+	}
+
+	public function details($id){
+		$data['pelamar_invitation'] = Pelamar::where('id_tgl_psychotest',$id)->where('status_invite','0')->get();
+		$data['tgl_psychotest'] = TanggalPsychotest::find($id);
+		
+		return view('admin.pelamar.pelamar_inproses_details',$data);
 	}
 
 }

@@ -105,7 +105,7 @@
                       <tbody>
                         @foreach($pelamar as $value)
                           <tr>
-                            <td><a href="{{url("pelamar/$value->id/detail")}}"><font color="blue">{{$value->no_applicant}}</font></a></td>
+                            <td><a href="{{url("pelamar/$value->id/detail")}}" target="_blank"><font color="blue">{{$value->no_applicant}}</font></a></td>
                             <td>{{$value->nama}}</td>
                             <td>{{$value->tingkat_pendidikan->tingkat}}</td>
                             <td>{{$value->institusi->nama_institusi}}</td>
@@ -162,7 +162,7 @@
             </div>
             <div class="modal-body">
               <div id="testmodal" style="padding: 5px 20px;">
-                <form id="" class="form-horizontal calender" role="form" action="{{url('pelamar_inproses/test_scheduling')}}" method="POST">
+                <form id="" class="form-horizontal calender" role="form" action="{{url('pelamar_inproses/tambah_schedule')}}" method="POST">
                 {!! csrf_field() !!}
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Psychotest Date</label>
@@ -184,21 +184,32 @@
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Quota</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control auto_currency" name="kuota">
+                    <input type="text" class="form-control" name="kuota">
                     </div>
                   </div>
-                </form>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Test Method</label>
+                    <div class="col-sm-9">
+                    <select name="id_test_method" class="form-control select_search" style="width:100%" data-placeholder="Pilih Test Method" required>
+                      <option value=""></option>
+                      @foreach($test_method as $key=>$value)
+                        <option value="{{$key}}">{{$value}}</option>
+                      @endforeach
+                    </select>
+                    </div>
+                  </div>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary antosubmit">Save changes</button>
+              <button type="submit" class="btn btn-primary antosubmit">Save changes</button>
+            </form>
             </div>
           </div>
         </div>
       </div>
       <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-lg">
           <div class="modal-content">
 
             <div class="modal-header">
@@ -208,26 +219,67 @@
             <div class="modal-body">
 
               <div id="testmodal2" style="padding: 5px 20px;">
-                <form id="antoform2" class="form-horizontal calender" role="form">
-                  <div class="form-group">
+                <form id="antoform2" class="form-horizontal calender" role="form" method="POST" action="{{url('pelamar_inproses/update_schedule')}}">
+                  <input type="hidden" class="form-control" id="id_psychotest" name="id">
+                   <div class="form-group">
                     <label class="col-sm-3 control-label">Title</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control" id="title2" name="title2">
+                      <label id="title2" class="control-label"></label>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Description</label>
+                    <label class="col-sm-3 control-label">Psychoteste Date</label>
                     <div class="col-sm-9">
-                      <textarea class="form-control" style="height:55px;" id="descr2" name="descr"></textarea>
+                      <input type="text" class="form-control myDatepicker2" id="tanggal" name="tanggal">
                     </div>
                   </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">City</label>
+                    <div class="col-sm-9">
+                       <select name="id_kota" class="form-control select_search" style="width:100%" data-placeholder="Pilih Kota" required>
+                      <option value=""></option>
+                      @foreach ($kota as $key=>$value )
+                          <option value="{{$key}}">{{$value}}</option>
+                      @endforeach
+                      </select>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Quota</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control"  id="kuota" name="kuota">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Quota Left</label>
+                    <div class="col-sm-9">
+                      <input type="text" class="form-control" id="kuota_left" name="kuota_left">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-3 control-label">Test Method</label>
+                    <div class="col-sm-9">
+                    <select name="id_test_method" class="form-control select_search" style="width:100%" data-placeholder="Pilih Test Method" required>
+                      <option value=""></option>
+                      @foreach($test_method as $key=>$value)
+                        <option value="{{$key}}">{{$value}}</option>
+                      @endforeach
+                    </select>
+                    </div>
+                  </div>
+                  
+                  
 
-                </form>
               </div>
             </div>
             <div class="modal-footer">
+             
+                
+                <button type="button" class="btn btn-success" id="psychotest_details">Details</button>
+              
               <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary antosubmit2">Save changes</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
             </div>
           </div>
         </div>
@@ -299,7 +351,12 @@
         },
         eventClick: function(calEvent, jsEvent, view) {
           $('#fc_edit').click();
-          $('#title2').val(calEvent.title);
+          $('#title2').html(calEvent.title);
+          $('#id_psychotest').val(calEvent.id);
+          $('#tanggal').val(calEvent.tanggal);
+          $('#kuota').val(calEvent.kuota);
+          $('#kuota_left').val(calEvent.kuota_left);
+          $('#psychotest_details').val(calEvent.id);
 
           categoryClass = $("#event_type").val();
 
@@ -329,6 +386,10 @@
 
     $(document).ready(function(){
       init_calendar();
+      $("#psychotest_details").click(function(){
+        var id = $(this).val();
+        window.location = "pelamar_inproses/details/"+id;
+      });
     });
     </script>
   @endsection

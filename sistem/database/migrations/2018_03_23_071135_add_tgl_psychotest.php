@@ -16,6 +16,7 @@ class AddTglPsychotest extends Migration
         Schema::table('tanggal_psychotest', function (Blueprint $table) {
             $table->integer('kuota')->after('tanggal');
             $table->integer('kuota_left')->after('kuota');
+            $table->integer('id_test_method')->after('kuota_left');
         });
     }
 
@@ -30,6 +31,7 @@ class AddTglPsychotest extends Migration
         Schema::table('tanggal_psychotest', function (Blueprint $table) {
             $table->dropColumn('kuota');
             $table->dropColumn('kuota_left');
+            $table->dropColumn('id_test_method');
         });
     }
 }
