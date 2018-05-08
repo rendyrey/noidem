@@ -30,6 +30,8 @@ Route::post('import_pelamar','PelamarController@import_pelamar');
 Route::post('pelamar/edit_pelamar','PelamarController@edit_pelamar');
 Route::get('pelamar/update_tabel/{status}','PelamarController@update_tabel');
 Route::get('pelamar_inproses','PelamarController@pelamar_inproses');
+//Pelamar Inproses
+Route::get('pelamar_inproses/get_psychotest','PelamarController@get_psychotest');
 
 //pelamar awaiting
 Route::get('pelamar_awaiting','PelamarController@pelamar_awaiting');

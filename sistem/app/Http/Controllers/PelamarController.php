@@ -792,4 +792,19 @@ class PelamarController extends Controller
 		return view('admin.pelamar.pelamar_awaiting',$data);
 	}
 
+	public function get_psychotest(){
+		$psychotest = TanggalPsychotest::all();
+		$events = array();
+		foreach($psychotest as $value){
+			$e = array();
+			$e['id'] = $value->id;
+			$e['title'] = "Quota left $value->kuota_left, Quota $value->kuota, ".$value->kota->kota;
+			$e['start'] = $value->tanggal;
+			$e['end'] = $value->tanggal;
+			$e['allDay'] = TRUE;
+			array_push($events,$e);
+		}
+		echo json_encode($events);
+	}
+
 }

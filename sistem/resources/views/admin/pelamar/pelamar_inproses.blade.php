@@ -227,7 +227,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary antosubmit2">Save changes</button>
+              <button type="submit" class="btn btn-primary antosubmit2">Save changes</button>
             </div>
           </div>
         </div>
@@ -240,11 +240,13 @@
 
       <script>
       /* CALENDAR */
+      
 
       function  init_calendar() {
 
         if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
         console.log('init_calendar');
+        
 
         var date = new Date(),
         d = '7',
@@ -311,44 +313,22 @@
           calendar.fullCalendar('unselect');
         },
         dayClick: function(start) {
-          var time = new Date(start)
-          alert('Clicked on:'+time.getDate());
+          var time = new Date(start);
+          var waktu = new Date('2018','04','07');
+          //alert(waktu);
         },
         editable: true,
-        events: [{
-          title: 'All Day Event',
-          start: new Date(y, m, 1)
-        }, {
-          title: 'Long Event',
-          start: new Date(y, m, d - 5),
-          end: new Date(y, m, d - 2)
-        }, {
-          title: 'Meeting',
-          start: new Date(y, m, d, 10, 30),
-          allDay: false
-        }, {
-          title: 'Lunch',
-          start: new Date(y, m, d + 14, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false
-        }, {
-          title: 'Birthday Party',
-          start: new Date(y, m, d + 1, 19, 0),
-          end: new Date(y, m, d + 1, 22, 30),
-          allDay: false
-        }, {
-          title: 'Click for Google',
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: 'http://google.com/'
-        }]
+        events:{
+          url:"{{url('pelamar_inproses/get_psychotest')}}",
+          type:"GET"
+        }
+          
       });
 
     };
 
     $(document).ready(function(){
       init_calendar();
-
     });
     </script>
   @endsection
