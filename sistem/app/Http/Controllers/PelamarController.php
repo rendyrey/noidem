@@ -794,6 +794,15 @@ class PelamarController extends Controller
 		return view('admin.pelamar.pelamar_awaiting',$data);
 	}
 
+	public function pelamar_failed(){
+		$data['pelamar_recruitment'] = Pelamar::all();
+		$data['pelamar_prescreening'] = Pelamar::all();
+		$data['pelamar_psychotest'] = Pelamar::all();
+		$data['pelamar_interview'] = Pelamar::all();
+		return view('admin.pelamar.pelamar_failed',$data);
+		
+	}
+
 	public function get_psychotest(){
 		$psychotest = TanggalPsychotest::all();
 		$events = array();
@@ -850,6 +859,7 @@ class PelamarController extends Controller
 
 	public function details($id){
 		$data['pelamar_invitation'] = Pelamar::where('id_tgl_psychotest',$id)->where('status_invite','0')->get();
+		$data['pelamar_invited'] = Pelamar::where('id_tgl_psychotest',$id)->where('status_invite','1')->get();
 		$data['tgl_psychotest'] = TanggalPsychotest::find($id);
 		
 		return view('admin.pelamar.pelamar_inproses_details',$data);

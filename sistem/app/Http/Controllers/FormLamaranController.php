@@ -17,7 +17,7 @@ use App\Pelamar;
 use App\Provinsi;
 use App\TanggalPsychotest;
 use App\TingkatPendidikan;
-use App\KriteriaSyarat;
+// use App\KriteriaSyarat;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image as Image;
@@ -100,6 +100,7 @@ class FormLamaranController extends Controller
 
     public function tambah(Request $request)
     {
+        
         $actual_fresh1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->value('actual_fresh');
         $actual_fresh2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->value('actual_fresh');
         $actual_fresh3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->value('actual_fresh');
@@ -283,10 +284,10 @@ class FormLamaranController extends Controller
                 }
                 //-- end update actual fresh
                 //mendapatkan
-                $syarat1 = KriteriaSyarat::where('id',$id_syarat1)->first();
-                $syarat2 = KriteriaSyarat::where('id',$id_syarat2)->first();
-                $syarat3 = KriteriaSyarat::where('id',$id_syarat3)->first();
-                $syarat4 = KriteriaSyarat::where('id',$id_syarat4)->first();
+                // $syarat1 = KriteriaSyarat::where('id',$id_syarat1)->first();
+                // $syarat2 = KriteriaSyarat::where('id',$id_syarat2)->first();
+                // $syarat3 = KriteriaSyarat::where('id',$id_syarat3)->first();
+                // $syarat4 = KriteriaSyarat::where('id',$id_syarat4)->first();
                 
                 if ($level == "S1") {
                     

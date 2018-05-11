@@ -17,6 +17,7 @@
 											<input type="radio" name="id_tingkat_pendidikan" id="{{$value->tingkat}}" autocomplete="off" value="{{$value->id}}"> {{$value->tingkat}}
 											</label>
 										@endforeach
+										<br><font color="red">{{$errors->first('id_tingkat_pendidikan')}}</font><br>
 										</div>
 									</div>
 								</div>

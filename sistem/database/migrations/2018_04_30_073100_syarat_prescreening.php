@@ -21,7 +21,7 @@ class SyaratPrescreening extends Migration
             $table->integer('edu_level');
             $table->string('accreditation');
             $table->double('gpa', 3, 2);
-            $table->double('study_period',2,1);
+            $table->double('study_period',3,1);
             $table->integer('age');
             $table->integer('id_major')->nullable();
             $table->string('is_active')->nullable();

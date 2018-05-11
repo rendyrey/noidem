@@ -108,7 +108,7 @@
                             <td>{{++$i}}</td>
                             <td>{{$value->position_category}}</td>
                             <td>{{$value->major->major}}</td>
-                            <td>{{$value->edu_level}}</td>
+                            <td>{{$value->tingkat_pendidikan->tingkat}}</td>
                             <td>{{$value->gpa}}</td>
                             <td>{{$value->accreditation}}</td>
                             <td>{{$value->study_period}}</td>
@@ -138,7 +138,7 @@
   </div>
 
   {{-- modal untuk tambah data syarat umum --}}
-  <div class="modal fade bs-example-modal-lg syarat_umum" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bs-example-modal-lg syarat_umum" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -192,17 +192,17 @@
             </div>
             <div class="form-group">
               <label>GPA</label>
-              <input type="text" name="gpa" class="form-control">
+              <input type="text" name="gpa" class="form-control" placeholder="Ex: 2.75">
               <font color="red">{{$errors->first('gpa')}}</font>
             </div>
             <div class="form-group">
               <label>Study Period</label>
-              <input type="text" name="study_period" class="form-control">
+              <input type="text" name="study_period" class="form-control" placeholder="Ex: 4.5">
               <font color="red">{{$errors->first('study_period')}}</font>
             </div>
             <div class="form-group">
               <label>Age</label>
-              <input type="text" name="age" class="form-control">
+              <input type="text" name="age" class="form-control" placeholder="Ex: 27">
               <font color="red">{{$errors->first('age')}}</font>
             </div>
           </div>
@@ -218,7 +218,7 @@
   </div>
 
   {{-- modal untuk tambah data syarat khusus --}}
-  <div class="modal fade bs-example-modal-lg syarat_khusus" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bs-example-modal-lg syarat_khusus" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -308,7 +308,7 @@
 
 
   <!-- Modal Delete -->
-  <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal fade" id="confirm-delete" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

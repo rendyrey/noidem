@@ -39,8 +39,9 @@
                   <label>Position Category</label>
                   <select name="position_category" class="form-control select_search" style="width:100%" data-placeholder="Pilih Position Category">
                     <option value=""></option>
-                    <option value="Lapangan">Lapangan</option>
-                    <option value="Pusat">Pusat</option>
+                    @foreach ($position_category_opt as $value )
+                        <option value="{{$value}}" {{$syarat_psychotest->position_category==$value ? 'selected':'' }}>{{$value}}</option>
+                    @endforeach
                   </select>
                   <font color="red">{{$errors->first('position_category')}}</font>
                 </div>

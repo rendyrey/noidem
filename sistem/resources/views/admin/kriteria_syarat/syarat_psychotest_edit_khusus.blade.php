@@ -37,10 +37,11 @@
 
                 <div class="form-group">
                   <label>Position</label>
-                  <select name="position" class="form-control select_search" style="width:100%" data-placeholder="Pilih Position Category">
+                  <select name="position" class="form-control select_search" style="width:100%" data-placeholder="Pilih Position">
                     <option value=""></option>
-                    <option value="Lapangan">Lapangan</option>
-                    <option value="Pusat">Pusat</option>
+                    @foreach ($position_opt as $key=>$value )
+                        <option value="{{$key}}" {{$syarat_psychotest->position==$key ? 'selected':''}}>{{$value}}</option>
+                    @endforeach
                   </select>
                   <font color="red">{{$errors->first('position_category')}}</font>
                 </div>
@@ -48,7 +49,10 @@
                   <label>Major</label>
                   <select name="major" class="form-control select_search" style="width:100%" data-placeholder="Pilih Position Category">
                     <option value=""></option>
-                    <option value="1">Satu</option>
+                    @foreach ($major_opt as $key=>$value )
+                        <option value="{{$key}}" {{$syarat_psychotest->major==$key ? 'selected':''}}>{{$value}}</option>
+                    @endforeach
+
                   </select>
                   <font color="red">{{$errors->first('test_score')}}</font>
                 </div>

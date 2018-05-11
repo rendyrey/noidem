@@ -94,8 +94,8 @@
                         @foreach($syarat_psychotest_khusus as $value)
                           <tr>
                             <td>{{++$i}}</td>
-                            <td>{{$value->position}}</td>
-                            <td>{{$value->major}}</td>
+                            <td>{{$value->posisi->posisi}}</td>
+                            <td>{{$value->get_major->major}}</td>
                             <td>{{$value->get_test_type->test_type}}</td>
                             <td>{{$value->test_score}}</td>
                             <td>
@@ -122,7 +122,7 @@
   </div>
 
   {{-- modal untuk tambah data syarat umum --}}
-  <div class="modal fade bs-example-modal-lg syarat_umum" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bs-example-modal-lg syarat_umum"  role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -172,7 +172,7 @@
   </div>
 
   {{-- modal untuk tambah data syarat khusus --}}
-  <div class="modal fade bs-example-modal-lg syarat_khusus" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal fade bs-example-modal-lg syarat_khusus"  role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
 
@@ -186,9 +186,11 @@
             {!! csrf_field() !!}
             <div class="form-group">
               <label>Position</label>
-              <select name="position" class="form-control select_search" style="width:100%" data-placeholder="Pilih Position Category">
+              <select name="position" class="form-control select_search" style="width:100%" data-placeholder="Pilih Position">
                 <option value=""></option>
-                <option value="1">Satu</option>
+                @foreach($position_opt as $key=>$value)
+                  <option value="{{$key}}">{{$value}}</option>
+                @endforeach
               </select>
               <font color="red">{{$errors->first('position_category')}}</font>
             </div>
@@ -205,7 +207,12 @@
             </div>
             <div class="form-group">
               <label>Test Type</label>
-              <input name = "test_type" type="text" class="form-control">
+              <select name="test_type" class="form-control select_search" style="width:100%" data-placeholder="Pilih Test Type">
+                <option value=""></option>
+                @foreach($test_type_opt as $key=>$value)
+                  <option value="{{$key}}">{{$value}}</option>
+                @endforeach
+              </select>
               <font color="red">{{$errors->first('test_score')}}</font>
             </div>
             <div class="form-group">

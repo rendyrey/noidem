@@ -45,7 +45,7 @@
                       </ul>
                       <div id="myTabContent" class="tab-content">
                         <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
-                           <table id="datatable" class="table table-striped table-bordered table_dashboard">
+                           <table id="" class="table table-striped table-bordered table_dashboard">
                 <thead>
                   <tr>
                     <th>No Applicant</th>
@@ -81,10 +81,48 @@
                   @endforeach
                 </tbody>
               </table>
+              <div class="text-right">
+              <button type="button" class="btn btn-primary" id="invite">Invite</button>
+              <button type="button" class="btn btn-primary" id="check-in">Check-in</button>
+              </div>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="tab_content2" aria-labelledby="profile-tab">
-                          <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo
-                            booth letterpress, commodo enim craft beer mlkshk aliquip</p>
+                          <table id="" class="table table-striped table-bordered table_dashboard">
+                <thead>
+                  <tr>
+                    <th>No Applicant</th>
+                    <th>Name</th>
+                    <th>Edu Level</th>
+                    <th>Institution Name</th>
+                    <th>Major</th>
+                    <th><input type="checkbox" class="selectAll"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php $i=0;?>
+                  @foreach($pelamar_invited as $value)
+                    <tr>
+                      <?php
+                      $lbl = "";
+                      if($value->status_pelamar == "Passed") {
+                        $lbl = "label-success";
+                      } elseif ($value->status_pelamar == "Awaiting") {
+                        $lbl = "label-warning";
+                      } else {
+                        $lbl = "label-danger";
+                      }
+                      ?>
+                      <td><a href="{{url("pelamar/$value->id/detail")}}" target="_blank"><font color="blue">{{$value->no_applicant}}</font></a></td>
+                      <td>{{$value->nama}}</td>
+                      <td>{{$value->tingkat_pendidikan->tingkat}}</td>
+                      <td>{{$value->institusi->nama_institusi}}</td>
+                      <td>{{$value->major->major}}</td>
+                      <td><input class="checkBoxClass" type="checkbox" name="checkbox[]" value="{{$i}}"></td>
+                    </tr>
+                    <?php $i++;?>
+                  @endforeach
+                </tbody>
+              </table>
                         </div>
                         <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
                           <p>xxFood truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo

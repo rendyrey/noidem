@@ -35,8 +35,12 @@ Route::get('pelamar_inproses/get_psychotest','PelamarController@get_psychotest')
 Route::post('pelamar_inproses/tambah_schedule','PelamarController@tambah_schedule');
 Route::post('pelamar_inproses/update_schedule','PelamarController@update_schedule');
 Route::get('pelamar_inproses/details/{id}','PelamarController@details');
+
 //pelamar awaiting
 Route::get('pelamar_awaiting','PelamarController@pelamar_awaiting');
+
+//pelamar failed
+Route::get('pelamar_failed','PelamarController@pelamar_failed');
 Route::get('/2', function () {
     return view('formlamaran2');
 });

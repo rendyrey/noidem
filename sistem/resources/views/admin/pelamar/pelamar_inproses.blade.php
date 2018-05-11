@@ -140,6 +140,7 @@
                         @endforeach
                       </tbody>
                     </table>
+                    <button type="button" class="btn btn-primary" id="inproses_proses">Process</button>
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
 
@@ -152,7 +153,7 @@
       </div>
 
       <!-- calendar modal -->
-      <div id="CalenderModalNew" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div id="CalenderModalNew" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
 
@@ -208,7 +209,7 @@
           </div>
         </div>
       </div>
-      <div id="CalenderModalEdit" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div id="CalenderModalEdit" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
 

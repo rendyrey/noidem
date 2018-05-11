@@ -13,4 +13,12 @@ class SyaratPsychotest extends Model
     public function get_test_type(){
         return $this->belongsTo('App\TestType','test_type');
     }
+
+    public function posisi(){
+        return $this->belongsTo('App\Posisi','position');
+    }
+
+    public function get_major(){
+        return $this->belongsTo('App\Major','major');
+    }
 }

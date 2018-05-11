@@ -9,6 +9,7 @@ use App\SyaratPsychotest;
 use App\SyaratPrescreening;
 use App\TestType;
 use App\Major;
+use App\Posisi;
 use App\TingkatPendidikan;
 
 class KriteriaSyaratController extends Controller
@@ -30,6 +31,8 @@ class KriteriaSyaratController extends Controller
       $data['syarat_psychotest_khusus'] = SyaratPsychotest::where('type','khusus')->get();
       $data['test_type_opt'] = TestType::all()->lists('test_type','id');
       $data['major_opt'] = Major::orderBy('major','asc')->lists('major','id');
+      $data['position_category_opt'] = ['Lapangan','Pusat'];
+      $data['position_opt'] = Posisi::orderBy('posisi','asc')->lists('posisi','id');
       return view('admin.kriteria_syarat.syarat_psychotest',$data);
     }
 
@@ -57,7 +60,7 @@ class KriteriaSyaratController extends Controller
         'position'=>'required',
         'major'=>'required',
         'test_type'=>'required',
-        'test_score'=>'required'
+        'test_score'=>'required|numeric'
       ]);
       $syarat_psychotest = new SyaratPsychotest;
       $syarat_psychotest->position_category = "-";
@@ -76,12 +79,15 @@ class KriteriaSyaratController extends Controller
     public function syarat_psychotest_edit($id){
       $data['syarat_psychotest'] = SyaratPsychotest::find($id);
       $data['test_type_opt'] = TestType::all()->lists('test_type','id');
+      $data['position_category_opt'] = ['Lapangan','Pusat'];
       return view('admin.kriteria_syarat.syarat_psychotest_edit',$data);
     }
-
+    
     public function syarat_psychotest_edit_khusus($id){
       $data['syarat_psychotest'] = SyaratPsychotest::find($id);
       $data['test_type_opt'] = TestType::all()->lists('test_type','id');
+      $data['position_opt'] = Posisi::orderBy('posisi','asc')->lists('posisi','id');
+      $data['major_opt'] = Major::orderBy('major','asc')->lists('major','id');
       return view('admin.kriteria_syarat.syarat_psychotest_edit_khusus',$data);
     }
 
@@ -90,7 +96,7 @@ class KriteriaSyaratController extends Controller
       $this->validate($request,[
         'position_category'=>'required',
         'test_type'=>'required',
-        'test_score'=>'required'
+        'test_score'=>'required|numeric'
       ]);
       $update = SyaratPsychotest::find($id);
       $update->position_category = $request->position_category;
@@ -139,7 +145,7 @@ class KriteriaSyaratController extends Controller
         'id_tingkat_pendidikan'=>'required',
         'accreditation'=>'required',
         'gpa'=>'required|regex:/^[0-4]\.?[0-9]{0,2}$/',
-        'study_period'=>'required|regex:/^[0-9]\.?[5]?$/',
+        'study_period'=>'required|regex:/^[0-9]{1,2}\.?[5]?$/',
         'age'=>'required|regex:/^[0-9]{0,2}$/'
       ]);
       $syarat = new SyaratPrescreening;
@@ -164,7 +170,7 @@ class KriteriaSyaratController extends Controller
         'id_tingkat_pendidikan'=>'required',
         'accreditation'=>'required',
         'gpa'=>'required|regex:/^[0-4]\.?[0-9]{0,2}$/',
-        'study_period'=>'required|regex:/^[0-9]\.?[5]?$/',
+        'study_period'=>'required|regex:/^[0-9]{1,2}\.?[5]?$/',
         'age'=>'required|regex:/^[0-9]{0,2}$/',
         'is_active'=>'required'
       ]);
@@ -214,7 +220,7 @@ class KriteriaSyaratController extends Controller
         'id_tingkat_pendidikan'=>'required',
         'accreditation'=>'required',
         'gpa'=>'required|regex:/^[0-4]\.?[0-9]{0,2}$/',
-        'study_period'=>'required|regex:/^[0-9]\.?[5]?$/',
+        'study_period'=>'required|regex:/^[0-9]{1,2}\.?[5]?$/',
         'age'=>'required|regex:/^[0-9]{0,2}$/'
       ]);
       $update = SyaratPrescreening::find($id);

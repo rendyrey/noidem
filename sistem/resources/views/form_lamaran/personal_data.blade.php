@@ -13,7 +13,7 @@
 
 							<div class="col-xs-12 col-sm-5">
 								<span class="block input-icon input-icon-right">
-									<input type="text" name="nama" id="nama" class="width-100" placeholder="Name as ID Card" />
+									<input type="text" name="nama" id="nama" class="width-100" placeholder="Name as ID Card" value="{{old('nama')}}">
 									<i class="ace-icon fa fa-pencil-square-o"></i>
 								</span>
 							</div>

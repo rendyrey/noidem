@@ -14,9 +14,9 @@ class Posisi extends Migration
     {
         Schema::create('posisi', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('divisi');
+            $table->string('divisi')->nullable();
             $table->string('posisi');
-            $table->string('posisi_publish');
+            $table->string('posisi_publish')->nullable();
             $table->timestamps();
         });
     }

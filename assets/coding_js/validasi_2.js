@@ -12,7 +12,10 @@ $.validator.addMethod('filesize', function (value, element, param) {
               //id
 		        	'id_iklan': {
 		                required: true
-		            },
+					},
+					'id_tingkat_pendidikan':{
+						required: true
+					},
 		            'job_interest_1': {
 		                required: true
 		            },

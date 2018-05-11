@@ -36,7 +36,11 @@ class Pelamar extends Model
     	return $this->belongsTo('App\Major', 'id_major');
     }
 
-    public function Bidang_usaha()
+    public function akreditasi(){
+      return $this->belongsTo('App\Akreditasi','id_major');
+    }
+
+    public function get_bidang_usaha()
     {
     	return $this->belongsTo('App\Bidang_usaha', 'id_bidang_usaha');
     }
