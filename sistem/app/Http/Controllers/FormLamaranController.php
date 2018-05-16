@@ -15,6 +15,7 @@ use App\Major;
 use App\MajorGrup;
 use App\Pelamar;
 use App\Provinsi;
+use App\SyaratPrescreening;
 use App\TanggalPsychotest;
 use App\TingkatPendidikan;
 // use App\KriteriaSyarat;
@@ -100,7 +101,56 @@ class FormLamaranController extends Controller
 
     public function tambah(Request $request)
     {
-        
+
+        $this->validate($request,[
+          'id_iklan'=>'required',
+          'job_interest_1'=>'required',
+          'nama'=>'required',
+          'jenis_kelamin'=>'required',
+          'status'=>'required',
+          'date_of_birth'=>'required|numeric',
+          'month_of_birth'=>'required',
+          'year_of_birth'=>'required',
+          'email'=>'required|email',
+          'mobile_phone'=>'required|numeric',
+          'photo'=>'required|image|max:1024',
+          'id_tingkat_pendidikan'=>'required',
+          'id_institusi'=>'required',
+          'id_major'=>'required',
+          'gpa'=>'required|regex:/^[0-4]\.[0-9]{1,2}$/',
+          'start_month_education'=>'required',
+          'start_year_education'=>'required',
+          'end_month_education'=>'required',
+          'end_year_education'=>'required',
+          'id_tanggal_psychotest'=>'required'
+        ],[
+          'id_iklan.required' => 'Vacancy is required',
+          'nama.required'=>'Name is required',
+          'job_interest_1.required'=>'Job Interest is required',
+          'jenis_kelamin.required'=>'Gender is required',
+          'status.required'=>'Marital Status is required',
+          'date_of_birth.required'=>'Date of birth is required',
+          'month_of_birth.required'=>'Month of birth is required',
+          'year_of_birth.required'=>'Year of birth is required',
+          'email.required'=>'Email is required',
+          'email.email'=>'Email must be in e-mail address format',
+          'mobile_phone.required'=>'Mobile phone is required',
+          'mobile_phone.numeric'=>'Mobile phone must be in numeric format',
+          'photo.required'=>'Photo is required',
+          'photo.image'=>'Photo must be in image format',
+          'photo.max'=>"Photo's size must be under 2 MB",
+          'id_tingkat_pendidikan.required'=>'Education level is required',
+          'id_institusi.required'=>'Institution is required',
+          'id_major.required'=>'Major is required',
+          'gpa.required'=>'GPA is required',
+          'gpa.regex'=>'GPA format must be X.XX',
+          'start_month_education.required'=>'Start Month is required',
+          'start_year_education.required'=>'Start Year is required',
+          'end_month_education.required'=>'End Month is required',
+          'end_year_education.required'=>'End Year is required',
+          'id_tanggal_psychotest.required'=>'Psychotest Readiness is required'
+        ]);
+
         $actual_fresh1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->value('actual_fresh');
         $actual_fresh2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->value('actual_fresh');
         $actual_fresh3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->value('actual_fresh');
@@ -110,7 +160,7 @@ class FormLamaranController extends Controller
         $actual_pass_fresh2 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_2)->value('actual_pass_fresh');
         $actual_pass_fresh3 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_3)->value('actual_pass_fresh');
         $actual_pass_fresh4 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_4)->value('actual_pass_fresh');
-        
+
         $actual_exp1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->value('actual_exp');
         $actual_exp2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->value('actual_exp');
         $actual_exp3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->value('actual_exp');
@@ -120,7 +170,7 @@ class FormLamaranController extends Controller
         $actual_pass_exp2 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_2)->value('actual_pass_exp');
         $actual_pass_exp3 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_3)->value('actual_pass_exp');
         $actual_pass_exp4 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_4)->value('actual_pass_exp');
-        
+
         $awaiting_fresh1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->value('awaiting_fresh');
         $awaiting_fresh2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->value('awaiting_fresh');
         $awaiting_fresh3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->value('awaiting_fresh');
@@ -135,16 +185,14 @@ class FormLamaranController extends Controller
         $actual_pg_fresh2 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_2)->value('actual_pg_fresh');
         $actual_pg_fresh3 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_3)->value('actual_pg_fresh');
         $actual_pg_fresh4 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_4)->value('actual_pg_fresh');
-        
+
         $actual_pg_exp1 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_1)->value('actual_pg_exp');
         $actual_pg_exp2 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_2)->value('actual_pg_exp');
         $actual_pg_exp3 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_3)->value('actual_pg_exp');
         $actual_pg_exp4 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_4)->value('actual_pg_exp');
-        
-        $id_syarat1 = Loker::where('no_rcr',$request->job_interest_1)->value('id_syarat');
-        $id_syarat2 = Loker::where('no_rcr',$request->job_interest_2)->value('id_syarat');
-        $id_syarat3 = Loker::where('no_rcr',$request->job_interest_3)->value('id_syarat');
-        $id_syarat4 = Loker::where('no_rcr',$request->job_interest_4)->value('id_syarat');
+
+       
+
         $data_exist = Pelamar::where('nama', '=', $request->nama)
             ->where('tgl_lahir', '=', $request->month_of_birth . "/" . $request->date_of_birth . "/" . $request->year_of_birth)
             ->where('mobile_phone', '=', $request->mobile_phone)
@@ -182,8 +230,8 @@ class FormLamaranController extends Controller
                 $pelamar->photo = $filename;
 
             }
+            //kondisi apabila pelamar adalah D3, D4, atau S1
             if ($request->id_tingkat_pendidikan == 1 or $request->id_tingkat_pendidikan == 2 or $request->id_tingkat_pendidikan == 3) {
-
                 $pelamar->id_tingkat_pendidikan = $request->id_tingkat_pendidikan;
                 $pelamar->id_institusi = $request->id_institusi;
                 $pelamar->other_institusi = $request->other_institusi;
@@ -250,59 +298,60 @@ class FormLamaranController extends Controller
             $to_usia = Carbon::today();
             $usia = $from_usia->diff($to_usia)->y;
 
+            //check ada atau nggak
+            $check_syarat = SyaratPrescreening::where('work_experience','No')->where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+            ->where('accreditation',$akreditasi)->where('gpa','<=',$request->gpa)
+            ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->first();
+            dd($check_syarat);
+
             //Freshgraduate
             if ($request->id_bidang_usaha == "") {
-                
+
                 //-- update actual fresh
                 $jml_actual_fresh1 = $actual_fresh1 + 1;
                 $jml_actual_fresh2 = $actual_fresh2 + 1;
                 $jml_actual_fresh3 = $actual_fresh3 + 1;
                 $jml_actual_fresh4 = $actual_fresh4 + 1;
-                
+
                 if ($request->job_interest_1) {
                     $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
                     $update_pelamar_passed1->actual_fresh = $jml_actual_fresh1;
                     $update_pelamar_passed1->save();
                 }
-                
+
                 if ($request->job_interest_2) {
                     $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
                     $update_pelamar_passed2->actual_fresh = $jml_actual_fresh2;
                     $update_pelamar_passed2->save();
                 }
-                
+
                 if ($request->job_interest_3) {
                     $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
                     $update_pelamar_passed3->actual_fresh = $jml_actual_fresh3;
                     $update_pelamar_passed3->save();
                 }
-                
+
                 if ($request->job_interest_4) {
                     $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
                     $update_pelamar_passed4->actual_fresh = $jml_actual_fresh4;
                     $update_pelamar_passed4->save();
                 }
-                //-- end update actual fresh
-                //mendapatkan
-                // $syarat1 = KriteriaSyarat::where('id',$id_syarat1)->first();
-                // $syarat2 = KriteriaSyarat::where('id',$id_syarat2)->first();
-                // $syarat3 = KriteriaSyarat::where('id',$id_syarat3)->first();
-                // $syarat4 = KriteriaSyarat::where('id',$id_syarat4)->first();
-                
+              
+
                 if ($level == "S1") {
-                    
+
                     if ($lama_studi <= 5 and $akreditasi == "A" and $request->gpa >= 2.75 and $usia >= 18) {
-                        
+
                         $pelamar->status_pelamar = "Passed";
                         $pelamar->keterangan = "actual_fresh";
-                        
+
                     } elseif ($lama_studi <= 5 and $akreditasi == "B" and $request->gpa >= 3 and $usia >= 18) {
-                        
+
                         $pelamar->status_pelamar = "Passed";
                         $pelamar->keterangan = "actual_fresh";
-                        
+
                     } elseif ($lama_studi <= 5 and $request->gpa >= 3 and $usia >= 18) {
-                        
+
                         $pelamar->status_pelamar = "Awaiting";
                         $pelamar->keterangan = "awaiting_fresh";
 
@@ -382,19 +431,19 @@ class FormLamaranController extends Controller
                         $update_pelamar_passed1->actual_pass_fresh = $jml_actual_pass_fresh1;
                         $update_pelamar_passed1->save();
                     }
-    
+
                     if ($request->job_interest_2) {
                         $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
                         $update_pelamar_passed2->actual_pass_fresh = $jml_actual_pass_fresh2;
                         $update_pelamar_passed2->save();
                     }
-    
+
                     if ($request->job_interest_3) {
                         $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
                         $update_pelamar_passed3->actual_pass_fresh = $jml_actual_pass_fresh3;
                         $update_pelamar_passed3->save();
                     }
-    
+
                     if ($request->job_interest_4) {
                         $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
                         $update_pelamar_passed4->actual_pass_fresh = $jml_actual_pass_fresh4;
@@ -545,7 +594,7 @@ class FormLamaranController extends Controller
 
                 if ($pelamar->status_pelamar == "Passed") {
 
-                
+
                     //-- update kuota psychotest
                     $id_tgl_psychotest = $request->id_tanggal_psychotest;
                     $get_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
@@ -567,19 +616,19 @@ class FormLamaranController extends Controller
                         $update_pelamar_passed1->actual_pass_exp = $jml_actual_pass_exp1;
                         $update_pelamar_passed1->save();
                     }
-                    
+
                     if ($request->job_interest_2) {
                         $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
                         $update_pelamar_passed2->actual_pass_exp = $jml_actual_pass_exp2;
                         $update_pelamar_passed2->save();
                     }
-                    
+
                     if ($request->job_interest_3) {
                         $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
                         $update_pelamar_passed3->actual_pass_exp = $jml_actual_pass_exp3;
                         $update_pelamar_passed3->save();
                     }
-                    
+
                     if ($request->job_interest_4) {
                         $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
                         $update_pelamar_passed4->actual_pass_exp = $jml_actual_pass_exp4;
@@ -679,7 +728,7 @@ class FormLamaranController extends Controller
                 $detail_we->save();
 
             }
-            
+
             return redirect('/')->with('message', 'Terima kasih, Data berhasil disimpan!');
 
         }

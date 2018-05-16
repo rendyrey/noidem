@@ -64,9 +64,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <?php $i=0; ?>
+                        <?php $i=0; ?>
                         @foreach($pelamar_recruitment as $value)
-                        <tr>
+                          <tr>
                             <td>{{$value->no_applicant}}</td>
                             <td>{{$value->nama}}</td>
                             <td>{{$value->jenis_kelamin}}</td>
@@ -77,8 +77,8 @@
                             <td>{{$value->id_bidang_usaha=='0'?'No':'Yes'}}</td>
                             <td>{{$value->get_bidang_usaha->bidang_usaha}}</td>
                             <td><input class="checkBoxClass" type="checkbox" name="checkbox[]" value="{{$i}}"></td>
-                        </tr>
-                        <?php $i++;?>
+                          </tr>
+                          <?php $i++;?>
                         @endforeach
                       </tbody>
                     </table>
@@ -105,9 +105,9 @@
                         </tr>
                       </thead>
                       <tbody>
-                      <?php $i=0; ?>
+                        <?php $i=0; ?>
                         @foreach($pelamar_recruitment as $value)
-                        <tr>
+                          <tr>
                             <td>{{$value->no_applicant}}</td>
                             <td>{{$value->nama}}</td>
                             <td>{{$value->tingkat_pendidikan->tingkat}}</td>
@@ -121,14 +121,43 @@
                             <td>{{$value->id_bidang_usaha=='0'?'No':'Yes'}}</td>
                             <td>{{$value->get_bidang_usaha->bidang_usaha}}</td>
                             <td><input class="checkBoxClass" type="checkbox" name="checkbox[]" value="{{$i}}"></td>
-                        </tr>
-                        <?php $i++;?>
+                          </tr>
+                          <?php $i++;?>
                         @endforeach
                       </tbody>
                     </table>
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="tab_content3" aria-labelledby="profile-tab">
+                    <table id="" class="table table-striped table-bordered table_dashboard">
+                      <thead>
+                        <tr>
+                          <th>No</th>
+                          <th>No Applicant</th>
+                          <th>Name</th>
+                          <th>NTM</th>
+                          <th>Ketelitian & Kecepatan</th>
+                          <th>Hitung cepat</th>
+                          <th>Logika Bahasa</th>
+                          <th>Kreativitas Angka</th>
+                          <th>Kreativitas Gambar</th>
+                          <th>Daftar Isian</th>
+                          <th>Metode Tes</th>
+                          <th><input type="checkbox" class="selectAll"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <?php $i=0; ?>
+                        @foreach($pelamar_recruitment as $value)
+                          <tr>
 
+                            <td><input class="checkBoxClass" type="checkbox" name="checkbox[]" value="{{$i}}"></td>
+                          </tr>
+                          <?php $i++;?>
+                        @endforeach
+                      </tbody>
+                    </table>
+                  </div>
+                  <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
                   </div>
                 </div>
               </div>
@@ -137,5 +166,5 @@
         </div>
       </div>
 
-      
-  @endsection
+
+    @endsection

@@ -865,4 +865,9 @@ class PelamarController extends Controller
 		return view('admin.pelamar.pelamar_inproses_details',$data);
 	}
 
+	public function add_applicant($id){
+		$data['tgl_psychotest'] = TanggalPsychotest::find($id);
+		return view('admin.pelamar.pelamar_inproses_add_applicant',$data);
+	}
+
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 100131
 File Encoding         : 65001
 
-Date: 2018-04-10 09:48:14
+Date: 2018-05-14 14:43:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,7 +42,7 @@ INSERT INTO `advertising_category` VALUES ('11', 'Events', '2016-10-04 22:50:39'
 INSERT INTO `advertising_category` VALUES ('12', 'Job Fair', '2016-10-04 22:50:51', '2016-10-04 22:50:51', null);
 INSERT INTO `advertising_category` VALUES ('13', 'Campus Recruitment', '2016-10-04 22:51:13', '2016-10-04 22:51:13', null);
 INSERT INTO `advertising_category` VALUES ('14', 'Head Hunter', '2017-03-06 04:04:27', '2017-03-06 04:04:27', null);
-INSERT INTO `advertising_category` VALUES ('15', 'Asosiasi Profesi', '2017-03-06 06:54:16', '2018-04-02 15:05:54', null);
+INSERT INTO `advertising_category` VALUES ('15', 'Asosiasi Profesi', '2017-03-06 06:54:16', '2018-04-26 12:01:38', null);
 
 -- ----------------------------
 -- Table structure for advertising_media
@@ -63,7 +63,7 @@ CREATE TABLE `advertising_media` (
 -- ----------------------------
 -- Records of advertising_media
 -- ----------------------------
-INSERT INTO `advertising_media` VALUES ('4', '4', 'Company Website', '2016-10-04 22:51:39', '2018-04-02 15:14:02', null);
+INSERT INTO `advertising_media` VALUES ('4', '4', 'Company Website', '2016-10-04 22:51:39', '2018-04-26 14:26:14', null);
 INSERT INTO `advertising_media` VALUES ('5', '5', 'Fakultas Farmasi UGM', '2016-10-04 22:52:19', '2016-10-04 22:52:19', null);
 INSERT INTO `advertising_media` VALUES ('6', '6', 'Job Street', '2016-10-04 22:52:36', '2017-03-06 04:52:27', null);
 INSERT INTO `advertising_media` VALUES ('7', '7', 'Medion Employees', '2016-10-04 22:53:39', '2017-03-06 05:39:33', null);
@@ -1619,6 +1619,7 @@ CREATE TABLE `bidang_usaha` (
 -- ----------------------------
 -- Records of bidang_usaha
 -- ----------------------------
+INSERT INTO `bidang_usaha` VALUES ('0', '-', '0000-00-00 00:00:00', '0000-00-00 00:00:00', null);
 INSERT INTO `bidang_usaha` VALUES ('1', 'Animal Health', null, null, null);
 INSERT INTO `bidang_usaha` VALUES ('2', 'Agriculture', '2016-09-22 00:45:24', '2016-09-22 00:45:24', null);
 INSERT INTO `bidang_usaha` VALUES ('3', 'Mining', '2016-09-22 00:31:53', '2016-09-22 00:31:53', null);
@@ -1664,11 +1665,14 @@ CREATE TABLE `detail_edu_bg` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of detail_edu_bg
 -- ----------------------------
+INSERT INTO `detail_edu_bg` VALUES ('1', '1', '3', '38', '', '51', '', '3.88', '2013', '2017', null, '0', '', '0', '', '', '', '', '2018-04-17 01:20:11', '2018-04-17 01:20:11');
+INSERT INTO `detail_edu_bg` VALUES ('2', '2', '3', '24', '', '54', '', '3.75', '2015', '2017', null, '0', '', '0', '', '', '', '', '2018-05-09 06:25:28', '2018-05-09 06:25:28');
+INSERT INTO `detail_edu_bg` VALUES ('3', '3', '2', '3', '', '1', '', '3.55', '2013', '2016', null, '0', '', '0', '', '', '', '', '2018-05-09 06:49:55', '2018-05-09 06:49:55');
 
 -- ----------------------------
 -- Table structure for detail_we
@@ -1787,11 +1791,11 @@ CREATE TABLE `iklan` (
 -- ----------------------------
 -- Records of iklan
 -- ----------------------------
-INSERT INTO `iklan` VALUES ('10', '9', '9', '2018-02-23', '2018-03-10', '2018-02-21', '2018-04-27', 'jobfair.medion.co.id', '111', '2018-02-19 19:57:18', '2018-04-02 03:00:52');
-INSERT INTO `iklan` VALUES ('11', '4', '4', '2018-03-01', '2018-03-10', '2018-03-01', '2018-04-27', 'formlamaran.medion.co.id', '321', '2018-02-20 17:49:44', '2018-04-02 00:53:44');
-INSERT INTO `iklan` VALUES ('12', '13', '14', '2018-03-01', '2018-03-07', '2018-03-01', '2018-04-27', 'jobfair.medion.co.id', '', '2018-02-27 17:51:57', '2018-03-29 09:10:03');
-INSERT INTO `iklan` VALUES ('13', '9', '9', '2018-03-07', '2018-03-25', '2018-03-07', '2018-04-27', 'formlamaran.medion.co.id', '456', '2018-03-08 00:20:32', '2018-03-23 08:30:50');
-INSERT INTO `iklan` VALUES ('18', '4', '4', '2018-03-22', '2018-03-28', '2018-03-27', '2018-04-27', 'formlamaran.medion.co.id', '', '2018-03-22 02:15:54', '2018-03-29 09:25:26');
+INSERT INTO `iklan` VALUES ('10', '9', '9', '2018-02-23', '2018-03-10', '2018-02-21', '2018-05-31', 'jobfair.medion.co.id', '111', '2018-02-19 19:57:18', '2018-05-11 01:08:14');
+INSERT INTO `iklan` VALUES ('11', '4', '4', '2018-03-01', '2018-03-10', '2018-03-01', '2018-05-31', 'formlamaran.medion.co.id', '321', '2018-02-20 17:49:44', '2018-05-11 01:08:25');
+INSERT INTO `iklan` VALUES ('12', '13', '14', '2018-03-01', '2018-03-07', '2018-03-01', '2018-04-10', 'jobfair.medion.co.id', '', '2018-02-27 17:51:57', '2018-03-29 09:10:03');
+INSERT INTO `iklan` VALUES ('13', '9', '9', '2018-03-07', '2018-03-25', '2018-03-07', '2018-05-31', 'formlamaran.medion.co.id', '456', '2018-03-08 00:20:32', '2018-05-11 01:09:08');
+INSERT INTO `iklan` VALUES ('18', '4', '4', '2018-03-22', '2018-03-28', '2018-03-27', '2018-04-27', 'formlamaran.medion.co.id', '444', '2018-03-22 02:15:54', '2018-04-17 09:21:19');
 INSERT INTO `iklan` VALUES ('19', '4', '4', '2018-03-23', '2018-03-24', '2018-03-29', '2018-03-31', 'formlamaran.medion.co.id', '', '2018-03-23 02:09:06', '2018-03-29 09:25:51');
 INSERT INTO `iklan` VALUES ('20', '4', '4', '2018-03-23', '2018-03-24', '0000-00-00', '0000-00-00', 'formlamaran.medion.co.id', '', '2018-03-23 02:09:11', '2018-03-23 02:09:11');
 INSERT INTO `iklan` VALUES ('21', '4', '4', '2018-03-23', '2018-03-24', '2018-03-29', '2018-04-06', 'formlamaran.medion.co.id', '', '2018-03-23 02:09:20', '2018-03-29 09:27:06');
@@ -2021,9 +2025,12 @@ CREATE TABLE `loker` (
   `id_tingkat_pendidikan` int(11) NOT NULL,
   `id_major_grup` int(11) NOT NULL,
   `id_major` int(11) NOT NULL,
+  `id_syarat` int(11) NOT NULL,
   `no_rcr` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `position_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `position_publish` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `actual_applicant_fresh` int(11) NOT NULL DEFAULT '0',
+  `actual_applicant_exp` int(11) NOT NULL DEFAULT '0',
   `target_fresh` int(11) NOT NULL DEFAULT '0',
   `target_exp` int(11) NOT NULL DEFAULT '0',
   `actual_fresh` int(11) NOT NULL DEFAULT '0',
@@ -2043,35 +2050,37 @@ CREATE TABLE `loker` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of loker
 -- ----------------------------
-INSERT INTO `loker` VALUES ('1', '1', '500000.00', '500000.00', '1', '14', '36', 'RCR0011', 'TSR', 'Technical Sales Representative', '6', '4', '0', '0', '4', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 20:53:09', '2016-12-26 19:20:57');
-INSERT INTO `loker` VALUES ('2', '1', '1000000.00', '1000000.00', '3', '19', '54', 'RCR0022', 'EAD', 'Programmer', '8', '5', '0', '0', '4', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 20:54:40', '2016-12-26 19:21:10');
-INSERT INTO `loker` VALUES ('3', '2', '100000.00', '100000.00', '1', '4', '12', 'RCR0002', 'Dokter Hewan', 'Dokter Hewan', '5', '5', '0', '1', '2', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 23:05:46', '2016-12-26 23:41:07');
-INSERT INTO `loker` VALUES ('4', '1', '100000.00', '100000.00', '2', '18', '50', 'RCR0003', 'HR', 'Human Resource', '8', '6', '0', '0', '6', '0', '5', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:08:36', '2016-12-05 22:58:45');
-INSERT INTO `loker` VALUES ('5', '2', '100000.00', '100000.00', '4', '1', '1', 'RCR0004', 'Apoteker', 'Apoteker', '2', '2', '0', '1', '1', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:11:46', '2016-12-26 23:41:21');
-INSERT INTO `loker` VALUES ('6', '2', '100000.00', '100000.00', '2', '19', '55', 'RCR0005', 'EAS', 'Analist', '5', '5', '0', '0', '3', '0', '3', '0', '2', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:54:51', '2016-11-30 00:54:51');
-INSERT INTO `loker` VALUES ('7', '3', '500000.00', '500000.00', '2', '19', '52', 'RCR0006', 'EAD', 'Programmer', '10', '5', '0', '0', '5', '0', '4', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 01:14:05', '2016-11-30 01:14:05');
-INSERT INTO `loker` VALUES ('8', '3', '100000.00', '100000.00', '3', '19', '53', 'RCR0007', 'Analist', 'Analist', '5', '5', '0', '0', '3', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 19:08:52', '2016-11-30 19:08:52');
-INSERT INTO `loker` VALUES ('9', '2', '100000.00', '100000.00', '5', '22', '71', 'RCR0008', 'Asst Manager Engginering', 'Asst Manager Engginering', '5', '5', '0', '0', '2', '0', '2', '0', '2', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 23:52:38', '2016-11-30 23:52:38');
-INSERT INTO `loker` VALUES ('10', '1', '750000.00', '750000.00', '1', '1', '1', 'RCR0012', 'NSM', 'Network Administrator', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-06 02:01:16', '2016-12-06 02:05:07');
-INSERT INTO `loker` VALUES ('11', '4', '100000.00', '100000.00', '1', '1', '1', 'RCR0102', 'TSR', 'Sales', '3', '3', '0', '1', '3', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-20 20:04:56', '2016-12-29 01:13:41');
-INSERT INTO `loker` VALUES ('12', '4', '1000000.00', '1000000.00', '3', '18', '50', 'RCR1001', 'HRD', 'HRDRS', '2', '2', '0', '2', '2', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-22 23:33:22', '2016-12-29 01:13:56');
-INSERT INTO `loker` VALUES ('13', '5', '900000.00', '0.00', '3', '18', '88', 'RCR0001', 'HR Recruitment', 'HRD', '10', '10', '2', '3', '10', '0', '5', '0', '2', '2', '0', '0', '0', '0', '0.00', '0.00', '2017-01-03 20:11:40', '2017-01-03 20:11:40');
-INSERT INTO `loker` VALUES ('14', '6', '3000000.00', '0.00', '3', '8', '22', 'RCR201708010002', 'Legal Officer', 'Legal Officer', '0', '15', '0', '0', '0', '0', '8', '0', '0', '0', '0', '4', '0', '0', '0.00', '0.00', '2017-03-13 20:15:43', '2017-03-13 20:15:43');
-INSERT INTO `loker` VALUES ('15', '6', '0.00', '0.00', '4', '4', '11', 'RCR201708010003', 'Technical Sales Representative', 'Technical Sales Representative', '100', '50', '0', '0', '80', '0', '30', '0', '0', '0', '2', '1', '0', '0', '0.00', '0.00', '2017-03-13 20:23:53', '2017-03-13 20:23:53');
-INSERT INTO `loker` VALUES ('16', '7', '300000000.00', '0.00', '1', '1', '95', 'rcr12023456777', 'cf', 'cc', '90', '60', '0', '0', '45', '0', '20', '0', '0', '0', '1', '1', '0', '0', '0.00', '0.00', '2017-03-15 20:45:17', '2017-03-15 20:45:17');
-INSERT INTO `loker` VALUES ('17', '9', '500000.00', '0.00', '3', '1', '95', 'adsfadf', 'programmer', 'Programmer', '50', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2018-02-07 00:15:06', '2018-02-07 00:15:06');
-INSERT INTO `loker` VALUES ('18', '9', '0.00', '0.00', '1', '1', '95', 'sdfgs', '', 'ONcom', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2018-02-07 00:15:50', '2018-02-07 00:15:50');
-INSERT INTO `loker` VALUES ('21', '11', '1000000.00', '2000000.00', '1', '18', '87', 'RCR003', 'Manajemen', 'Manajemen Staff', '200', '50', '0', '0', '100', '0', '20', '0', '0', '0', '5', '2', '0', '0', '0.00', '0.00', '2018-02-20 17:50:59', '2018-02-20 17:50:59');
-INSERT INTO `loker` VALUES ('25', '13', '900000000.00', '800000000.00', '1', '1', '1', 'RCR123', 'ENAK', 'GAK ENAK', '20', '10', '0', '0', '10', '0', '10', '0', '14', '10', '10', '10', '0', '0', '0.00', '0.00', '2018-03-23 08:05:38', '2018-03-23 08:30:02');
-INSERT INTO `loker` VALUES ('26', '10', '9000000.00', '9000000.00', '1', '23', '17', 'RCR246', 'Farmasi', 'Farmasi Publish', '200', '100', '0', '0', '100', '0', '50', '0', '0', '0', '50', '10', '0', '0', '0.00', '0.00', '2018-03-28 07:49:04', '2018-03-28 07:49:04');
-INSERT INTO `loker` VALUES ('27', '21', '8000000.00', '9000000.00', '1', '1', '1', 'RCR777', 'Posisi IT', 'Computer Engineering', '200', '100', '0', '0', '50', '0', '20', '0', '10', '10', '10', '10', '0', '0', '0.00', '0.00', '2018-03-29 07:57:50', '2018-03-29 07:57:50');
-INSERT INTO `loker` VALUES ('28', '27', '8000000.00', '7000000.00', '3', '1', '1', 'RCR888', 'posisi sisi', 'Tukang Elas', '100', '100', '0', '0', '100', '0', '100', '0', '100', '100', '100', '100', '0', '0', '0.00', '0.00', '2018-03-29 07:59:09', '2018-03-29 07:59:09');
-INSERT INTO `loker` VALUES ('29', '18', '90000000.00', '50000000.00', '1', '1', '1', 'RCR111', 'Posisi brau', 'baru posisi', '100', '100', '0', '0', '100', '0', '100', '0', '100', '100', '100', '100', '0', '0', '0.00', '0.00', '2018-03-29 08:44:26', '2018-03-29 08:44:26');
+INSERT INTO `loker` VALUES ('1', '1', '500000.00', '500000.00', '1', '14', '36', '1', 'RCR0011', 'TSR', 'Technical Sales Representative', '0', '0', '6', '4', '0', '0', '4', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 20:53:09', '2016-12-26 19:20:57');
+INSERT INTO `loker` VALUES ('2', '1', '1000000.00', '1000000.00', '3', '19', '54', '1', 'RCR0022', 'EAD', 'Programmer', '0', '0', '8', '5', '0', '0', '4', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 20:54:40', '2016-12-26 19:21:10');
+INSERT INTO `loker` VALUES ('3', '2', '100000.00', '100000.00', '1', '4', '12', '1', 'RCR0002', 'Dokter Hewan', 'Dokter Hewan', '0', '0', '5', '5', '0', '1', '2', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-29 23:05:46', '2016-12-26 23:41:07');
+INSERT INTO `loker` VALUES ('4', '1', '100000.00', '100000.00', '2', '18', '50', '1', 'RCR0003', 'HR', 'Human Resource', '0', '0', '8', '6', '0', '0', '6', '0', '5', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:08:36', '2016-12-05 22:58:45');
+INSERT INTO `loker` VALUES ('5', '2', '100000.00', '100000.00', '4', '1', '1', '1', 'RCR0004', 'Apoteker', 'Apoteker', '0', '0', '2', '2', '0', '1', '1', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:11:46', '2016-12-26 23:41:21');
+INSERT INTO `loker` VALUES ('6', '2', '100000.00', '100000.00', '2', '19', '55', '1', 'RCR0005', 'EAS', 'Analist', '0', '0', '5', '5', '0', '0', '3', '0', '3', '0', '2', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 00:54:51', '2016-11-30 00:54:51');
+INSERT INTO `loker` VALUES ('7', '3', '500000.00', '500000.00', '2', '19', '52', '1', 'RCR0006', 'EAD', 'Programmer', '0', '0', '10', '5', '0', '0', '5', '0', '4', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 01:14:05', '2016-11-30 01:14:05');
+INSERT INTO `loker` VALUES ('8', '3', '100000.00', '100000.00', '3', '19', '53', '1', 'RCR0007', 'Analist', 'Analist', '0', '0', '5', '5', '0', '0', '3', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 19:08:52', '2016-11-30 19:08:52');
+INSERT INTO `loker` VALUES ('9', '2', '100000.00', '100000.00', '5', '22', '71', '1', 'RCR0008', 'Asst Manager Engginering', 'Asst Manager Engginering', '0', '0', '5', '5', '0', '0', '2', '0', '2', '0', '2', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-11-30 23:52:38', '2016-11-30 23:52:38');
+INSERT INTO `loker` VALUES ('10', '1', '750000.00', '750000.00', '1', '1', '1', '1', 'RCR0012', 'NSM', 'Network Administrator', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-06 02:01:16', '2016-12-06 02:05:07');
+INSERT INTO `loker` VALUES ('11', '4', '100000.00', '100000.00', '1', '1', '1', '1', 'RCR0102', 'TSR', 'Sales', '0', '0', '3', '3', '0', '1', '3', '0', '3', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-20 20:04:56', '2016-12-29 01:13:41');
+INSERT INTO `loker` VALUES ('12', '4', '1000000.00', '1000000.00', '3', '18', '50', '1', 'RCR1001', 'HRD', 'HRDRS', '0', '0', '2', '2', '0', '2', '2', '0', '2', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2016-12-22 23:33:22', '2016-12-29 01:13:56');
+INSERT INTO `loker` VALUES ('13', '5', '900000.00', '0.00', '3', '18', '88', '1', 'RCR0001', 'HR Recruitment', 'HRD', '0', '0', '10', '10', '2', '3', '10', '0', '5', '0', '2', '2', '0', '0', '0', '0', '0.00', '0.00', '2017-01-03 20:11:40', '2017-01-03 20:11:40');
+INSERT INTO `loker` VALUES ('14', '6', '3000000.00', '0.00', '3', '8', '22', '1', 'RCR201708010002', 'Legal Officer', 'Legal Officer', '0', '0', '0', '15', '0', '0', '0', '0', '8', '0', '0', '0', '0', '4', '0', '0', '0.00', '0.00', '2017-03-13 20:15:43', '2017-03-13 20:15:43');
+INSERT INTO `loker` VALUES ('15', '6', '0.00', '0.00', '4', '4', '11', '1', 'RCR201708010003', 'Technical Sales Representative', 'Technical Sales Representative', '0', '0', '100', '50', '0', '0', '80', '0', '30', '0', '0', '0', '2', '1', '0', '0', '0.00', '0.00', '2017-03-13 20:23:53', '2017-03-13 20:23:53');
+INSERT INTO `loker` VALUES ('16', '7', '300000000.00', '0.00', '1', '1', '95', '1', 'rcr12023456777', 'cf', 'cc', '0', '0', '90', '60', '0', '0', '45', '0', '20', '0', '0', '0', '1', '1', '0', '0', '0.00', '0.00', '2017-03-15 20:45:17', '2017-03-15 20:45:17');
+INSERT INTO `loker` VALUES ('17', '9', '500000.00', '0.00', '3', '1', '95', '1', 'adsfadf', 'programmer', 'Programmer', '0', '0', '50', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2018-02-07 00:15:06', '2018-02-07 00:15:06');
+INSERT INTO `loker` VALUES ('18', '9', '0.00', '0.00', '1', '1', '95', '1', 'sdfgs', '', 'ONcom', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0.00', '0.00', '2018-02-07 00:15:50', '2018-02-07 00:15:50');
+INSERT INTO `loker` VALUES ('21', '11', '1000000.00', '2000000.00', '1', '18', '87', '1', 'RCR003', 'Manajemen', 'Manajemen Staff', '0', '0', '200', '50', '2', '0', '100', '0', '20', '0', '0', '0', '5', '2', '0', '0', '0.00', '0.00', '2018-02-20 17:50:59', '2018-05-09 06:55:34');
+INSERT INTO `loker` VALUES ('25', '13', '900000000.00', '800000000.00', '1', '1', '1', '1', 'RCR123', 'ENAK', 'uwenak', '0', '0', '20', '10', '10', '1', '10', '0', '10', '0', '17', '10', '10', '10', '1', '0', '0.00', '0.00', '2018-03-23 08:05:38', '2018-05-09 06:58:14');
+INSERT INTO `loker` VALUES ('26', '10', '9000000.00', '9000000.00', '1', '1', '17', '1', 'RCR246', 'Farmasif', 'Farmasi Publish', '0', '0', '200', '100', '0', '0', '100', '0', '50', '0', '0', '0', '50', '10', '0', '0', '0.00', '0.00', '2018-03-28 07:49:04', '2018-04-16 06:31:19');
+INSERT INTO `loker` VALUES ('27', '21', '8000000.00', '9000000.00', '1', '1', '1', '1', 'RCR777', 'Posisi IT', 'Computer Engineering', '0', '0', '200', '100', '0', '0', '50', '0', '20', '0', '10', '10', '10', '10', '0', '0', '0.00', '0.00', '2018-03-29 07:57:50', '2018-03-29 07:57:50');
+INSERT INTO `loker` VALUES ('28', '27', '8000000.00', '7000000.00', '3', '1', '1', '1', 'RCR888', 'posisi sisi', 'Tukang Elas', '0', '0', '100', '100', '0', '0', '100', '0', '100', '0', '100', '100', '100', '100', '0', '0', '0.00', '0.00', '2018-03-29 07:59:09', '2018-03-29 07:59:09');
+INSERT INTO `loker` VALUES ('29', '18', '90000000.00', '50000000.00', '1', '1', '1', '1', 'RCR111', 'Posisi brau', 'baru posisi', '0', '0', '100', '100', '0', '0', '100', '0', '100', '0', '100', '100', '100', '100', '0', '0', '0.00', '0.00', '2018-03-29 08:44:26', '2018-03-29 08:44:26');
+INSERT INTO `loker` VALUES ('30', '10', '9000000.00', '1000000.00', '1', '1', '150', '1', 'RCR2705', 'Administrasi WSR', 'Administration', '0', '0', '100', '50', '0', '0', '10', '0', '10', '0', '0', '0', '10', '10', '0', '0', '0.00', '0.00', '2018-04-16 07:46:39', '2018-04-16 07:46:39');
+INSERT INTO `loker` VALUES ('32', '10', '9000000.00', '1000000.00', '1', '2', '1', '1', 'RCR112', 'Administrasi WSR', 'Administration', '0', '0', '100', '100', '0', '0', '100', '0', '100', '0', '0', '0', '100', '100', '0', '0', '0.00', '0.00', '2018-04-18 01:03:59', '2018-04-18 01:03:59');
 
 -- ----------------------------
 -- Table structure for major
@@ -2356,6 +2365,13 @@ INSERT INTO `migrations` VALUES ('2018_03_08_080847_syarat', '12');
 INSERT INTO `migrations` VALUES ('2018_03_09_010146_syarat_add_keterangan', '13');
 INSERT INTO `migrations` VALUES ('2018_03_23_071135_add_tgl_psychotest', '14');
 INSERT INTO `migrations` VALUES ('2018_03_28_070519_posisi', '15');
+INSERT INTO `migrations` VALUES ('2018_04_30_072753_update_syarat', '16');
+INSERT INTO `migrations` VALUES ('2018_04_30_073100_syarat_prescreening', '17');
+INSERT INTO `migrations` VALUES ('2018_04_30_092139_type_test', '17');
+INSERT INTO `migrations` VALUES ('2018_05_02_040512_update_loker', '18');
+INSERT INTO `migrations` VALUES ('2018_05_08_072857_test_method', '19');
+INSERT INTO `migrations` VALUES ('2018_05_08_081219_update_pelamar', '20');
+INSERT INTO `migrations` VALUES ('2018_05_11_091209_position_category', '21');
 
 -- ----------------------------
 -- Table structure for password_resets
@@ -2412,6 +2428,8 @@ CREATE TABLE `pelamar` (
   `pernah_psychotest_dimedion` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `tgl_psychotest_dimedion` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `status_pelamar` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `status_invite` int(11) NOT NULL DEFAULT '0',
+  `status_checkin` int(11) NOT NULL DEFAULT '0',
   `ip_address` varchar(25) COLLATE utf8_unicode_ci DEFAULT NULL,
   `browser` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `keterangan` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
@@ -2425,11 +2443,14 @@ CREATE TABLE `pelamar` (
   KEY `pelamar_id_tgl_psychotest_foreign` (`id_tgl_psychotest`),
   CONSTRAINT `pelamar_id_major_foreign` FOREIGN KEY (`id_major`) REFERENCES `major` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `pelamar_id_tingkat_pendidikan_foreign` FOREIGN KEY (`id_tingkat_pendidikan`) REFERENCES `tingkat_pendidikan` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of pelamar
 -- ----------------------------
+INSERT INTO `pelamar` VALUES ('1', 'APL20180417001', 'RCR123', '', '', null, '13', '', 'Rendy RR', 'Laki-Laki', 'Single', '4/6/1993', 'renddrendd@gmail.com', '081572112121', 'Rendy RR 20180417.jpg', '3', '38', '', '51', '', '3.88', 'January 2013', 'January 2017', '0', '', '', '', '15', 'No', '', '', 'No', '', 'Passed', '0', '0', '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:59.0) Gecko/20100101 Firefox/59.0', 'actual_fresh', '2018-04-17 01:20:11', '2018-04-17 01:20:11');
+INSERT INTO `pelamar` VALUES ('2', 'APL20180509001', 'RCR123', '', null, null, '13', '', 'Rima Kospiah Handayani', 'Perempuan', 'Single', '5/27/1994', 'rimakh27@gmail.com', '085721145572', 'Rima Kospiah Handayani 20180509.jpg', '3', '24', '', '54', '', '3.75', 'February 2015', 'March 2017', '0', '', '', '', '17', 'No', '', '', 'No', '', 'Awaiting', '0', '0', '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:59.0) Gecko/20100101 Firefox/59.0', 'awaiting_fresh', '2018-05-09 06:25:27', '2018-05-09 06:25:27');
+INSERT INTO `pelamar` VALUES ('3', 'APL20180509002', 'RCR123', '', null, null, '13', '', 'RKH', 'Perempuan', 'Single', '8/18/1986', 'aa@gmail.com', '081124542131', 'RKH 20180509.jpg', '2', '3', '', '1', '', '3.55', 'January 2013', 'May 2016', '0', '', '', '', '17', 'No', '', '', 'No', '', 'Awaiting', '0', '0', '::1', 'Mozilla/5.0 (Windows NT 10.0; WOW64; rv:59.0) Gecko/20100101 Firefox/59.0', 'awaiting_fresh', '2018-05-09 06:49:55', '2018-05-09 06:49:55');
 
 -- ----------------------------
 -- Table structure for posisi
@@ -2437,155 +2458,481 @@ CREATE TABLE `pelamar` (
 DROP TABLE IF EXISTS `posisi`;
 CREATE TABLE `posisi` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `divisi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `divisi` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `posisi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `posisi_publish` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `posisi_publish` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=449 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of posisi
 -- ----------------------------
-INSERT INTO `posisi` VALUES ('1', 'MAB', 'Customer Service', 'Marketing & Promotion', null, null);
-INSERT INTO `posisi` VALUES ('2', 'MAB', 'Marketing Analyst', 'Marketing & Promotion', null, null);
-INSERT INTO `posisi` VALUES ('3', 'MAB', 'Technical Support', 'Animal Health Consultant', null, null);
-INSERT INTO `posisi` VALUES ('4', 'MAB', 'Animal Health Consultant', 'Animal Health Consultant', null, null);
-INSERT INTO `posisi` VALUES ('5', 'MAB', 'Product Management – PP ', 'Product Management', null, null);
-INSERT INTO `posisi` VALUES ('6', 'MAB', 'Product Management – BP ', 'Product Management', null, null);
-INSERT INTO `posisi` VALUES ('7', 'MAB', 'Product Management – PE ', 'Product Management', null, null);
-INSERT INTO `posisi` VALUES ('8', 'MAB', 'Product Promotion', 'Marketing & Promotion', null, null);
-INSERT INTO `posisi` VALUES ('9', 'MAB', 'Personnel Support', 'Marketing & Promotion', null, null);
-INSERT INTO `posisi` VALUES ('10', 'MAB', 'UKK', 'Marketing & Promotion', null, null);
-INSERT INTO `posisi` VALUES ('11', 'MAB', 'Database', 'Marketing & Promotion', null, null);
-INSERT INTO `posisi` VALUES ('12', 'MAB', 'Regional Manager', 'Marketing & Promotion', null, null);
-INSERT INTO `posisi` VALUES ('13', 'MAB', 'Technical Sales Representative', 'Technical Sales Representative', null, null);
-INSERT INTO `posisi` VALUES ('14', 'MAB', 'Teknisi Peternakan', 'Field Technician', null, null);
-INSERT INTO `posisi` VALUES ('15', 'MAB', 'Laboran', 'Laboratory Technician', null, null);
-INSERT INTO `posisi` VALUES ('16', 'MAB', 'Administrasi WSR', 'Administration', null, null);
-INSERT INTO `posisi` VALUES ('17', 'MAB', 'Inventory Control', 'Warehouse & Distribution', null, null);
-INSERT INTO `posisi` VALUES ('18', 'MAB', 'Store', 'Warehouse & Distribution', null, null);
-INSERT INTO `posisi` VALUES ('19', 'MAB', 'Distribution', 'Warehouse & Distribution', null, null);
-INSERT INTO `posisi` VALUES ('20', 'MAB', 'Transportation', 'Warehouse & Distribution', null, null);
-INSERT INTO `posisi` VALUES ('21', 'MAB', 'Regional Controller', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('22', 'MAB', 'Account Receivable', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('23', 'QA', 'Auditors', 'Audit', null, null);
-INSERT INTO `posisi` VALUES ('24', 'QA', 'System Analysts', 'Quality System/Assurance', null, null);
-INSERT INTO `posisi` VALUES ('25', 'QA', 'Production Analysts', 'Quality System/Assurance', null, null);
-INSERT INTO `posisi` VALUES ('26', 'QA', 'Validation & Calibration', 'Quality System/Assurance', null, null);
-INSERT INTO `posisi` VALUES ('27', 'CORP R&D', 'Registration & Regulation', 'Product Registration & Regulation', null, null);
-INSERT INTO `posisi` VALUES ('28', 'CORP R&D', 'R&D – Animal Trial', 'Research & Development', null, null);
-INSERT INTO `posisi` VALUES ('29', 'CORP R&D', 'Molecular Biology', 'Research & Development', null, null);
-INSERT INTO `posisi` VALUES ('30', 'INT\'L SALES', 'Business Development', 'International Marketing', null, null);
-INSERT INTO `posisi` VALUES ('31', 'INT\'L SALES', 'Administration Export', 'International Marketing', null, null);
-INSERT INTO `posisi` VALUES ('32', 'BP', 'Biosafety, Biosecurity & QA', 'Quality System/Assurance', null, null);
-INSERT INTO `posisi` VALUES ('33', 'BP', 'Finance & Accounting', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('34', 'BP', 'Purchasing', 'Purchasing/Procurement', null, null);
-INSERT INTO `posisi` VALUES ('35', 'BP', 'Laboraty & Validation', 'Quality Control', null, null);
-INSERT INTO `posisi` VALUES ('36', 'BP', 'BP – Animal Trial', 'Quality Control', null, null);
-INSERT INTO `posisi` VALUES ('37', 'BP', 'Research & Development', 'Research & Development', null, null);
-INSERT INTO `posisi` VALUES ('38', 'BP', 'Production Planning', 'Production Planning & Inventory Control', null, null);
-INSERT INTO `posisi` VALUES ('39', 'BP', 'Inventory Control', 'Production Planning & Inventory Control', null, null);
-INSERT INTO `posisi` VALUES ('40', 'BP', 'Packaging', 'Production Planning & Inventory Control', null, null);
-INSERT INTO `posisi` VALUES ('41', 'BP', 'Viral Active', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('42', 'BP', 'Viral Inactive', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('43', 'BP', 'Bacterial', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('44', 'BP', 'Sterile Tools & Media Preparation', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('45', 'BP', 'Emulsification', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('46', 'BP', 'San Egg Production', 'Breeding Farm', null, null);
-INSERT INTO `posisi` VALUES ('47', 'BP', 'SPF Egg Production', 'Breeding Farm', null, null);
-INSERT INTO `posisi` VALUES ('48', 'CC & IS', 'Procurement', 'Purchasing/Procurement', null, null);
-INSERT INTO `posisi` VALUES ('49', 'CC & IS', 'Advertising & Publication', 'Advertising & Publication', null, null);
-INSERT INTO `posisi` VALUES ('50', 'CC & IS', 'Customer Intimacy', 'Marketing & Promotion', null, null);
-INSERT INTO `posisi` VALUES ('51', 'CC & IS', 'Corporate Design Communication', 'Graphic Design', null, null);
-INSERT INTO `posisi` VALUES ('52', 'CC & IS', 'Events & CSR', 'Events & CSR', null, null);
-INSERT INTO `posisi` VALUES ('53', 'CC & IS', 'Hardware Service', 'Information Technology – Hardware ', null, null);
-INSERT INTO `posisi` VALUES ('54', 'CC & IS', 'Hardware Maintenance', 'Information Technology – Hardware ', null, null);
-INSERT INTO `posisi` VALUES ('55', 'CC & IS', 'Network Service', 'Information Technology – Hardware ', null, null);
-INSERT INTO `posisi` VALUES ('56', 'CC & IS', 'Network Maintenance', 'Information Technology – Hardware ', null, null);
-INSERT INTO `posisi` VALUES ('57', 'CC & IS', 'Provision', 'Information Technology – Hardware ', null, null);
-INSERT INTO `posisi` VALUES ('58', 'CC & IS', 'Inventory', 'Information Technology – Hardware ', null, null);
-INSERT INTO `posisi` VALUES ('59', 'CC & IS', 'Quality Control', 'Information Technology – Hardware ', null, null);
-INSERT INTO `posisi` VALUES ('60', 'CC & IS', 'WSR', 'Information Technology – Hardware ', null, null);
-INSERT INTO `posisi` VALUES ('61', 'CC & IS', 'Application Development', 'Information System – Programmer ', null, null);
-INSERT INTO `posisi` VALUES ('62', 'CC & IS', 'Business System Analyst', 'Information System – Programmer ', null, null);
-INSERT INTO `posisi` VALUES ('63', 'CC & IS', 'ERP Production Support', 'Information System – Support ', null, null);
-INSERT INTO `posisi` VALUES ('64', 'CC & IS', 'ERP Finance & Supply Chain Management', 'Information System – Support ', null, null);
-INSERT INTO `posisi` VALUES ('65', 'CC & IS', 'ERP Sales & Marketing', 'Information System – Support ', null, null);
-INSERT INTO `posisi` VALUES ('66', 'CC & IS', 'ERP Integration & Enterprise Reporting', 'Information System – Support ', null, null);
-INSERT INTO `posisi` VALUES ('67', 'CC & IS', 'Database Admin', 'Information System – Support ', null, null);
-INSERT INTO `posisi` VALUES ('68', 'CC & IS', 'Server Admin', 'Information System – Support ', null, null);
-INSERT INTO `posisi` VALUES ('69', 'CC & IS', 'Client Service', 'Information System – Support ', null, null);
-INSERT INTO `posisi` VALUES ('70', 'ENG', 'Capital System', 'Capital System Engineering', null, null);
-INSERT INTO `posisi` VALUES ('71', 'ENG', 'PE Innovation Engineering', 'Innovation Engineering', null, null);
-INSERT INTO `posisi` VALUES ('72', 'ENG', 'Utilities & General Equipment Innovation Engineering', 'Innovation Engineering', null, null);
-INSERT INTO `posisi` VALUES ('73', 'ENG', 'BP Maintenance 1 Engineering', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('74', 'ENG', 'BP Maintenance 2 Engineering', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('75', 'ENG', 'BP Maintenance 3 Engineering', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('76', 'ENG', 'Vehicle Maintenance Engineering', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('77', 'ENG', 'Residential & Industrial Maintenance Engineering', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('78', 'ENG', 'Inventory', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('79', 'ENG', 'Utility Support', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('80', 'ENG', 'Civil Industrial Project Engineering', 'Building Maintenance & Construction', null, null);
-INSERT INTO `posisi` VALUES ('81', 'ENG', 'Civil Residential Project Engineering', 'Building Maintenance & Construction', null, null);
-INSERT INTO `posisi` VALUES ('82', 'ENG', 'MEP & HVAC Project Engineering', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('83', 'ENG', 'Building Maintenance Engineering', 'Building Maintenance & Construction', null, null);
-INSERT INTO `posisi` VALUES ('84', 'CORP & CAP PURCHASE', 'Corporate Purchase', 'Purchasing/Procurement', null, null);
-INSERT INTO `posisi` VALUES ('85', 'CORP & CAP PURCHASE', 'Capital Purchase', 'Purchasing/Procurement', null, null);
-INSERT INTO `posisi` VALUES ('86', 'F&A', 'Family Office Support', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('87', 'F&A', 'Financial Internal Audit', 'Audit', null, null);
-INSERT INTO `posisi` VALUES ('88', 'F&A', 'HDH Finance', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('89', 'F&A', 'Medilea Finance', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('90', 'F&A', 'Company Group Finance Accounting', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('91', 'F&A', 'Hotel Finance', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('92', 'F&A', 'Plasa/SEL Finance', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('93', 'F&A', 'Corporate Asset Management', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('94', 'F&A', 'Corporate Cash Management', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('95', 'F&A', 'Corporate Account Payable', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('96', 'F&A', 'MFJ & GPE Tax', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('97', 'F&A', 'Company Group Tax', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('98', 'F&A', 'MFJ & GPE Finance Accounting', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('99', 'F&A', 'MFJ & GPE Account Receivable', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('100', 'F&A', 'MFJ Manufacture Cost Accounting', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('101', 'F&A', 'GPE Finance', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('102', 'PE&P', 'Finance & Accounting', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('103', 'PE&P', 'Purchasing', 'Purchasing/Procurement', null, null);
-INSERT INTO `posisi` VALUES ('104', 'PE&P', 'Product Management', 'Product Management', null, null);
-INSERT INTO `posisi` VALUES ('105', 'PE&P', 'Plastic Production', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('106', 'PE&P', 'Non Plastic Production', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('107', 'PE&P', 'Setting & Maintenance', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('108', 'PE&P', 'Research Development Quality Control', 'Quality Control', null, null);
-INSERT INTO `posisi` VALUES ('109', 'PE&P', 'PPIC', 'Production Planning & Inventory Control', null, null);
-INSERT INTO `posisi` VALUES ('110', 'PE&P', 'Store & Distribution', 'Warehouse & Distribution', null, null);
-INSERT INTO `posisi` VALUES ('111', 'PE&P', 'HR/GA', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('112', 'PE&P', 'PCH/F&A', 'Purchasing/Procurement', null, null);
-INSERT INTO `posisi` VALUES ('113', 'PP', 'Finance & Accounting', 'Finance & Accounting', null, null);
-INSERT INTO `posisi` VALUES ('114', 'PP', 'New Products Development', 'Research & Development', null, null);
-INSERT INTO `posisi` VALUES ('115', 'PP', 'Regular Products Development', 'Research & Development', null, null);
-INSERT INTO `posisi` VALUES ('116', 'PP', 'Analytical Methods Development', 'Research & Development', null, null);
-INSERT INTO `posisi` VALUES ('117', 'PP', 'Purchasing', 'Purchasing/Procurement', null, null);
-INSERT INTO `posisi` VALUES ('118', 'PP', 'Quality Control', 'Quality Control', null, null);
-INSERT INTO `posisi` VALUES ('119', 'PP', 'Production Planning & Controlling', 'Production Planning & Inventory Control', null, null);
-INSERT INTO `posisi` VALUES ('120', 'PP', 'Warehouse, Dispensing, Administration Design', 'Production Planning & Inventory Control', null, null);
-INSERT INTO `posisi` VALUES ('121', 'PP', 'Powder, Capsule, Caplet', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('122', 'PP', 'Liquid', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('123', 'PP', 'Premix & Beta-Lactam', 'Production Supervisor', null, null);
-INSERT INTO `posisi` VALUES ('124', 'PP', 'Maintenance', 'Maintenance Engineering', null, null);
-INSERT INTO `posisi` VALUES ('125', 'HR & GA', 'Man Power Planning Headcount', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('126', 'HR & GA', 'Recruitment & Selection 1', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('127', 'HR & GA', 'Recruitment & Selection 2', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('128', 'HR & GA', 'Competency & Career Development', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('129', 'HR & GA', 'Job Grading, Performance Appraisal 1-2', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('130', 'HR & GA', 'Job Grading, Performance Appraisal 3', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('131', 'HR & GA', 'Health Safety Environment', 'Health Safety Environment', null, null);
-INSERT INTO `posisi` VALUES ('132', 'HR & GA', 'Industrial Relation & Security', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('133', 'HR & GA', 'House Keeping & Landscaping', 'General Affair', null, null);
-INSERT INTO `posisi` VALUES ('134', 'HR & GA', 'Office Supplies', 'General Affair', null, null);
-INSERT INTO `posisi` VALUES ('135', 'HR & GA', 'Payroll', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('136', 'HR & GA', 'Company Benefit', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('137', 'HR & GA', 'Legal Benefit', 'Human Resource', null, null);
-INSERT INTO `posisi` VALUES ('138', 'HR & GA', 'Event Management', 'Events & CSR', null, null);
+INSERT INTO `posisi` VALUES ('1', '', 'Internal Auditor', 'Audit', null, '2018-05-11 09:25:09');
+INSERT INTO `posisi` VALUES ('2', null, 'Quality Assurance Senior Head/Quality Management Representative', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('3', null, 'Quality System Manager', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('4', null, 'System Analyst Assistant Manager', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('5', null, 'Calibration Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('6', null, 'Production Analyst Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('7', null, 'System Analyst Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('8', null, 'Working Committee', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('9', null, 'Corporate Legal AH Assistant Head', 'Legal', null, null);
+INSERT INTO `posisi` VALUES ('10', null, 'Corporate Legal Head', 'Legal', null, null);
+INSERT INTO `posisi` VALUES ('11', null, 'Exim & Distribution License Staff', 'Legal', null, null);
+INSERT INTO `posisi` VALUES ('12', null, 'Legal Officer Staff', 'Legal', null, null);
+INSERT INTO `posisi` VALUES ('13', null, 'Product License Staff', 'Legal', null, null);
+INSERT INTO `posisi` VALUES ('14', null, 'Corporate Communication Director', 'Corporate Communication', null, null);
+INSERT INTO `posisi` VALUES ('15', null, 'Corporate Communication Manager', 'Corporate Communication', null, null);
+INSERT INTO `posisi` VALUES ('16', null, 'Event & Corporate Social Responsibility Assistant Manager', 'Event & CSR', null, null);
+INSERT INTO `posisi` VALUES ('17', null, 'Media Communication Assistant Manager', 'Advertising & Publication', null, null);
+INSERT INTO `posisi` VALUES ('18', null, 'Visual Communication Assistant Manager', 'Graphic Design', null, null);
+INSERT INTO `posisi` VALUES ('19', null, 'Event & Corporate Social Responsibility Staff', 'Event & CSR', null, null);
+INSERT INTO `posisi` VALUES ('20', null, 'Media Communication Staff', 'Advertising & Publication', null, null);
+INSERT INTO `posisi` VALUES ('21', null, 'Visual Communication Staff', 'Graphic Design', null, null);
+INSERT INTO `posisi` VALUES ('22', null, 'Account Payable Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('23', null, 'Cash Management Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('24', null, 'Corporate Finance & Accounting Director', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('25', null, 'Family Office Support Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('26', null, 'Finance Accounting (1) Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('27', null, 'Finance Accounting (2) Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('28', null, 'Finance Accounting (3)  Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('29', null, 'Finance Accounting Senior Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('30', null, 'Financial Information System Analyst Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('31', null, 'Financial Internal Audit Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('32', null, 'Financial Planning & Analyst Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('33', null, 'Financial Planning & Analyst Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('34', null, 'Financial Planning & Analyst Senior Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('35', null, 'Treasury Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('36', null, 'Account Payable Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('37', null, 'Account Receivable Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('38', null, 'Cash Management Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('39', null, 'Family Office 1 Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('40', null, 'Family Office 2 Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('41', null, 'Finance Accounting (1) Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('42', null, 'Finance Accounting (2) Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('43', null, 'Finance Accounting (3) Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('44', null, 'Finance Accounting (4) Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('45', null, 'Financial Information System Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('46', null, 'Financial Internal Audit Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('47', null, 'Financial Planning & Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('48', null, 'Business Analyst Assistant Manager', 'System Business Analyst', null, null);
+INSERT INTO `posisi` VALUES ('49', null, 'Client Services Assistant Manager', 'IT Support', null, null);
+INSERT INTO `posisi` VALUES ('50', null, 'Developer Assistant Manager', 'Programmer', null, null);
+INSERT INTO `posisi` VALUES ('51', null, 'Information Technology Director', 'Information Technology', null, null);
+INSERT INTO `posisi` VALUES ('52', null, 'Information Technology Senior Manager', 'Information Technology', null, null);
+INSERT INTO `posisi` VALUES ('53', null, 'IT Consultant Manager', 'Information Technology', null, null);
+INSERT INTO `posisi` VALUES ('54', null, 'IT Governance Assistant Manager', 'Information Technology', null, null);
+INSERT INTO `posisi` VALUES ('55', null, 'IT Operation Manager', 'Information Technology', null, null);
+INSERT INTO `posisi` VALUES ('56', null, 'IT Services Manager', 'Information Technology', null, null);
+INSERT INTO `posisi` VALUES ('57', null, 'Server & Network Assistant Manager', 'Database & Server Administrator', null, null);
+INSERT INTO `posisi` VALUES ('58', null, 'Business Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('59', null, 'Developer Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('60', null, 'Hardware & Software Support Staff', 'IT Support', null, null);
+INSERT INTO `posisi` VALUES ('61', null, 'IT Governance Staff', 'Information Technology', null, null);
+INSERT INTO `posisi` VALUES ('62', null, 'Provision & Inventory Staff', 'IT Support', null, null);
+INSERT INTO `posisi` VALUES ('63', null, 'Quality Control Staff', 'IT Support', null, null);
+INSERT INTO `posisi` VALUES ('64', null, 'Server & Network Staff', 'Database & Server Administrator', null, null);
+INSERT INTO `posisi` VALUES ('65', null, 'Employee and Community Event & CSR Assistant Manager', 'Event & CSR', null, null);
+INSERT INTO `posisi` VALUES ('66', null, 'Environment, Health & Safety Manager', 'Environment Health & Safety', null, null);
+INSERT INTO `posisi` VALUES ('67', null, 'GA - House Keeping Assistant Manager', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('68', null, 'GA - Mess & Canteen Assistant Manager', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('69', null, 'GA - Office & Supplies Assistant Manager', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('70', null, 'GA - Security Assistant Manager', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('71', null, 'General Affair  Manager', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('72', null, 'General Affair & Personnel Admin Senior Manager', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('73', null, 'HRD - Academician Event & CSR (AEC) Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('74', null, 'HRD - Competency Assessment & Development (CAD) Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('75', null, 'HRD - Headcount & Filing Management (HCFM) Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('76', null, 'HRD - Talent Planning & Development (TPD) Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('77', null, 'Human Resources & General Affair Director', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('78', null, 'Human Resources Development Senior Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('79', null, 'OD&SI 2 Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('80', null, 'OD&SI 3 Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('81', null, 'OD&SI 5 Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('82', null, 'OD&SI 6 Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('83', null, 'Organization Development & System Improvement Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('84', null, 'Payroll 1 Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('85', null, 'Payroll 2 Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('86', null, 'Payroll 3 Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('87', null, 'Academician Event & CSR Staff', 'Event & CSR', null, null);
+INSERT INTO `posisi` VALUES ('88', null, 'Competency Assessment Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('89', null, 'Competency Development Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('90', null, 'Driver Management Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('91', null, 'Employee and Community Event & CSR Staff', 'Event & CSR', null, null);
+INSERT INTO `posisi` VALUES ('92', null, 'GA - Company License & Industrial Relation Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('93', null, 'GA - Landscaping Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('94', null, 'GAPA - Travel & Tour Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('95', null, 'House Keeping 2 Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('96', null, 'House Keeping 3 Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('97', null, 'House Keeping Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('98', null, 'Legal & Audit Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('99', null, 'Mail Delivery Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('100', null, 'Mess Management WSR Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('101', null, 'OD&SI 1 Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('102', null, 'OD&SI 4 Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('103', null, 'Payroll 1 Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('104', null, 'Payroll 2 Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('105', null, 'Payroll 3 Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('106', null, 'Safety & Environment Staff', 'Health Safety Environment', null, null);
+INSERT INTO `posisi` VALUES ('107', null, 'Talent Planning & Development Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('108', null, 'Vehicle Planning & Insurance Management Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('109', null, 'Cap Procurement Assistant Manager', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('110', null, 'Corp Procurement Assistant Manager', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('111', null, 'Export-Import Assistant Manager', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('112', null, 'Procurement Senior Manager', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('113', null, 'Buyer Cap 1 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('114', null, 'Buyer Cap 2 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('115', null, 'Buyer Cap 3 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('116', null, 'Buyer Cap 4 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('117', null, 'Buyer Cap 5 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('118', null, 'Buyer Corp 1 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('119', null, 'Buyer Corp 2 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('120', null, 'Buyer Corp 3 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('121', null, 'Buyer Corp 4 Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('122', null, 'Export-Import 1 Staf', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('123', null, 'Export-Import 2 Staf', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('124', null, 'Export-Import 3 Staf', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('125', null, 'Building Maintenance Engineering Assistant Manager', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('126', null, 'Capital System & Inventory Engineering Manager', 'Capital Project Management', null, null);
+INSERT INTO `posisi` VALUES ('127', null, 'Capital System Engineering Assistant Manager', 'Capital Project Management', null, null);
+INSERT INTO `posisi` VALUES ('128', null, 'Civil Engineering Manager', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('129', null, 'Civil Project Engineering Assistant Manager', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('130', null, 'Electrical & HVAC Engineering Assistant Manager', 'MEP Engineering', null, null);
+INSERT INTO `posisi` VALUES ('131', null, 'Engineering Director', 'Engineering', null, null);
+INSERT INTO `posisi` VALUES ('132', null, 'Equipment Innovation Engineering Assistant Manager', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('133', null, 'General Workshop Engineering Assistant Manager', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('134', null, 'Innovation Engineering Manager', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('135', null, 'Inventory Engineering Assistant Manager', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('136', null, 'Mechanical & Plumbing Engineering Assistant Manager', 'MEP Engineering', null, null);
+INSERT INTO `posisi` VALUES ('137', null, 'MEP & HVAC Engineering Manager', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('138', null, 'MEP & HVAC Innovation Engineering Assistant Manager', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('139', null, 'Quality Assurance  Engineering Manager', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('140', null, 'Workshop Engineering Manager', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('141', null, 'Capital System & Planning Engineering Staff', 'Capital Project Management', null, null);
+INSERT INTO `posisi` VALUES ('142', null, 'Construction Building Maintenance Engineering Staff', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('143', null, 'Document Administration Engineering Staff', 'General Administration', null, null);
+INSERT INTO `posisi` VALUES ('144', null, 'Electrical & Electronic Maintenance Engineering Staff', 'MEP Engineering', null, null);
+INSERT INTO `posisi` VALUES ('145', null, 'HVAC Innovation Engineering Staff', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('146', null, 'HVAC Maintenance Engineering Staff', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('147', null, 'Inventory Engineering Staff', 'Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('148', null, 'Machinery Design Engineering Staff', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('149', null, 'Machinery Fabrication Engineering Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('150', null, 'Mechanical Maintenance Engineering Staff', 'MEP Engineering', null, null);
+INSERT INTO `posisi` VALUES ('151', null, 'MEP & HVAC Fabrication Engineering Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('152', null, 'MEP Innovation Engineering Staff', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('153', null, 'Non Construction Building Maintenance Engineering Staff', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('154', null, 'Non Machinery Design Engineering Staff', 'Innovation Engineering', null, null);
+INSERT INTO `posisi` VALUES ('155', null, 'Non Machinery Fabrication Engineering Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('156', null, 'Power Distribution Engineering Staff', 'MEP Engineering', null, null);
+INSERT INTO `posisi` VALUES ('157', null, 'Project Planning Engineering Staff', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('158', null, 'Project Supervision Engineering Staff', 'Building Maintenance & Construction', null, null);
+INSERT INTO `posisi` VALUES ('159', null, 'Quality Assurance  Engineering Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('160', null, 'Waste Water & Environmental Engineering Staff', 'MEP Engineering', null, null);
+INSERT INTO `posisi` VALUES ('161', null, 'Water Production & Plumbing Maintenance Engineering Staff', 'MEP Engineering', null, null);
+INSERT INTO `posisi` VALUES ('162', null, 'International Sales Assistant Manager', 'International Marketing', null, null);
+INSERT INTO `posisi` VALUES ('163', null, 'Special Project Leader', 'International Marketing', null, null);
+INSERT INTO `posisi` VALUES ('164', null, 'Technical Support Staff', 'International Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('165', null, 'ANIMAL HEALTH DIRECTOR', null, null, null);
+INSERT INTO `posisi` VALUES ('166', null, 'Pharmaceutical Product Director', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('167', null, 'PP Business Development Manager', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('168', null, 'PP Dossier & Analytical Method Development Assistant Manager', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('169', null, 'PP Financial Planning & Analyst Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('170', null, 'PP Maintenance Assistant Manager', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('171', null, 'PP Manufacturing Senior Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('172', null, 'PP New Products Development Assistant Manager', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('173', null, 'PP Powder Capsule Caplet Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('174', null, 'PP Premix, Beta-Lactam, & Liquid Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('175', null, 'PP Procurement Assistant Manager', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('176', null, 'PP Product Management Assistant Manager', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('177', null, 'PP Production Planning & Inventory Control Assistant Manager', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('178', null, 'PP Quality Assurance Assistant Manager', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('179', null, 'PP Quality Control Assistant Manager', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('180', null, 'PP Regular Products Development Assistant Manager', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('181', null, 'PP Warehouse Dispensing & Adm Design Assistant Manager', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('182', null, 'Financial Planning & Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('183', null, 'Mgmt Trainee', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('184', null, 'PP Analytical Method Development Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('185', null, 'PP Biology Laboratory Staff', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('186', null, 'PP Chemical Laboratory Staff', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('187', null, 'PP Dedicated Line Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('188', null, 'PP Dispensing Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('189', null, 'PP Dossier Development Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('190', null, 'PP General Line Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('191', null, 'PP Inventory Control Staff', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('192', null, 'PP Label Store & Administration Design Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('193', null, 'PP Material Store Staff', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('194', null, 'PP New Products Development Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('195', null, 'PP Non Sterile Liquid Production Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('196', null, 'PP Packaging - Distribution & Return Product Handling Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('197', null, 'PP Packaging Laboratory Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('198', null, 'PP Premix & Betalaktam Production Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('199', null, 'PP Procurement Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('200', null, 'PP Product Development Procurement Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('201', null, 'PP Product Management Staff', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('202', null, 'PP Production Analyst', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('203', null, 'PP Production Planning & Scheduling Staff', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('204', null, 'PP Regular Products Development Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('205', null, 'PP Sterile Liquid Production Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('206', null, 'PP Validation Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('207', null, 'PPMTC L, BL & Innovation Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('208', null, 'PPMTC PCC & Premix Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('209', null, 'PPMTC PCC Machine Setting Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('210', null, 'Animal Testing & Laboratory Services Manager', 'Laboratory & Animal Trial', null, null);
+INSERT INTO `posisi` VALUES ('211', null, 'Animal Testing & Trial Assistant Manager', 'Laboratory & Animal Trial', null, null);
+INSERT INTO `posisi` VALUES ('212', null, 'Laboratory & Animal Testing Senior Manager', 'Laboratory & Animal Trial', null, null);
+INSERT INTO `posisi` VALUES ('213', null, 'Laboratory Services Assistant Manager', 'Laboratory & Animal Trial', null, null);
+INSERT INTO `posisi` VALUES ('214', null, 'LAT Business Development Manager', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('215', null, 'LAT Financial Planning & Analyst', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('216', null, 'LAT Product Management Assistant Manager', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('217', null, 'Service Development & Training Assistant Manager', null, null, null);
+INSERT INTO `posisi` VALUES ('218', null, 'Surveillance Analyst', null, null, null);
+INSERT INTO `posisi` VALUES ('219', null, 'Animal Testing Staff', 'Laboratory & Animal Trial', null, null);
+INSERT INTO `posisi` VALUES ('220', null, 'Animal Trial Staff', 'Laboratory & Animal Trial', null, null);
+INSERT INTO `posisi` VALUES ('221', null, 'Laboratory Services Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('222', null, 'LAT Product Management Staff', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('223', null, 'LAT QA Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('224', null, 'Service Development & Training Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('225', null, 'AH Procurement', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('226', null, 'Biological Product Director', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('227', null, 'BP Active Viral Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('228', null, 'BP Bacterial Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('229', null, 'BP Biosafety, Biosecuriry & Quality Assurance Assistant Manager', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('230', null, 'BP Emulsion & Suspension Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('231', null, 'BP Financial Planning & Analyst Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('232', null, 'BP Inactive Viral Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('233', null, 'BP Maintenance Assistant Manager', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('234', null, 'BP Manufacturing Senior Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('235', null, 'BP New Product Development Assistant Manager', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('236', null, 'BP PPIC Manager', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('237', null, 'BP Product Management Assistant Manager', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('238', null, 'BP Quality Control & Research Development Senior Manager', null, null, null);
+INSERT INTO `posisi` VALUES ('239', null, 'BP Regular Product & Dossier Development Assistant Manager', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('240', null, 'BP Vaccine Production 1 Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('241', null, 'BP Vaccine Production 2 Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('242', null, 'BPQC Laboratory Assistant Manager', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('243', null, 'AH Procurement Product Development Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('244', null, 'AH Procurement Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('245', null, 'BP Active Vaccine Packaging Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('246', null, 'BP AVP 1 Process Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('247', null, 'BP AVP 2 Process Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('248', null, 'BP AVP Tools & Media Preparation Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('249', null, 'BP Biosafety & Quality Compliance Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('250', null, 'BP Cell Base Production Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('251', null, 'BP Dossier Development Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('252', null, 'BP Emulsion & Suspension Preparation Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('253', null, 'BP Emulsion & Suspension Process Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('254', null, 'BP Financial Planning & Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('255', null, 'BP Freeze Drying Process Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('256', null, 'BP Inactive Vaccine Packaging Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('257', null, 'BP Inventory Control Staff', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('258', null, 'BP IVP 1 Process Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('259', null, 'BP IVP 1 Tools & Media Preparation Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('260', null, 'BP IVP 2 Process Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('261', null, 'BP IVP 2 Tools & Media Preparation Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('262', null, 'BP Maintenance 1 Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('263', null, 'BP Maintenance 2 Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('264', null, 'BP Maintenance 3 Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('265', null, 'BP Maintenance 4 Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('266', null, 'BP Maintenance 5 Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('267', null, 'BP Maintenance 6 Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('268', null, 'BP New Product Development Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('269', null, 'BP NPD Support Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('270', null, 'BP Product Management Staff', 'Product Management', null, null);
+INSERT INTO `posisi` VALUES ('271', null, 'BP Production Analyst', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('272', null, 'BP Production Planning Staff', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('273', null, 'BP Regular Product Development Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('274', null, 'BP Validation  Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('275', null, 'BPBP Process Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('276', null, 'BPBP Sterile Tools & Media Preparation Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('277', null, 'BPQC Lab Bacterial Staff', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('278', null, 'BPQC Lab BSL3 Staff', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('279', null, 'BPQC Lab Physical Staff', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('280', null, 'BPQC Lab Tools & Media Preparation Staff', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('281', null, 'BPQC Lab Viral Staff', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('282', null, 'Molecular Biology Analyst', 'Quality Control', null, null);
+INSERT INTO `posisi` VALUES ('283', null, 'Molecular Biology Laboratory Staff', 'QUality Control', null, null);
+INSERT INTO `posisi` VALUES ('284', null, 'PEP Business Development Manager', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('285', null, 'PEP CR Non Plastic Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('286', null, 'PEP CR Plastic Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('287', null, 'PEP CR Procurement Assistant Manager', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('288', null, 'PEP Financial Planning & Analyst Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('289', null, 'PEP Maintenance Assistant Manager', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('290', null, 'PEP Manufacturing Senior Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('291', null, 'PEP MK Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('292', null, 'PEP MK Production Support Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('293', null, 'PEP Quality Assurance Assistant Manager', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('294', null, 'PEP RD Assistant Manager', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('295', null, 'PEP TPM Assistant Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('296', null, 'POULTRY EQUIPMENT & PLASTIC DIRECTOR', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('297', null, 'PPIC Assistant Manager', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('298', null, 'PEP CR AHS & MD Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('299', null, 'PEP CR Incubator & CH Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('300', null, 'PEP CR Offset Production & Printing Preparation  Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('301', null, 'PEP CR Plastic Production Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('302', null, 'PEP CR Procurement Product Development Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('303', null, 'PEP CR Procurement Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('304', null, 'PEP CR Production Warehouse Staff', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('305', null, 'PEP CR Setting Production Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('306', null, 'PEP Financial Planning & Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('307', null, 'PEP General Maintenance Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('308', null, 'PEP HR-GA Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('309', null, 'PEP Main Warehouse Raw & Support Material Inventory Control Staff', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('310', null, 'PEP Maintenance Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('311', null, 'PEP MK Plastic Production Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('312', null, 'PEP MK Procurement Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('313', null, 'PEP MK Production Warehouse Staff', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('314', null, 'PEP MK Setting Production Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('315', null, 'PEP Product Marketing Staff', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('316', null, 'PEP Production Analyst Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('317', null, 'PEP Production Planning & Scheduling Staff', 'Production Planning & Inventory Control', null, null);
+INSERT INTO `posisi` VALUES ('318', null, 'PEP Quality Control Staff', 'QUality Control', null, null);
+INSERT INTO `posisi` VALUES ('319', null, 'PEP RD Staff', 'Research & Development', null, null);
+INSERT INTO `posisi` VALUES ('320', null, 'PEP Store & Distribution Staff', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('321', null, 'PEP Technical Support Staff', 'Equipment Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('322', null, 'PEP Tooling & Workshop Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('323', null, 'PEP Validation Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('324', null, 'AH & Technical Expert', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('325', null, 'Clean Egg Production Assistant Manager', 'Production', null, null);
+INSERT INTO `posisi` VALUES ('326', null, 'Livestock 1 Business Development Manager', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('327', null, 'Livestock 1 Operations Manager', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('328', null, 'LIVESTOCK DIRECTOR', null, null, null);
+INSERT INTO `posisi` VALUES ('329', null, 'Livestock Procurement Assistant Manager', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('330', null, 'Site Support CP, CR Assistant Manager', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('331', null, 'Building Maintenance, Landscaping & GA Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('332', null, 'Duck Farm Staff', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('333', null, 'Egg Handling Staff', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('334', null, 'Farm Maintenance Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('335', null, 'Hen Farm Staff', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('336', null, 'Livestock 1 Business Development Staff', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('337', null, 'Livestock 1 Financial Planning & Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('338', null, 'Livestock 1 QA Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('339', null, 'Livestock Procurement Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('340', null, 'Material & Feed Handling Staff', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('341', null, 'District Assistant Manager (DAM)', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('342', null, 'District Assistant Manager (DAM)', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('343', null, 'MARKETING & DISTRIBUTION DIRECTOR', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('344', null, 'National Sales 1 Senior Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('345', null, 'National Sales 2 Senior Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('346', null, 'Regional Sales I, II, VII, & VIII (RM)', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('347', null, 'Regional Sales III, IV, V, VI (RM)', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('348', null, 'ADM Staff', 'Branch Administration', null, null);
+INSERT INTO `posisi` VALUES ('349', null, 'ADM Staff', 'Branch Administration', null, null);
+INSERT INTO `posisi` VALUES ('350', null, 'Laboran Staff', 'Laboratory Technician', null, null);
+INSERT INTO `posisi` VALUES ('351', null, 'Laboran Staff', 'Laboratory Technician', null, null);
+INSERT INTO `posisi` VALUES ('352', null, 'SR Staff', 'Sales Representative', null, null);
+INSERT INTO `posisi` VALUES ('353', null, 'SR Staff', 'Sales Representative', null, null);
+INSERT INTO `posisi` VALUES ('354', null, 'TP Staff', 'Veterinary Field Technician', null, null);
+INSERT INTO `posisi` VALUES ('355', null, 'TP Staff', 'Veterinary Field Technician', null, null);
+INSERT INTO `posisi` VALUES ('356', null, 'TSR Premix Staff', 'Technical Sales Representative', null, null);
+INSERT INTO `posisi` VALUES ('357', null, 'TSR Premix Staff', 'Technical Sales Representative', null, null);
+INSERT INTO `posisi` VALUES ('358', null, 'TSR Staff', 'Technical Sales Representative', null, null);
+INSERT INTO `posisi` VALUES ('359', null, 'TSR Staff', 'Technical Sales Representative', null, null);
+INSERT INTO `posisi` VALUES ('360', null, 'Distribution Assistant Manager', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('361', null, 'Inventory Control Assistant Manager', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('362', null, 'M&D Store & Distribution Manager', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('363', null, 'Store Assistant Manager', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('364', null, 'Distribution Staff', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('365', null, 'Inventory Control Staff', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('366', null, 'Store Staff', 'Warehouse & Distribution', null, null);
+INSERT INTO `posisi` VALUES ('367', null, 'M&D Business Development Assistant Manager', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('368', null, 'M&D Direct Marketing Assistant Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('369', null, 'M&D Marketing & Business Development Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('370', null, 'M&D Trade Marketing Assistant Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('371', null, 'M&D Business Development Staff', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('372', null, 'M&D Direct Marketing Staff', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('373', null, 'M&D Trade Marketing Staff', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('374', null, 'M&D Customer Service & Promotion Assistant Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('375', null, 'M&D Sales Administration Assistant Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('376', null, 'M&D Sales Operation Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('377', null, 'M&D Customer Service & Promotion Staff', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('378', null, 'M&D Sales Administration Staff', 'General Administration', null, null);
+INSERT INTO `posisi` VALUES ('379', null, 'PD&A Competency, Career Development & Event Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('380', null, 'PD&A Performance Appraisal & Time Attendance Assistant Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('381', null, 'Personnel Development & Administration Manager', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('382', null, 'PD&A Performance Appraisal & Time Attendance Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('383', null, 'PD&A Training & Career Development Staff', 'Human Resource', null, null);
+INSERT INTO `posisi` VALUES ('384', null, 'M&D Account Receivable Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('385', null, 'M&D Finance & Accounting Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('386', null, 'M&D Finance Accounting Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('387', null, 'M&D Account Receivable Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('388', null, 'M&D Finance Accounting Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('389', null, 'M&D Financial Planning Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('390', null, 'M&D Internal Audit Assistant Manager', 'Audit', null, null);
+INSERT INTO `posisi` VALUES ('391', null, 'M&D Internal Audit Staff', 'Audit', null, null);
+INSERT INTO `posisi` VALUES ('392', null, 'AH & Technical Expert', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('393', null, 'Broiler Breeder Farm Production Assistant Manager', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('394', null, 'Hatchery Production Assistant Manager', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('395', null, 'Livestock 2 Business Development Assistant Manager', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('396', null, 'Livestock 2 Business Development Manager', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('397', null, 'Livestock 2 Operations Manager', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('398', null, 'LIVESTOCK DIRECTOR', null, null, null);
+INSERT INTO `posisi` VALUES ('399', null, 'Livestock Financial Planning & Analyst Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('400', null, 'Livestock Procurement Assistant Manager', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('401', null, 'Site Support TR Assistant Manager', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('402', null, 'Farm & Utility Eng Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('403', null, 'Farm TR Staff', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('404', null, 'General Admin Staff', 'General Administration', null, null);
+INSERT INTO `posisi` VALUES ('405', null, 'Hatchery and Utility Eng Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('406', null, 'Hatchery Production Staff', 'Production Supervisor', null, null);
+INSERT INTO `posisi` VALUES ('407', null, 'Hatchery QC & Distribution Staff', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('408', null, 'Laundry, Kitchen Staff', 'General Affair', null, null);
+INSERT INTO `posisi` VALUES ('409', null, 'Livestock 2 QA Staff', 'Quality System/Assurance', null, null);
+INSERT INTO `posisi` VALUES ('410', null, 'Livestock Financial Planning & Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('411', null, 'Material & Egg Handling Staff', 'Breeding Farm', null, null);
+INSERT INTO `posisi` VALUES ('412', null, 'FOOD ', null, null, null);
+INSERT INTO `posisi` VALUES ('413', null, 'Food Director', 'Food Product', null, null);
+INSERT INTO `posisi` VALUES ('414', null, 'Food Manufacturing Operation Manager', 'Food Product', null, null);
+INSERT INTO `posisi` VALUES ('415', null, 'Food Service Operation Assistant Manager', 'Food Product', null, null);
+INSERT INTO `posisi` VALUES ('416', null, 'Financial Planning & Analyst Staff', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('417', null, 'FM Marketing & Promotion Staff', 'Food Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('418', null, 'FM Production, PPIC & QC Staff', 'Food Production', null, null);
+INSERT INTO `posisi` VALUES ('419', null, 'FM Purchasing & Sales Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('420', null, 'FM QA, R&D Staff', 'QUality Control', null, null);
+INSERT INTO `posisi` VALUES ('421', null, 'FS Marketing & Promotion Staff', 'Food Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('422', null, 'FS Production, PPIC & QC Staff', 'Food Production', null, null);
+INSERT INTO `posisi` VALUES ('423', null, 'FS Purchasing & Sales Staff', 'Purchasing/Procurement', null, null);
+INSERT INTO `posisi` VALUES ('424', null, 'Research & Innovation Head', 'Research & Innovation', null, null);
+INSERT INTO `posisi` VALUES ('425', null, 'Researcher 1', 'Research & Innovation', null, null);
+INSERT INTO `posisi` VALUES ('426', null, 'Researcher 2', 'Research & Innovation', null, null);
+INSERT INTO `posisi` VALUES ('427', null, 'Researcher 3', 'Research & Innovation', null, null);
+INSERT INTO `posisi` VALUES ('428', null, 'Researcher 4 Staff', 'Research & Innovation', null, null);
+INSERT INTO `posisi` VALUES ('429', null, 'Business Support System Manager', null, null, null);
+INSERT INTO `posisi` VALUES ('430', null, 'Operational Business Support Assistant Manager', null, null, null);
+INSERT INTO `posisi` VALUES ('431', null, 'Control & Support Staff', null, null, null);
+INSERT INTO `posisi` VALUES ('432', null, 'Maintenance Staff', 'Maintenance Engineering', null, null);
+INSERT INTO `posisi` VALUES ('433', null, 'Marketing & Distribution 2 Director', null, null, null);
+INSERT INTO `posisi` VALUES ('434', null, 'TEC BP & PP Manager', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('435', null, 'TEC Equipment Assistant Manager', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('436', null, 'TEC Non Poultry Assistant Manager', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('437', null, 'TEC Poultry Assistant Manager', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('438', null, 'TEC Premix Assistant Manager', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('439', null, 'TEC Senior Manager', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('440', null, 'TEC Equipment Staff', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('441', null, 'TEC Non Poultry & Publication Staff', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('442', null, 'TEC Poultry Staff', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('443', null, 'TEC Premix Staff', 'Animal Health Technical Support', null, null);
+INSERT INTO `posisi` VALUES ('444', null, 'H&P Financial Planning & Analyst Assistant Manager', 'Finance & Accounting', null, null);
+INSERT INTO `posisi` VALUES ('445', null, 'H&P Marketing & Promotion Assistant Manager', 'Marketing & Promotion', null, null);
+INSERT INTO `posisi` VALUES ('446', null, 'HOSPITALITY & PROPERTY DEPUTY GENERAL MANAGER', null, null, null);
+INSERT INTO `posisi` VALUES ('447', null, 'H&P Business Development Staff', 'Business Planning & Development', null, null);
+INSERT INTO `posisi` VALUES ('448', null, 'H&P Quality System & Analyst Staff', 'Quality System/Assurance', null, null);
+
+-- ----------------------------
+-- Table structure for position_category
+-- ----------------------------
+DROP TABLE IF EXISTS `position_category`;
+CREATE TABLE `position_category` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `position_category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of position_category
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for provinsi
@@ -2639,25 +2986,77 @@ INSERT INTO `provinsi` VALUES ('33', 'PAPUA', null, null, null);
 INSERT INTO `provinsi` VALUES ('34', 'PAPUA BARAT', null, null, null);
 
 -- ----------------------------
--- Table structure for syarat
+-- Table structure for syarat_prescreening
 -- ----------------------------
-DROP TABLE IF EXISTS `syarat`;
-CREATE TABLE `syarat` (
+DROP TABLE IF EXISTS `syarat_prescreening`;
+CREATE TABLE `syarat_prescreening` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `gpa` double(4,2) NOT NULL,
-  `akreditasi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `masa_studi` int(11) NOT NULL,
-  `usia` int(11) NOT NULL,
-  `keterangan` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `position_category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `work_experience` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `id_tingkat_pendidikan` int(11) NOT NULL,
+  `accreditation` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `gpa` double(3,2) NOT NULL,
+  `study_period` double(3,1) NOT NULL,
+  `age` int(11) DEFAULT NULL,
+  `id_major` int(11) DEFAULT NULL,
+  `is_active` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
--- Records of syarat
+-- Records of syarat_prescreening
 -- ----------------------------
-INSERT INTO `syarat` VALUES ('1', '2.75', 'B', '5', '18', 'Developer Staff', '2018-03-08 20:00:48', '2018-04-02 08:44:13');
+INSERT INTO `syarat_prescreening` VALUES ('1', 'umum', 'Lapangan', 'No', '3', 'B', '2.75', '5.0', '24', '0', '0', '2018-05-09 00:43:01', '2018-05-09 00:43:40');
+INSERT INTO `syarat_prescreening` VALUES ('2', 'umum', 'Lapangan', 'No', '1', 'B', '2.75', '5.0', '22', '0', '0', '2018-05-09 00:43:31', '2018-05-09 00:43:31');
+INSERT INTO `syarat_prescreening` VALUES ('3', 'umum', 'Lapangan', 'No', '5', 'B', '2.75', '26.0', '26', '0', '0', '2018-05-09 00:50:40', '2018-05-09 00:53:48');
+INSERT INTO `syarat_prescreening` VALUES ('4', 'umum', 'Pusat', 'No', '1', 'B', '3.00', '5.0', '22', '0', '0', '2018-05-09 00:52:42', '2018-05-09 00:52:42');
+INSERT INTO `syarat_prescreening` VALUES ('5', 'umum', 'Pusat', 'No', '3', 'B', '3.00', '5.0', '24', '0', '0', '2018-05-09 00:52:56', '2018-05-09 00:53:14');
+INSERT INTO `syarat_prescreening` VALUES ('6', 'umum', 'Pusat', 'No', '5', 'B', '3.00', '26.0', '26', '0', '0', '2018-05-09 00:53:37', '2018-05-09 00:53:55');
+INSERT INTO `syarat_prescreening` VALUES ('7', 'khusus', 'Lapangan', '-', '3', 'A', '2.75', '5.0', '24', '12', '1', '2018-05-09 00:56:07', '2018-05-09 00:56:07');
+
+-- ----------------------------
+-- Table structure for syarat_psychotest
+-- ----------------------------
+DROP TABLE IF EXISTS `syarat_psychotest`;
+CREATE TABLE `syarat_psychotest` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `position_category` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `test_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `test_score` int(11) NOT NULL,
+  `position` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `major` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of syarat_psychotest
+-- ----------------------------
+INSERT INTO `syarat_psychotest` VALUES ('1', 'umum', 'Lapangan', '1', '150', '-', '-', '2018-05-09 00:58:38', '2018-05-09 01:08:26');
+INSERT INTO `syarat_psychotest` VALUES ('2', 'umum', 'Lapangan', '2', '55', '-', '-', '2018-05-09 01:09:02', '2018-05-09 01:09:02');
+INSERT INTO `syarat_psychotest` VALUES ('3', 'umum', 'Lapangan', '3', '41', '-', '-', '2018-05-09 01:09:17', '2018-05-09 01:09:17');
+INSERT INTO `syarat_psychotest` VALUES ('4', 'umum', 'Lapangan', '4', '29', '-', '-', '2018-05-09 01:09:27', '2018-05-09 01:09:27');
+INSERT INTO `syarat_psychotest` VALUES ('5', 'umum', 'Lapangan', '5', '8', '-', '-', '2018-05-09 01:09:41', '2018-05-09 01:09:41');
+INSERT INTO `syarat_psychotest` VALUES ('6', 'umum', 'Lapangan', '7', '80', '-', '-', '2018-05-09 01:09:56', '2018-05-09 01:09:56');
+INSERT INTO `syarat_psychotest` VALUES ('7', 'umum', 'Pusat', '1', '155', '-', '-', '2018-05-09 01:10:42', '2018-05-09 01:10:42');
+INSERT INTO `syarat_psychotest` VALUES ('8', 'umum', 'Pusat', '2', '61', '-', '-', '2018-05-09 01:10:55', '2018-05-09 01:10:55');
+INSERT INTO `syarat_psychotest` VALUES ('9', 'umum', 'Pusat', '3', '45', '-', '-', '2018-05-09 01:11:11', '2018-05-09 01:11:11');
+INSERT INTO `syarat_psychotest` VALUES ('10', 'umum', 'Pusat', '4', '26', '-', '-', '2018-05-09 01:11:28', '2018-05-09 01:49:28');
+INSERT INTO `syarat_psychotest` VALUES ('11', 'umum', 'Pusat', '5', '11', '-', '-', '2018-05-09 01:11:41', '2018-05-09 01:11:41');
+INSERT INTO `syarat_psychotest` VALUES ('12', 'umum', 'Pusat', '6', '10', '-', '-', '2018-05-09 01:12:01', '2018-05-09 01:12:01');
+INSERT INTO `syarat_psychotest` VALUES ('13', 'umum', 'Pusat', '7', '80', '-', '-', '2018-05-09 01:12:12', '2018-05-09 01:12:12');
+INSERT INTO `syarat_psychotest` VALUES ('14', 'khusus', '-', '1', '150', '403', '11', '2018-05-09 01:43:22', '2018-05-09 02:13:52');
+INSERT INTO `syarat_psychotest` VALUES ('15', 'khusus', '-', '2', '55', '403', '11', '2018-05-09 02:00:55', '2018-05-09 02:14:00');
+INSERT INTO `syarat_psychotest` VALUES ('16', 'khusus', '-', '3', '41', '403', '11', '2018-05-09 02:12:03', '2018-05-09 02:14:09');
+INSERT INTO `syarat_psychotest` VALUES ('17', 'khusus', '-', '4', '29', '403', '11', '2018-05-09 02:12:29', '2018-05-09 02:14:16');
+INSERT INTO `syarat_psychotest` VALUES ('18', 'khusus', '-', '5', '8', '403', '11', '2018-05-09 02:13:00', '2018-05-09 02:14:24');
+INSERT INTO `syarat_psychotest` VALUES ('19', 'khusus', '-', '6', '9', '403', '11', '2018-05-09 02:13:19', '2018-05-09 02:14:34');
+INSERT INTO `syarat_psychotest` VALUES ('20', 'khusus', '-', '7', '80', '403', '11', '2018-05-09 02:13:44', '2018-05-09 02:14:45');
 
 -- ----------------------------
 -- Table structure for tanggal_psychotest
@@ -2665,23 +3064,70 @@ INSERT INTO `syarat` VALUES ('1', '2.75', 'B', '5', '18', 'Developer Staff', '20
 DROP TABLE IF EXISTS `tanggal_psychotest`;
 CREATE TABLE `tanggal_psychotest` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `id_iklan` int(11) NOT NULL,
+  `id_iklan` int(11) NOT NULL DEFAULT '0',
   `id_kota` int(11) NOT NULL,
   `tanggal` date NOT NULL,
   `kuota` int(11) NOT NULL,
+  `kuota_left` int(11) DEFAULT '0',
+  `id_test_method` int(11) NOT NULL,
   `keterangan` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of tanggal_psychotest
 -- ----------------------------
-INSERT INTO `tanggal_psychotest` VALUES ('10', '10', '9', '2018-03-26', '0', 'Psikotes', '2018-02-20 00:31:19', '2018-02-20 00:31:19');
-INSERT INTO `tanggal_psychotest` VALUES ('11', '13', '1', '2018-03-24', '0', '', '2018-03-08 01:39:27', '2018-03-08 01:39:27');
-INSERT INTO `tanggal_psychotest` VALUES ('12', '10', '2', '2018-03-25', '0', '', '2018-03-08 01:39:40', '2018-03-08 01:39:40');
-INSERT INTO `tanggal_psychotest` VALUES ('13', '10', '10', '2018-04-03', '27', '', '2018-03-08 01:39:50', '2018-03-23 08:47:58');
+INSERT INTO `tanggal_psychotest` VALUES ('10', '0', '9', '2018-03-26', '0', null, '2', 'Psikotes', '2018-02-20 00:31:19', '2018-02-20 00:31:19');
+INSERT INTO `tanggal_psychotest` VALUES ('11', '0', '1', '2018-03-24', '0', null, '2', 'Keterangan', '2018-03-08 01:39:27', '2018-03-08 01:39:27');
+INSERT INTO `tanggal_psychotest` VALUES ('12', '0', '2', '2018-03-25', '0', null, '2', 'Keterangan', '2018-03-08 01:39:40', '2018-03-08 01:39:40');
+INSERT INTO `tanggal_psychotest` VALUES ('13', '0', '10', '2018-04-20', '26', null, '2', 'Keterangan', '2018-03-08 01:39:50', '2018-04-17 01:20:11');
+INSERT INTO `tanggal_psychotest` VALUES ('14', '0', '1', '2018-04-25', '90', null, '2', 'Keterangan', '2018-04-24 09:22:55', '2018-04-24 09:22:55');
+INSERT INTO `tanggal_psychotest` VALUES ('15', '0', '1', '2018-05-10', '100', '50', '2', '', '2018-05-08 03:50:35', '2018-05-08 07:49:57');
+INSERT INTO `tanggal_psychotest` VALUES ('16', '0', '2', '2018-05-09', '50', '50', '2', '', '2018-05-08 08:02:40', '2018-05-09 02:24:43');
+INSERT INTO `tanggal_psychotest` VALUES ('17', '0', '5', '2018-05-11', '400', '400', '1', '', '2018-05-08 08:06:30', '2018-05-08 08:06:30');
+
+-- ----------------------------
+-- Table structure for test_method
+-- ----------------------------
+DROP TABLE IF EXISTS `test_method`;
+CREATE TABLE `test_method` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `method` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of test_method
+-- ----------------------------
+INSERT INTO `test_method` VALUES ('1', 'Pencil & Paper Based Test', null, null);
+INSERT INTO `test_method` VALUES ('2', 'Computer Based Teset', null, null);
+
+-- ----------------------------
+-- Table structure for test_type
+-- ----------------------------
+DROP TABLE IF EXISTS `test_type`;
+CREATE TABLE `test_type` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `test_type` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of test_type
+-- ----------------------------
+INSERT INTO `test_type` VALUES ('1', 'Total', null, null);
+INSERT INTO `test_type` VALUES ('2', 'Ketelitian & Kecepatan', null, null);
+INSERT INTO `test_type` VALUES ('3', 'Hitung Cepat', null, null);
+INSERT INTO `test_type` VALUES ('4', 'Logika Bahasa', null, null);
+INSERT INTO `test_type` VALUES ('5', 'Kreativitas Angka', null, null);
+INSERT INTO `test_type` VALUES ('6', 'Kreativitas Gambar', null, null);
+INSERT INTO `test_type` VALUES ('7', 'Complete CV', null, null);
 
 -- ----------------------------
 -- Table structure for tingkat_pendidikan
@@ -2700,7 +3146,7 @@ CREATE TABLE `tingkat_pendidikan` (
 -- ----------------------------
 -- Records of tingkat_pendidikan
 -- ----------------------------
-INSERT INTO `tingkat_pendidikan` VALUES ('1', 'D3', '1', '2016-10-20 07:05:30', '2018-04-02 15:21:52', null);
+INSERT INTO `tingkat_pendidikan` VALUES ('1', 'D3', '1', '2016-10-20 07:05:30', '2018-04-26 14:26:39', null);
 INSERT INTO `tingkat_pendidikan` VALUES ('2', 'D4', '2', '2016-10-20 07:05:37', '2016-10-20 07:05:37', null);
 INSERT INTO `tingkat_pendidikan` VALUES ('3', 'S1', '3', '2016-10-20 07:05:49', '2016-10-20 07:05:49', null);
 INSERT INTO `tingkat_pendidikan` VALUES ('4', 'Profesi', '4', '2016-10-20 07:06:01', '2016-10-20 07:06:01', null);
@@ -2722,10 +3168,12 @@ CREATE TABLE `users` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of users
 -- ----------------------------
 INSERT INTO `users` VALUES ('1', 'Dani Kurniawan', 'dann.sevens@gmail.com', '$2y$10$oXPQmqa0ZUN0/QqTiWs.VugJS9nnQ7de.RsBMZcZKc4cr59XNpEfu', 'iRmjZ4Z1FIn8ewjPCiXMsTrIJBwjFEuobz5wkHkFinEIVuRqvZNFkuUHpSpY', '2018-04-02 16:03:53', '2016-12-27 23:38:37', '2017-05-03 18:25:25');
-INSERT INTO `users` VALUES ('2', 'User', 'user@medion.co.id', '$2y$10$ZQtRUldzDirPwHvGye5bh.vv3IGdIFJGlc.V.AySQZGY9M9z5bhrO', 'tTPnCtAKZnzAD9PojJpaWmYADD0OShgfFXGsXQ1dtaTThhnvK8NLsI8BVI41', '2018-04-03 08:10:30', '2016-12-29 02:42:27', '2018-04-03 01:10:30');
+INSERT INTO `users` VALUES ('2', 'User', 'user@medion.co.id', '$2y$10$ZQtRUldzDirPwHvGye5bh.vv3IGdIFJGlc.V.AySQZGY9M9z5bhrO', 'c7jTfxrGw1Koecd6NmSSi5MRqAGcDs1xih2vnDqTZx9KcGl6KYnQINl5fCew', '2018-04-26 14:28:19', '2016-12-29 02:42:27', '2018-04-26 07:28:19');
+INSERT INTO `users` VALUES ('3', 'Rendy Reynaldy A.', 'rendyreynaldy@gmail.com', '$2y$10$paoZoObf7ApuP8LL0vEXu.8q3uGvjRrnVN6VXYDpZa.DAQZUzzVW6', null, '2018-04-26 14:28:13', '2018-04-26 07:28:13', '2018-04-26 07:28:13');
+SET FOREIGN_KEY_CHECKS=1;

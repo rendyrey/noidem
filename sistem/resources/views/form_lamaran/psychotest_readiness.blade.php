@@ -16,9 +16,10 @@
 									<option></option>
 									@foreach($tanggal_psychotest as $value)
 										<?php $tanggal = date('d M Y', strtotime($value->tanggal)); ?>
-										<option value="{{$value->id}}" name="{{$value->id_iklan}}">{{$tanggal}} ( {{$value->kota->kota}} )</option>
+										<option value="{{$value->id}}" name="{{$value->id_iklan}}" {{old('id_tanggal_psychotest')==$value->id ? 'selected':''}}>{{$tanggal}} ( {{$value->kota->kota}} )</option>
 									@endforeach
 								</select>
+								<font color="red">{{$errors->first('id_tanggal_psychotest')}}</font>
 							</div>
 						</div>
 						<div class="form-group" id="other_venue" style="display: none">

@@ -27,7 +27,7 @@ class PosisiController extends Controller
 
     public function update($id,request $request){
       $this->validate($request,[
-        'divisi'=>'required',
+        // 'divisi'=>'required',
         'posisi'=>'required',
         'posisi_publish'=>'required'
       ],[

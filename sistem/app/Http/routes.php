@@ -35,7 +35,7 @@ Route::get('pelamar_inproses/get_psychotest','PelamarController@get_psychotest')
 Route::post('pelamar_inproses/tambah_schedule','PelamarController@tambah_schedule');
 Route::post('pelamar_inproses/update_schedule','PelamarController@update_schedule');
 Route::get('pelamar_inproses/details/{id}','PelamarController@details');
-
+Route::get('pelamar_inproses/add_applicant/{id}','PelamarController@add_applicant');
 //pelamar awaiting
 Route::get('pelamar_awaiting','PelamarController@pelamar_awaiting');
 
@@ -61,6 +61,8 @@ Route::get('admin', 'DashboardController@vacancy_dashboard');
 Route::get('vacancy_dashboard', 'DashboardController@vacancy_dashboard');
 Route::get('main_dashboard', 'DashboardController@main_dashboard');
 Route::get('applicant_dashboard', 'DashboardController@applicant_dashboard');
+Route::get('calendar_psychotest','DashboardController@calendar_psychotest');
+Route::get('calendar_data','DashboardController@calendar_data');
 
 //Bidang Usaha
 Route::get('bidang_usaha', 'BidangUsahacontroller@index');
@@ -109,6 +111,9 @@ Route::post('posisi/tambah','PosisiController@tambah');
 
 //Position Publish
 Route::get('position_publish','PositionPublishController@index');
+Route::get('position_publish/{id}/edit','PositionPublishController@edit');
+Route::post('position_publish/{id}/update','PositionPublishController@update');
+Route::get('position_publish/{id}/delete','PositionPublishController@delete');
 
 //Position Category
 Route::get('position_category','PositionCategoryController@index');

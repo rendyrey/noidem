@@ -155,14 +155,14 @@
                       <label>Index Adv Media Effect Exp</label>
                       <input name = "index_adv_media_effect_exp" type="text" class="form-control" value="{{$loker->index_adv_media_effect_exp}}">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label>Kriteria Syarat Grup</label>
                       <select name = 'id_major_grup' class = 'form-control select_search' id="major_grups">
                         @foreach($kriteria_syarat as $value1)
                           <option value="{{$value1->id}}" {{$loker->id_syarat == $value1->id ? 'selected' : ''}}>{{$value1->keterangan}}</option>
                         @endforeach
                       </select>
-                    </div>
+                    </div> --}}
                   </div>
                 </div>
                 <a href="{{ url('vacancy_advertising') }}" class="btn btn-sm btn-danger">Close</a>

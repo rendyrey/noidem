@@ -91,7 +91,6 @@ class KriteriaSyaratController extends Controller
       return view('admin.kriteria_syarat.syarat_psychotest_edit_khusus',$data);
     }
 
-
     public function syarat_psychotest_update(Request $request,$id){
       $this->validate($request,[
         'position_category'=>'required',

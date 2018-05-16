@@ -168,14 +168,7 @@
   <label>Index Adv Media Effect Exp</label>
   <input name="index_adv_media_effect_exp_{{$lokers->id}}" type="text" class="form-control">
 </div>
-<div class="form-group">
-  <label>Kriteria Syarat</label>
-  <select name="id_syarat_{{$lokers->id}}" class='form-control'>
-    @foreach($kriteria_syarat_opt as $value)
-      <option value="{{$value->id}}">{{$value->keterangan}}</option>
-    @endforeach
-  </select>
-</div>
+
 <button type="submit" class="btn btn-sm btn-primary pull-right">
   <i class="fa fa-check"></i> Simpan</button>
 </div>

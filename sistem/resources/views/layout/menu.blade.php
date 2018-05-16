@@ -44,10 +44,10 @@
                     <li><a href="{{url('advertising_category')}}">Advertising Category</a></li>
                     <li><a href="{{url('advertising_media')}}">Advertising Media</a></li>
                     <li><a href="{{url('tingkat_pendidikan')}}">Tingkat Pendidikan</a></li>
-                    <li><a href="{{url('tanggal_psychotest')}}">Tanggal Psychotest</a></li>
+                    {{-- <li><a href="{{url('tanggal_psychotest')}}">Tanggal Psychotest</a></li> --}}
                     <li><a href="{{url('kriteria_syarat')}}">Kriteria Syarat</a></li>
                     <li><a href="{{url('akreditasi')}}">Akreditasi</a></li>
-                    <li><a href="{{url('posisi')}}">Posisi</a></li>
+                    {{-- <li><a href="{{url('posisi')}}">Posisi</a></li> --}}
                     <li><a href="{{url('position_publish')}}">Position Publish</a></li>
                     <li><a href="{{url('position_category')}}">Position Category</a></li>
                     <li><a href="{{url('user')}}">User</a></li>

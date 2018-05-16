@@ -303,17 +303,9 @@
                   </div>
                 </div>
               </div>
-
-
-
-
             </div>
-
           </div>
         </div>
-
-
-
         <script src="{{ URL::asset('assets/js/jquery-2.1.4.min.js') }}"></script>
         <script type="text/javascript">
         $(document).ready(function(){

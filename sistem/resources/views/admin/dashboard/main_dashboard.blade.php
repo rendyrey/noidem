@@ -13,7 +13,7 @@
           </div>
         </div>
       </div>
-
+      
       <div class="clearfix"></div>
 
       <div class="row">
@@ -23,6 +23,8 @@
               <p class="text-muted font-13 m-b-30">
                 {{-- The Buttons extension for DataTables provides a common set of options, API methods and styling to display buttons on a page that will interact with a DataTable. The core library provides the based framework upon which plug-ins can built. --}}
               </p>
+              <div id='calendar'></div>
+              <br>
               <table id="datatable" class="table table-striped table-bordered table_dashboard">
                 <thead>
                   <tr>
@@ -62,4 +64,155 @@
           </div>
         </div>
       </div>
-    @endsection
+
+
+      <div id="CalenderModalEdit" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel2">Main Dashboard</h4>
+            </div>
+            <div class="modal-body" id="modal_body">
+
+              <input type="text" name="tanggal" value="" id="tanggal">
+            </div>
+            <div class="modal-footer">
+              {{-- <button type="button" class="btn btn-success" id="psychotest_details">Details</button> --}}
+              <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save changes</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="fc_create" data-toggle="modal" data-target="#CalenderModalNew"></div>
+    <div id="fc_edit" data-toggle="modal" data-target="#CalenderModalEdit"></div>
+
+    <!-- jQuery -->
+    <script src="{{ URL::asset('assets/gentelella/vendors/jquery/dist/jquery.min.js')}}"></script>
+
+    <script>
+    /* CALENDAR */
+
+
+    function  init_calendar() {
+
+      if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
+      console.log('init_calendar');
+
+
+      var date = new Date(),
+      d = '7',
+      m = '04',
+      y = '2018',
+      started,
+      categoryClass;
+
+      var calendar = $('#calendar').fullCalendar({
+        header: {
+          left: 'prev,next today',
+          center: 'title',
+          right: 'month,agendaWeek,agendaDay,listMonth'
+        },
+        selectable: true,
+        selectHelper: true,
+        select: function(start, end, allDay) {
+          $('#fc_create').click();
+
+          started = start;
+          ended = end;
+
+          $(".antosubmit").on("click", function() {
+            var title = $("#title").val();
+            if (end) {
+              ended = end;
+            }
+
+            categoryClass = $("#event_type").val();
+
+            if (title) {
+              calendar.fullCalendar('renderEvent', {
+                title: title,
+                start: started,
+                end: end,
+                allDay: allDay
+              },
+              true // make the event "stick"
+            );
+          }
+
+          $('#title').val('');
+
+          calendar.fullCalendar('unselect');
+
+          $('.antoclose').click();
+
+          return false;
+        });
+      },
+      eventClick: function(calEvent, jsEvent, view) {
+        $('#fc_edit').click();
+        $('#tanggal').val(calEvent.tanggal);
+        var tanggal = calEvent.tanggal;
+        $.ajax({
+          url:"{{url('calendar_data')}}",
+          type:"GET",
+          data:{
+            'tanggal':tanggal
+          },
+          success:function(result){
+            $("#modal_body").html(result);
+          }
+        });
+
+        categoryClass = $("#event_type").val();
+
+        $(".antosubmit2").on("click", function() {
+          calEvent.title = $("#title2").val();
+
+          calendar.fullCalendar('updateEvent', calEvent);
+          $('.antoclose2').click();
+        });
+
+        calendar.fullCalendar('unselect');
+      },
+      dayClick: function(date) {
+        //var time = new Date(start);
+        //var waktu = new Date('2018','04','07');
+        //alert(date.format());
+        var tanggal = date.format();
+        $('#fc_edit').click();
+        $.ajax({
+          url:"{{url('calendar_data')}}",
+          type:"GET",
+          data:{
+            'tanggal':tanggal
+          },
+          success:function(result){
+            $("#modal_body").html(result);
+          }
+        });
+      },
+      editable: true,
+      events:{
+        url:"{{url('calendar_psychotest')}}",
+        type:"GET"
+      }
+
+    });
+
+  };
+
+  $(document).ready(function(){
+    init_calendar();
+    $("#psychotest_details").click(function(){
+      var id = $(this).val();
+      window.location = "pelamar_inproses/details/"+id;
+    });
+  });
+  </script>
+@endsection

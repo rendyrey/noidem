@@ -5,7 +5,7 @@
     <div class="">
       <div class="page-title">
         <div class="title_left">
-          <h3>Mian Dashboard</h3>
+          <h3>Applicant Dashboard</h3>
         </div>
 
         <div class="title_right">
@@ -44,9 +44,7 @@
                   </tr>
                 </thead>
                 <tbody>
-
                 </tbody>
-
               </table>
             </div>
           </div>

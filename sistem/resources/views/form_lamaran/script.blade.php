@@ -32,7 +32,7 @@ $(window).load(function() {
 <script src="assets/js/ace.min.js"></script>
 <script src="assets/coding_js/chosen-photo.js"></script>
 <script src="assets/js/jquery.validate.min.js"></script>
-<script src="assets/coding_js/validasi_2.js"></script>
+{{-- <script src="assets/coding_js/validasi_2.js"></script> --}}
 <script src="assets/coding_js/general_data.js"></script>
 <script src="assets/coding_js/other_data.js"></script>
 <script src="assets/coding_js/confirmation.js"></script>
@@ -113,13 +113,13 @@ $(document).ready(function() {
 		});
 		x--;
 	});
-	 $("#id-input-file-3").change(function () {
-        var fileExtension = ['jpeg', 'jpg', 'png', 'bmp'];
-        if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
+	$("#id-input-file-3").change(function () {
+		var fileExtension = ['jpeg', 'jpg', 'png', 'bmp'];
+		if ($.inArray($(this).val().split('.').pop().toLowerCase(), fileExtension) == -1) {
 			$("#id-input-file-3").val('');
-            alert("Only formats are allowed : "+fileExtension.join(', '));
-        }
-    });
+			alert("Only formats are allowed : "+fileExtension.join(', '));
+		}
+	});
 	$("#interest_1").change(function(){
 		var id = $(this).val();
 		$("#interest_2").find('option').prop('disabled',false);
