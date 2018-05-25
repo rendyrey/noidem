@@ -82,7 +82,6 @@
 							</div>
 							<div class="form-group">
 								<label class="col-xs-12 col-sm-3 control-label no-padding-right">GPA</label>
-
 								<div class="col-xs-12 col-sm-2">
 									<span class="block input-icon input-icon-right">
 										<input type="text" name="gpa" class="justNumber width-100" maxlength="4" value="{{old('gpa')}}">
@@ -97,8 +96,8 @@
 								<div class="col-xs-12 col-sm-2">
 									<select name="start_month_education" class="form-control">
 										<option value="">Select Month</option>
-										@foreach($months as $name)
-											<option value="{{$name}}" {{old('start_month_education')==$name ? 'selected':''}}>{{$name}}</option>
+										@foreach($months as $key=>$name)
+											<option value="{{$key}}" {{old('start_month_education')==$key ? 'selected':''}}>{{$name}}</option>
 										@endforeach
 									</select>
 									<font color="red">{{$errors->first('start_month_education')}}</font>
@@ -118,8 +117,8 @@
 								<div class="col-xs-12 col-sm-2">
 									<select name="end_month_education" class="form-control">
 										<option value="">Select Month</option>
-										@foreach($months as $name)
-											<option value="{{$name}}" {{old('end_month_education')==$name ? 'selected':''}}>{{$name}}</option>
+										@foreach($months as $key=>$name)
+											<option value="{{$key}}" {{old('end_month_education')==$key ? 'selected':''}}>{{$name}}</option>
 										@endforeach
 									</select>
 									<font color="red">{{$errors->first('end_month_education')}}</font>
@@ -128,9 +127,7 @@
 									<select name="end_year_education" class="form-control">
 										<option value="">Select Year</option>
 										@foreach ($yearArray as $year)
-
 											<option value="{{$year}}" {{old('end_year_education')==$year ? 'selected':''}}>{{$year}}</option>
-
 										@endforeach
 									</select>
 									<font color="red">{{$errors->first('end_year_education')}}</font>

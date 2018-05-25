@@ -247,14 +247,14 @@
                           <label class="col-md-4 col-sm-4 col-xs-12">Start Year Education
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{$pelamar->start_year_education}}
+                            {{date('F Y',strtotime($pelamar->start_year_education))}}
                           </div>
                         </div>
                         <div class="form-group">
                           <label class="col-md-4 col-sm-4 col-xs-12">End Year Education
                           </label>
                           <div class="col-md-6 col-sm-6 col-xs-12">
-                            {{$pelamar->end_year_education}}
+                            {{date('F Y',strtotime($pelamar->end_year_education))}}
                           </div>
                         </div>
                       </form>

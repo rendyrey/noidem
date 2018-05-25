@@ -191,7 +191,7 @@ class FormLamaranController extends Controller
         $actual_pg_exp3 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_3)->value('actual_pg_exp');
         $actual_pg_exp4 = Loker::where('id_iklan',$request->id_iklan)->where('no_rcr',$request->job_interest_4)->value('actual_pg_exp');
 
-       
+
 
         $data_exist = Pelamar::where('nama', '=', $request->nama)
             ->where('tgl_lahir', '=', $request->month_of_birth . "/" . $request->date_of_birth . "/" . $request->year_of_birth)
@@ -238,8 +238,8 @@ class FormLamaranController extends Controller
                 $pelamar->id_major = $request->id_major;
                 $pelamar->other_major = $request->other_major;
                 $pelamar->gpa = $request->gpa;
-                $pelamar->start_year_education = $request->start_month_education . " " . $request->start_year_education;
-                $pelamar->end_year_education = $request->end_month_education . " " . $request->end_year_education;
+                $pelamar->start_year_education = $request->start_year_education."-".$request->start_month_education."-01";
+                $pelamar->end_year_education = $request->end_year_education."-".$request->end_month_education."-01";
 
             } else {
 
@@ -249,8 +249,8 @@ class FormLamaranController extends Controller
                 $pelamar->id_major = $request->id_major_more;
                 $pelamar->other_major = $request->other_major_more;
                 $pelamar->gpa = $request->gpa_more;
-                $pelamar->start_year_education = $request->start_month_education_more . " " . $request->start_year_education_more;
-                $pelamar->end_year_education = $request->end_month_education_more . " " . $request->end_year_education_more;
+                $pelamar->start_year_education = $request->start_year_education_more."-".$request->start_month_education_more."01";
+                $pelamar->end_year_education = $request->end_year_education_more."-".$request->end_month_education_more."-01";
             }
 
             if (!empty($request->id_bidang_usaha)) {
@@ -261,7 +261,6 @@ class FormLamaranController extends Controller
                 $pelamar->end_year_work_experience = $request->we_end_month . " " . $request->we_end_year;
 
             } else {
-
                 $pelamar->id_bidang_usaha = "";
                 $pelamar->other_bidang_usaha = "";
                 $pelamar->start_year_work_experience = "";
@@ -293,16 +292,13 @@ class FormLamaranController extends Controller
 
             $akreditasi = Akreditasi::where('id_institusi', '=', $pelamar->id_institusi)->where('id_major', '=', $pelamar->id_major)->value('akreditasi');
             $level = TingkatPendidikan::where('id', '=', $pelamar->id_tingkat_pendidikan)->value('tingkat');
-            $lama_studi = $pelamar->end_year_education - $pelamar->start_year_education;
+            $education_start = Carbon::parse($pelamar->start_year_education);
+            $education_end = Carbon::parse($pelamar->end_year_education);
+            $diff= $education_start->diffInMonths($education_end);
+            $lama_studi = round($diff/12,1);
             $from_usia = Carbon::createFromDate($request->year_of_birth, $request->month_of_birth, $request->date_of_birth);
             $to_usia = Carbon::today();
             $usia = $from_usia->diff($to_usia)->y;
-
-            //check ada atau nggak
-            $check_syarat = SyaratPrescreening::where('work_experience','No')->where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-            ->where('accreditation',$akreditasi)->where('gpa','<=',$request->gpa)
-            ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->first();
-            dd($check_syarat);
 
             //Freshgraduate
             if ($request->id_bidang_usaha == "") {
@@ -336,79 +332,48 @@ class FormLamaranController extends Controller
                     $update_pelamar_passed4->actual_fresh = $jml_actual_fresh4;
                     $update_pelamar_passed4->save();
                 }
-              
 
-                if ($level == "S1") {
 
-                    if ($lama_studi <= 5 and $akreditasi == "A" and $request->gpa >= 2.75 and $usia >= 18) {
+                //check untuk status pelamar (passed) 1
+                $syarat_passed = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
+                ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->exists();
 
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_fresh";
+                //check untuk status pelamar awaiting
+                $syarat_awaiting1 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                ->where('accreditation','>=',$akreditasi)
+                ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->exists();
 
-                    } elseif ($lama_studi <= 5 and $akreditasi == "B" and $request->gpa >= 3 and $usia >= 18) {
+                $syarat_awaiting2 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
+                ->where('age','>=',$usia)->exists();
 
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_fresh";
+                $syarat_awaiting3 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                ->where('gpa','<=',$request->gpa)
+                ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->exists();
 
-                    } elseif ($lama_studi <= 5 and $request->gpa >= 3 and $usia >= 18) {
-
-                        $pelamar->status_pelamar = "Awaiting";
-                        $pelamar->keterangan = "awaiting_fresh";
-
-                    } else {
-
-                        $pelamar->status_pelamar = "Failed";
-                        $pelamar->keterangan = "failed_fresh";
-                    }
-
-                } elseif ($level == "D3") {
-
-                    if ($lama_studi <= 3 and $akreditasi == "A" and $request->gpa >= 2.75 and $usia >= 18) {
-
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_fresh";
-
-                    } elseif ($lama_studi <= 3 and $akreditasi == "B" and $request->gpa >= 3 and $usia >= 18) {
-
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_fresh";
-
-                    } elseif ($lama_studi <= 3 and $request->gpa >= 3 and $usia >= 18) {
-
-                        $pelamar->status_pelamar = "Awaiting";
-                        $pelamar->keterangan = "awaiting_fresh";
-
-                    } else {
-
-                        $pelamar->status_pelamar = "Failed";
-                        $pelamar->keterangan = "failed_fresh";
-                    }
-
-                } elseif ($level == "D4") {
-
-                    if ($lama_studi <= 4 and $akreditasi == "A" and $request->gpa >= 2.75 and $usia >= 18) {
-
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_fresh";
-
-                    } elseif ($lama_studi <= 4 and $akreditasi == "B" and $request->gpa >= 3 and $usia >= 18) {
-
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_fresh";
-
-                    } elseif ($lama_studi <= 4 and $request->gpa >= 3 and $usia >= 18) {
-
-                        $pelamar->status_pelamar = "Awaiting";
-                        $pelamar->keterangan = "awaiting_fresh";
-
-                    } else {
-
-                        $pelamar->status_pelamar = "Failed";
-                        $pelamar->keterangan = "failed_fresh";
-                    }
+                $status_pelamar = '';
+                if($syarat_passed){
+                    $status_pelamar = "PG";
+                    $keterangan = "actual_fresh";
+                }else if($syarat_awaiting1){
+                    $status_pelamar = "Awaiting";
+                    $keterangan = "actual_fresh";
+                }else if($syarat_awaiting2){
+                    $status_pelamar = "Awaiting";
+                    $keterangan = "actual_fresh";
+                }else if($syarat_awaiting3){
+                    $status_pelamar = "Awaiting";
+                    $keterangan = "actual_fresh";
+                }else{
+                    $status_pelamar = "Failed";
+                    $keterangan = "failed_fresh";
                 }
 
-                if ($pelamar->status_pelamar == "Passed") {
+                $pelamar->status_pelamar = $status_pelamar;
+                $pelamar->keterangan = $keterangan;
+
+                if ($pelamar->status_pelamar == "PG") {
                     // -- update kuota psychotest
                     $id_tgl_psychotest = $request->id_tanggal_psychotest;
                     $get_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
@@ -522,77 +487,47 @@ class FormLamaranController extends Controller
                 }
                 // -- end update actual exp
 
-                if ($level == "S1") {
+                   //check untuk status pelamar (passed) 1
+                   $syarat_passed = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                   ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
+                   ->where('study_period','>=',$lama_studi)->exists();
 
-                    if ($lama_studi <= 5 and $akreditasi == "A" and $request->gpa >= 2.75 and $usia <= 45) {
+                   //check untuk status pelamar awaiting
+                   $syarat_awaiting1 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                   ->where('accreditation','>=',$akreditasi)
+                   ->where('study_period','>=',$lama_studi)->exists();
 
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_exp";
+                   $syarat_awaiting2 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                   ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
+                   ->exists();
 
-                    } elseif ($lama_studi <= 5 and $akreditasi == "B" and $request->gpa >= 3 and $usia <= 45) {
+                   $syarat_awaiting3 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                   ->where('gpa','<=',$request->gpa)
+                   ->where('study_period','>=',$lama_studi)->exists();
 
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_exp";
+                   $status_pelamar = '';
+                   if($syarat_passed){
+                       $status_pelamar = "PG";
+                       $keterangan = "actual_exp";
+                   }else if($syarat_awaiting1){
+                       $status_pelamar = "Awaiting";
+                       $keterangan = "actual_exp";
+                   }else if($syarat_awaiting2){
+                       $status_pelamar = "Awaiting";
+                       $keterangan = "actual_exp";
+                   }else if($syarat_awaiting3){
+                       $status_pelamar = "Awaiting";
+                       $keterangan = "actual_exp";
+                   }else{
+                       $status_pelamar = "Failed";
+                       $keterangan = "failed_exp";
+                   }
 
-                    } elseif ($lama_studi <= 5 and $request->gpa >= 3 and $usia <= 45) {
+                   $pelamar->status_pelamar = $status_pelamar;
+                   $pelamar->keterangan = $keterangan;
 
-                        $pelamar->status_pelamar = "Awaiting";
-                        $pelamar->keterangan = "awaiting_fresh";
 
-                    } else {
-
-                        $pelamar->status_pelamar = "Failed";
-                        $pelamar->keterangan = "failed_exp";
-                    }
-
-                } elseif ($level == "D3") {
-
-                    if ($lama_studi <= 3 and $akreditasi == "A" and $request->gpa >= 2.75 and $usia <= 45) {
-
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_exp";
-
-                    } elseif ($lama_studi <= 3 and $akreditasi == "B" and $request->gpa >= 3 and $usia <= 45) {
-
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_exp";
-
-                    } elseif ($lama_studi <= 3 and $request->gpa >= 3 and $usia <= 45) {
-
-                        $pelamar->status_pelamar = "Awaiting";
-                        $pelamar->keterangan = "awaiting_exp";
-
-                    } else {
-
-                        $pelamar->status_pelamar = "Failed";
-                        $pelamar->keterangan = "failed_exp";
-                    }
-
-                } elseif ($level == "D4") {
-
-                    if ($lama_studi <= 4 and $akreditasi == "A" and $request->gpa >= 2.75 and $usia <= 45) {
-
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_exp";
-
-                    } elseif ($lama_studi <= 4 and $akreditasi == "B" and $request->gpa >= 3 and $usia <= 45) {
-
-                        $pelamar->status_pelamar = "Passed";
-                        $pelamar->keterangan = "actual_exp";
-
-                    } elseif ($lama_studi <= 4 and $request->gpa >= 3 and $usia <= 45) {
-
-                        $pelamar->status_pelamar = "Awaiting";
-                        $pelamar->keterangan = "awaiting_exp";
-
-                    } else {
-
-                        $pelamar->status_pelamar = "Failed";
-                        $pelamar->keterangan = "failed_exp";
-                    }
-                }
-
-                if ($pelamar->status_pelamar == "Passed") {
+                if ($pelamar->status_pelamar == "PG") {
 
 
                     //-- update kuota psychotest
