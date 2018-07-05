@@ -15,7 +15,7 @@ class AdvertisingMediaController extends Controller
     {
         $this->middleware('auth');
     }
-    
+
     public function index()
     {
     	$advertising_media = AdvertisingMedia::all();
@@ -42,7 +42,8 @@ class AdvertisingMediaController extends Controller
     {
     	$media = $request->media;
     	$id_kategori = $request->id_kategori;
-    	DB::table('advertising_media')->where('id', $id)->update(['id_kategori' => $id_kategori, 'media' => $media]);
+      $domain = $request->domain;
+    	DB::table('advertising_media')->where('id', $id)->update(['id_kategori' => $id_kategori, 'media' => $media,'domain'=>$domain]);
     	return redirect('advertising_media')->with('message','Data berhasil diubah!')->with('panel','success');
     }
 }

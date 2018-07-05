@@ -31,7 +31,7 @@ class PosisiController extends Controller
         'posisi'=>'required',
         'posisi_publish'=>'required'
       ],[
-        'divisi.required'=>'Kolom Divisi harus diisi!',
+        // 'divisi.required'=>'Kolom Divisi harus diisi!',
         'posisi.required'=>'Kolom Posisi harus diisi!',
         'posisi_publish.required'=>'Kolok Posisi Publish harus diisi!'
       ]);
@@ -51,19 +51,19 @@ class PosisiController extends Controller
 
     public function tambah(request $request){
       $this->validate($request,[
-        'divisi'=>'required',
+        // 'divisi'=>'required',
         'posisi'=>'required',
         'posisi_publish'=>'required'
       ],[
-        'divisi.required'=>'Kolom Divisi harus diisi!',
+        // 'divisi.required'=>'Kolom Divisi harus diisi!',
         'posisi.required'=>'Kolom Posisi harus diisi!',
         'posisi_publish.required'=>'Kolok Posisi Publish harus diisi!'
       ]);
       $posisi = new Posisi;
-      $posisi->divisi = $request->divisi;
+      // $posisi->divisi = $request->divisi;
       $posisi->posisi = $request->posisi;
       $posisi->posisi_publish = $request->posisi_publish;
       $posisi->save();
-      return redirect('posisi')->with('message', 'Data posisi berhasil disimpan!')->with('panel','success');
+      return redirect('position_publish')->with('message', 'Data posisi berhasil disimpan!')->with('panel','success');
     }
 }

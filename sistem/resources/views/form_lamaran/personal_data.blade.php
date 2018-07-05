@@ -9,6 +9,17 @@
 				<div id="fuelux-wizard-container">
 					<div class="step-pane active" data-step="1">
 						<div class="form-group">
+							<label class="col-xs-12 col-sm-3 control-label no-padding-right">NIK</label>
+							<div class="col-xs-12 col-sm-5">
+								<span class="block input-icon input-icon-right">
+									<input type="text" name="nik" id="nik" class="width-100" placeholder="NIK or ID Number" value="{{old('nik')}}">
+									<i class="ace-icon fa fa-pencil-square-o"></i>
+									<br>
+									<font color="red">{{$errors->first('nik')}}</font>
+								</span>
+							</div>
+						</div>
+						<div class="form-group">
 							<label class="col-xs-12 col-sm-3 control-label no-padding-right">Full Name</label>
 							<div class="col-xs-12 col-sm-5">
 								<span class="block input-icon input-icon-right">

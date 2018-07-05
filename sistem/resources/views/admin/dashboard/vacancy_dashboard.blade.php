@@ -45,7 +45,7 @@
                     <th>Target pg Exp</th>
                     <th>Target pass Fresh</th>
                     <th>Target pass Exp</th>
-                    <th>Gender</th> 
+                    <th>Gender</th>
                     <th>Edu Level</th>
                     <th>Major Grup</th>
                     <th>Major</th>
@@ -109,7 +109,7 @@
                         <td>{{$val->target_pg_exp}}</td>
                         <td>{{$val->target_pass_fresh}}</td>
                         <td>{{$val->target_pass_exp}}</td>
-                        <td>Belum</td>
+                        <td>{{$val->gender}}</td>
                         <td>{{$val->tingkat_pendidikan->tingkat}}</td>
                         <td>{{$val->major_grup->nama_grup}}</td>
                         <td>{{$val->major->major}}</td>

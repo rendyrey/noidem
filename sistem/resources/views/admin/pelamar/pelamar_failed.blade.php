@@ -106,7 +106,7 @@
                       </thead>
                       <tbody>
                         <?php $i=0; ?>
-                        @foreach($pelamar_recruitment as $value)
+                        @foreach($pelamar_prescreening as $value)
                           <tr>
                             <td>{{$value->no_applicant}}</td>
                             <td>{{$value->nama}}</td>
@@ -116,7 +116,13 @@
                             <td>{{$value->major->major}}</td>
                             <td>{{$value->akreditasi->akreditasi}}</td>
                             <td>{{$value->gpa}}</td>
-                            <td>{{date('Y m d',strtotime($value->tgl_lahir))}}</td>
+                            <?php
+                            $date = new DateTime(date('Y-m-d',strtotime($value->tgl_lahir)));
+                            $now = new DateTime();
+                            $interval = $now->diff($date);
+                            $age = $interval->y;
+                            ?>
+                            <td>{{$age}}</td>
                             <td>10</td>
                             <td>{{$value->id_bidang_usaha=='0'?'No':'Yes'}}</td>
                             <td>{{$value->get_bidang_usaha->bidang_usaha}}</td>
@@ -147,24 +153,73 @@
                       </thead>
                       <tbody>
                         <?php $i=0; ?>
-                        @foreach($pelamar_recruitment as $value)
+                        @foreach($pelamar_psychotest as $value)
                           <tr>
-
+                            <td>{{$i}}</td>
+                            <td>{{$value->no_applicant}}</td>
+                            <td>{{$value->nama}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td><input class="checkBoxClass" type="checkbox" name="checkbox[]" value="{{$i}}"></td>
                           </tr>
                           <?php $i++;?>
                         @endforeach
                       </tbody>
                     </table>
+                    <button type="button" class="btn btn-primary" id="psychotest_process"  data-toggle="modal" data-target="#ProcessPsychotest">Process</button>
+
                   </div>
                   <div role="tabpanel" class="tab-pane fade" id="tab_content4" aria-labelledby="profile-tab">
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
         </div>
       </div>
 
+      <!-- calendar modal -->
+      <div id="ProcessPsychotest" class="modal fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
 
-    @endsection
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+              <h4 class="modal-title" id="myModalLabel">Process Test Scheduling</h4>
+            </div>
+            <div class="modal-body">
+              <form id="" class="form-horizontal calender" role="form" action="{{url('pelamar_process_psychotest')}}" method="POST">
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Test Method</label>
+                  <div class="col-sm-9">
+                    <select name="test_method" class="form-control">
+                      <option value="Pencil and Paper Test">Pencil and Paper Test</option>
+                      <option value="Computer Based Test">Computer Based Test</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Psychotest Date</label>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control myDatepicker2" id="tanggal" name="tanggal">
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary antosubmit">Save changes</button>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      @endsection

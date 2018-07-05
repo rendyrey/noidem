@@ -6,17 +6,20 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Posisi;
+use App\PositionCategory;
 
 class PositionPublishController extends Controller
 {
     //
     public function index(){
         $data['position_publish'] = Posisi::all();
+        $data['position_category'] = PositionCategory::all();
         return view('admin.position_publish.index',$data);
     }
 
     public function edit($id){
         $data['position_publish'] = Posisi::findOrfail($id);
+        $data['position_category'] = PositionCategory::all();
       return view('admin.position_publish.edit',$data);
     }
 
@@ -26,12 +29,12 @@ class PositionPublishController extends Controller
             'posisi'=>'required',
             'posisi_publish'=>'required'
           ],[
-            'divisi.required'=>'Kolom Divisi harus diisi!',
+            // 'divisi.required'=>'Kolom Divisi harus diisi!',
             'posisi.required'=>'Kolom Posisi harus diisi!',
             'posisi_publish.required'=>'Kolok Posisi Publish harus diisi!'
           ]);
           $posisi = Posisi::findOrfail($id);
-          $posisi->divisi = $request->divisi;
+        //   $posisi->divisi = $request->divisi;
           $posisi->posisi = $request->posisi;
           $posisi->posisi_publish = $request->posisi_publish;
           $posisi->save();
@@ -42,5 +45,23 @@ class PositionPublishController extends Controller
         $hapus = Posisi::findOrfail($id);
         $hapus->delete();
         return redirect('position_publish')->with('message', 'Data posisi berhasil dihapus!')->with('panel','success');
+      }
+
+      public function tambah(request $request){
+        $this->validate($request,[
+          // 'divisi'=>'required',
+          'posisi'=>'required',
+          'posisi_publish'=>'required'
+        ],[
+          // 'divisi.required'=>'Kolom Divisi harus diisi!',
+          'posisi.required'=>'Kolom Posisi harus diisi!',
+          'posisi_publish.required'=>'Kolok Posisi Publish harus diisi!'
+        ]);
+        $posisi = new Posisi;
+        // $posisi->divisi = $request->divisi;
+        $posisi->posisi = $request->posisi;
+        $posisi->posisi_publish = $request->posisi_publish;
+        $posisi->save();
+        return redirect('position_publish')->with('message', 'Data posisi berhasil disimpan!')->with('panel','success');
       }
 }

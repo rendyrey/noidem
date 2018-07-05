@@ -36,14 +36,16 @@ Route::post('pelamar_inproses/tambah_schedule','PelamarController@tambah_schedul
 Route::post('pelamar_inproses/update_schedule','PelamarController@update_schedule');
 Route::get('pelamar_inproses/details/{id}','PelamarController@details');
 Route::get('pelamar_inproses/add_applicant/{id}','PelamarController@add_applicant');
+Route::post('pelamar_inproses/add_applicants/{id}','PelamarController@add_applicants');
 //pelamar awaiting
 Route::get('pelamar_awaiting','PelamarController@pelamar_awaiting');
 
 //pelamar failed
 Route::get('pelamar_failed','PelamarController@pelamar_failed');
 Route::get('/2', function () {
-    return view('formlamaran2');
+	return view('formlamaran2');
 });
+Route::post('pelamar_process_psychotest','PelamarController@pelamar_process_psychotest');
 
 // Campus Reqruitment
 Route::get('cr', 'CampusReqruitmentController@index');
@@ -69,7 +71,10 @@ Route::get('bidang_usaha', 'BidangUsahacontroller@index');
 Route::post('tambah_bidang_usaha', 'BidangUsahacontroller@tambah');
 Route::get('bidang_usaha/{id}/edit', 'BidangUsahacontroller@edit');
 Route::get('bidang_usaha/{id}/update', 'BidangUsahacontroller@update');
+Route::get('bidang_usaha/{id}/delete','BidangUsahaCOntroller@delete');
 Route::post('bidang_usaha/modal_hapus','BidangUsahaController@modal_hapus');
+Route::post('import_bidang_usaha','BidangUsahaController@import_bidang_usaha');
+Route::get('export_bidang_usaha','BidangUsahaController@export_bidang_usaha');
 
 //Institusi
 Route::get('institusi', 'Institusicontroller@index');
@@ -77,30 +82,40 @@ Route::post('import_institusi', 'Institusicontroller@import');
 Route::post('tambah_institusi', 'Institusicontroller@tambah');
 Route::get('institusi/{id}/edit', 'Institusicontroller@edit');
 Route::get('institusi/{id}/update', 'Institusicontroller@update');
+Route::post('import_institusi','InstitusiController@import_institusi');
+Route::get('export_institusi','InstitusiController@export_institusi');
 
 //Provinsi
 Route::get('provinsi', 'Provinsicontroller@index');
 Route::post('tambah_provinsi', 'Provinsicontroller@tambah');
 Route::get('provinsi/{id}/edit', 'Provinsicontroller@edit');
 Route::get('provinsi/{id}/update', 'Provinsicontroller@update');
+Route::get('export_provinsi','ProvinsiController@export_provinsi');
+Route::post('import_provinsi','ProvinsiController@import_provinsi');
 
 //Kota
 Route::get('kota', 'Kotacontroller@index');
 Route::post('tambah_kota', 'Kotacontroller@tambah');
 Route::get('kota/{id}/edit', 'Kotacontroller@edit');
 Route::get('kota/{id}/update', 'Kotacontroller@update');
+Route::get('export_kota','KotaController@export_kota');
+Route::post('import_kota','KotaController@import_kota');
 
 //Major Grup
 Route::get('major_grup', 'MajorGrupController@index');
 Route::post('tambah_major_grup', 'MajorGrupController@tambah');
 Route::get('major_grup/{id}/edit', 'MajorGrupController@edit');
 Route::get('major_grup/{id}/update', 'MajorGrupController@update');
+Route::get('export_major_grup','MajorGrupController@export_major_grup');
+Route::post('import_major_grup','MajorGrupController@import_major_grup');
 
 //major
 Route::get('major', 'MajorController@index');
 Route::post('tambah_major', 'MajorController@tambah');
 Route::get('major/{id}/edit', 'MajorController@edit');
 Route::get('major/{id}/update', 'MajorController@update');
+Route::get('export_major','MajorController@export_major');
+Route::post('import_major','MajorController@import_major');
 
 //Posisi
 Route::get('posisi','PosisiController@index');
@@ -114,9 +129,12 @@ Route::get('position_publish','PositionPublishController@index');
 Route::get('position_publish/{id}/edit','PositionPublishController@edit');
 Route::post('position_publish/{id}/update','PositionPublishController@update');
 Route::get('position_publish/{id}/delete','PositionPublishController@delete');
+Route::post('position_publish/tambah/','PositionPublishController@tambah');
 
 //Position Category
 Route::get('position_category','PositionCategoryController@index');
+Route::post('tambah_position_category','PositionCategoryController@tambah');
+Route::get('position_category/{id}/delete','PositionCategoryController@delete');
 
 //Advertising Category
 Route::get('advertising_category', 'AdvertisingCategoryController@index');

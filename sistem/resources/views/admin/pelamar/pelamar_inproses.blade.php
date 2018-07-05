@@ -69,7 +69,7 @@
                             <div class="clearfix"></div>
                           </div>
                           <div class="x_content">
-                          <button type="button" class="btn btn-success" data-toggle="modal" data-target="#CalenderModalNew">Add Schedule</button>
+                            <button id="new_schedule" type="button" class="btn btn-success" data-toggle="modal" data-target="#CalenderModalNew">Add Schedule</button>
 
                             <div id='calendar'></div>
 
@@ -164,47 +164,47 @@
             <div class="modal-body">
               <div id="testmodal" style="padding: 5px 20px;">
                 <form id="" class="form-horizontal calender" role="form" action="{{url('pelamar_inproses/tambah_schedule')}}" method="POST">
-                {!! csrf_field() !!}
+                  {!! csrf_field() !!}
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Psychotest Date</label>
                     <div class="col-sm-9">
-                      <input type="text" class="form-control myDatepicker2" id="title" name="tanggal">
+                      <input type="text" class="form-control myDatepicker2" id="tanggal" name="tanggal">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-3 control-label">City</label>
                     <div class="col-sm-9">
                       <select name="id_kota" class="form-control select_search" style="width:100%" data-placeholder="Pilih Kota" required>
-                      <option value=""></option>
-                      @foreach ($kota as $key=>$value )
+                        <option value=""></option>
+                        @foreach ($kota as $key=>$value )
                           <option value="{{$key}}">{{$value}}</option>
-                      @endforeach
+                        @endforeach
                       </select>
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Quota</label>
                     <div class="col-sm-9">
-                    <input type="text" class="form-control" name="kuota">
+                      <input type="text" class="form-control" name="kuota">
                     </div>
                   </div>
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Test Method</label>
                     <div class="col-sm-9">
-                    <select name="id_test_method" class="form-control select_search" style="width:100%" data-placeholder="Pilih Test Method" required>
-                      <option value=""></option>
-                      @foreach($test_method as $key=>$value)
-                        <option value="{{$key}}">{{$value}}</option>
-                      @endforeach
-                    </select>
+                      <select name="id_test_method" class="form-control select_search" style="width:100%" data-placeholder="Pilih Test Method" required>
+                        <option value=""></option>
+                        @foreach($test_method as $key=>$value)
+                          <option value="{{$key}}">{{$value}}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
+                </div>
               </div>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary antosubmit">Save changes</button>
-            </form>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default antoclose" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary antosubmit">Save changes</button>
+              </form>
             </div>
           </div>
         </div>
@@ -222,7 +222,7 @@
               <div id="testmodal2" style="padding: 5px 20px;">
                 <form id="antoform2" class="form-horizontal calender" role="form" method="POST" action="{{url('pelamar_inproses/update_schedule')}}">
                   <input type="hidden" class="form-control" id="id_psychotest" name="id">
-                   <div class="form-group">
+                  <div class="form-group">
                     <label class="col-sm-3 control-label">Title</label>
                     <div class="col-sm-9">
                       <label id="title2" class="control-label"></label>
@@ -237,11 +237,11 @@
                   <div class="form-group">
                     <label class="col-sm-3 control-label">City</label>
                     <div class="col-sm-9">
-                       <select name="id_kota" class="form-control select_search" style="width:100%" data-placeholder="Pilih Kota" required>
-                      <option value=""></option>
-                      @foreach ($kota as $key=>$value )
+                      <select name="id_kota" class="form-control select_search" style="width:100%" data-placeholder="Pilih Kota" required>
+                        <option value=""></option>
+                        @foreach ($kota as $key=>$value )
                           <option value="{{$key}}">{{$value}}</option>
-                      @endforeach
+                        @endforeach
                       </select>
                     </div>
                   </div>
@@ -251,36 +251,31 @@
                       <input type="text" class="form-control"  id="kuota" name="kuota">
                     </div>
                   </div>
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label">Quota Left</label>
-                    <div class="col-sm-9">
-                      <input type="text" class="form-control" id="kuota_left" name="kuota_left">
-                    </div>
-                  </div>
+
                   <div class="form-group">
                     <label class="col-sm-3 control-label">Test Method</label>
                     <div class="col-sm-9">
-                    <select name="id_test_method" class="form-control select_search" style="width:100%" data-placeholder="Pilih Test Method" required>
-                      <option value=""></option>
-                      @foreach($test_method as $key=>$value)
-                        <option value="{{$key}}">{{$value}}</option>
-                      @endforeach
-                    </select>
+                      <select name="id_test_method" class="form-control select_search" style="width:100%" data-placeholder="Pilih Test Method" required>
+                        <option value=""></option>
+                        @foreach($test_method as $key=>$value)
+                          <option value="{{$key}}">{{$value}}</option>
+                        @endforeach
+                      </select>
                     </div>
                   </div>
-                  
-                  
 
+
+
+                </div>
               </div>
-            </div>
-            <div class="modal-footer">
-             
-                
+              <div class="modal-footer">
+
+
                 <button type="button" class="btn btn-success" id="psychotest_details">Details</button>
-              
-              <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-                </form>
+
+                <button type="button" class="btn btn-default antoclose2" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary antosubmit2">Save changes</button>
+              </form>
             </div>
           </div>
         </div>
@@ -293,13 +288,13 @@
 
       <script>
       /* CALENDAR */
-      
+
 
       function  init_calendar() {
 
         if( typeof ($.fn.fullCalendar) === 'undefined'){ return; }
         console.log('init_calendar');
-        
+
 
         var date = new Date(),
         d = '7',
@@ -317,7 +312,7 @@
           selectable: true,
           selectHelper: true,
           select: function(start, end, allDay) {
-            $('#fc_create').click();
+            //$('#new_schedule').click();
 
             started = start;
             ended = end;
@@ -342,12 +337,13 @@
             }
 
             $('#title').val('');
+            $('#tanggal').val('2018-06-17');
 
-            calendar.fullCalendar('unselect');
+            //calendar.fullCalendar('unselect');
 
-            $('.antoclose').click();
+            //$('.antoclose').click();
 
-            return false;
+            //return false;
           });
         },
         eventClick: function(calEvent, jsEvent, view) {
@@ -373,6 +369,8 @@
         dayClick: function(start) {
           var time = new Date(start);
           var waktu = new Date('2018','04','07');
+          //$('#new_schedule').click();
+          //alert('hi');
           //alert(waktu);
         },
         editable: true,
@@ -380,7 +378,7 @@
           url:"{{url('pelamar_inproses/get_psychotest')}}",
           type:"GET"
         }
-          
+
       });
 
     };

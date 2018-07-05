@@ -29,7 +29,7 @@
               <h4>Advertising Category: {{$iklan->advertising_category->kategori}}</h4>
               <small>Advertising Media: {{$iklan->advertising_media->media}}</small>
               <br>
-              <a href="{{url('vacancy_advertising')}}"><button class="btn btn-m btn-info">Back</button></a>
+              <a href="{{url('vacancy_advertising')}}"><button class="btn btn-m btn-primary"><i class="fa fa-arrow-circle-left"></i>&nbsp;Back</button></a>
               <a href="{{url("vacancy_advertising/$iklan->id/form_tambah_loker")}}"><button type="button" class="btn btn-m btn-success">Add</button></a>
               <table id="datatable" class="table table-striped table-bordered table_dashboard">
                 <thead>
@@ -42,6 +42,7 @@
                     <th>Major Grup</th>
                     <th>Major</th>
                     <th>No RCR</th>
+                    <th>Gender</th>
                     <th>Posisi</th>
                     <th>Posisi Publish</th>
                     <th>Target Fresh</th>
@@ -76,6 +77,7 @@
                       <td>{{$values->major_grup->nama_grup}}</td>
                       <td>{{$values->major->major}}</td>
                       <td>{{$values->no_rcr}}</td>
+                      <td>{{$values->gender}}</td>
                       <td>{{$values->position_name}}</td>
                       <td>{{$values->position_publish}}</td>
                       <td>{{$values->target_fresh}}</td>

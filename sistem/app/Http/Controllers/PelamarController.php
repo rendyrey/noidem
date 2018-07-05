@@ -35,8 +35,8 @@ class PelamarController extends Controller
 	public function tampil_pelamar()
 	{
 		$pelamar = Pelamar::all();
-
-		return view('admin.pelamar.index', compact('pelamar'));
+		$pelamar_failed_recruitment = Pelamar::where('status_pelamar','Failed_Recruitment')->get();
+		return view('admin.pelamar.index', compact('pelamar','pelamar_failed_recruitment'));
 	}
 
 	public function edit_pelamar(Request $request){
@@ -57,14 +57,14 @@ class PelamarController extends Controller
 		$loker4 = "";
 
 
-			$edu_level1 = $pelamar->tingkat_pendidikan->tingkat;
-			$loker1 = Loker::where('no_rcr', $pelamar->job_interest_1)->value('position_name');
-			$loker2 = Loker::where('no_rcr', $pelamar->job_interest_2)->value('position_name');
-			$loker3 = Loker::where('no_rcr', $pelamar->job_interest_3)->value('position_name');
-			$loker4 = Loker::where('no_rcr', $pelamar->job_interest_4)->value('position_name');
+		$edu_level1 = $pelamar->tingkat_pendidikan->tingkat;
+		$loker1 = Loker::where('no_rcr', $pelamar->job_interest_1)->value('position_name');
+		$loker2 = Loker::where('no_rcr', $pelamar->job_interest_2)->value('position_name');
+		$loker3 = Loker::where('no_rcr', $pelamar->job_interest_3)->value('position_name');
+		$loker4 = Loker::where('no_rcr', $pelamar->job_interest_4)->value('position_name');
 
 
-			$edu_level2 = $detail_edu->tingkat_pendidikan1->tingkat;
+		$edu_level2 = $detail_edu->tingkat_pendidikan1->tingkat;
 
 		if($edu_level1 == $edu_level2) {
 			$ket = "hidden";
@@ -209,7 +209,7 @@ class PelamarController extends Controller
 
 			if(!empty($job_interest_1)) {
 
-				if ($status_pelamar_new == "Passed") {
+				if ($status_pelamar_new == "PG") {
 
 					if ($keterangan == "awaiting_fresh") {
 						$jml_actual = Loker::where('id_iklan', $id_iklan)->where('no_rcr', $job_interest_1)->value('actual_fresh');
@@ -273,7 +273,7 @@ class PelamarController extends Controller
 
 			if(!empty($job_interest_2)) {
 
-				if ($status_pelamar_new == "Passed") {
+				if ($status_pelamar_new == "PG") {
 
 					if ($keterangan == "awaiting_fresh") {
 						$jml_actual = Loker::where('id_iklan', $id_iklan)->where('no_rcr', $job_interest_2)->value('actual_fresh');
@@ -337,7 +337,7 @@ class PelamarController extends Controller
 
 			if(!empty($job_interest_3)) {
 
-				if ($status_pelamar_new == "Passed") {
+				if ($status_pelamar_new == "PG") {
 
 					if ($keterangan == "awaiting_fresh") {
 						$jml_actual = Loker::where('id_iklan', $id_iklan)->where('no_rcr', $job_interest_3)->value('actual_fresh');
@@ -401,7 +401,7 @@ class PelamarController extends Controller
 
 			if(!empty($job_interest_4)) {
 
-				if ($status_pelamar_new == "Passed") {
+				if ($status_pelamar_new == "PG") {
 
 					if ($keterangan == "awaiting_fresh") {
 						$jml_actual = Loker::where('id_iklan', $id_iklan)->where('no_rcr', $job_interest_4)->value('actual_fresh');
@@ -476,7 +476,7 @@ class PelamarController extends Controller
 			foreach($pelamar as $value){
 				echo "<tr>";
 				$lbl = "";
-				if($value->status_pelamar == "Passed") {
+				if($value->status_pelamar == "PG") {
 					$lbl = "label-success";
 				} elseif ($value->status_pelamar == "Awaiting") {
 					$lbl = "label-warning";
@@ -778,7 +778,7 @@ class PelamarController extends Controller
 	}
 
 	public function update_tabel($status_pelamar){
-		$data['pelamar'] = Pelamar::where('status_pelamar',$status_pelamar)->get();
+		$data['pelamar'] = Pelamar::where('status_pelamar','like','Failed%')->get();
 		return view('admin.pelamar.index',$data);
 	}
 
@@ -795,12 +795,12 @@ class PelamarController extends Controller
 	}
 
 	public function pelamar_failed(){
-		$data['pelamar_recruitment'] = Pelamar::all();
-		$data['pelamar_prescreening'] = Pelamar::all();
-		$data['pelamar_psychotest'] = Pelamar::all();
+		$data['pelamar_recruitment'] = Pelamar::where('status_pelamar','Failed_Recruitment')->get();
+		$data['pelamar_prescreening'] = Pelamar::where('status_pelamar','Failed_Prescreening')->get();
+		$data['pelamar_psychotest'] = Pelamar::where('status_pelamar','PG')->get();
 		$data['pelamar_interview'] = Pelamar::all();
 		return view('admin.pelamar.pelamar_failed',$data);
-		
+
 	}
 
 	public function get_psychotest(){
@@ -837,20 +837,19 @@ class PelamarController extends Controller
 		$psychotest->kuota = $request->kuota;
 		$psychotest->id_test_method = $request->id_test_method;
 		$psychotest->save();
+		return redirect('pelamar_inproses')->with('message','Data berhasil disimpan!')->with('panel','success');
 	}
 
 	public function update_schedule(Request $request){
 		$this->validate($request,[
 			'tanggal'=>'required',
 			'kuota'=>'required|numeric',
-			'kuota_left'=>'required|numeric',
 			'id_kota'=>'required|numeric',
 			'id_test_method'=>'required|numeric'
 		]);
 		$edit = TanggalPsychotest::find($request->id);
 		$edit->tanggal = $request->tanggal;
 		$edit->kuota = $request->kuota;
-		$edit->kuota_left = $request->kuota_left;
 		$edit->id_kota = $request->id_kota;
 		$edit->id_test_method = $request->id_test_method;
 		$edit->save();
@@ -861,13 +860,29 @@ class PelamarController extends Controller
 		$data['pelamar_invitation'] = Pelamar::where('id_tgl_psychotest',$id)->where('status_invite','0')->get();
 		$data['pelamar_invited'] = Pelamar::where('id_tgl_psychotest',$id)->where('status_invite','1')->get();
 		$data['tgl_psychotest'] = TanggalPsychotest::find($id);
-		
+
 		return view('admin.pelamar.pelamar_inproses_details',$data);
 	}
 
 	public function add_applicant($id){
 		$data['tgl_psychotest'] = TanggalPsychotest::find($id);
+		$data['pelamar'] = Pelamar::where('id_tgl_psychotest','<>',$id)->where('status_pelamar','PG')->get();
+		$data['id'] = $id;
 		return view('admin.pelamar.pelamar_inproses_add_applicant',$data);
+	}
+
+	public function add_applicants(Request $request,$id){
+		$this->validate($request,[
+			'checkbox'=>'required'
+		],[
+			'checkbox.required'=>'Pilih salah satu applicant yang akan ditambahkan'
+		]);
+		foreach($request->checkbox as $id_applicant){
+			$pelamar = Pelamar::find($id_applicant);
+			$pelamar->id_tgl_psychotest = $id;
+			$pelamar->save();
+		}
+		return redirect('pelamar_inproses/add_applicant/'.$id)->with('message','Berhasil menambah applicant!')->with('panel','success');
 	}
 
 }

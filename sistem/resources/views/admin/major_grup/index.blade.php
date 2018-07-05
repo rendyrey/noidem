@@ -60,6 +60,16 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6" style="border:gray 1px;margin-left:20px">
+          <form action="{{url('import_major_grup')}}" method="post" enctype="multipart/form-data">
+            <h5>Upload Master Data (update)</h5>
+            <input type="file" class="btn" name="file">
+            <a href="{{url('export_major_grup')}}"><button type="button" class="btn btn-primary">Download</button></a>
+            <input type="submit" value="Submit" class="btn btn-success">
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 

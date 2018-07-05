@@ -42,7 +42,7 @@ class Iklan extends Model
         $job_interest = DB::table('iklan')
             ->join('loker', 'iklan.id', '=', 'loker.id_iklan')
             ->select('loker.*', 'iklan.id')
-            ->where('iklan.actual_end_date', '>=', Carbon::now())
+            ->where('iklan.actual_end_date', '>=', Carbon::today())
             ->where('iklan.domain','formlamaran.medion.co.id')
             ->get();
 
@@ -53,7 +53,7 @@ class Iklan extends Model
       $job_interest = DB::table('iklan')
           ->join('loker', 'iklan.id', '=', 'loker.id_iklan')
           ->select('loker.*', 'iklan.id')
-          ->where('iklan.actual_end_date', '>=', Carbon::now())
+          ->where('iklan.actual_end_date', '>=', Carbon::today())
           ->where('iklan.domain','jobfair.medion.co.id')
           ->get();
 

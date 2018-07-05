@@ -30,6 +30,8 @@
       <i class="fa fa-home"></i><a href="{{url('pelamar_inproses')}}"> Psychotest {{date('d M Y',strtotime($tgl_psychotest->tanggal))}}</a> >
       <a href="{{url('pelamar_inproses/details/'.$tgl_psychotest->id)}}">Details</a> >
       <a href="{{url()->current()}}">Add Applicant</a>
+      <br>
+      <a href="{{url('pelamar_inproses/details/'.$tgl_psychotest->id)}}"><button class="btn btn-sm btn-primary"> <i class="fa fa-arrow-circle-left"></i>&nbsp; Back</button></a>
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
@@ -47,9 +49,24 @@
                   </tr>
                 </thead>
                 <tbody>
-                </tbody>
-              </table>
-              <button class="btn btn-success btn-sm">+ Add</button>
+                  <?php $i=0;?>
+                  @foreach ($pelamar as $value)
+                    <tr>
+                      <td>{{++$i}}</td>
+                      <td>{{$value->nama}}</td>
+                      <td>{{$value->tingkat_pendidikan->tingkat}}</td>
+                      <td>{{$value->institusi->nama_institusi}}</td>
+                      <td>{{$value->major->major}}</td>
+                      <td>{{$value->tanggal_psychotest->tanggal}}</td>
+                      <form action="{{url('pelamar_inproses/add_applicants/'.$id)}}" method="POST">
+                        <td><input class="checkBoxClass" type="checkbox" name="checkbox[]" value="{{$value->id}}"></td>
+                      </tr>
+                    @endforeach
+                  </tbody>
+                </table>
+                <button class="btn btn-success btn-sm" name="add_applicant" type="submit">+ Add</button>
+              </form>
+
             </div>
           </div>
         </div>

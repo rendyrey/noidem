@@ -41,19 +41,22 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>No</td>
-                    <td>Apa ya</td>
-                    <td>
-                      <a class="green" href="">
-                        <i class="ace-icon fa fa-pencil bigger-130"></i>
-                      </a>
-                      &nbsp;&nbsp;
-                      <a class="red" href="#" data-href="" data-toggle="modal" data-target="#confirm-delete">
-                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
-                      </a>
-                    </td>
-                  </tr>
+                  <?php $i=0; ?>
+                  @foreach ($position_category as $key => $value)
+                    <tr>
+                      <td>{{++$i}}</td>
+                      <td>{{$value->position_category}}</td>
+                      <td>
+                        <a class="green" href="">
+                          <i class="ace-icon fa fa-pencil bigger-130"></i>
+                        </a>
+                        &nbsp;&nbsp;
+                        <a class="red" href="#" data-href="position_category/{{$value->id}}/delete" data-toggle="modal" data-target="#confirm-delete">
+                          <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                        </a>
+                      </td>
+                    </tr>
+                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -71,12 +74,12 @@
           <h4 class="modal-title" id="myModalLabel">Tambah Data Position Category</h4>
         </div>
         <div class="modal-body">
-          <form action="" method="POST">
+          <form action="{{url('tambah_position_category')}}" method="POST">
             <div class="modal-body">
               {!! csrf_field() !!}
               <div class="form-group">
-                <label>Position Publish</label>
-                <input name = "bidang_usaha" type="text" class="form-control">
+                <label>Position Category</label>
+                <input name = "position_category" type="text" class="form-control">
                 <input type="hidden" name="_token" value="{!! csrf_token() !!}">
               </div>
             </div>

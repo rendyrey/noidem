@@ -37,33 +37,29 @@
                       <label>Event Code</label>
                       <input name = "event_code" type="text" class="form-control" value="{{$iklan->event_code}}">
                     </div>
-                    <div class="form-group">
+                    {{-- <div class="form-group">
                       <label>Adv Category</label>
                       <select name = 'id_kategori' class='form-control select_search' id="adv_category">
                         @foreach($advertising_category as $key1 => $value1)
                           <option value="{{$key1}}" name="{{$key1}}" {{$iklan->id_kategori == $key1 ? 'selected' : ''}}>{{$value1}}</option>
                         @endforeach
                       </select>
-                    </div>
+                    </div> --}}
+
                     <div class="form-group">
                       <label>Adv Media</label>
-                      <select name = 'id_media' class='form-control select_search' id="adv_media">
-                        @foreach($advertising_media as $value1)
-                          <option value="{{$value1->id}}" name="{{$value1->advertising_category->id}}" {{$iklan->id_media == $value1->id ? 'selected' : ''}}>{{$value1->media}}</option>
+                      <select name='id_media' class='form-control select_search' data-placeholder="Select Adv Media" id="adv_medias" style="width:100%;">
+                        <option value=""></option>
+                        @foreach($advertising_category as $value1)
+                          <optgroup label="{{$value1->kategori}}">
+                            @foreach ($value1->advertising_media as $value)
+                              <option value="{{$value->id}}" {{$iklan->id_media == $value->id ? 'selected' : ''}}>{{$value->media}} - {{$value->domain}}</option>
+                            @endforeach
+                          </optgroup>
                         @endforeach
                       </select>
                     </div>
-                    <div class="form-group">
-                      <label>Domain</label>
-                      <select name = 'domain' class='form-control select_search'>
-                        <option value="formlamaran.medion.co.id" {{$iklan->domain == "formlamaran.medion.co.id" ? 'selected' : ''}}>formlamaran.medion.co.id</option>
-                        <option value="jobfair.medion.co.id" {{$iklan->domain == "jobfair.medion.co.id" ? 'selected' : ''}}>jobfair.medion.co.id</option>
-                        <option value="cr.medion.co.id" {{$iklan->domain == "cr.medion.co.id" ? 'selected' : ''}}>cr.medion.co.id</option>
-                      </select>
-                    </div>
-                  </div>
 
-                  <div class="col-xs-6">
                     <div class="form-group">
                       <label>Plan Start Date</label>
                       <div class='input-group date' >
@@ -82,6 +78,11 @@
                         </span>
                       </div>
                     </div>
+
+                  </div>
+
+                  <div class="col-xs-6">
+
                     <div class="form-group">
                       <label>Actual Start Date</label>
                       <div class='input-group date' >
@@ -100,9 +101,9 @@
                         </span>
                       </div>
                     </div>
+                    <a href="{{ url('vacancy_advertising') }}" class="btn btn-sm btn-danger">Close</a>
+                    <input type="submit" class="btn btn-sm btn-primary" value="Update">
                   </div>
-                  <a href="{{ url('vacancy_advertising') }}" class="btn btn-sm btn-danger">Close</a>
-                  <input type="submit" class="btn btn-sm btn-primary" value="Update">
                 </form>
               </div>
             </div>

@@ -27,7 +27,15 @@
           @endforeach
         </ul>
       @endif
-      <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg">Tambah Data</button>
+      <div class="row">
+        <div class="col-md-6">
+          <button type="button" class="btn btn-success" data-toggle="modal" data-target=".bs-example-modal-lg">Tambah Data</button>
+
+        </div>
+        <div class="col-md-6">
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-12">
           <div class="x_panel">
@@ -60,6 +68,18 @@
           </div>
         </div>
       </div>
+      <div class="row">
+        <div class="col-md-6" style="border:gray 1px;margin-left:20px">
+          <form action="{{url('import_bidang_usaha')}}" method="post" enctype="multipart/form-data">
+            <h5>Upload Master Data (update)</h5>
+            <input type="file" class="btn" name="file">
+            <a href="{{url('export_bidang_usaha')}}"><button type="button" class="btn btn-primary">Download</button></a>
+            <input type="submit" value="Submit" class="btn btn-success">
+          </form>
+        </div>
+      </div>
+      <hr>
+
     </div>
   </div>
   <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-hidden="true">

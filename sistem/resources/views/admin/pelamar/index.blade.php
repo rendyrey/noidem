@@ -57,7 +57,7 @@
                     <tr>
                       <?php
                       $lbl = "";
-                      if($value->status_pelamar == "Passed") {
+                      if($value->status_pelamar == "PG" ) {
                         $lbl = "label-success";
                       } elseif ($value->status_pelamar == "Awaiting") {
                         $lbl = "label-warning";

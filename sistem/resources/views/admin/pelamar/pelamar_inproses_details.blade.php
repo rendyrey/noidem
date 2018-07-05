@@ -47,7 +47,7 @@
                 <div id="myTabContent" class="tab-content">
                   <div role="tabpanel" class="tab-pane fade active in" id="tab_content1" aria-labelledby="home-tab">
                     <a href="{{url('pelamar_inproses/add_applicant/'.$tgl_psychotest->id)}}"><button class="btn btn-success btn-sm">+ Add Applicant</button></a>
-                    <table id="" class="table table-striped table-bordered table_dashboard">
+                    <table id="" class="table table-striped table-bordered">
                       <thead>
                         <tr>
                           <th>No Applicant</th>

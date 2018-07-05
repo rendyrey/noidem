@@ -11,7 +11,7 @@ class AdvertisingMedia extends Model
 
     protected $table = 'advertising_media';
     protected $primaryKey = 'id';
-    protected $fillable = ['id_kategori','media'];
+    protected $fillable = ['id_kategori','media','domain'];
     protected $dates = ['deleted_at'];
 
     public function advertising_category()

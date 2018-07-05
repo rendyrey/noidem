@@ -38,18 +38,21 @@
               <table id="datatable" class="table table-striped table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th>Divisi</th>
-                    <th>Posisi</th>
-                    <th>Posisi Publish</th>
+                    <th>No</th>
+                    <th>Position</th>
+                    <th>Position Publish</th>
+                    <th>Position Category</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
+                <?php $i=0; ?>
                   @foreach($position_publish as $value)
                     <tr>
-                      <td>{{$value->divisi}}</td>
+                      <td>{{++$i}}</td>
                       <td>{{$value->posisi}}</td>
                       <td>{{$value->posisi_publish}}</td>
+                      <td>{{$value->positionCategory->position_category}}</td>
                       <td>
                         <a class="green" href="position_publish/{{$value->id}}/edit">
                           <i class="ace-icon fa fa-pencil bigger-130"></i>
@@ -79,24 +82,25 @@
           <h4 class="modal-title" id="myModalLabel">Tambah Data Posisi</h4>
         </div>
         <div class="modal-body">
-          <form action="{{url('posisi/tambah')}}" method="POST">
-
+          <form action="{{url('position_publish/tambah')}}" method="POST">
             {!! csrf_field() !!}
             <div class="form-group">
-              <label>Nama Divisi</label>
-              <input name = "divisi" type="text" class="form-control">
-            </div>
-            <div class="form-group">
-              <label>Posisi</label>
+              <label>Position</label>
               <input name = "posisi" type="text" class="form-control">
             </div>
             <div class="form-group">
-              <label>Posisi Publish</label>
+              <label>Position Publish</label>
               <input type="text" name="posisi_publish" class="form-control">
             </div>
-
-
-
+            <div class="form-group">
+              <label>Position Category</label>
+              <select name="id_position_category" class="form-control select_search" style="width:100%" data-placeholder="Pilih Category">
+                <option value=""></option>
+                @foreach ($position_category as $value )
+                    <option value="{{$value->id}}">{{$value->position_category}}</option>
+                @endforeach
+              </select>
+            </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -107,7 +111,6 @@
       </div>
     </div>
   </div>
-
   <!-- Modal Delete -->
   <div class="modal fade" id="confirm-delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">

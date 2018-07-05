@@ -30,7 +30,6 @@
                     <li><a href="{{url('main_dashboard')}}">Main Dashboard</a></li>
                     <li><a href="{{url('vacancy_dashboard')}}">Vacancy Dashboard</a></li>
                     <li><a href="{{url('applicant_dashboard')}}">Applicant Dashboard</a></li>
-
                   </ul>
                 </li>
                 <li><a><i class="fa fa-edit"></i> Master <span class="fa fa-chevron-down"></span></a>
@@ -45,7 +44,7 @@
                     <li><a href="{{url('advertising_media')}}">Advertising Media</a></li>
                     <li><a href="{{url('tingkat_pendidikan')}}">Tingkat Pendidikan</a></li>
                     {{-- <li><a href="{{url('tanggal_psychotest')}}">Tanggal Psychotest</a></li> --}}
-                    <li><a href="{{url('kriteria_syarat')}}">Kriteria Syarat</a></li>
+                    {{-- <li><a href="{{url('kriteria_syarat')}}">Kriteria Syarat</a></li> --}}
                     <li><a href="{{url('akreditasi')}}">Akreditasi</a></li>
                     {{-- <li><a href="{{url('posisi')}}">Posisi</a></li> --}}
                     <li><a href="{{url('position_publish')}}">Position Publish</a></li>

@@ -39,6 +39,7 @@
                   <tr>
                     <th>Media</th>
                     <th>Kategori</th>
+                    <th>Domain</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
@@ -47,6 +48,7 @@
                     <tr>
                       <td>{{$value->media}}</td>
                       <td>{{$value->advertising_category->kategori}}</td>
+                      <td>{{$value->domain}}</td>
                       <td>
                         <a class="green" href="advertising_media/{{$value->id}}/edit">
                           <i class="ace-icon fa fa-pencil bigger-130"></i>

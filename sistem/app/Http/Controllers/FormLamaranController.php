@@ -19,6 +19,7 @@ use App\SyaratPrescreening;
 use App\TanggalPsychotest;
 use App\TingkatPendidikan;
 // use App\KriteriaSyarat;
+use DB;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Intervention\Image\Facades\Image as Image;
@@ -30,8 +31,8 @@ class FormLamaranController extends Controller
         $bidang_usaha = Bidang_usaha::all();
         $institusi = Institusi::all();
         $kota = Kota::all();
-        $major = Major::all();
-        $major_grup = MajorGrup::all();
+        $major = Major::where('major','<>','Any')->get();
+        $major_grup = MajorGrup::where('nama_grup','<>','Any')->get();
         $provinsi = Provinsi::all();
         $advertising_category = AdvertisingCategory::all();
         $tingkat_pendidikan = TingkatPendidikan::orderBy('no_urut', 'ASC')->limit(5)->get();
@@ -48,7 +49,14 @@ class FormLamaranController extends Controller
             $attributes[$v->major_grup->nama_grup][$v->id] = $v->major;
         }
         $tanggal_psychotest = TanggalPsychotest::where('tanggal', '>=', Carbon::today())->where('kuota','>',0)->orderBy('tanggal', 'asc')->get();
-        $iklan = Iklan::where('domain', 'formlamaran.medion.co.id')->where('actual_end_date', '>=', Carbon::today())->get();
+        // $iklan = Iklan::where('domain', 'formlamaran.medion.co.id')->where('actual_end_date', '>=', Carbon::today())->has('loker')->orWhere('actual_end_date','0000-00-00')->get();
+        $iklan = Iklan::where(function($query){
+          $query->where('domain','formlamaran.medion.co.id')->where('actual_end_date','>=',Carbon::today())->has('loker');
+        })->orWhere(function($query){
+          $query->where('domain','formlamaran.medion.co.id')->where('actual_end_date','0000-00-00')->where('actual_start_date','<>','0000-00-00')->has('loker');
+        })
+        ->get();
+        // dd($iklan->toSql());
         $arr_iklan = array();
         foreach ($iklan as $value) {
             if (!isset($arr_iklan[$value->advertising_media->media])) {
@@ -105,6 +113,7 @@ class FormLamaranController extends Controller
         $this->validate($request,[
           'id_iklan'=>'required',
           'job_interest_1'=>'required',
+          'nik'=>'required|digits:16',
           'nama'=>'required',
           'jenis_kelamin'=>'required',
           'status'=>'required',
@@ -125,6 +134,8 @@ class FormLamaranController extends Controller
           'id_tanggal_psychotest'=>'required'
         ],[
           'id_iklan.required' => 'Vacancy is required',
+          'nik.required' => 'NIK is required',
+          'nik.digits' => 'NIK must be 16 digits',
           'nama.required'=>'Name is required',
           'job_interest_1.required'=>'Job Interest is required',
           'jenis_kelamin.required'=>'Gender is required',
@@ -215,6 +226,7 @@ class FormLamaranController extends Controller
             $pelamar->job_interest_4 = $request->job_interest_4;
             $pelamar->id_iklan = $request->id_iklan;
             $pelamar->medion_employee_name = $request->medion_employee_name;
+            $pelamar->nik = $request->nik;
             $pelamar->nama = $request->nama;
             $pelamar->jenis_kelamin = $request->jenis_kelamin;
             $pelamar->status = $request->status;
@@ -300,313 +312,375 @@ class FormLamaranController extends Controller
             $to_usia = Carbon::today();
             $usia = $from_usia->diff($to_usia)->y;
 
-            //Freshgraduate
-            if ($request->id_bidang_usaha == "") {
-
-                //-- update actual fresh
-                $jml_actual_fresh1 = $actual_fresh1 + 1;
-                $jml_actual_fresh2 = $actual_fresh2 + 1;
-                $jml_actual_fresh3 = $actual_fresh3 + 1;
-                $jml_actual_fresh4 = $actual_fresh4 + 1;
-
-                if ($request->job_interest_1) {
-                    $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
-                    $update_pelamar_passed1->actual_fresh = $jml_actual_fresh1;
-                    $update_pelamar_passed1->save();
-                }
-
-                if ($request->job_interest_2) {
-                    $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
-                    $update_pelamar_passed2->actual_fresh = $jml_actual_fresh2;
-                    $update_pelamar_passed2->save();
-                }
-
-                if ($request->job_interest_3) {
-                    $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
-                    $update_pelamar_passed3->actual_fresh = $jml_actual_fresh3;
-                    $update_pelamar_passed3->save();
-                }
-
-                if ($request->job_interest_4) {
-                    $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
-                    $update_pelamar_passed4->actual_fresh = $jml_actual_fresh4;
-                    $update_pelamar_passed4->save();
-                }
-
-
-                //check untuk status pelamar (passed) 1
-                $syarat_passed = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-                ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
-                ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->exists();
-
-                //check untuk status pelamar awaiting
-                $syarat_awaiting1 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-                ->where('accreditation','>=',$akreditasi)
-                ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->exists();
-
-                $syarat_awaiting2 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-                ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
-                ->where('age','>=',$usia)->exists();
-
-                $syarat_awaiting3 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-                ->where('gpa','<=',$request->gpa)
-                ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->exists();
-
-                $status_pelamar = '';
-                if($syarat_passed){
-                    $status_pelamar = "PG";
-                    $keterangan = "actual_fresh";
-                }else if($syarat_awaiting1){
-                    $status_pelamar = "Awaiting";
-                    $keterangan = "actual_fresh";
-                }else if($syarat_awaiting2){
-                    $status_pelamar = "Awaiting";
-                    $keterangan = "actual_fresh";
-                }else if($syarat_awaiting3){
-                    $status_pelamar = "Awaiting";
-                    $keterangan = "actual_fresh";
-                }else{
-                    $status_pelamar = "Failed";
-                    $keterangan = "failed_fresh";
-                }
-
-                $pelamar->status_pelamar = $status_pelamar;
-                $pelamar->keterangan = $keterangan;
-
-                if ($pelamar->status_pelamar == "PG") {
-                    // -- update kuota psychotest
-                    $id_tgl_psychotest = $request->id_tanggal_psychotest;
-                    $get_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
-                    $current_kuota = $get_psychotest->kuota;
-                    $min_kuota = $current_kuota-1;
-
-                    $update_tgl_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
-                    $update_tgl_psychotest->kuota = $min_kuota;
-                    $update_tgl_psychotest->save();
-                    // --end kuota psychotest
-
-                    //-- update actual pass fresh
-                    $jml_actual_pass_fresh1 = $actual_pass_fresh1 + 1;
-                    $jml_actual_pass_fresh2 = $actual_pass_fresh2 + 1;
-                    $jml_actual_pass_fresh3 = $actual_pass_fresh3 + 1;
-                    $jml_actual_pass_fresh4 = $actual_pass_fresh4 + 1;
-
-                    if ($request->job_interest_1) {
-                        $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
-                        $update_pelamar_passed1->actual_pass_fresh = $jml_actual_pass_fresh1;
-                        $update_pelamar_passed1->save();
-                    }
-
-                    if ($request->job_interest_2) {
-                        $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
-                        $update_pelamar_passed2->actual_pass_fresh = $jml_actual_pass_fresh2;
-                        $update_pelamar_passed2->save();
-                    }
-
-                    if ($request->job_interest_3) {
-                        $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
-                        $update_pelamar_passed3->actual_pass_fresh = $jml_actual_pass_fresh3;
-                        $update_pelamar_passed3->save();
-                    }
-
-                    if ($request->job_interest_4) {
-                        $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
-                        $update_pelamar_passed4->actual_pass_fresh = $jml_actual_pass_fresh4;
-                        $update_pelamar_passed4->save();
-                    }
-                    //-- end update actual pass fresh
-
-
-                } elseif ($pelamar->status_pelamar == "Awaiting") {
-
-                    //-- update awaiting fresh
-                    $jml_awaiting_fresh1 = $awaiting_fresh1 + 1;
-                    $jml_awaiting_fresh2 = $awaiting_fresh2 + 1;
-                    $jml_awaiting_fresh3 = $awaiting_fresh3 + 1;
-                    $jml_awaiting_fresh4 = $awaiting_fresh4 + 1;
-
-                    //update jumlah awaiting
-                    if ($request->job_interest_1) {
-                        $update_pelamar_awaiting1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
-                        $update_pelamar_awaiting1->awaiting_fresh = $jml_awaiting_fresh1;
-                        $update_pelamar_awaiting1->save();
-                    }
-
-                    if ($request->job_interest_2) {
-                        $update_pelamar_awaiting2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
-                        $update_pelamar_awaiting2->awaiting_fresh = $jml_awaiting_fresh2;
-                        $update_pelamar_awaiting2->save();
-                    }
-
-                    if ($request->job_interest_3) {
-                        $update_pelamar_awaiting3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
-                        $update_pelamar_awaiting3->awaiting_fresh = $jml_awaiting_fresh3;
-                        $update_pelamar_awaiting3->save();
-                    }
-
-                    if ($request->job_interest_4) {
-                        $update_pelamar_awaiting4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
-                        $update_pelamar_awaiting4->awaiting_fresh = $jml_awaiting_fresh4;
-                        $update_pelamar_awaiting4->save();
-                    }
-                    //-- end update awaiting fresh
-                }
-
-                //Experience
-            } else {
-
-                // -- update actual exp
-                $jml_actual_exp1 = $actual_exp1 + 1;
-                $jml_actual_exp2 = $actual_exp2 + 1;
-                $jml_actual_exp3 = $actual_exp3 + 1;
-                $jml_actual_exp4 = $actual_exp4 + 1;
-
-
-                if ($request->job_interest_1) {
-                    $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
-                    $update_pelamar_passed1->actual_exp = $jml_actual_exp1;
-                    $update_pelamar_passed1->save();
-                }
-
-                if ($request->job_interest_2) {
-                    $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
-                    $update_pelamar_passed2->actual_exp = $jml_actual_exp2;
-                    $update_pelamar_passed2->save();
-                }
-
-                if ($request->job_interest_3) {
-                    $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
-                    $update_pelamar_passed3->actual_exp = $jml_actual_exp3;
-                    $update_pelamar_passed3->save();
-                }
-
-                if ($request->job_interest_4) {
-                    $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
-                    $update_pelamar_passed4->actual_exp = $jml_actual_exp4;
-                    $update_pelamar_passed4->save();
-                }
-                // -- end update actual exp
-
-                   //check untuk status pelamar (passed) 1
-                   $syarat_passed = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-                   ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
-                   ->where('study_period','>=',$lama_studi)->exists();
-
-                   //check untuk status pelamar awaiting
-                   $syarat_awaiting1 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-                   ->where('accreditation','>=',$akreditasi)
-                   ->where('study_period','>=',$lama_studi)->exists();
-
-                   $syarat_awaiting2 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-                   ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
-                   ->exists();
-
-                   $syarat_awaiting3 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
-                   ->where('gpa','<=',$request->gpa)
-                   ->where('study_period','>=',$lama_studi)->exists();
-
-                   $status_pelamar = '';
-                   if($syarat_passed){
-                       $status_pelamar = "PG";
-                       $keterangan = "actual_exp";
-                   }else if($syarat_awaiting1){
-                       $status_pelamar = "Awaiting";
-                       $keterangan = "actual_exp";
-                   }else if($syarat_awaiting2){
-                       $status_pelamar = "Awaiting";
-                       $keterangan = "actual_exp";
-                   }else if($syarat_awaiting3){
-                       $status_pelamar = "Awaiting";
-                       $keterangan = "actual_exp";
-                   }else{
-                       $status_pelamar = "Failed";
-                       $keterangan = "failed_exp";
-                   }
-
-                   $pelamar->status_pelamar = $status_pelamar;
-                   $pelamar->keterangan = $keterangan;
-
-
-                if ($pelamar->status_pelamar == "PG") {
-
-
-                    //-- update kuota psychotest
-                    $id_tgl_psychotest = $request->id_tanggal_psychotest;
-                    $get_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
-                    $current_kuota = $get_psychotest->kuota;
-                    $min_kuota = $current_kuota-1;
-
-                    $update_tgl_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
-                    $update_tgl_psychotest->kuota = $min_kuota;
-                    $update_tgl_psychotest->save();
-                    //-- end update kuota psychotest
-
-                    //-- update actual pass exp
-                    $jml_actual_pass_exp1 = $actual_pass_exp1 + 1;
-                    $jml_actual_pass_exp2 = $actual_pass_exp2 + 1;
-                    $jml_actual_pass_exp3 = $actual_pass_exp3 + 1;
-                    $jml_actual_pass_exp4 = $actual_pass_exp4 + 1;
-                    if ($request->job_interest_1) {
-                        $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
-                        $update_pelamar_passed1->actual_pass_exp = $jml_actual_pass_exp1;
-                        $update_pelamar_passed1->save();
-                    }
-
-                    if ($request->job_interest_2) {
-                        $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
-                        $update_pelamar_passed2->actual_pass_exp = $jml_actual_pass_exp2;
-                        $update_pelamar_passed2->save();
-                    }
-
-                    if ($request->job_interest_3) {
-                        $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
-                        $update_pelamar_passed3->actual_pass_exp = $jml_actual_pass_exp3;
-                        $update_pelamar_passed3->save();
-                    }
-
-                    if ($request->job_interest_4) {
-                        $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
-                        $update_pelamar_passed4->actual_pass_exp = $jml_actual_pass_exp4;
-                        $update_pelamar_passed4->save();
-                    }
-                    //-- end update actual pass exp
-                } elseif ($pelamar->status_pelamar == "Awaiting") {
-
-                    $jml_awaiting_exp_1 = $awaiting_exp1 + 1;
-                    $jml_awaiting_exp_2 = $awaiting_exp2 + 1;
-                    $jml_awaiting_exp_3 = $awaiting_exp3 + 1;
-                    $jml_awaiting_exp_4 = $awaiting_exp4 + 1;
-
-                    // DB::table('loker')->where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->update(['awaiting_exp' => $jml_awaiting_exp_1]);
-                    // DB::table('loker')->where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->update(['awaiting_exp' => $jml_awaiting_exp_2]);
-                    // DB::table('loker')->where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->update(['awaiting_exp' => $jml_awaiting_exp_3]);
-                    // DB::table('loker')->where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->update(['awaiting_exp' => $jml_awaiting_exp_4]);
-
-                    if ($request->job_interest_1) {
-                        $update_pelamar_awaiting1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
-                        $update_pelamar_awaiting1->awaiting_exp = $jml_awaiting_exp_1;
-                        $update_pelamar_awaiting1->save();
-                    }
-
-                    if ($request->job_interest_2) {
-                        $update_pelamar_awaiting2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
-                        $update_pelamar_awaiting2->awaiting_exp = $jml_awaiting_exp_2;
-                        $update_pelamar_awaiting2->save();
-                    }
-
-                    if ($request->job_interest_3) {
-                        $update_pelamar_awaiting3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
-                        $update_pelamar_awaiting3->awaiting_exp = $jml_awaiting_exp_3;
-                        $update_pelamar_awaiting3->save();
-                    }
-
-                    if ($request->job_interest_4) {
-                        $update_pelamar_awaiting4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
-                        $update_pelamar_awaiting4->awaiting_exp = $jml_awaiting_exp_4;
-                        $update_pelamar_awaiting4->save();
-                    }
-                }
+            $status_recruitment = "failed";
+            //untuk job interest 1
+            $jobInterest1 = Loker::where('no_rcr',$request->job_interest_1)->first();
+            if(($request->jenis_kelamin == $jobInterest1->gender || $jobInterest1->gender == "Any") && $status_recruitment == "failed"){
+              $id_major_grup = Major::where('id',$pelamar->id_major)->value('id_grup');
+              if($pelamar->id_tingkat_pendidikan == $jobInterest1->id_tingkat_pendidikan && $id_major_grup == $jobInterest1->id_major_grup){
+                $pelamar->status_pelamar = "Passed_Recruitment";
+                $status_recruitment = "Passed";
+              }else{
+                $pelamar->status_pelamar = "Failed_Recruitment";
+              }
+            }else{
+              $pelamar->status_pelamar = "Failed_Recruitment";
             }
+
+            //untuk job interest 2
+            if($request->job_interest_2){
+              $jobInterest2 = Loker::where('no_rcr',$request->job_interest_2);
+              if(($request->jenis_kelamin == $jobInterest2->gender || $jobInterest2->gender == "Any") && $status_recruitment == "failed"){
+                $id_major_grup = Major::where('id',$pelamar->id_major)->value('id_grup');
+                if($pelamar->id_tingkat_pendidikan == $jobInterest2->id_tingkat_pendidikan && $id_major_grup == $jobInterest2->id_major_grup){
+                  $pelamar->status_pelamar = "Passed_Recruitment";
+                  $status_recruitment = "Passed";
+                }else{
+                  $pelamar->status_pelamar = "Failed_Recruitment";
+                }
+              }else{
+                $pelamar->status_pelamar = "Failed_Recruitment";
+              }
+            }
+
+            //untuk job interest 3
+            if($request->job_interest_3){
+              $jobInterest3 = Loker::find('no_rcr',$request->job_interest_3);
+              if(($request->jenis_kelamin == $jobInterest3->gender || $jobInterest3->gender == "Any") && $status_recruitment == "failed"){
+                $id_major_grup = Major::where('id',$pelamar->id_major)->value('id_grup');
+                if($pelamar->id_tingkat_pendidikan == $jobInterest3->id_tingkat_pendidikan && $id_major_grup == $jobInterest3->id_major_grup){
+                  $pelamar->status_pelamar = "Passed_Recruitment";
+                  $status_recruitment = "Passed";
+                }else{
+                  $pelamar->status_pelamar = "Failed_Recruitment";
+                }
+              }else{
+                $pelamar->status_pelamar = "Failed_Recruitment";
+              }
+            }
+
+            //untuk job interest 4
+            if($request->job_interest_4){
+              $jobInterest4 = Loker::find('no_rcr',$request->job_interest_4);
+              if(($request->jenis_kelamin == $jobInterest4->gender || $jobInterest4->gender == "Any") && $status_recruitment == "failed"){
+                $id_major_grup = Major::where('id',$pelamar->id_major)->value('id_grup');
+                if($pelamar->id_tingkat_pendidikan == $jobInterest4->id_tingkat_pendidikan && $id_major_grup == $jobInterest4->id_major_grup){
+                  $pelamar->status_pelamar = "Passed_Recruitment";
+                  $status_recruitment = "Passed";
+                }else{
+                  $pelamar->status_pelamar = "Failed_Recruitment";
+                }
+              }else{
+                $pelamar->status_pelamar = "Failed_Recruitment";
+              }
+            }
+
+
+            if($status_recruitment == "Passed"){
+              //Freshgraduate
+              if ($request->id_bidang_usaha == "") {
+                  //-- update actual fresh
+                  $jml_actual_fresh1 = $actual_fresh1 + 1;
+                  $jml_actual_fresh2 = $actual_fresh2 + 1;
+                  $jml_actual_fresh3 = $actual_fresh3 + 1;
+                  $jml_actual_fresh4 = $actual_fresh4 + 1;
+
+                  if ($request->job_interest_1) {
+                      $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
+                      $update_pelamar_passed1->actual_fresh = $jml_actual_fresh1;
+                      $update_pelamar_passed1->save();
+                  }
+
+                  if ($request->job_interest_2) {
+                      $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
+                      $update_pelamar_passed2->actual_fresh = $jml_actual_fresh2;
+                      $update_pelamar_passed2->save();
+                  }
+
+                  if ($request->job_interest_3) {
+                      $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
+                      $update_pelamar_passed3->actual_fresh = $jml_actual_fresh3;
+                      $update_pelamar_passed3->save();
+                  }
+
+                  if ($request->job_interest_4) {
+                      $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
+                      $update_pelamar_passed4->actual_fresh = $jml_actual_fresh4;
+                      $update_pelamar_passed4->save();
+                  }
+
+
+                  //check untuk status pelamar (passed) 1
+                  $syarat_passed = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                  ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
+                  ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->where('type','umum')->exists();
+
+                  //check untuk status pelamar awaiting
+                  $syarat_awaiting1 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                  ->where('accreditation','>=',$akreditasi)
+                  ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->where('type','umum')->exists();
+
+                  $syarat_awaiting2 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                  ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)->where('type','umum')
+                  ->where('age','>=',$usia)->exists();
+
+                  $syarat_awaiting3 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                  ->where('gpa','<=',$request->gpa)
+                  ->where('age','>=',$usia)->where('study_period','>=',$lama_studi)->where('type','umum')->exists();
+
+                  $status_pelamar = '';
+                  if($syarat_passed){
+                      $status_pelamar = "PG";
+                      $keterangan = "actual_fresh";
+                  }else if($syarat_awaiting1){
+                      $status_pelamar = "Awaiting";
+                      $keterangan = "actual_fresh";
+                  }else if($syarat_awaiting2){
+                      $status_pelamar = "Awaiting";
+                      $keterangan = "actual_fresh";
+                  }else if($syarat_awaiting3){
+                      $status_pelamar = "Awaiting";
+                      $keterangan = "actual_fresh";
+                  }else{
+                      $status_pelamar = "Failed_Prescreening";
+                      $keterangan = "failed_fresh";
+                  }
+
+                  $pelamar->status_pelamar = $status_pelamar;
+                  $pelamar->keterangan = $keterangan;
+
+                  if ($pelamar->status_pelamar == "PG") {
+                      // -- update kuota psychotest
+                      $id_tgl_psychotest = $request->id_tanggal_psychotest;
+                      $get_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
+                      $current_kuota = $get_psychotest->kuota;
+                      $min_kuota = $current_kuota-1;
+
+                      $update_tgl_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
+                      $update_tgl_psychotest->kuota = $min_kuota;
+                      $update_tgl_psychotest->save();
+                      // --end kuota psychotest
+
+                      //-- update actual pass fresh
+                      $jml_actual_pass_fresh1 = $actual_pass_fresh1 + 1;
+                      $jml_actual_pass_fresh2 = $actual_pass_fresh2 + 1;
+                      $jml_actual_pass_fresh3 = $actual_pass_fresh3 + 1;
+                      $jml_actual_pass_fresh4 = $actual_pass_fresh4 + 1;
+
+                      if ($request->job_interest_1) {
+                          $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
+                          $update_pelamar_passed1->actual_pass_fresh = $jml_actual_pass_fresh1;
+                          $update_pelamar_passed1->save();
+                      }
+
+                      if ($request->job_interest_2) {
+                          $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
+                          $update_pelamar_passed2->actual_pass_fresh = $jml_actual_pass_fresh2;
+                          $update_pelamar_passed2->save();
+                      }
+
+                      if ($request->job_interest_3) {
+                          $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
+                          $update_pelamar_passed3->actual_pass_fresh = $jml_actual_pass_fresh3;
+                          $update_pelamar_passed3->save();
+                      }
+
+                      if ($request->job_interest_4) {
+                          $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
+                          $update_pelamar_passed4->actual_pass_fresh = $jml_actual_pass_fresh4;
+                          $update_pelamar_passed4->save();
+                      }
+                      //-- end update actual pass fresh
+
+
+                  } elseif ($pelamar->status_pelamar == "Awaiting") {
+
+                      //-- update awaiting fresh
+                      $jml_awaiting_fresh1 = $awaiting_fresh1 + 1;
+                      $jml_awaiting_fresh2 = $awaiting_fresh2 + 1;
+                      $jml_awaiting_fresh3 = $awaiting_fresh3 + 1;
+                      $jml_awaiting_fresh4 = $awaiting_fresh4 + 1;
+
+                      //update jumlah awaiting
+                      if ($request->job_interest_1) {
+                          $update_pelamar_awaiting1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
+                          $update_pelamar_awaiting1->awaiting_fresh = $jml_awaiting_fresh1;
+                          $update_pelamar_awaiting1->save();
+                      }
+
+                      if ($request->job_interest_2) {
+                          $update_pelamar_awaiting2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
+                          $update_pelamar_awaiting2->awaiting_fresh = $jml_awaiting_fresh2;
+                          $update_pelamar_awaiting2->save();
+                      }
+
+                      if ($request->job_interest_3) {
+                          $update_pelamar_awaiting3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
+                          $update_pelamar_awaiting3->awaiting_fresh = $jml_awaiting_fresh3;
+                          $update_pelamar_awaiting3->save();
+                      }
+
+                      if ($request->job_interest_4) {
+                          $update_pelamar_awaiting4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
+                          $update_pelamar_awaiting4->awaiting_fresh = $jml_awaiting_fresh4;
+                          $update_pelamar_awaiting4->save();
+                      }
+                      //-- end update awaiting fresh
+                  }
+
+                  //Experience
+              } else {
+
+                  // -- update actual exp
+                  $jml_actual_exp1 = $actual_exp1 + 1;
+                  $jml_actual_exp2 = $actual_exp2 + 1;
+                  $jml_actual_exp3 = $actual_exp3 + 1;
+                  $jml_actual_exp4 = $actual_exp4 + 1;
+
+
+                  if ($request->job_interest_1) {
+                      $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
+                      $update_pelamar_passed1->actual_exp = $jml_actual_exp1;
+                      $update_pelamar_passed1->save();
+                  }
+
+                  if ($request->job_interest_2) {
+                      $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
+                      $update_pelamar_passed2->actual_exp = $jml_actual_exp2;
+                      $update_pelamar_passed2->save();
+                  }
+
+                  if ($request->job_interest_3) {
+                      $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
+                      $update_pelamar_passed3->actual_exp = $jml_actual_exp3;
+                      $update_pelamar_passed3->save();
+                  }
+
+                  if ($request->job_interest_4) {
+                      $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
+                      $update_pelamar_passed4->actual_exp = $jml_actual_exp4;
+                      $update_pelamar_passed4->save();
+                  }
+                  // -- end update actual exp
+
+                     //check untuk status pelamar (passed) 1
+                     $syarat_passed = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                     ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
+                     ->where('study_period','>=',$lama_studi)->exists();
+
+                     //check untuk status pelamar awaiting
+                     $syarat_awaiting1 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                     ->where('accreditation','>=',$akreditasi)
+                     ->where('study_period','>=',$lama_studi)->exists();
+
+                     $syarat_awaiting2 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                     ->where('accreditation','>=',$akreditasi)->where('gpa','<=',$request->gpa)
+                     ->exists();
+
+                     $syarat_awaiting3 = SyaratPrescreening::where('id_tingkat_pendidikan',$pelamar->id_tingkat_pendidikan)
+                     ->where('gpa','<=',$request->gpa)
+                     ->where('study_period','>=',$lama_studi)->exists();
+
+                     $status_pelamar = '';
+                     if($syarat_passed){
+                         $status_pelamar = "PG";
+                         $keterangan = "actual_exp";
+                     }else if($syarat_awaiting1){
+                         $status_pelamar = "Awaiting";
+                         $keterangan = "actual_exp";
+                     }else if($syarat_awaiting2){
+                         $status_pelamar = "Awaiting";
+                         $keterangan = "actual_exp";
+                     }else if($syarat_awaiting3){
+                         $status_pelamar = "Awaiting";
+                         $keterangan = "actual_exp";
+                     }else{
+                         $status_pelamar = "Failed_Prescreening";
+                         $keterangan = "failed_exp";
+                     }
+
+                     $pelamar->status_pelamar = $status_pelamar;
+                     $pelamar->keterangan = $keterangan;
+
+
+                  if ($pelamar->status_pelamar == "PG") {
+                      //-- update kuota psychotest
+                      $id_tgl_psychotest = $request->id_tanggal_psychotest;
+                      $get_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
+                      $current_kuota = $get_psychotest->kuota;
+                      $min_kuota = $current_kuota-1;
+                      $update_tgl_psychotest = TanggalPsychotest::where('id',$id_tgl_psychotest)->first();
+                      $update_tgl_psychotest->kuota = $min_kuota;
+                      $update_tgl_psychotest->save();
+                      //-- end update kuota psychotest
+                      //-- update actual pass exp
+                      $jml_actual_pass_exp1 = $actual_pass_exp1 + 1;
+                      $jml_actual_pass_exp2 = $actual_pass_exp2 + 1;
+                      $jml_actual_pass_exp3 = $actual_pass_exp3 + 1;
+                      $jml_actual_pass_exp4 = $actual_pass_exp4 + 1;
+                      if ($request->job_interest_1) {
+                          $update_pelamar_passed1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
+                          $update_pelamar_passed1->actual_pass_exp = $jml_actual_pass_exp1;
+                          $update_pelamar_passed1->save();
+                      }
+
+                      if ($request->job_interest_2) {
+                          $update_pelamar_passed2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
+                          $update_pelamar_passed2->actual_pass_exp = $jml_actual_pass_exp2;
+                          $update_pelamar_passed2->save();
+                      }
+
+                      if ($request->job_interest_3) {
+                          $update_pelamar_passed3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
+                          $update_pelamar_passed3->actual_pass_exp = $jml_actual_pass_exp3;
+                          $update_pelamar_passed3->save();
+                      }
+
+                      if ($request->job_interest_4) {
+                          $update_pelamar_passed4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
+                          $update_pelamar_passed4->actual_pass_exp = $jml_actual_pass_exp4;
+                          $update_pelamar_passed4->save();
+                      }
+                      //-- end update actual pass exp
+                  } elseif ($pelamar->status_pelamar == "Awaiting") {
+
+                      $jml_awaiting_exp_1 = $awaiting_exp1 + 1;
+                      $jml_awaiting_exp_2 = $awaiting_exp2 + 1;
+                      $jml_awaiting_exp_3 = $awaiting_exp3 + 1;
+                      $jml_awaiting_exp_4 = $awaiting_exp4 + 1;
+
+                      // DB::table('loker')->where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->update(['awaiting_exp' => $jml_awaiting_exp_1]);
+                      // DB::table('loker')->where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->update(['awaiting_exp' => $jml_awaiting_exp_2]);
+                      // DB::table('loker')->where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->update(['awaiting_exp' => $jml_awaiting_exp_3]);
+                      // DB::table('loker')->where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->update(['awaiting_exp' => $jml_awaiting_exp_4]);
+
+                      if ($request->job_interest_1) {
+                          $update_pelamar_awaiting1 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_1)->first();
+                          $update_pelamar_awaiting1->awaiting_exp = $jml_awaiting_exp_1;
+                          $update_pelamar_awaiting1->save();
+                      }
+
+                      if ($request->job_interest_2) {
+                          $update_pelamar_awaiting2 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_2)->first();
+                          $update_pelamar_awaiting2->awaiting_exp = $jml_awaiting_exp_2;
+                          $update_pelamar_awaiting2->save();
+                      }
+
+                      if ($request->job_interest_3) {
+                          $update_pelamar_awaiting3 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_3)->first();
+                          $update_pelamar_awaiting3->awaiting_exp = $jml_awaiting_exp_3;
+                          $update_pelamar_awaiting3->save();
+                      }
+
+                      if ($request->job_interest_4) {
+                          $update_pelamar_awaiting4 = Loker::where('id_iklan', $request->id_iklan)->where('no_rcr', $request->job_interest_4)->first();
+                          $update_pelamar_awaiting4->awaiting_exp = $jml_awaiting_exp_4;
+                          $update_pelamar_awaiting4->save();
+                      }
+                  }
+              }
+            }
+
 
             $pelamar->ip_address = $request->ip();
             $pelamar->browser = $request->header('User-Agent');
